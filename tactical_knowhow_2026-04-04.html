@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>戦術ノウハウ分析 | Reborn Over50</title>
+<style>
+  :root {
+    --green: #1a6b3a;
+    --green-light: #2d8f52;
+    --green-pale: #e8f5ed;
+    --yellow: #f5c518;
+    --red: #c0392b;
+    --blue: #2471a3;
+    --gray: #555;
+    --line: #ddd;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+    background: #f2f4f3;
+    color: #222;
+    line-height: 1.7;
+  }
+
+  /* ヘッダー */
+  header {
+    background: linear-gradient(135deg, #0f4c27 0%, #1a6b3a 60%, #2d8f52 100%);
+    color: white;
+    padding: 40px 30px 32px;
+    text-align: center;
+  }
+  header .badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 20px;
+    padding: 4px 16px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    margin-bottom: 14px;
+  }
+  header h1 { font-size: 26px; font-weight: 800; margin-bottom: 8px; }
+  header p { font-size: 14px; opacity: 0.85; }
+  header .subtitle { font-size: 13px; opacity: 0.7; margin-top: 6px; }
+
+  /* ナビゲーション */
+  nav {
+    background: #fff;
+    border-bottom: 2px solid var(--green);
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  nav a {
+    display: block;
+    padding: 14px 22px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--gray);
+    text-decoration: none;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+  }
+  nav a:hover { color: var(--green); border-bottom-color: var(--green); background: var(--green-pale); }
+
+  /* コンテンツ */
+  .container { max-width: 960px; margin: 0 auto; padding: 36px 20px 60px; }
+
+  /* キーメッセージ */
+  .key-message {
+    background: linear-gradient(135deg, #0f4c27, #1e7a42);
+    color: white;
+    border-radius: 14px;
+    padding: 28px 32px;
+    margin-bottom: 40px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(26,107,58,0.3);
+  }
+  .key-message .label { font-size: 11px; letter-spacing: 2px; opacity: 0.7; margin-bottom: 10px; }
+  .key-message h2 { font-size: 20px; font-weight: 800; line-height: 1.5; }
+  .key-message .pills {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 20px;
+  }
+  .key-message .pill {
+    background: rgba(255,255,255,0.18);
+    border: 1px solid rgba(255,255,255,0.35);
+    border-radius: 20px;
+    padding: 6px 16px;
+    font-size: 13px;
+  }
+
+  /* セクション */
+  .section { margin-bottom: 48px; }
+  .section-header {
+    display: flex; align-items: center; gap: 14px;
+    border-bottom: 3px solid var(--green);
+    padding-bottom: 12px;
+    margin-bottom: 24px;
+  }
+  .section-num {
+    background: var(--green);
+    color: white;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; font-weight: 900;
+    flex-shrink: 0;
+  }
+  .section-header h2 { font-size: 20px; font-weight: 800; color: var(--green); }
+  .section-header .tag {
+    font-size: 11px; background: var(--green-pale); color: var(--green);
+    border-radius: 10px; padding: 3px 10px; font-weight: 700; margin-left: auto;
+  }
+
+  /* カード */
+  .card {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    border-left: 4px solid var(--green);
+  }
+  .card h3 {
+    font-size: 15px; font-weight: 800; color: var(--green);
+    margin-bottom: 14px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .card h3::before { content: ''; display: block; width: 6px; height: 6px; background: var(--green); border-radius: 50%; }
+
+  /* グリッド */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  @media (max-width: 640px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+  /* ピッチ図 */
+  .pitch-container {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  }
+  .pitch-container h3 {
+    font-size: 15px; font-weight: 800; color: var(--green);
+    margin-bottom: 16px; text-align: center;
+  }
+  .pitch {
+    background: linear-gradient(180deg, #3a9e5c 0%, #2d8f52 100%);
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto;
+  }
+  .pitch svg { display: block; width: 100%; }
+
+  /* テーブル */
+  table {
+    width: 100%; border-collapse: collapse; font-size: 14px;
+    background: white; border-radius: 10px; overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    margin-bottom: 20px;
+  }
+  th {
+    background: var(--green); color: white;
+    padding: 12px 16px; text-align: left; font-size: 13px;
+  }
+  td { padding: 11px 16px; border-bottom: 1px solid #eee; }
+  tr:last-child td { border-bottom: none; }
+  tr:nth-child(even) td { background: #fafafa; }
+  .badge-red { background: #fde8e8; color: var(--red); border-radius: 6px; padding: 2px 8px; font-size: 12px; font-weight: 700; }
+  .badge-blue { background: #e8f0fe; color: var(--blue); border-radius: 6px; padding: 2px 8px; font-size: 12px; font-weight: 700; }
+  .badge-green { background: var(--green-pale); color: var(--green); border-radius: 6px; padding: 2px 8px; font-size: 12px; font-weight: 700; }
+
+  /* ステップリスト */
+  .step-list { list-style: none; }
+  .step-list li {
+    display: flex; gap: 14px; align-items: flex-start;
+    margin-bottom: 14px;
+  }
+  .step-num {
+    background: var(--green); color: white;
+    min-width: 26px; height: 26px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 800; flex-shrink: 0; margin-top: 2px;
+  }
+  .step-text strong { display: block; font-size: 14px; color: #222; }
+  .step-text span { font-size: 13px; color: var(--gray); }
+
+  /* 3要素カード */
+  .three-elem {
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 20px;
+  }
+  @media (max-width: 640px) { .three-elem { grid-template-columns: 1fr; } }
+  .elem-card {
+    background: white; border-radius: 10px; padding: 18px 16px;
+    text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    border-top: 4px solid var(--green);
+  }
+  .elem-icon { font-size: 30px; margin-bottom: 8px; }
+  .elem-title { font-size: 15px; font-weight: 800; color: var(--green); margin-bottom: 6px; }
+  .elem-val { font-size: 20px; font-weight: 900; color: #222; margin-bottom: 4px; }
+  .elem-note { font-size: 12px; color: var(--gray); }
+
+  /* アラート */
+  .alert {
+    border-radius: 10px; padding: 16px 20px; margin-bottom: 16px;
+    display: flex; gap: 12px; align-items: flex-start; font-size: 14px;
+  }
+  .alert-warn { background: #fff8e1; border-left: 4px solid #f5c518; }
+  .alert-good { background: var(--green-pale); border-left: 4px solid var(--green); }
+  .alert-icon { font-size: 20px; flex-shrink: 0; }
+  .alert strong { display: block; font-weight: 800; margin-bottom: 3px; }
+
+  /* タイムライン（練習フェーズ） */
+  .phase-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 640px) { .phase-grid { grid-template-columns: 1fr; } }
+  .phase-card {
+    background: white; border-radius: 12px; overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  }
+  .phase-header {
+    padding: 14px 20px;
+    font-weight: 800; font-size: 15px; color: white;
+  }
+  .phase-header.p1 { background: linear-gradient(90deg, #1a6b3a, #2d8f52); }
+  .phase-header.p2 { background: linear-gradient(90deg, #1a4b7a, #2471a3); }
+  .phase-body { padding: 16px 20px; }
+  .phase-item {
+    display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 1px solid #eee; padding: 9px 0; font-size: 14px;
+  }
+  .phase-item:last-child { border-bottom: none; }
+  .phase-item .name { font-weight: 700; }
+  .phase-item .time { color: var(--green); font-weight: 800; font-size: 13px; }
+
+  /* フッター */
+  footer {
+    text-align: center; padding: 24px; font-size: 12px; color: #999;
+    border-top: 1px solid var(--line); margin-top: 20px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="badge">TACTICAL ANALYSIS REPORT</div>
+  <h1>戦術ノウハウ分析レポート</h1>
+  <p>0-2敗戦の課題から学ぶ — 3つの改善ポイントと実践トレーニング</p>
+  <p class="subtitle">Reborn Over50 | 東京都リーグ3部 | 2026.04.04</p>
+</header>
+
+<nav>
+  <a href="#summary">総括</a>
+  <a href="#press">ハイプレス対応</a>
+  <a href="#transition">奪取後の動き</a>
+  <a href="#sidechange">サイドチェンジ</a>
+  <a href="#training">練習メニュー</a>
+</nav>
+
+<div class="container">
+
+  <!-- キーメッセージ -->
+  <div class="key-message" id="summary">
+    <div class="label">OVER 50 TEAM PHILOSOPHY</div>
+    <h2>「動きを減らして、立ち位置で解決する」<br>Over50の武器は経験とサッカーIQ</h2>
+    <div class="pills">
+      <span class="pill">スキャン習慣（最速即効）</span>
+      <span class="pill">数的優位は立ち位置で作る</span>
+      <span class="pill">第三の男パターン化</span>
+      <span class="pill">先読みスライド</span>
+    </div>
+  </div>
+
+  <!-- 課題サマリー表 -->
+  <div class="card" style="border-left-color:#c0392b;">
+    <h3 style="color:#c0392b;">今回の敗因サマリー</h3>
+    <table>
+      <thead><tr><th>課題</th><th>現象</th><th>根本原因</th><th>優先度</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>ハイプレス対応</strong></td>
+          <td>プレスを受けるとボールロスト</td>
+          <td>後方の数的優位が作れていない / 立ち位置が悪い</td>
+          <td><span class="badge-red">高</span></td>
+        </tr>
+        <tr>
+          <td><strong>奪取後の動き出し</strong></td>
+          <td>ボールを取っても周りが止まる</td>
+          <td>共通理解の欠如 / 認知的遅れ</td>
+          <td><span class="badge-red">高</span></td>
+        </tr>
+        <tr>
+          <td><strong>サイドチェンジ対応</strong></td>
+          <td>DFのスライドが遅い</td>
+          <td>ユニット移動の習慣なし / 立ち位置の遅さ</td>
+          <td><span class="badge-blue">中</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ===== 課題1 ===== -->
+  <div class="section" id="press">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <h2>相手のハイプレス対応（ビルドアップ）</h2>
+      <span class="tag">BUILD-UP</span>
+    </div>
+
+    <!-- ピッチ図：3バック構造 -->
+    <div class="pitch-container">
+      <h3>3バック構造で数的優位を作る（GK+2CB vs 相手2FW）</h3>
+      <div class="pitch">
+        <svg viewBox="0 0 400 260" xmlns="http://www.w3.org/2000/svg">
+          <!-- フィールドライン -->
+          <rect x="0" y="0" width="400" height="260" fill="#2d8f52"/>
+          <rect x="10" y="10" width="380" height="240" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
+          <!-- センターライン -->
+          <line x1="10" y1="130" x2="390" y2="130" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+          <!-- ゴールエリア（下） -->
+          <rect x="150" y="220" width="100" height="30" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
+          <!-- ペナルティエリア（下） -->
+          <rect x="100" y="200" width="200" height="50" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+
+          <!-- 味方（青） -->
+          <!-- GK -->
+          <circle cx="200" cy="240" r="14" fill="#2471a3" stroke="white" stroke-width="2"/>
+          <text x="200" y="245" text-anchor="middle" fill="white" font-size="11" font-weight="bold">GK</text>
+
+          <!-- CB左 -->
+          <circle cx="100" cy="200" r="14" fill="#2471a3" stroke="white" stroke-width="2"/>
+          <text x="100" y="205" text-anchor="middle" fill="white" font-size="10" font-weight="bold">CB</text>
+
+          <!-- CB右 -->
+          <circle cx="300" cy="200" r="14" fill="#2471a3" stroke="white" stroke-width="2"/>
+          <text x="300" y="205" text-anchor="middle" fill="white" font-size="10" font-weight="bold">CB</text>
+
+          <!-- ピボット -->
+          <circle cx="200" cy="170" r="14" fill="#1a6b3a" stroke="white" stroke-width="2"/>
+          <text x="200" y="175" text-anchor="middle" fill="white" font-size="9" font-weight="bold">VOL</text>
+
+          <!-- 相手FW（赤） -->
+          <circle cx="160" cy="155" r="14" fill="#c0392b" stroke="white" stroke-width="2"/>
+          <text x="160" y="160" text-anchor="middle" fill="white" font-size="9" font-weight="bold">FW</text>
+          <circle cx="240" cy="155" r="14" fill="#c0392b" stroke="white" stroke-width="2"/>
+          <text x="240" y="160" text-anchor="middle" fill="white" font-size="9" font-weight="bold">FW</text>
+
+          <!-- プレスの矢印（赤） -->
+          <line x1="160" y1="165" x2="125" y2="188" stroke="#ff6b6b" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#arrowRed)"/>
+          <line x1="240" y1="165" x2="275" y2="188" stroke="#ff6b6b" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#arrowRed)"/>
+
+          <!-- パスの矢印（青） -->
+          <line x1="113" y1="192" x2="192" y2="175" stroke="#7ec8ff" stroke-width="2" marker-end="url(#arrowBlue)"/>
+          <line x1="200" y1="155" x2="200" y2="143" stroke="#f5c518" stroke-width="2.5" marker-end="url(#arrowYellow)"/>
+
+          <!-- ラベル -->
+          <rect x="0" y="0" width="400" height="24" fill="rgba(0,0,0,0.35)"/>
+          <text x="200" y="16" text-anchor="middle" fill="white" font-size="11" font-weight="bold">2FWのプレスに対して 3枚 = 自動的に数的優位</text>
+
+          <!-- 数的優位ラベル -->
+          <rect x="20" y="195" width="64" height="18" fill="rgba(26,107,58,0.85)" rx="4"/>
+          <text x="52" y="208" text-anchor="middle" fill="white" font-size="10" font-weight="bold">3 vs 2</text>
+
+          <!-- 矢印マーカー -->
+          <defs>
+            <marker id="arrowRed" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L8,3 z" fill="#ff6b6b"/>
+            </marker>
+            <marker id="arrowBlue" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L8,3 z" fill="#7ec8ff"/>
+            </marker>
+            <marker id="arrowYellow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L8,3 z" fill="#f5c518"/>
+            </marker>
+          </defs>
+        </svg>
+      </div>
+      <p style="text-align:center; font-size:12px; color:#666; margin-top:10px;">
+        青＝自チーム / 赤＝相手 / 黄矢印＝前進パス<br>
+        相手FW2枚に対して、CB2+GKの3枚で常に数的優位が生まれる
+      </p>
+    </div>
+
+    <!-- プレスタイプ別 -->
+    <div class="card">
+      <h3>プレスタイプ別の対応策</h3>
+      <table>
+        <thead><tr><th>タイプ</th><th>相手の意図</th><th>対応策</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="badge-red">マンマーク</span></td>
+            <td>特定の選手に張り付く</td>
+            <td>第三の男（C選手）を使った迂回パス</td>
+          </tr>
+          <tr>
+            <td><span class="badge-blue">ゾーン</span></td>
+            <td>エリアに入ったらプレス</td>
+            <td>素早いボール移動でゾーンの境界を突く</td>
+          </tr>
+          <tr>
+            <td><span class="badge-red">誘導型</span></td>
+            <td>サイドに追い込んで奪取</td>
+            <td>逆サイドへのロングサイドチェンジ</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grid2">
+      <div class="alert alert-good">
+        <span class="alert-icon">✅</span>
+        <div>
+          <strong>やるべきこと</strong>
+          後ろに戻す＝次の攻撃の準備。GKへのバックパスは失敗ではない。ゴールキック時の立ち位置をルーティン化する。
+        </div>
+      </div>
+      <div class="alert alert-warn">
+        <span class="alert-icon">⚠️</span>
+        <div>
+          <strong>Over50の現実</strong>
+          ロングボールは「蹴ってから探す」ではなく「FWの位置を確認してから蹴る」。焦ってロストするのが最悪のパターン。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 課題2 ===== -->
+  <div class="section" id="transition">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <h2>ボール奪取後の動き出し停止・密集での捌き</h2>
+      <span class="tag">TRANSITION</span>
+    </div>
+
+    <!-- 根本原因 -->
+    <div class="card">
+      <h3>なぜ動きが止まるのか — 3つの根本原因</h3>
+      <ul class="step-list">
+        <li>
+          <div class="step-num">1</div>
+          <div class="step-text">
+            <strong>認知的遅れ</strong>
+            <span>「奪った → 自分が動く」の判断に時間がかかる。奪取後5〜10秒が「ゴールデンモーメント」なのに逸してしまう。</span>
+          </div>
+        </li>
+        <li>
+          <div class="step-num">2</div>
+          <div class="step-text">
+            <strong>共通理解の欠如</strong>
+            <span>「奪ったらどこに出す？」「誰がどう動く？」の約束事がない。出し手と受け手の準備がズレている。</span>
+          </div>
+        </li>
+        <li>
+          <div class="step-num">3</div>
+          <div class="step-text">
+            <strong>心理的な迷い</strong>
+            <span>「動いて受けられなかったら無駄足」という恐れで様子見になる。失敗を許容する文化が必要。</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- サポートの3要素 -->
+    <div class="three-elem">
+      <div class="elem-card">
+        <div class="elem-icon">📏</div>
+        <div class="elem-title">距離</div>
+        <div class="elem-val">5〜15m</div>
+        <div class="elem-note">狭い局面では3〜8m<br>近すぎず・遠すぎず</div>
+      </div>
+      <div class="elem-card">
+        <div class="elem-icon">📐</div>
+        <div class="elem-title">角度</div>
+        <div class="elem-val">45〜60°</div>
+        <div class="elem-note">真後ろは詰まる<br>斜めに立つ</div>
+      </div>
+      <div class="elem-card">
+        <div class="elem-icon">⏱️</div>
+        <div class="elem-title">タイミング</div>
+        <div class="elem-val">プレス時</div>
+        <div class="elem-note">早すぎるとDFも連動<br>相手が食いついた瞬間</div>
+      </div>
+    </div>
+
+    <!-- 第三の男 図 -->
+    <div class="pitch-container">
+      <h3>第三の男（Third Man）のメカニズム</h3>
+      <div class="pitch">
+        <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="0" width="400" height="200" fill="#2d8f52"/>
+          <rect x="10" y="10" width="380" height="180" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+
+          <!-- 選手A（ボール保持） -->
+          <circle cx="80" cy="140" r="16" fill="#2471a3" stroke="white" stroke-width="2"/>
+          <text x="80" y="145" text-anchor="middle" fill="white" font-size="12" font-weight="bold">A</text>
+          <!-- ボール -->
+          <circle cx="80" cy="140" r="5" fill="#f5c518" stroke="white" stroke-width="1"/>
+
+          <!-- 選手B -->
+          <circle cx="200" cy="110" r="16" fill="#2471a3" stroke="white" stroke-width="2"/>
+          <text x="200" y="115" text-anchor="middle" fill="white" font-size="12" font-weight="bold">B</text>
+
+          <!-- 選手C（第三の男） -->
+          <circle cx="320" cy="80" r="16" fill="#1a6b3a" stroke="#f5c518" stroke-width="3"/>
+          <text x="320" y="85" text-anchor="middle" fill="white" font-size="12" font-weight="bold">C</text>
+
+          <!-- 相手DF -->
+          <circle cx="200" cy="145" r="14" fill="#c0392b" stroke="white" stroke-width="2"/>
+          <text x="200" y="150" text-anchor="middle" fill="white" font-size="9" font-weight="bold">DF</text>
+          <circle cx="150" cy="100" r="14" fill="#c0392b" stroke="white" stroke-width="2"/>
+          <text x="150" y="105" text-anchor="middle" fill="white" font-size="9" font-weight="bold">DF</text>
+
+          <!-- パス矢印 -->
+          <!-- A→B -->
+          <line x1="96" y1="133" x2="183" y2="116" stroke="white" stroke-width="2.5" stroke-dasharray="none" marker-end="url(#arrowW1)"/>
+          <!-- B→C -->
+          <line x1="216" y1="103" x2="303" y2="87" stroke="#f5c518" stroke-width="2.5" marker-end="url(#arrowY1)"/>
+
+          <!-- DFの視線（困惑） -->
+          <text x="200" y="73" text-anchor="middle" fill="rgba(255,100,100,0.9)" font-size="11" font-weight="bold">DFは3つを同時に見られない</text>
+
+          <!-- ラベル -->
+          <rect x="0" y="0" width="400" height="22" fill="rgba(0,0,0,0.4)"/>
+          <text x="200" y="15" text-anchor="middle" fill="white" font-size="11" font-weight="bold">A → B → C（第三の男）でプレスを無効化</text>
+
+          <!-- C選手のラベル -->
+          <rect x="280" y="52" width="80" height="16" fill="rgba(26,107,58,0.85)" rx="4"/>
+          <text x="320" y="63" text-anchor="middle" fill="#f5c518" font-size="10" font-weight="bold">フリー！</text>
+
+          <defs>
+            <marker id="arrowW1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L8,3 z" fill="white"/>
+            </marker>
+            <marker id="arrowY1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L8,3 z" fill="#f5c518"/>
+            </marker>
+          </defs>
+        </svg>
+      </div>
+      <p style="text-align:center; font-size:12px; color:#666; margin-top:10px;">
+        DFは「ボール・Bへのパス・第三の男C」の3つを同時に追えない<br>
+        パターンを覚えれば体力に頼らず解決できる = Over50に最適
+      </p>
+    </div>
+
+    <div class="alert alert-good">
+      <span class="alert-icon">🧠</span>
+      <div>
+        <strong>Over50向け認知トレーニングの鉄則</strong>
+        1セッション1コンセプト。「なぜそこに動いた？」を言語化させる。最初はゆっくり、徐々にスピードを上げる。
+        <strong style="display:inline; color:var(--green);">スキャン（首振り）はボールを受ける直前に必ず。これが最速の即効策。</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 課題3 ===== -->
+  <div class="section" id="sidechange">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <h2>ディフェンスのサイドチェンジ対応の遅さ</h2>
+      <span class="tag">DEFENSE</span>
+    </div>
+
+    <!-- ピッチ図：サイドチェンジ -->
+    <div class="pitch-container">
+      <h3>相手サイドチェンジへの守備スライド</h3>
+      <div class="pitch">
+        <svg viewBox="0 0 440 220" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="0" width="440" height="220" fill="#2d8f52"/>
+          <rect x="10" y="10" width="420" height="200" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+          <!-- センターライン縦 -->
+          <line x1="220" y1="10" x2="220" y2="210" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="6,4"/>
+
+          <!-- 相手 サイドチェンジパス -->
+          <line x1="60" y1="70" x2="380" y2="90" stroke="#ff6b6b" stroke-width="3" marker-end="url(#arrowRed2)" stroke-dasharray="none"/>
+          <!-- 相手FW右 -->
+          <circle cx="60" cy="70" r="14" fill="#c0392b" stroke="white" stroke-width="2"/>
+          <text x="60" y="75" text-anchor="middle" fill="white" font-size="9" font-weight="bold">FW</text>
+          <!-- 相手FW左（受ける） -->
+          <circle cx="388" cy="90" r="14" fill="#c0392b" stroke="white" stroke-width="2"/>
+          <text x="388" y="95" text-anchor="middle" fill="white" font-size="9" font-weight="bold">FW</text>
+          <text x="388" y="110" text-anchor="middle" fill="#f5c518" font-size="9" font-weight="bold">フリー</text>
+
+          <!-- 守備ライン（before：右に寄っている） -->
+          <!-- SB右（ボールに近い） -->
+          <circle cx="90" cy="155" r="13" fill="#2471a3" stroke="#aaa" stroke-width="2" stroke-dasharray="4,2" opacity="0.6"/>
+          <text x="90" y="159" text-anchor="middle" fill="white" font-size="8">SB</text>
+          <!-- CB右 -->
+          <circle cx="155" cy="155" r="13" fill="#2471a3" stroke="#aaa" stroke-width="2" stroke-dasharray="4,2" opacity="0.6"/>
+          <text x="155" y="159" text-anchor="middle" fill="white" font-size="8">CB</text>
+          <!-- CB左 -->
+          <circle cx="225" cy="155" r="13" fill="#2471a3" stroke="#aaa" stroke-width="2" stroke-dasharray="4,2" opacity="0.6"/>
+          <text x="225" y="159" text-anchor="middle" fill="white" font-size="8">CB</text>
+          <!-- SB左（逆サイド、遠い） -->
+          <circle cx="295" cy="155" r="13" fill="#2471a3" stroke="#aaa" stroke-width="2" stroke-dasharray="4,2" opacity="0.6"/>
+          <text x="295" y="159" text-anchor="middle" fill="white" font-size="8">SB</text>
+
+          <!-- スライド矢印 -->
+          <line x1="103" y1="155" x2="178" y2="155" stroke="#7ec8ff" stroke-width="2" marker-end="url(#arrowBlue2)"/>
+          <line x1="168" y1="155" x2="243" y2="155" stroke="#7ec8ff" stroke-width="2" marker-end="url(#arrowBlue2)"/>
+          <line x1="238" y1="155" x2="318" y2="155" stroke="#7ec8ff" stroke-width="2" marker-end="url(#arrowBlue2)"/>
+          <line x1="308" y1="155" x2="378" y2="155" stroke="#f5c518" stroke-width="2.5" marker-end="url(#arrowYellow2)"/>
+
+          <!-- after ポジション -->
+          <circle cx="185" cy="155" r="13" fill="#2471a3" stroke="white" stroke-width="2"/>
+          <text x="185" y="159" text-anchor="middle" fill="white" font-size="8">SB</text>
+          <circle cx="255" cy="155" r="13" fill="#2471a3" stroke="white" stroke-width="2"/>
+          <text x="255" y="159" text-anchor="middle" fill="white" font-size="8">CB</text>
+          <circle cx="325" cy="155" r="13" fill="#2471a3" stroke="white" stroke-width="2"/>
+          <text x="325" y="159" text-anchor="middle" fill="white" font-size="8">CB</text>
+          <circle cx="385" cy="155" r="13" fill="#2471a3" stroke="white" stroke-width="2"/>
+          <text x="385" y="159" text-anchor="middle" fill="white" font-size="8">SB</text>
+
+          <!-- ラベル -->
+          <rect x="0" y="0" width="440" height="22" fill="rgba(0,0,0,0.4)"/>
+          <text x="220" y="15" text-anchor="middle" fill="white" font-size="11" font-weight="bold">ユニットとして一斉スライド — 1人遅れると穴ができる</text>
+
+          <!-- 薄い＝元の位置 -->
+          <rect x="10" y="170" width="130" height="18" fill="rgba(0,0,0,0.4)" rx="4"/>
+          <text x="75" y="182" text-anchor="middle" fill="#aaa" font-size="9">薄色＝スライド前の位置</text>
+
+          <defs>
+            <marker id="arrowRed2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L8,3 z" fill="#ff6b6b"/>
+            </marker>
+            <marker id="arrowBlue2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L8,3 z" fill="#7ec8ff"/>
+            </marker>
+            <marker id="arrowYellow2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L8,3 z" fill="#f5c518"/>
+            </marker>
+          </defs>
+        </svg>
+      </div>
+      <p style="text-align:center; font-size:12px; color:#666; margin-top:10px;">
+        相手のサイドチェンジパス（赤）に対してDFラインが一斉スライド（青矢印）<br>
+        最後尾SBが逆サイドFWに対応（黄矢印）
+      </p>
+    </div>
+
+    <!-- 原因別対応 -->
+    <div class="card">
+      <h3>スライドが遅い原因と解決策</h3>
+      <table>
+        <thead><tr><th>原因</th><th>分類</th><th>解決策</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>ボールばかり見ている</td>
+            <td><span class="badge-blue">認知</span></td>
+            <td>スキャン訓練（ボール以外も見る習慣）</td>
+          </tr>
+          <tr>
+            <td>スライドの合図が共有されていない</td>
+            <td><span class="badge-red">戦術理解</span></td>
+            <td>声の合図・約束事を明文化</td>
+          </tr>
+          <tr>
+            <td>体力的にスライドしきれない</td>
+            <td><span class="badge-red">体力</span></td>
+            <td>最初から正しい立ち位置（省エネポジション）</td>
+          </tr>
+          <tr>
+            <td>「誰かがやる」意識</td>
+            <td><span class="badge-blue">責任感</span></td>
+            <td>担当ゾーンを明確化・個人責任制</td>
+          </tr>
+          <tr>
+            <td>スライドの距離感がわからない</td>
+            <td><span class="badge-green">空間認識</span></td>
+            <td>コーンでゾーンを視覚化した練習</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="alert alert-good">
+      <span class="alert-icon">💡</span>
+      <div>
+        <strong>Over50省エネ守備の鉄則：先読みスライド</strong>
+        相手が片サイドで停滞している間に、<strong>すでに逆サイドの調整を開始</strong>する。ミドルブロック（自陣40〜50m付近）で守り、DFライン幅を40mに絞れば移動距離が半減する。ボランチを「スペースの消防士」に固定し、体力ある選手を配置する。
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 練習メニュー ===== -->
+  <div class="section" id="training">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <h2>推奨トレーニングメニュー</h2>
+      <span class="tag">TRAINING</span>
+    </div>
+
+    <div class="phase-grid">
+      <div class="phase-card">
+        <div class="phase-header p1">フェーズ1：土台づくり（1〜2ヶ月）</div>
+        <div class="phase-body">
+          <div class="phase-item">
+            <span class="name">5v2ロンド（20×20m）</span>
+            <span class="time">20分</span>
+          </div>
+          <div class="phase-item">
+            <span class="name">シャドーDF（声で方向指示）</span>
+            <span class="time">10分</span>
+          </div>
+          <div class="phase-item">
+            <span class="name">GKキック時の立ち位置確認</span>
+            <span class="time">10分</span>
+          </div>
+          <div class="phase-item">
+            <span class="name">スキャン強調パス練習</span>
+            <span class="time">15分</span>
+          </div>
+        </div>
+      </div>
+      <div class="phase-card">
+        <div class="phase-header p2">フェーズ2：応用（3〜4ヶ月）</div>
+        <div class="phase-body">
+          <div class="phase-item">
+            <span class="name">3ゾーンポジショナルゲーム</span>
+            <span class="time">25分</span>
+          </div>
+          <div class="phase-item">
+            <span class="name">4ゴールゲーム（サイドチェンジ）</span>
+            <span class="time">20分</span>
+          </div>
+          <div class="phase-item">
+            <span class="name">奪取3秒ルールゲーム</span>
+            <span class="time">20分</span>
+          </div>
+          <div class="phase-item">
+            <span class="name">8v8 ハーフコートゲーム</span>
+            <span class="time">30分</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ロンド解説 -->
+    <div class="card" style="margin-top:20px;">
+      <h3>5v2ロンドのセットアップ（最重要メニュー）</h3>
+      <div class="pitch-container" style="box-shadow:none; padding:16px 0 0;">
+        <div class="pitch">
+          <svg viewBox="0 0 300 260" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0" y="0" width="300" height="260" fill="#2d8f52"/>
+            <!-- 20m四角（コーン） -->
+            <rect x="50" y="40" width="200" height="180" fill="none" stroke="#f5c518" stroke-width="2.5" stroke-dasharray="8,4"/>
+            <!-- コーン -->
+            <polygon points="50,40 42,52 58,52" fill="#f5c518"/>
+            <polygon points="250,40 242,52 258,52" fill="#f5c518"/>
+            <polygon points="50,220 42,208 58,208" fill="#f5c518"/>
+            <polygon points="250,220 242,208 258,208" fill="#f5c518"/>
+
+            <!-- 外5人（青） -->
+            <circle cx="50" cy="130" r="15" fill="#2471a3" stroke="white" stroke-width="2"/>
+            <text x="50" y="135" text-anchor="middle" fill="white" font-size="10" font-weight="bold">1</text>
+            <circle cx="150" cy="40" r="15" fill="#2471a3" stroke="white" stroke-width="2"/>
+            <text x="150" y="45" text-anchor="middle" fill="white" font-size="10" font-weight="bold">2</text>
+            <circle cx="250" cy="130" r="15" fill="#2471a3" stroke="white" stroke-width="2"/>
+            <text x="250" y="135" text-anchor="middle" fill="white" font-size="10" font-weight="bold">3</text>
+            <circle cx="150" cy="220" r="15" fill="#2471a3" stroke="white" stroke-width="2"/>
+            <text x="150" y="225" text-anchor="middle" fill="white" font-size="10" font-weight="bold">4</text>
+            <circle cx="100" cy="80" r="15" fill="#2471a3" stroke="white" stroke-width="2"/>
+            <text x="100" y="85" text-anchor="middle" fill="white" font-size="10" font-weight="bold">5</text>
+
+            <!-- 中2人（赤） -->
+            <circle cx="150" cy="130" r="15" fill="#c0392b" stroke="white" stroke-width="2"/>
+            <text x="150" y="135" text-anchor="middle" fill="white" font-size="10" font-weight="bold">D</text>
+            <circle cx="195" cy="155" r="15" fill="#c0392b" stroke="white" stroke-width="2"/>
+            <text x="195" y="160" text-anchor="middle" fill="white" font-size="10" font-weight="bold">D</text>
+
+            <!-- パス -->
+            <line x1="65" y1="125" x2="133" y2="85" stroke="white" stroke-width="2" marker-end="url(#arrowW2)"/>
+            <line x1="113" y1="80" x2="233" y2="125" stroke="white" stroke-width="2" marker-end="url(#arrowW2)"/>
+
+            <!-- ラベル -->
+            <rect x="0" y="0" width="300" height="22" fill="rgba(0,0,0,0.4)"/>
+            <text x="150" y="15" text-anchor="middle" fill="white" font-size="11" font-weight="bold">5v2 ロンド（20m × 20m）</text>
+
+            <!-- メモ -->
+            <rect x="50" y="235" width="200" height="16" fill="rgba(0,0,0,0.4)" rx="3"/>
+            <text x="150" y="247" text-anchor="middle" fill="white" font-size="9">外5人がパスを繋ぐ / 内2人が奪う</text>
+
+            <defs>
+              <marker id="arrowW2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+                <path d="M0,0 L0,6 L8,3 z" fill="white"/>
+              </marker>
+            </defs>
+          </svg>
+        </div>
+      </div>
+      <ul style="font-size:14px; margin-top:14px; padding-left:18px; color:#444;">
+        <li>Over50向けにスペースを広めに設定（20×20m）</li>
+        <li>最初はタッチ制限なし → 慣れたら2タッチ制限</li>
+        <li>コーチングポイント：「受ける前にスキャン」「三角形を意識」「受けたらすぐ出す or 前を向く」</li>
+        <li>ボールを奪った2人はそのままミニゴールを狙う → 奪取後の切り替えも訓練</li>
+      </ul>
+    </div>
+
+    <!-- 今すぐできること -->
+    <div class="key-message" style="margin-top:24px;">
+      <div class="label">TODAY'S ACTION</div>
+      <h2 style="font-size:17px;">今すぐ次の練習から試せること</h2>
+      <div class="pills">
+        <span class="pill">① 受ける前のスキャン（首振り）を全員に徹底</span>
+        <span class="pill">② GKキック時の立ち位置をルーティン化</span>
+        <span class="pill">③「後ろに戻す＝失敗でない」を明言する</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  Reborn Over50 | 東京都リーグ3部 | 戦術ノウハウ分析レポート | 2026-04-04
+</footer>
+
+<!-- TOPに戻るボタン -->
+<a href="index.html" id="back-top" title="トップページへ戻る">
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+    <polyline points="9 22 9 12 15 12 15 22"/>
+  </svg>
+  TOP
+</a>
+
+<style>
+#back-top {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  background: linear-gradient(135deg, #0f4c27, #1a6b3a);
+  color: white;
+  border-radius: 50px;
+  padding: 10px 18px 10px 14px;
+  font-size: 13px;
+  font-weight: 800;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 16px rgba(26,107,58,0.45);
+  transition: transform 0.2s, box-shadow 0.2s;
+  z-index: 999;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+#back-top:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px rgba(26,107,58,0.55);
+}
+</style>
+
+</body>
+</html>

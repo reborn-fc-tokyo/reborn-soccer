@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reborn Over50 | 戦術ノウハウ</title>
+<style>
+  :root {
+    --green: #1a6b3a;
+    --green-light: #2d8f52;
+    --green-pale: #e8f5ed;
+    --gray: #555;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+    background: #f2f4f3;
+    color: #222;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  header {
+    background: linear-gradient(135deg, #0f4c27 0%, #1a6b3a 60%, #2d8f52 100%);
+    color: white;
+    padding: 48px 24px 36px;
+    text-align: center;
+  }
+  header .badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.18);
+    border: 1px solid rgba(255,255,255,0.35);
+    border-radius: 20px;
+    padding: 4px 16px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+  }
+  header h1 { font-size: 28px; font-weight: 900; margin-bottom: 8px; }
+  header .sub { font-size: 14px; opacity: 0.8; margin-top: 6px; }
+
+  .team-info {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+  }
+  .team-info .item {
+    background: rgba(255,255,255,0.15);
+    border-radius: 8px;
+    padding: 6px 16px;
+    font-size: 13px;
+  }
+  .team-info .item span { opacity: 0.7; font-size: 11px; display: block; }
+
+  .container { max-width: 800px; margin: 0 auto; padding: 40px 20px 64px; }
+
+  .section-title {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--green);
+    border-bottom: 2px solid var(--green);
+    padding-bottom: 8px;
+    margin-bottom: 24px;
+  }
+
+  .article-list { display: flex; flex-direction: column; gap: 16px; }
+
+  .article-card {
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border-left: 5px solid var(--green);
+  }
+  .article-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(0,0,0,0.12);
+  }
+
+  .card-date {
+    background: var(--green);
+    color: white;
+    min-width: 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 14px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+  .card-date .year { font-size: 11px; opacity: 0.75; }
+  .card-date .month-day { font-size: 22px; font-weight: 900; line-height: 1.1; }
+
+  .card-body { padding: 18px 20px; flex: 1; }
+  .card-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+  .tag {
+    font-size: 11px; font-weight: 700;
+    background: var(--green-pale); color: var(--green);
+    border-radius: 10px; padding: 2px 10px;
+  }
+  .card-title { font-size: 17px; font-weight: 800; color: #1a1a1a; margin-bottom: 6px; }
+  .card-desc { font-size: 13px; color: var(--gray); line-height: 1.6; }
+  .card-arrow {
+    display: flex; align-items: center; justify-content: center;
+    padding: 0 16px; color: #ccc; font-size: 20px; flex-shrink: 0;
+  }
+  .article-card:hover .card-arrow { color: var(--green); }
+
+  .empty {
+    text-align: center; color: #aaa; padding: 40px 0; font-size: 14px;
+  }
+
+  footer {
+    text-align: center; padding: 24px; font-size: 12px; color: #999;
+    border-top: 1px solid #ddd;
+  }
+
+  @media (max-width: 480px) {
+    .card-date { min-width: 72px; }
+    .card-title { font-size: 15px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="badge">TACTICAL KNOWLEDGE BASE</div>
+  <h1>Reborn Over50</h1>
+  <p class="sub">戦術ノウハウ・試合分析・練習資料</p>
+  <div class="team-info">
+    <div class="item"><span>チーム</span>Reborn（リボーン）</div>
+    <div class="item"><span>カテゴリ</span>東京都リーグ 3部</div>
+    <div class="item"><span>対象</span>Over 50</div>
+  </div>
+</header>
+
+<div class="container">
+  <p class="section-title">REPORTS &amp; ANALYSIS</p>
+
+  <div class="article-list">
+
+    <!-- 記事カード：新しい順に追加 -->
+    <a class="article-card" href="tactical_knowhow_2026-04-04.html">
+      <div class="card-date">
+        <span class="year">2026</span>
+        <span class="month-day">04<br>04</span>
+      </div>
+      <div class="card-body">
+        <div class="card-tags">
+          <span class="tag">戦術分析</span>
+          <span class="tag">ハイプレス対応</span>
+          <span class="tag">攻守切り替え</span>
+          <span class="tag">サイドチェンジ</span>
+        </div>
+        <div class="card-title">戦術ノウハウ分析レポート</div>
+        <div class="card-desc">
+          0-2敗戦の3つの課題（ハイプレス対応・ボール奪取後の動き出し・守備のサイドチェンジ）を深掘り分析。
+          Over50チーム向けの現実的解決策と推奨トレーニングメニューをピッチ図付きでまとめた。
+        </div>
+      </div>
+      <div class="card-arrow">›</div>
+    </a>
+
+    <!-- 以降、新しいレポートをここに追加 -->
+
+  </div>
+</div>
+
+<footer>
+  Reborn Over50 | 東京都リーグ3部 | Tactical Knowledge Base
+</footer>
+
+</body>
+</html>
