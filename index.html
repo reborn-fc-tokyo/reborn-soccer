@@ -65,58 +65,121 @@
     padding-bottom: 8px;
     margin-bottom: 24px;
   }
+  .section-title.memo {
+    margin-top: 40px;
+    color: #888;
+    border-bottom-color: #ccc;
+  }
 
-  .article-list { display: flex; flex-direction: column; gap: 16px; }
-
-  .article-card {
+  /* ─── メイン記事カード ─── */
+  .featured-card {
     background: white;
-    border-radius: 14px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(26,107,58,0.15);
     overflow: hidden;
     text-decoration: none;
     color: inherit;
-    display: flex;
+    display: block;
     transition: transform 0.2s, box-shadow 0.2s;
-    border-left: 5px solid var(--green);
+    border: 2px solid var(--green);
   }
-  .article-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 24px rgba(0,0,0,0.12);
+  .featured-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 32px rgba(26,107,58,0.2);
   }
-
-  .card-date {
-    background: var(--green);
+  .featured-head {
+    background: linear-gradient(135deg, #0f4c27, #1a6b3a);
     color: white;
-    min-width: 90px;
+    padding: 20px 24px 16px;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px 14px;
-    text-align: center;
-    flex-shrink: 0;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
   }
-  .card-date .year { font-size: 11px; opacity: 0.75; }
-  .card-date .month-day { font-size: 22px; font-weight: 900; line-height: 1.1; }
-
-  .card-body { padding: 18px 20px; flex: 1; }
-  .card-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+  .featured-head .f-badge {
+    font-size: 10px;
+    letter-spacing: 2px;
+    opacity: 0.7;
+    margin-bottom: 6px;
+  }
+  .featured-head .f-title {
+    font-size: 22px;
+    font-weight: 900;
+    line-height: 1.3;
+  }
+  .featured-head .f-date {
+    font-size: 11px;
+    opacity: 0.6;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+  .featured-body { padding: 20px 24px; }
+  .featured-body .card-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
   .tag {
     font-size: 11px; font-weight: 700;
     background: var(--green-pale); color: var(--green);
     border-radius: 10px; padding: 2px 10px;
   }
-  .card-title { font-size: 17px; font-weight: 800; color: #1a1a1a; margin-bottom: 6px; }
-  .card-desc { font-size: 13px; color: var(--gray); line-height: 1.6; }
-  .card-arrow {
-    display: flex; align-items: center; justify-content: center;
-    padding: 0 16px; color: #ccc; font-size: 20px; flex-shrink: 0;
+  .featured-body .f-desc { font-size: 14px; color: var(--gray); line-height: 1.7; }
+  .featured-body .f-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 16px;
+    background: var(--green);
+    color: white;
+    padding: 9px 20px;
+    border-radius: 24px;
+    font-size: 13px;
+    font-weight: 800;
   }
-  .article-card:hover .card-arrow { color: var(--green); }
 
-  .empty {
-    text-align: center; color: #aaa; padding: 40px 0; font-size: 14px;
+  /* ─── 戦術メモカード（コンパクト） ─── */
+  .memo-list { display: flex; flex-direction: column; gap: 10px; }
+  .memo-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    align-items: center;
+    transition: transform 0.15s, box-shadow 0.15s;
+    border-left: 4px solid #bbb;
   }
+  .memo-card:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+    border-left-color: var(--green);
+  }
+  .memo-date {
+    background: #f5f5f5;
+    color: #888;
+    min-width: 72px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 10px;
+    text-align: center;
+    flex-shrink: 0;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .memo-body { padding: 12px 16px; flex: 1; }
+  .memo-body .memo-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 4px; }
+  .memo-tag {
+    font-size: 10px; font-weight: 700;
+    background: #f0f0f0; color: #888;
+    border-radius: 8px; padding: 1px 8px;
+  }
+  .memo-title { font-size: 14px; font-weight: 800; color: #333; }
+  .memo-arrow {
+    padding: 0 14px; color: #ccc; font-size: 18px; flex-shrink: 0;
+  }
+  .memo-card:hover .memo-arrow { color: var(--green); }
 
   footer {
     text-align: center; padding: 24px; font-size: 12px; color: #999;
@@ -124,8 +187,8 @@
   }
 
   @media (max-width: 480px) {
-    .card-date { min-width: 72px; }
-    .card-title { font-size: 15px; }
+    .featured-head .f-title { font-size: 18px; }
+    .memo-date { min-width: 58px; font-size: 11px; }
   }
 </style>
 </head>
@@ -143,129 +206,96 @@
 </header>
 
 <div class="container">
-  <p class="section-title">REPORTS &amp; ANALYSIS</p>
 
-  <div class="article-list">
+  <!-- メイン記事 -->
+  <p class="section-title">MAIN</p>
+  <a class="featured-card" href="highpress_buildup_2026-04-04.html">
+    <div class="featured-head">
+      <div>
+        <div class="f-badge">FEATURED ARTICLE</div>
+        <div class="f-title">DFによるサイドチェンジ</div>
+      </div>
+      <div class="f-date">2026.04.04</div>
+    </div>
+    <div class="featured-body">
+      <div class="card-tags">
+        <span class="tag">キャンセル</span>
+        <span class="tag">サイドチェンジ</span>
+        <span class="tag">ボランチ連動</span>
+        <span class="tag">まとめ版</span>
+      </div>
+      <div class="f-desc">
+        右SBが詰まったときのキャンセル判断から、CBサイドチェンジ、逆SBの受け方、ボランチの動き出しタイミングまでを図3枚・カード付きで解説。チーム全員が共有すべき基本の流れ。
+      </div>
+      <div class="f-cta">読む ›</div>
+    </div>
+  </a>
 
-    <!-- 記事カード：新しい順に追加 -->
-    <a class="article-card" href="tactical_knowhow_2026-04-04.html">
-      <div class="card-date">
-        <span class="year">2026</span>
-        <span class="month-day">04<br>04</span>
-      </div>
-      <div class="card-body">
-        <div class="card-tags">
-          <span class="tag">戦術分析</span>
-          <span class="tag">ハイプレス対応</span>
-          <span class="tag">攻守切り替え</span>
-          <span class="tag">サイドチェンジ</span>
+  <!-- 戦術メモ -->
+  <p class="section-title memo">TACTICAL MEMOS — 参考資料</p>
+  <div class="memo-list">
+
+    <a class="memo-card" href="tactical_knowhow_2026-04-04.html">
+      <div class="memo-date">04/04</div>
+      <div class="memo-body">
+        <div class="memo-tags">
+          <span class="memo-tag">戦術分析</span>
+          <span class="memo-tag">ハイプレス対応</span>
+          <span class="memo-tag">攻守切り替え</span>
         </div>
-        <div class="card-title">戦術ノウハウ分析レポート</div>
-        <div class="card-desc">
-          0-2敗戦の3つの課題（ハイプレス対応・ボール奪取後の動き出し・守備のサイドチェンジ）を深掘り分析。
-          Over50チーム向けの現実的解決策と推奨トレーニングメニューをピッチ図付きでまとめた。
-        </div>
+        <div class="memo-title">戦術ノウハウ分析レポート</div>
       </div>
-      <div class="card-arrow">›</div>
+      <div class="memo-arrow">›</div>
     </a>
 
-    <a class="article-card" href="sb_buildup_2026-04-04.html">
-      <div class="card-date">
-        <span class="year">2026</span>
-        <span class="month-day">04<br>04</span>
-      </div>
-      <div class="card-body">
-        <div class="card-tags">
-          <span class="tag">SB分析</span>
-          <span class="tag">ビルドアップ</span>
-          <span class="tag">立ち位置</span>
-          <span class="tag">プレス対応</span>
+    <a class="memo-card" href="sb_buildup_2026-04-04.html">
+      <div class="memo-date">04/04</div>
+      <div class="memo-body">
+        <div class="memo-tags">
+          <span class="memo-tag">SB分析</span>
+          <span class="memo-tag">ビルドアップ</span>
+          <span class="memo-tag">立ち位置</span>
         </div>
-        <div class="card-title">サイドバックのビルドアップ改善</div>
-        <div class="card-desc">
-          「SBで詰まってボールを失う」の根本原因を分析。低すぎ・外すぎの立ち位置、スキャン不足、CB・ボランチの三角形サポート不足を図解。Over50向けのドリル4種付き。
-        </div>
+        <div class="memo-title">サイドバックのビルドアップ改善</div>
       </div>
-      <div class="card-arrow">›</div>
+      <div class="memo-arrow">›</div>
     </a>
 
-    <a class="article-card" href="sb_cancel_switch_2026-04-04.html">
-      <div class="card-date">
-        <span class="year">2026</span>
-        <span class="month-day">04<br>04</span>
-      </div>
-      <div class="card-body">
-        <div class="card-tags">
-          <span class="tag">ビルドアップ</span>
-          <span class="tag">キャンセル</span>
-          <span class="tag">サイドチェンジ</span>
+    <a class="memo-card" href="sb_cancel_switch_2026-04-04.html">
+      <div class="memo-date">04/04</div>
+      <div class="memo-body">
+        <div class="memo-tags">
+          <span class="memo-tag">キャンセル</span>
+          <span class="memo-tag">サイドチェンジ</span>
         </div>
-        <div class="card-title">キャンセル＆サイドチェンジ</div>
-        <div class="card-desc">
-          「SBで詰まる」の正体は「キャンセルの判断が遅い」こと。詰まる前にCBへ戻して逆サイドへ展開する4ステップを図解。体力不要・技術不要、判断のタイミングだけを改善する。
-        </div>
+        <div class="memo-title">キャンセル＆サイドチェンジ</div>
       </div>
-      <div class="card-arrow">›</div>
+      <div class="memo-arrow">›</div>
     </a>
 
-    <a class="article-card" href="foot_and_cancel_2026-04-04.html">
-      <div class="card-date">
-        <span class="year">2026</span>
-        <span class="month-day">04<br>04</span>
-      </div>
-      <div class="card-body">
-        <div class="card-tags">
-          <span class="tag">利き足配置</span>
-          <span class="tag">キャンセル判断</span>
-          <span class="tag">約束事</span>
+    <a class="memo-card" href="foot_and_cancel_2026-04-04.html">
+      <div class="memo-date">04/04</div>
+      <div class="memo-body">
+        <div class="memo-tags">
+          <span class="memo-tag">利き足配置</span>
+          <span class="memo-tag">キャンセル判断</span>
         </div>
-        <div class="card-title">利き足の配置 ＆ キャンセルの判断基準</div>
-        <div class="card-desc">
-          強敵には右利きを左SB・左利きを右SBに置くと体が自然に中央を向きキャンセルが楽になる。判断基準は「相手5m以内→即キャンセル」の1つだけ。チームの約束事3行で「先が見える」状態になる仕組みを図解。
-        </div>
+        <div class="memo-title">利き足の配置 ＆ キャンセルの判断基準</div>
       </div>
-      <div class="card-arrow">›</div>
+      <div class="memo-arrow">›</div>
     </a>
 
-    <a class="article-card" href="sb_position_receive_2026-04-04.html">
-      <div class="card-date">
-        <span class="year">2026</span>
-        <span class="month-day">04<br>04</span>
-      </div>
-      <div class="card-body">
-        <div class="card-tags">
-          <span class="tag">逆SB</span>
-          <span class="tag">受ける位置</span>
-          <span class="tag">間合い</span>
+    <a class="memo-card" href="sb_position_receive_2026-04-04.html">
+      <div class="memo-date">04/04</div>
+      <div class="memo-body">
+        <div class="memo-tags">
+          <span class="memo-tag">逆SB</span>
+          <span class="memo-tag">受ける位置</span>
         </div>
-        <div class="card-title">逆SBはどこで受けるか</div>
-        <div class="card-desc">
-          サイドチェンジ後、逆SBの理想の受け位置と間合いを図解。「止まって待つ」vs「2〜3歩動き出す」の違いで相手との間合いが約10m変わることを示す。
-        </div>
+        <div class="memo-title">逆SBはどこで受けるか</div>
       </div>
-      <div class="card-arrow">›</div>
+      <div class="memo-arrow">›</div>
     </a>
-
-    <a class="article-card" href="highpress_buildup_2026-04-04.html">
-      <div class="card-date">
-        <span class="year">2026</span>
-        <span class="month-day">04<br>04</span>
-      </div>
-      <div class="card-body">
-        <div class="card-tags">
-          <span class="tag">ハイプレス対応</span>
-          <span class="tag">キャンセル</span>
-          <span class="tag">サイドチェンジ</span>
-        </div>
-        <div class="card-title">DFによるサイドチェンジ【まとめ版】</div>
-        <div class="card-desc">
-          キャンセル→サイドチェンジ→逆SBの流れを図2枚でシンプルに解説。「詰まる前に戻す」タイミングと3つのポイント。
-        </div>
-      </div>
-      <div class="card-arrow">›</div>
-    </a>
-
-    <!-- 以降、新しいレポートをここに追加 -->
 
   </div>
 </div>
