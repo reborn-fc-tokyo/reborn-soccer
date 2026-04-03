@@ -16,6 +16,15 @@
 
   .container { max-width:860px; margin:0 auto; padding:32px 16px 64px; }
 
+  /* ポイントリスト */
+  .points { display:flex; flex-direction:column; gap:10px; margin-bottom:28px; }
+  .point-row { display:flex; align-items:flex-start; gap:14px; background:white; border-radius:12px; padding:14px 18px; box-shadow:0 2px 8px rgba(0,0,0,0.07); }
+  .point-num { background:var(--green); color:white; min-width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:900; flex-shrink:0; margin-top:1px; }
+  .point-who { font-size:12px; font-weight:800; color:var(--blue); min-width:120px; padding-top:2px; flex-shrink:0; }
+  .point-text { font-size:14px; font-weight:700; color:#1a1a1a; }
+  .point-sub { font-size:12px; color:#777; margin-top:3px; }
+  .point-row.warn .point-num { background:var(--orange,#e67e22); }
+
   /* ステップバー */
   .steps { display:flex; align-items:center; justify-content:center; gap:0; margin-bottom:28px; flex-wrap:wrap; }
   .step { background:white; border-radius:8px; padding:10px 16px; font-size:13px; font-weight:800; color:var(--green); box-shadow:0 2px 8px rgba(0,0,0,0.08); white-space:nowrap; }
@@ -52,6 +61,38 @@
 </header>
 
 <div class="container">
+
+  <!-- 5つのポイント -->
+  <div class="points">
+    <div class="point-row">
+      <div class="point-num">①</div>
+      <div class="point-who">右SB</div>
+      <div><div class="point-text">キャンセルの判断を早く</div><div class="point-sub">相手が5m以内に来た瞬間 → 迷わず戻す</div></div>
+    </div>
+    <div class="point-row">
+      <div class="point-num">②</div>
+      <div class="point-who">右CB・左SB</div>
+      <div><div class="point-text">キャンセル前提で準備しておく</div><div class="point-sub">右CBは斜め後ろ45度、左SBは少し前に出て待つ</div></div>
+    </div>
+    <div class="point-row">
+      <div class="point-num">③</div>
+      <div class="point-who">右CB</div>
+      <div><div class="point-text">逆CBへのサイドチェンジを早く</div><div class="point-sub">受けたらすぐ左CBへ。ためらわない</div></div>
+    </div>
+    <div class="point-row">
+      <div class="point-num">④</div>
+      <div class="point-who">左SB</div>
+      <div><div class="point-text">2〜3歩前で受ける</div><div class="point-sub">止まって待たない。動き出しで相手との間合いが10m変わる</div></div>
+    </div>
+    <div class="point-row" style="border-left:4px solid #e67e22;">
+      <div class="point-num" style="background:#e67e22;">⑤</div>
+      <div class="point-who">ボランチ・ウィング</div>
+      <div>
+        <div class="point-text">右CBがボールを受けた瞬間から次を準備</div>
+        <div class="point-sub">※右SBがボールを持っている間は動かない。早く動きすぎると相手にバレてスペースが消える</div>
+      </div>
+    </div>
+  </div>
 
   <!-- ステップバー -->
   <div class="steps">
