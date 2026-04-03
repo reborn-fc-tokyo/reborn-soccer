@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ハイプレス対応 | Reborn Over50</title>
 <style>
-  :root { --green:#1a6b3a; --pale:#e8f5ed; --red:#c0392b; --blue:#2471a3; --yellow:#f5c518; }
+  :root { --green:#1a6b3a; --pale:#e8f5ed; --red:#c0392b; --blue:#2471a3; --yellow:#f5c518; --orange:#e67e22; }
   * { box-sizing:border-box; margin:0; padding:0; }
   body { font-family:'Helvetica Neue',Arial,'Hiragino Kaku Gothic ProN',Meiryo,sans-serif; background:#f2f4f3; color:#222; line-height:1.7; }
 
@@ -16,35 +16,57 @@
 
   .container { max-width:860px; margin:0 auto; padding:32px 16px 64px; }
 
-  /* ポイントリスト */
-  .points { display:flex; flex-direction:column; gap:10px; margin-bottom:28px; }
-  .point-row { display:flex; align-items:flex-start; gap:14px; background:white; border-radius:12px; padding:14px 18px; box-shadow:0 2px 8px rgba(0,0,0,0.07); }
-  .point-num { background:var(--green); color:white; min-width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:900; flex-shrink:0; margin-top:1px; }
-  .point-who { font-size:12px; font-weight:800; color:var(--blue); min-width:120px; padding-top:2px; flex-shrink:0; }
-  .point-text { font-size:14px; font-weight:700; color:#1a1a1a; }
-  .point-sub { font-size:12px; color:#777; margin-top:3px; }
-  .point-row.warn .point-num { background:var(--orange,#e67e22); }
+  /* ─── ① まとめ ─── */
+  .summary {
+    background:white; border-radius:16px;
+    box-shadow:0 2px 14px rgba(0,0,0,0.08);
+    overflow:hidden; margin-bottom:28px;
+  }
+  .summary-head {
+    background:var(--green); color:white;
+    padding:14px 22px; font-size:13px; font-weight:800; letter-spacing:1px;
+  }
+  .summary-body { padding:16px 20px; display:flex; flex-direction:column; gap:0; }
+  .srow {
+    display:grid; grid-template-columns:36px 110px 1fr;
+    align-items:center; gap:12px;
+    padding:12px 4px; border-bottom:1px solid #f0f0f0;
+  }
+  .srow:last-child { border-bottom:none; }
+  .srow .num {
+    background:var(--green); color:white; width:30px; height:30px;
+    border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-size:13px; font-weight:900; flex-shrink:0;
+  }
+  .srow.orange .num { background:var(--orange); }
+  .srow .who { font-size:12px; font-weight:800; color:var(--blue); }
+  .srow .what { font-size:14px; font-weight:700; color:#1a1a1a; }
+  .srow .what small { display:block; font-size:11px; font-weight:400; color:#888; margin-top:2px; }
+  @media(max-width:480px){
+    .srow { grid-template-columns:30px 1fr; }
+    .srow .who { display:none; }
+    .srow .what::before { content:attr(data-who); display:block; font-size:11px; color:var(--blue); font-weight:800; margin-bottom:2px; }
+  }
 
-  /* ステップバー */
-  .steps { display:flex; align-items:center; justify-content:center; gap:0; margin-bottom:28px; flex-wrap:wrap; }
-  .step { background:white; border-radius:8px; padding:10px 16px; font-size:13px; font-weight:800; color:var(--green); box-shadow:0 2px 8px rgba(0,0,0,0.08); white-space:nowrap; }
-  .step-arrow { font-size:18px; color:#bbb; padding:0 6px; }
-
-  /* カード */
-  .card { background:white; border-radius:14px; padding:22px; margin-bottom:20px; box-shadow:0 2px 12px rgba(0,0,0,0.07); }
-  .card-title { font-size:15px; font-weight:800; color:var(--green); margin-bottom:14px; padding-bottom:10px; border-bottom:2px solid var(--pale); }
-  .sentence { font-size:16px; font-weight:700; color:#1a1a1a; margin-bottom:16px; line-height:1.6; }
-
-  /* ピッチ */
+  /* ─── ② 図 ─── */
+  .fig { background:white; border-radius:14px; padding:20px; margin-bottom:20px; box-shadow:0 2px 12px rgba(0,0,0,0.07); }
+  .fig-title { font-size:14px; font-weight:800; color:var(--green); margin-bottom:12px; display:flex; align-items:center; gap:8px; }
+  .fig-title::before { content:''; display:block; width:4px; height:18px; background:var(--green); border-radius:2px; }
   .pitch { background:linear-gradient(180deg,#3a9e5c,#2d8f52); border-radius:10px; overflow:hidden; }
   .pitch svg { display:block; width:100%; }
-  .pitch-note { text-align:center; font-size:12px; color:#666; margin-top:8px; line-height:1.7; }
+  .pitch-note { text-align:center; font-size:12px; color:#666; margin-top:10px; line-height:1.7; }
 
-  /* 豆知識 */
-  .trivia { background:linear-gradient(135deg,#1a4b7a,#2471a3); color:white; border-radius:14px; padding:20px 24px; margin-bottom:20px; }
-  .trivia .label { font-size:11px; letter-spacing:2px; opacity:.7; margin-bottom:6px; }
-  .trivia p { font-size:14px; line-height:1.7; }
-  .trivia strong { color:#7ec8ff; }
+  /* ─── ③ 注意事項 ─── */
+  .notes { background:white; border-radius:16px; box-shadow:0 2px 14px rgba(0,0,0,0.08); overflow:hidden; margin-bottom:20px; }
+  .notes-head { background:#555; color:white; padding:14px 22px; font-size:13px; font-weight:800; letter-spacing:1px; }
+  .note-row {
+    display:flex; gap:14px; align-items:flex-start;
+    padding:14px 20px; border-bottom:1px solid #f0f0f0; font-size:14px;
+  }
+  .note-row:last-child { border-bottom:none; }
+  .note-icon { font-size:18px; flex-shrink:0; margin-top:1px; }
+  .note-row strong { display:block; font-weight:800; margin-bottom:2px; font-size:14px; }
+  .note-row span { font-size:13px; color:#555; }
 
   /* TOPボタン */
   #back-top { position:fixed; bottom:28px; right:28px; background:linear-gradient(135deg,#0f4c27,#1a6b3a); color:white; border-radius:50px; padding:10px 18px 10px 14px; font-size:13px; font-weight:800; text-decoration:none; display:flex; align-items:center; gap:6px; box-shadow:0 4px 16px rgba(26,107,58,0.45); z-index:999; transition:transform .2s; font-family:'Helvetica Neue',Arial,sans-serif; }
@@ -62,125 +84,125 @@
 
 <div class="container">
 
-  <!-- 5つのポイント -->
-  <div class="points">
-    <div class="point-row">
-      <div class="point-num">①</div>
-      <div class="point-who">右SB</div>
-      <div><div class="point-text">キャンセルの判断を早く</div><div class="point-sub">相手が5m以内に来た瞬間 → 迷わず戻す</div></div>
-    </div>
-    <div class="point-row">
-      <div class="point-num">②</div>
-      <div class="point-who">右CB・左SB</div>
-      <div><div class="point-text">キャンセル前提で準備しておく</div><div class="point-sub">右CBは斜め後ろ45度、左SBは少し前に出て待つ</div></div>
-    </div>
-    <div class="point-row">
-      <div class="point-num">③</div>
-      <div class="point-who">右CB</div>
-      <div><div class="point-text">逆CBへのサイドチェンジを早く</div><div class="point-sub">受けたらすぐ左CBへ。ためらわない</div></div>
-    </div>
-    <div class="point-row">
-      <div class="point-num">④</div>
-      <div class="point-who">左SB</div>
-      <div><div class="point-text">2〜3歩前で受ける</div><div class="point-sub">止まって待たない。動き出しで相手との間合いが10m変わる</div></div>
-    </div>
-    <div class="point-row" style="border-left:4px solid #e67e22;">
-      <div class="point-num" style="background:#e67e22;">⑤</div>
-      <div class="point-who">ボランチ・ウィング</div>
-      <div>
-        <div class="point-text">右CBがボールを受けた瞬間から次を準備</div>
-        <div class="point-sub">※右SBがボールを持っている間は動かない。早く動きすぎると相手にバレてスペースが消える</div>
+  <!-- ① まとめ -->
+  <div class="summary">
+    <div class="summary-head">POINT — 全員がやること</div>
+    <div class="summary-body">
+      <div class="srow">
+        <div class="num">①</div>
+        <div class="who">右SB</div>
+        <div class="what" data-who="右SB">
+          キャンセルの判断を早く
+          <small>相手が5m以内に来た → 迷わず右CBへ戻す</small>
+        </div>
+      </div>
+      <div class="srow">
+        <div class="num">②</div>
+        <div class="who">右CB・左SB</div>
+        <div class="what" data-who="右CB・左SB">
+          キャンセル前提で準備しておく
+          <small>右CBは斜め後ろ45度で待つ／左SBは少し前に出て待つ</small>
+        </div>
+      </div>
+      <div class="srow">
+        <div class="num">③</div>
+        <div class="who">右CB</div>
+        <div class="what" data-who="右CB">
+          受けたらすぐ左CBへサイドチェンジ
+          <small>ためらわない。右に相手が集まっている間が勝負</small>
+        </div>
+      </div>
+      <div class="srow">
+        <div class="num">④</div>
+        <div class="who">左SB</div>
+        <div class="what" data-who="左SB">
+          2〜3歩前で受ける
+          <small>止まって待たない。その動き出しで相手との間合いが10m変わる</small>
+        </div>
+      </div>
+      <div class="srow orange">
+        <div class="num">⑤</div>
+        <div class="who">ボランチ・WG</div>
+        <div class="what" data-who="ボランチ・WG">
+          右CBがボールを受けた瞬間から次を準備
+          <small>右SBがまだ持っている間は動かない（早すぎると相手にバレる）</small>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- ステップバー -->
-  <div class="steps">
-    <div class="step">① 右SBが詰まりそう</div>
-    <div class="step-arrow">→</div>
-    <div class="step">② キャンセル（右CBへ戻す）</div>
-    <div class="step-arrow">→</div>
-    <div class="step">③ サイドチェンジ</div>
-    <div class="step-arrow">→</div>
-    <div class="step">④ 左SBが少し前で受ける</div>
-  </div>
-
-  <!-- 図1：全体の流れ -->
-  <div class="card">
-    <div class="card-title">図1 — 全体の流れ</div>
-    <p class="sentence">右に来たプレスを、左のガラ空きスペースで受け流す。</p>
+  <!-- ② 図1：全体の流れ -->
+  <div class="fig">
+    <div class="fig-title">図1 — 全体の流れ</div>
     <div class="pitch">
-      <svg viewBox="0 0 500 280" xmlns="http://www.w3.org/2000/svg">
-        <rect width="500" height="280" fill="#2d8f52"/>
-        <rect x="8" y="8" width="484" height="264" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="1.5"/>
-        <!-- ハーフライン -->
-        <line x1="8" y1="150" x2="492" y2="150" stroke="rgba(255,255,255,0.25)" stroke-width="1" stroke-dasharray="7,5"/>
+      <svg viewBox="0 0 500 290" xmlns="http://www.w3.org/2000/svg">
+        <rect width="500" height="290" fill="#2d8f52"/>
+        <rect x="8" y="8" width="484" height="274" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="1.5"/>
+        <line x1="8" y1="155" x2="492" y2="155" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="7,5"/>
 
         <!-- 右サイド圧縮ゾーン -->
-        <rect x="8" y="155" width="220" height="110" fill="rgba(192,57,43,0.12)" rx="4"/>
-        <text x="114" y="173" text-anchor="middle" fill="rgba(255,120,100,0.8)" font-size="10" font-weight="bold">相手が集まる</text>
+        <rect x="8" y="160" width="225" height="115" fill="rgba(192,57,43,0.13)" rx="4"/>
+        <text x="116" y="178" text-anchor="middle" fill="rgba(255,120,100,0.85)" font-size="10" font-weight="bold">相手が集まる</text>
 
         <!-- 左サイド空きゾーン -->
-        <rect x="265" y="80" width="227" height="100" fill="rgba(245,197,24,0.15)" stroke="#f5c518" stroke-width="1" stroke-dasharray="5,4" rx="6"/>
-        <text x="378" y="100" text-anchor="middle" fill="#f5c518" font-size="11" font-weight="bold">ガラ空き</text>
+        <rect x="268" y="82" width="222" height="105" fill="rgba(245,197,24,0.16)" stroke="#f5c518" stroke-width="1.2" stroke-dasharray="5,4" rx="6"/>
+        <text x="379" y="101" text-anchor="middle" fill="#f5c518" font-size="12" font-weight="bold">ガラ空き！</text>
 
         <!-- GK -->
-        <circle cx="250" cy="268" r="12" fill="#2471a3" stroke="white" stroke-width="1.5"/>
-        <text x="250" y="273" text-anchor="middle" fill="white" font-size="8">GK</text>
+        <circle cx="250" cy="278" r="12" fill="#2471a3" stroke="white" stroke-width="1.5"/>
+        <text x="250" y="283" text-anchor="middle" fill="white" font-size="8">GK</text>
 
-        <!-- 右CB -->
-        <circle cx="148" cy="238" r="14" fill="#2471a3" stroke="#7ec8ff" stroke-width="2.5"/>
-        <text x="148" y="243" text-anchor="middle" fill="white" font-size="9" font-weight="bold">右CB</text>
+        <!-- 右CB（待機） -->
+        <circle cx="148" cy="248" r="15" fill="#2471a3" stroke="#7ec8ff" stroke-width="2.5"/>
+        <text x="148" y="253" text-anchor="middle" fill="white" font-size="9" font-weight="bold">右CB</text>
+        <rect x="90" y="232" width="46" height="13" fill="rgba(0,0,0,0.45)" rx="3"/>
+        <text x="113" y="243" text-anchor="middle" fill="#7ec8ff" font-size="8">②待機中</text>
 
         <!-- 左CB -->
-        <circle cx="348" cy="238" r="14" fill="#2471a3" stroke="#7ec8ff" stroke-width="2.5"/>
-        <text x="348" y="243" text-anchor="middle" fill="white" font-size="9" font-weight="bold">左CB</text>
+        <circle cx="352" cy="248" r="15" fill="#2471a3" stroke="#7ec8ff" stroke-width="2.5"/>
+        <text x="352" y="253" text-anchor="middle" fill="white" font-size="9" font-weight="bold">左CB</text>
 
-        <!-- 右SB（詰まってる） -->
-        <circle cx="38" cy="195" r="15" fill="#2471a3" stroke="#f5c518" stroke-width="3"/>
-        <text x="38" y="191" text-anchor="middle" fill="white" font-size="8" font-weight="bold">右SB</text>
-        <circle cx="38" cy="195" r="5" fill="#f5c518" stroke="white" stroke-width="1.5"/>
+        <!-- 右SB（ボール） -->
+        <circle cx="35" cy="200" r="16" fill="#2471a3" stroke="#f5c518" stroke-width="3"/>
+        <text x="35" y="196" text-anchor="middle" fill="white" font-size="8" font-weight="bold">右SB</text>
+        <circle cx="35" cy="200" r="5" fill="#f5c518" stroke="white" stroke-width="1.5"/>
 
-        <!-- 左SB（前で受ける） -->
-        <circle cx="458" cy="118" r="15" fill="#2471a3" stroke="#7fff7f" stroke-width="3"/>
-        <text x="458" y="113" text-anchor="middle" fill="white" font-size="8" font-weight="bold">左SB</text>
-        <text x="458" y="124" text-anchor="middle" fill="#7fff7f" font-size="8">少し前で受ける</text>
+        <!-- 左SB（前で待つ） -->
+        <circle cx="464" cy="122" r="16" fill="#2471a3" stroke="#7fff7f" stroke-width="3"/>
+        <text x="464" y="117" text-anchor="middle" fill="white" font-size="8" font-weight="bold">左SB</text>
+        <text x="464" y="128" text-anchor="middle" fill="#7fff7f" font-size="8">②前で待つ</text>
+        <!-- 動き出し -->
+        <line x1="464" y1="160" x2="464" y2="141" stroke="#7fff7f" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#aG)"/>
+        <circle cx="464" cy="170" r="11" fill="none" stroke="rgba(127,255,127,0.35)" stroke-width="1.5" stroke-dasharray="4,3"/>
 
-        <!-- 相手プレス（右に3人） -->
-        <circle cx="75" cy="165" r="12" fill="#c0392b" stroke="white" stroke-width="1.5"/>
-        <text x="75" y="170" text-anchor="middle" fill="white" font-size="7">WG</text>
-        <circle cx="125" cy="195" r="12" fill="#c0392b" stroke="white" stroke-width="1.5"/>
-        <text x="125" y="200" text-anchor="middle" fill="white" font-size="7">SH</text>
-        <circle cx="178" cy="175" r="12" fill="#c0392b" stroke="white" stroke-width="1.5"/>
-        <text x="178" y="180" text-anchor="middle" fill="white" font-size="7">MF</text>
+        <!-- 相手（右に3人） -->
+        <circle cx="74" cy="170" r="12" fill="#c0392b" stroke="white" stroke-width="1.5"/>
+        <text x="74" y="175" text-anchor="middle" fill="white" font-size="7">WG</text>
+        <circle cx="122" cy="200" r="12" fill="#c0392b" stroke="white" stroke-width="1.5"/>
+        <text x="122" y="205" text-anchor="middle" fill="white" font-size="7">SH</text>
+        <circle cx="178" cy="180" r="12" fill="#c0392b" stroke="white" stroke-width="1.5"/>
+        <text x="178" y="185" text-anchor="middle" fill="white" font-size="7">MF</text>
+        <line x1="67" y1="180" x2="51" y2="192" stroke="#ff6b6b" stroke-width="2" marker-end="url(#aR)"/>
+        <line x1="109" y1="198" x2="52" y2="199" stroke="#ff6b6b" stroke-width="2" marker-end="url(#aR)"/>
 
-        <!-- プレス矢印 -->
-        <line x1="68" y1="175" x2="53" y2="187" stroke="#ff6b6b" stroke-width="2" marker-end="url(#aR)"/>
-        <line x1="112" y1="193" x2="54" y2="194" stroke="#ff6b6b" stroke-width="2" marker-end="url(#aR)"/>
+        <!-- ①キャンセル -->
+        <line x1="51" y1="193" x2="131" y2="240" stroke="white" stroke-width="3" marker-end="url(#aW)"/>
+        <rect x="52" y="204" width="64" height="15" fill="rgba(0,0,0,0.5)" rx="3"/>
+        <text x="84" y="215" text-anchor="middle" fill="white" font-size="9" font-weight="bold">①キャンセル</text>
 
-        <!-- ① 右SB → 右CB（キャンセル） -->
-        <line x1="52" y1="188" x2="132" y2="230" stroke="white" stroke-width="3" marker-end="url(#aW)"/>
-        <rect x="55" y="198" width="62" height="16" fill="rgba(0,0,0,0.45)" rx="4"/>
-        <text x="86" y="210" text-anchor="middle" fill="white" font-size="9" font-weight="bold">①キャンセル</text>
+        <!-- ③サイドチェンジ -->
+        <line x1="164" y1="242" x2="335" y2="242" stroke="#7ec8ff" stroke-width="3" marker-end="url(#aB)"/>
+        <rect x="198" y="226" width="106" height="15" fill="rgba(0,0,0,0.5)" rx="3"/>
+        <text x="251" y="237" text-anchor="middle" fill="#7ec8ff" font-size="9" font-weight="bold">③サイドチェンジ</text>
 
-        <!-- ② 右CB → 左CB（サイドチェンジ） -->
-        <line x1="163" y1="232" x2="332" y2="232" stroke="#7ec8ff" stroke-width="3" marker-end="url(#aB)"/>
-        <rect x="200" y="218" width="100" height="16" fill="rgba(0,0,0,0.45)" rx="4"/>
-        <text x="250" y="230" text-anchor="middle" fill="#7ec8ff" font-size="9" font-weight="bold">②サイドチェンジ</text>
+        <!-- ④展開 -->
+        <line x1="367" y1="237" x2="449" y2="133" stroke="#7fff7f" stroke-width="3" marker-end="url(#aG)"/>
+        <rect x="390" y="178" width="58" height="15" fill="rgba(0,0,0,0.5)" rx="3"/>
+        <text x="419" y="189" text-anchor="middle" fill="#7fff7f" font-size="9" font-weight="bold">④展開</text>
 
-        <!-- ③ 左CB → 左SB（展開） -->
-        <line x1="362" y1="227" x2="444" y2="130" stroke="#7fff7f" stroke-width="3" marker-end="url(#aG)"/>
-        <rect x="388" y="168" width="58" height="16" fill="rgba(0,0,0,0.45)" rx="4"/>
-        <text x="417" y="180" text-anchor="middle" fill="#7fff7f" font-size="9" font-weight="bold">③展開</text>
-
-        <!-- 左SBの動き出し -->
-        <line x1="458" y1="155" x2="458" y2="135" stroke="#7fff7f" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#aG)"/>
-        <circle cx="458" cy="165" r="11" fill="none" stroke="rgba(127,255,127,0.4)" stroke-width="1.5" stroke-dasharray="4,3"/>
-        <text x="458" y="178" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="7">2〜3歩</text>
-
-        <!-- 上部ラベル -->
+        <!-- ヘッダー -->
         <rect x="0" y="0" width="500" height="20" fill="rgba(0,0,0,0.45)"/>
-        <text x="250" y="14" text-anchor="middle" fill="white" font-size="10" font-weight="bold">右のプレスをキャンセルして左のスペースへ展開</text>
+        <text x="250" y="14" text-anchor="middle" fill="white" font-size="10" font-weight="bold">右のプレス → キャンセル → 左のガラ空きへ展開</text>
 
         <defs>
           <marker id="aR" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#ff6b6b"/></marker>
@@ -190,83 +212,62 @@
         </defs>
       </svg>
     </div>
-    <p class="pitch-note">
-      右に集まった相手が左に戻るには2〜3秒かかる。その間に左SBがフリーで受けられる。
-    </p>
+    <p class="pitch-note">右に集まった相手が左に戻るには2〜3秒かかる。その時間差を使う。</p>
   </div>
 
-  <!-- 図2：キャンセルのタイミング -->
-  <div class="card">
-    <div class="card-title">図2 — キャンセルのタイミング（これが一番大事）</div>
-    <p class="sentence">「詰まってから戻す」ではなく「来た瞬間に戻す」。</p>
+  <!-- ② 図2：キャンセルのタイミング -->
+  <div class="fig">
+    <div class="fig-title">図2 — キャンセルのタイミング（①が一番大事）</div>
     <div class="pitch">
       <svg viewBox="0 0 500 220" xmlns="http://www.w3.org/2000/svg">
         <rect width="500" height="220" fill="#2d8f52"/>
         <rect x="8" y="8" width="484" height="204" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="1.5"/>
-
-        <!-- 仕切り線 -->
         <line x1="250" y1="28" x2="250" y2="212" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" stroke-dasharray="6,4"/>
 
-        <!-- ===== 左：NG ===== -->
+        <!-- 左：NG -->
         <rect x="8" y="28" width="242" height="184" fill="rgba(192,57,43,0.08)"/>
-        <rect x="8" y="28" width="242" height="22" fill="rgba(192,57,43,0.55)"/>
+        <rect x="8" y="28" width="242" height="22" fill="rgba(192,57,43,0.6)"/>
         <text x="129" y="43" text-anchor="middle" fill="white" font-size="11" font-weight="800">❌ 詰まってから戻す</text>
-
-        <!-- 右SB（詰まってる） -->
-        <circle cx="80" cy="130" r="15" fill="#2471a3" stroke="#ff6b6b" stroke-width="3"/>
-        <text x="80" y="135" text-anchor="middle" fill="white" font-size="9" font-weight="bold">右SB</text>
-        <!-- 相手3人に囲まれてる -->
-        <circle cx="80" cy="90" r="12" fill="#c0392b" stroke="white" stroke-width="1.5"/>
-        <text x="80" y="95" text-anchor="middle" fill="white" font-size="7">WG</text>
-        <circle cx="45" cy="118" r="12" fill="#c0392b" stroke="white" stroke-width="1.5"/>
-        <text x="45" y="123" text-anchor="middle" fill="white" font-size="7">SH</text>
-        <circle cx="115" cy="118" r="12" fill="#c0392b" stroke="white" stroke-width="1.5"/>
-        <text x="115" y="123" text-anchor="middle" fill="white" font-size="7">MF</text>
-        <!-- 囲まれてる楕円 -->
-        <ellipse cx="80" cy="120" rx="55" ry="38" fill="none" stroke="rgba(255,100,100,0.5)" stroke-width="1.5" stroke-dasharray="4,3"/>
-        <!-- ロストマーク -->
+        <!-- 囲まれたSB -->
+        <circle cx="80" cy="128" r="15" fill="#2471a3" stroke="#ff6b6b" stroke-width="3"/>
+        <text x="80" y="133" text-anchor="middle" fill="white" font-size="9" font-weight="bold">右SB</text>
+        <circle cx="80" cy="88" r="12" fill="#c0392b" stroke="white" stroke-width="1.5"/>
+        <text x="80" y="93" text-anchor="middle" fill="white" font-size="7">WG</text>
+        <circle cx="43" cy="116" r="12" fill="#c0392b" stroke="white" stroke-width="1.5"/>
+        <text x="43" y="121" text-anchor="middle" fill="white" font-size="7">SH</text>
+        <circle cx="117" cy="116" r="12" fill="#c0392b" stroke="white" stroke-width="1.5"/>
+        <text x="117" y="121" text-anchor="middle" fill="white" font-size="7">MF</text>
+        <ellipse cx="80" cy="118" rx="55" ry="37" fill="none" stroke="rgba(255,100,100,0.5)" stroke-width="1.5" stroke-dasharray="4,3"/>
         <text x="80" y="110" text-anchor="middle" fill="#ff6b6b" font-size="22" font-weight="900">×</text>
+        <circle cx="185" cy="175" r="13" fill="#2471a3" stroke="rgba(255,255,255,0.35)" stroke-width="1.5" opacity="0.45"/>
+        <text x="185" y="180" text-anchor="middle" fill="white" font-size="8" opacity="0.45">右CB</text>
+        <line x1="94" y1="128" x2="172" y2="167" stroke="rgba(255,100,100,0.6)" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#aR2)"/>
+        <text x="140" y="142" text-anchor="middle" fill="rgba(255,160,160,0.9)" font-size="9">焦って出す → 精度落ちる</text>
 
-        <!-- 右CB -->
-        <circle cx="185" cy="175" r="13" fill="#2471a3" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" opacity="0.5"/>
-        <text x="185" y="180" text-anchor="middle" fill="white" font-size="8" opacity="0.5">右CB</text>
-        <!-- バックパス（焦ってる・精度低い） -->
-        <line x1="94" y1="130" x2="172" y2="168" stroke="rgba(255,100,100,0.6)" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#aR2)"/>
-        <text x="138" y="143" text-anchor="middle" fill="rgba(255,150,150,0.9)" font-size="9">焦って出す</text>
-        <text x="138" y="154" text-anchor="middle" fill="rgba(255,150,150,0.9)" font-size="8">精度が落ちる</text>
-
-        <!-- ===== 右：OK ===== -->
+        <!-- 右：OK -->
         <rect x="258" y="28" width="234" height="184" fill="rgba(26,107,58,0.08)"/>
-        <rect x="258" y="28" width="234" height="22" fill="rgba(26,107,58,0.6)"/>
+        <rect x="258" y="28" width="234" height="22" fill="rgba(26,107,58,0.65)"/>
         <text x="375" y="43" text-anchor="middle" fill="white" font-size="11" font-weight="800">✅ 来た瞬間に戻す</text>
-
-        <!-- 右SB（余裕） -->
-        <circle cx="310" cy="130" r="15" fill="#2471a3" stroke="#7fff7f" stroke-width="3"/>
-        <text x="310" y="125" text-anchor="middle" fill="white" font-size="9" font-weight="bold">右SB</text>
-        <circle cx="310" cy="130" r="5" fill="#f5c518" stroke="white" stroke-width="1.5"/>
-        <!-- 相手1人（まだ遠い） -->
-        <circle cx="310" cy="85" r="12" fill="#c0392b" stroke="white" stroke-width="1.5"/>
-        <text x="310" y="90" text-anchor="middle" fill="white" font-size="7">WG</text>
-        <!-- プレス矢印（向かってきてる） -->
-        <line x1="310" y1="97" x2="310" y2="113" stroke="#ff6b6b" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#aR2)"/>
-        <text x="332" y="90" fill="rgba(255,150,150,0.9)" font-size="9">来た！</text>
-
-        <!-- 右CB（準備できてる） -->
+        <!-- 余裕のSB -->
+        <circle cx="308" cy="128" r="15" fill="#2471a3" stroke="#7fff7f" stroke-width="3"/>
+        <text x="308" y="123" text-anchor="middle" fill="white" font-size="9" font-weight="bold">右SB</text>
+        <circle cx="308" cy="128" r="5" fill="#f5c518" stroke="white" stroke-width="1.5"/>
+        <circle cx="308" cy="83" r="12" fill="#c0392b" stroke="white" stroke-width="1.5"/>
+        <text x="308" y="88" text-anchor="middle" fill="white" font-size="7">WG</text>
+        <line x1="308" y1="95" x2="308" y2="111" stroke="#ff6b6b" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#aR2)"/>
+        <!-- 5m判断ゾーン -->
+        <rect x="264" y="56" width="118" height="26" fill="rgba(245,197,24,0.22)" stroke="#f5c518" stroke-width="1" rx="5"/>
+        <text x="323" y="67" text-anchor="middle" fill="#f5c518" font-size="9" font-weight="bold">相手が5m以内に来た</text>
+        <text x="323" y="77" text-anchor="middle" fill="#f5c518" font-size="9" font-weight="bold">→ 即キャンセル</text>
+        <!-- 右CB準備OK -->
         <circle cx="430" cy="175" r="14" fill="#2471a3" stroke="#7ec8ff" stroke-width="2.5"/>
         <text x="430" y="180" text-anchor="middle" fill="white" font-size="9" font-weight="bold">右CB</text>
+        <line x1="323" y1="125" x2="415" y2="168" stroke="white" stroke-width="3" marker-end="url(#aW2)"/>
+        <text x="378" y="137" text-anchor="middle" fill="white" font-size="9" font-weight="bold">余裕で正確に出せる</text>
 
-        <!-- キャンセルパス（余裕・正確） -->
-        <line x1="325" y1="127" x2="415" y2="170" stroke="white" stroke-width="3" marker-end="url(#aW2)"/>
-        <text x="382" y="138" text-anchor="middle" fill="white" font-size="9" font-weight="bold">余裕で出せる</text>
-
-        <!-- 判断のタイミング強調 -->
-        <rect x="262" y="58" width="120" height="28" fill="rgba(245,197,24,0.25)" stroke="#f5c518" stroke-width="1" rx="6"/>
-        <text x="322" y="70" text-anchor="middle" fill="#f5c518" font-size="10" font-weight="bold">相手が5m以内に</text>
-        <text x="322" y="81" text-anchor="middle" fill="#f5c518" font-size="10" font-weight="bold">向かってきたら → 即</text>
-
-        <!-- 上部ラベル -->
+        <!-- ヘッダー -->
         <rect x="0" y="0" width="500" height="20" fill="rgba(0,0,0,0.45)"/>
-        <text x="250" y="14" text-anchor="middle" fill="white" font-size="10" font-weight="bold">判断が早いほど、正確なキャンセルができる</text>
+        <text x="250" y="14" text-anchor="middle" fill="white" font-size="10" font-weight="bold">早い判断 = 余裕 / 遅い判断 = 焦り → ロスト</text>
 
         <defs>
           <marker id="aR2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#ff6b6b"/></marker>
@@ -274,33 +275,38 @@
         </defs>
       </svg>
     </div>
-    <p class="pitch-note">
-      詰まってから戻すと焦って精度が落ちてロスト。<br>
-      相手が向かってきた瞬間に戻せば、余裕を持って正確に出せる。
-    </p>
+    <p class="pitch-note">詰まる前に戻す。それだけで右CBは余裕を持ってサイドチェンジできる。</p>
   </div>
 
-  <!-- 豆知識 -->
-  <div class="trivia">
-    <div class="label">TIPS</div>
-    <p>強い相手には<strong>右SBに左利き・左SBに右利き</strong>を置くと、利き足が自然に中央を向くのでキャンセルパスが出しやすくなる。</p>
-  </div>
-
-  <!-- まとめ3行 -->
-  <div class="card" style="background:linear-gradient(135deg,#0f4c27,#1e7a42);color:white;padding:24px 28px;">
-    <div style="font-size:11px;letter-spacing:2px;opacity:.7;margin-bottom:12px;">3 POINTS</div>
-    <div style="display:flex;flex-direction:column;gap:12px;">
-      <div style="display:flex;gap:14px;align-items:flex-start;">
-        <div style="background:rgba(255,255,255,0.2);border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-weight:900;flex-shrink:0;">1</div>
-        <div style="font-size:15px;font-weight:700;padding-top:3px;">相手が5m以内に来たら、迷わず右CBへ戻す</div>
+  <!-- ③ 注意事項 -->
+  <div class="notes">
+    <div class="notes-head">注意事項</div>
+    <div class="note-row">
+      <span class="note-icon">⚠️</span>
+      <div>
+        <strong>ウィング・ボランチが早く動きすぎない（⑤）</strong>
+        <span>右SBがまだボールを持っている間に動き出すと、相手DFも連動して左をケアしはじめる。スペースが消えてサイドチェンジが意味を失う。</span>
       </div>
-      <div style="display:flex;gap:14px;align-items:flex-start;">
-        <div style="background:rgba(255,255,255,0.2);border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-weight:900;flex-shrink:0;">2</div>
-        <div style="font-size:15px;font-weight:700;padding-top:3px;">右CBはすぐ左CBへサイドチェンジ</div>
+    </div>
+    <div class="note-row">
+      <span class="note-icon">⚠️</span>
+      <div>
+        <strong>右CBが準備していないとキャンセルできない</strong>
+        <span>右SBがキャンセルしようとしても、右CBが遠い位置や変な角度にいると受けられない。右SBが受けた瞬間に右CBも斜め後ろ45度へ動くこと。</span>
       </div>
-      <div style="display:flex;gap:14px;align-items:flex-start;">
-        <div style="background:rgba(255,255,255,0.2);border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-weight:900;flex-shrink:0;">3</div>
-        <div style="font-size:15px;font-weight:700;padding-top:3px;">左SBは2〜3歩前に動き出してフリーで受ける</div>
+    </div>
+    <div class="note-row">
+      <span class="note-icon">⚠️</span>
+      <div>
+        <strong>左SBが止まって待っていると相手が戻ってくる</strong>
+        <span>サイドチェンジが来るまで止まっていると、相手DFが回復して間合いが5m以内になる。2〜3歩の動き出しで間合いを10m以上確保する。</span>
+      </div>
+    </div>
+    <div class="note-row" style="background:#fafff9;">
+      <span class="note-icon">💡</span>
+      <div>
+        <strong>強い相手には利き足の逆配置が効果的</strong>
+        <span>右SBに左利き・左SBに右利きを置くと、利き足が自然に中央を向くのでキャンセルパスが出しやすくなる。</span>
       </div>
     </div>
   </div>
