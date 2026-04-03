@@ -100,7 +100,7 @@
       <div class="prow">
         <div class="n">②</div>
         <div class="who">右CB・左SB</div>
-        <div class="body"><strong>キャンセル前提で準備しておく</strong><small>右CBは斜め後ろ45度で待つ／左SBは少し前に出て待つ</small></div>
+        <div class="body"><strong>キャンセル前提で準備しておく</strong><small>右CBは深めの斜め後ろ45度で待つ（深いほどパスを受けやすい）／左SBは少し前に出て待つ</small></div>
       </div>
       <div class="prow">
         <div class="n">③</div>
@@ -124,73 +124,77 @@
   <div class="fig">
     <div class="fig-label">図1 — 全体の流れ</div>
     <div class="pitch">
-      <svg viewBox="0 0 500 280" xmlns="http://www.w3.org/2000/svg">
-        <rect width="500" height="280" fill="#2d8f52"/>
-        <rect x="8" y="8" width="484" height="264" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
-        <line x1="8" y1="150" x2="492" y2="150" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="7,5"/>
+      <svg viewBox="0 0 500 290" xmlns="http://www.w3.org/2000/svg">
+        <rect width="500" height="290" fill="#2d8f52"/>
+        <rect x="8" y="8" width="484" height="274" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+        <line x1="8" y1="155" x2="492" y2="155" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="7,5"/>
 
-        <!-- 右サイド圧縮 -->
-        <rect x="8" y="155" width="222" height="110" fill="rgba(192,57,43,0.12)" rx="4"/>
-        <text x="114" y="173" text-anchor="middle" fill="rgba(255,120,100,0.85)" font-size="10" font-weight="bold">相手が集まる</text>
+        <!-- 右サイド圧縮（右側） -->
+        <rect x="270" y="160" width="222" height="115" fill="rgba(192,57,43,0.12)" rx="4"/>
+        <text x="381" y="178" text-anchor="middle" fill="rgba(255,120,100,0.85)" font-size="10" font-weight="bold">相手が集まる</text>
 
-        <!-- 左サイド空き -->
-        <rect x="265" y="80" width="222" height="100" fill="rgba(245,197,24,0.15)" stroke="#f5c518" stroke-width="1" stroke-dasharray="5,4" rx="6"/>
-        <text x="376" y="100" text-anchor="middle" fill="#f5c518" font-size="12" font-weight="bold">ガラ空き！</text>
+        <!-- 左サイド空き（左側） -->
+        <rect x="8" y="82" width="222" height="100" fill="rgba(245,197,24,0.15)" stroke="#f5c518" stroke-width="1" stroke-dasharray="5,4" rx="6"/>
+        <text x="119" y="102" text-anchor="middle" fill="#f5c518" font-size="12" font-weight="bold">ガラ空き！</text>
 
         <!-- GK -->
-        <circle cx="250" cy="268" r="11" fill="#2471a3" stroke="white" stroke-width="1.5"/>
-        <text x="250" y="273" text-anchor="middle" fill="white" font-size="7">GK</text>
-
-        <!-- 右CB -->
-        <circle cx="148" cy="240" r="14" fill="#2471a3" stroke="#7ec8ff" stroke-width="2.5"/>
-        <text x="148" y="245" text-anchor="middle" fill="white" font-size="9" font-weight="bold">右CB</text>
+        <circle cx="250" cy="278" r="11" fill="#2471a3" stroke="white" stroke-width="1.5"/>
+        <text x="250" y="283" text-anchor="middle" fill="white" font-size="7">GK</text>
 
         <!-- 左CB -->
-        <circle cx="350" cy="240" r="14" fill="#2471a3" stroke="#7ec8ff" stroke-width="2.5"/>
-        <text x="350" y="245" text-anchor="middle" fill="white" font-size="9" font-weight="bold">左CB</text>
+        <circle cx="148" cy="250" r="14" fill="#2471a3" stroke="#7ec8ff" stroke-width="2.5"/>
+        <text x="148" y="255" text-anchor="middle" fill="white" font-size="9" font-weight="bold">左CB</text>
 
-        <!-- 右SB（ボール） -->
-        <circle cx="35" cy="198" r="16" fill="#2471a3" stroke="#f5c518" stroke-width="3"/>
-        <text x="35" y="194" text-anchor="middle" fill="white" font-size="8" font-weight="bold">右SB</text>
-        <circle cx="35" cy="198" r="5" fill="#f5c518" stroke="white" stroke-width="1.5"/>
+        <!-- 右CB（深めに待機） -->
+        <circle cx="358" cy="262" r="14" fill="#2471a3" stroke="#7ec8ff" stroke-width="2.5"/>
+        <text x="358" y="267" text-anchor="middle" fill="white" font-size="9" font-weight="bold">右CB</text>
+        <rect x="372" y="248" width="58" height="13" fill="rgba(36,113,163,0.85)" rx="3"/>
+        <text x="401" y="259" text-anchor="middle" fill="white" font-size="8">深めに待機②</text>
 
-        <!-- 左SB -->
-        <circle cx="463" cy="118" r="15" fill="#2471a3" stroke="#7fff7f" stroke-width="3"/>
-        <text x="463" y="113" text-anchor="middle" fill="white" font-size="8" font-weight="bold">左SB</text>
-        <text x="463" y="124" text-anchor="middle" fill="#7fff7f" font-size="8">前で受ける</text>
-        <line x1="463" y1="155" x2="463" y2="136" stroke="#7fff7f" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#g)"/>
-        <circle cx="463" cy="165" r="10" fill="none" stroke="rgba(127,255,127,0.3)" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <!-- 右SB（ボール・右側） -->
+        <circle cx="465" cy="205" r="16" fill="#2471a3" stroke="#f5c518" stroke-width="3"/>
+        <text x="465" y="201" text-anchor="middle" fill="white" font-size="8" font-weight="bold">右SB</text>
+        <circle cx="465" cy="205" r="5" fill="#f5c518" stroke="white" stroke-width="1.5"/>
 
-        <!-- 相手 -->
-        <circle cx="72" cy="168" r="12" fill="#c0392b" stroke="white" stroke-width="1.5"/>
-        <text x="72" y="173" text-anchor="middle" fill="white" font-size="7">WG</text>
-        <circle cx="120" cy="198" r="12" fill="#c0392b" stroke="white" stroke-width="1.5"/>
-        <text x="120" y="203" text-anchor="middle" fill="white" font-size="7">SH</text>
-        <circle cx="175" cy="178" r="12" fill="#c0392b" stroke="white" stroke-width="1.5"/>
-        <text x="175" y="183" text-anchor="middle" fill="white" font-size="7">MF</text>
-        <line x1="65" y1="178" x2="51" y2="190" stroke="#ff6b6b" stroke-width="2" marker-end="url(#r)"/>
-        <line x1="107" y1="196" x2="52" y2="197" stroke="#ff6b6b" stroke-width="2" marker-end="url(#r)"/>
+        <!-- 左SB（左側・前で受ける） -->
+        <circle cx="37" cy="120" r="15" fill="#2471a3" stroke="#7fff7f" stroke-width="3"/>
+        <text x="37" y="115" text-anchor="middle" fill="white" font-size="8" font-weight="bold">左SB</text>
+        <text x="37" y="126" text-anchor="middle" fill="#7fff7f" font-size="8">前で受ける</text>
+        <line x1="37" y1="158" x2="37" y2="138" stroke="#7fff7f" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#g1)"/>
+        <circle cx="37" cy="168" r="10" fill="none" stroke="rgba(127,255,127,0.3)" stroke-width="1.5" stroke-dasharray="4,3"/>
 
-        <!-- パス -->
-        <line x1="51" y1="191" x2="132" y2="232" stroke="white" stroke-width="3" marker-end="url(#w)"/>
-        <rect x="52" y="200" width="64" height="15" fill="rgba(0,0,0,0.5)" rx="3"/>
-        <text x="84" y="211" text-anchor="middle" fill="white" font-size="9" font-weight="bold">①キャンセル</text>
+        <!-- 相手（右に3人） -->
+        <circle cx="428" cy="175" r="12" fill="#c0392b" stroke="white" stroke-width="1.5"/>
+        <text x="428" y="180" text-anchor="middle" fill="white" font-size="7">WG</text>
+        <circle cx="380" cy="205" r="12" fill="#c0392b" stroke="white" stroke-width="1.5"/>
+        <text x="380" y="210" text-anchor="middle" fill="white" font-size="7">SH</text>
+        <circle cx="325" cy="185" r="12" fill="#c0392b" stroke="white" stroke-width="1.5"/>
+        <text x="325" y="190" text-anchor="middle" fill="white" font-size="7">MF</text>
+        <line x1="435" y1="185" x2="450" y2="197" stroke="#ff6b6b" stroke-width="2" marker-end="url(#r1)"/>
+        <line x1="393" y1="203" x2="449" y2="204" stroke="#ff6b6b" stroke-width="2" marker-end="url(#r1)"/>
 
-        <line x1="163" y1="234" x2="334" y2="234" stroke="#7ec8ff" stroke-width="3" marker-end="url(#b)"/>
-        <rect x="200" y="218" width="102" height="15" fill="rgba(0,0,0,0.5)" rx="3"/>
-        <text x="251" y="229" text-anchor="middle" fill="#7ec8ff" font-size="9" font-weight="bold">③サイドチェンジ</text>
+        <!-- ①キャンセル: 右SB → 右CB -->
+        <line x1="449" y1="198" x2="374" y2="254" stroke="white" stroke-width="3" marker-end="url(#w1)"/>
+        <rect x="385" y="210" width="64" height="15" fill="rgba(0,0,0,0.5)" rx="3"/>
+        <text x="417" y="221" text-anchor="middle" fill="white" font-size="9" font-weight="bold">①キャンセル</text>
 
-        <line x1="365" y1="229" x2="449" y2="128" stroke="#7fff7f" stroke-width="3" marker-end="url(#g)"/>
-        <rect x="388" y="172" width="56" height="15" fill="rgba(0,0,0,0.5)" rx="3"/>
-        <text x="416" y="183" text-anchor="middle" fill="#7fff7f" font-size="9" font-weight="bold">④展開</text>
+        <!-- ③サイドチェンジ: 右CB → 左CB -->
+        <line x1="343" y1="255" x2="164" y2="248" stroke="#7ec8ff" stroke-width="3" marker-end="url(#b1)"/>
+        <rect x="198" y="238" width="102" height="15" fill="rgba(0,0,0,0.5)" rx="3"/>
+        <text x="249" y="249" text-anchor="middle" fill="#7ec8ff" font-size="9" font-weight="bold">③サイドチェンジ</text>
+
+        <!-- ④展開: 左CB → 左SB -->
+        <line x1="135" y1="240" x2="51" y2="133" stroke="#7fff7f" stroke-width="3" marker-end="url(#g1)"/>
+        <rect x="56" y="180" width="56" height="15" fill="rgba(0,0,0,0.5)" rx="3"/>
+        <text x="84" y="191" text-anchor="middle" fill="#7fff7f" font-size="9" font-weight="bold">④展開</text>
 
         <rect x="0" y="0" width="500" height="20" fill="rgba(0,0,0,0.4)"/>
         <text x="250" y="14" text-anchor="middle" fill="white" font-size="10" font-weight="bold">右のプレスをキャンセルして左のガラ空きへ展開</text>
         <defs>
-          <marker id="r" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#ff6b6b"/></marker>
-          <marker id="w" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="white"/></marker>
-          <marker id="b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#7ec8ff"/></marker>
-          <marker id="g" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#7fff7f"/></marker>
+          <marker id="r1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#ff6b6b"/></marker>
+          <marker id="w1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="white"/></marker>
+          <marker id="b1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#7ec8ff"/></marker>
+          <marker id="g1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#7fff7f"/></marker>
         </defs>
       </svg>
     </div>
