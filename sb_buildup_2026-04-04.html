@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SBビルドアップ改善 | Reborn Over50</title>
+<style>
+  :root {
+    --green: #1a6b3a;
+    --green-light: #2d8f52;
+    --green-pale: #e8f5ed;
+    --yellow: #f5c518;
+    --red: #c0392b;
+    --blue: #2471a3;
+    --gray: #555;
+    --line: #ddd;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+    background: #f2f4f3;
+    color: #222;
+    line-height: 1.7;
+  }
+
+  header {
+    background: linear-gradient(135deg, #0f4c27 0%, #1a6b3a 60%, #2d8f52 100%);
+    color: white;
+    padding: 40px 30px 32px;
+    text-align: center;
+  }
+  header .badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 20px;
+    padding: 4px 16px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    margin-bottom: 14px;
+  }
+  header h1 { font-size: 24px; font-weight: 800; margin-bottom: 8px; }
+  header p { font-size: 14px; opacity: 0.85; }
+  header .subtitle { font-size: 13px; opacity: 0.7; margin-top: 6px; }
+
+  nav {
+    background: #fff;
+    border-bottom: 2px solid var(--green);
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    flex-wrap: wrap;
+  }
+  nav a {
+    display: block;
+    padding: 13px 18px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--gray);
+    text-decoration: none;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+  }
+  nav a:hover { color: var(--green); border-bottom-color: var(--green); background: var(--green-pale); }
+
+  .container { max-width: 960px; margin: 0 auto; padding: 36px 20px 60px; }
+
+  /* キーメッセージ */
+  .key-message {
+    background: linear-gradient(135deg, #0f4c27, #1e7a42);
+    color: white;
+    border-radius: 14px;
+    padding: 26px 28px;
+    margin-bottom: 36px;
+    box-shadow: 0 4px 20px rgba(26,107,58,0.3);
+  }
+  .key-message .label { font-size: 11px; letter-spacing: 2px; opacity: 0.7; margin-bottom: 8px; }
+  .key-message h2 { font-size: 18px; font-weight: 800; line-height: 1.5; margin-bottom: 16px; }
+  .key-message .pills { display: flex; flex-wrap: wrap; gap: 8px; }
+  .key-message .pill {
+    background: rgba(255,255,255,0.18);
+    border: 1px solid rgba(255,255,255,0.35);
+    border-radius: 20px;
+    padding: 5px 14px;
+    font-size: 13px;
+  }
+
+  /* セクション */
+  .section { margin-bottom: 48px; }
+  .section-header {
+    display: flex; align-items: center; gap: 14px;
+    border-bottom: 3px solid var(--green);
+    padding-bottom: 12px;
+    margin-bottom: 24px;
+  }
+  .section-num {
+    background: var(--green); color: white;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; font-weight: 900; flex-shrink: 0;
+  }
+  .section-header h2 { font-size: 19px; font-weight: 800; color: var(--green); }
+  .section-header .tag {
+    font-size: 11px; background: var(--green-pale); color: var(--green);
+    border-radius: 10px; padding: 3px 10px; font-weight: 700; margin-left: auto;
+  }
+
+  /* カード */
+  .card {
+    background: white;
+    border-radius: 12px;
+    padding: 22px;
+    margin-bottom: 18px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    border-left: 4px solid var(--green);
+  }
+  .card h3 {
+    font-size: 15px; font-weight: 800; color: var(--green);
+    margin-bottom: 14px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .card h3::before { content: ''; display: block; width: 6px; height: 6px; background: var(--green); border-radius: 50%; }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 640px) { .grid2 { grid-template-columns: 1fr; } }
+
+  /* テーブル */
+  table {
+    width: 100%; border-collapse: collapse; font-size: 14px;
+    background: white; border-radius: 10px; overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    margin-bottom: 18px;
+  }
+  th { background: var(--green); color: white; padding: 12px 16px; text-align: left; font-size: 13px; }
+  td { padding: 11px 16px; border-bottom: 1px solid #eee; font-size: 14px; }
+  tr:last-child td { border-bottom: none; }
+  tr:nth-child(even) td { background: #fafafa; }
+  .badge-red { background: #fde8e8; color: var(--red); border-radius: 6px; padding: 2px 8px; font-size: 12px; font-weight: 700; }
+  .badge-blue { background: #e8f0fe; color: var(--blue); border-radius: 6px; padding: 2px 8px; font-size: 12px; font-weight: 700; }
+  .badge-green { background: var(--green-pale); color: var(--green); border-radius: 6px; padding: 2px 8px; font-size: 12px; font-weight: 700; }
+  .badge-yellow { background: #fff8e1; color: #b7860b; border-radius: 6px; padding: 2px 8px; font-size: 12px; font-weight: 700; }
+
+  /* ステップリスト */
+  .step-list { list-style: none; }
+  .step-list li { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 14px; }
+  .step-num {
+    background: var(--green); color: white;
+    min-width: 26px; height: 26px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 800; flex-shrink: 0; margin-top: 2px;
+  }
+  .step-text strong { display: block; font-size: 14px; color: #222; margin-bottom: 2px; }
+  .step-text span { font-size: 13px; color: var(--gray); }
+
+  /* アラート */
+  .alert {
+    border-radius: 10px; padding: 16px 20px; margin-bottom: 16px;
+    display: flex; gap: 12px; align-items: flex-start; font-size: 14px;
+  }
+  .alert-warn { background: #fff8e1; border-left: 4px solid #f5c518; }
+  .alert-good { background: var(--green-pale); border-left: 4px solid var(--green); }
+  .alert-bad  { background: #fde8e8; border-left: 4px solid var(--red); }
+  .alert-icon { font-size: 20px; flex-shrink: 0; }
+  .alert strong { display: block; font-weight: 800; margin-bottom: 3px; }
+
+  /* ピッチ */
+  .pitch-container {
+    background: white;
+    border-radius: 12px;
+    padding: 22px;
+    margin-bottom: 18px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  }
+  .pitch-container h3 {
+    font-size: 15px; font-weight: 800; color: var(--green);
+    margin-bottom: 14px; text-align: center;
+  }
+  .pitch { background: linear-gradient(180deg, #3a9e5c 0%, #2d8f52 100%); border-radius: 8px; overflow: hidden; margin: 0 auto; }
+  .pitch svg { display: block; width: 100%; }
+  .pitch-note { text-align: center; font-size: 12px; color: #666; margin-top: 10px; line-height: 1.6; }
+
+  /* 優先度リスト */
+  .priority-list { list-style: none; }
+  .priority-item {
+    display: flex; align-items: flex-start; gap: 14px;
+    background: white; border-radius: 10px;
+    padding: 14px 16px; margin-bottom: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .priority-badge {
+    min-width: 32px; height: 32px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 900; flex-shrink: 0; color: white;
+  }
+  .p1 { background: var(--red); }
+  .p2 { background: #e67e22; }
+  .p3 { background: var(--blue); }
+  .p4 { background: #7f8c8d; }
+  .priority-item strong { font-size: 14px; display: block; margin-bottom: 3px; }
+  .priority-item span { font-size: 13px; color: var(--gray); }
+
+  /* 練習カード */
+  .training-card {
+    background: white; border-radius: 12px; overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06); margin-bottom: 18px;
+  }
+  .training-header {
+    background: var(--green); color: white;
+    padding: 12px 20px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .training-header .num {
+    background: rgba(255,255,255,0.25); border-radius: 50%;
+    width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 900; flex-shrink: 0;
+  }
+  .training-header .title { font-size: 15px; font-weight: 800; }
+  .training-header .time { margin-left: auto; font-size: 13px; opacity: 0.85; }
+  .training-body { padding: 18px 20px; font-size: 14px; color: #333; }
+  .training-body ul { padding-left: 18px; margin-top: 8px; }
+  .training-body li { margin-bottom: 5px; }
+  .training-point { margin-top: 12px; padding: 10px 14px; background: var(--green-pale); border-radius: 8px; font-size: 13px; }
+  .training-point strong { color: var(--green); }
+
+  footer {
+    text-align: center; padding: 24px; font-size: 12px; color: #999;
+    border-top: 1px solid var(--line); margin-top: 20px;
+  }
+
+  /* TOPボタン */
+  #back-top {
+    position: fixed; bottom: 28px; right: 28px;
+    background: linear-gradient(135deg, #0f4c27, #1a6b3a);
+    color: white; border-radius: 50px;
+    padding: 10px 18px 10px 14px;
+    font-size: 13px; font-weight: 800; text-decoration: none;
+    display: flex; align-items: center; gap: 6px;
+    box-shadow: 0 4px 16px rgba(26,107,58,0.45);
+    transition: transform 0.2s, box-shadow 0.2s;
+    z-index: 999;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+  }
+  #back-top:hover { transform: translateY(-2px); box-shadow: 0 6px 22px rgba(26,107,58,0.55); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="badge">POSITIONAL ANALYSIS</div>
+  <h1>サイドバックのビルドアップ改善</h1>
+  <p>なぜSBでボールを失うのか — 原因と解決策</p>
+  <p class="subtitle">Reborn Over50 | 東京都リーグ3部 | 2026.04.04</p>
+</header>
+
+<nav>
+  <a href="#cause">なぜ詰まるか</a>
+  <a href="#solution">SBの判断</a>
+  <a href="#team">チーム戦術</a>
+  <a href="#training">練習メニュー</a>
+  <a href="#priority">優先事項</a>
+</nav>
+
+<div class="container">
+
+  <!-- キーメッセージ -->
+  <div class="key-message">
+    <div class="label">ROOT CAUSE</div>
+    <h2>SBの問題は「個人技」ではなく<br>「立ち位置」と「受ける前の準備」で解決できる</h2>
+    <div class="pills">
+      <span class="pill">受ける前のスキャン</span>
+      <span class="pill">体をピッチ中央に向ける</span>
+      <span class="pill">CB・ボランチの三角形</span>
+      <span class="pill">バックパスは積極的判断</span>
+    </div>
+  </div>
+
+  <!-- ===== 課題1 なぜ詰まるか ===== -->
+  <div class="section" id="cause">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <h2>なぜSBでビルドアップが詰まるのか</h2>
+      <span class="tag">CAUSE</span>
+    </div>
+
+    <!-- ピッチ図：SBの孤立 -->
+    <div class="pitch-container">
+      <h3>SBがプレスターゲットになる構造的理由</h3>
+      <div class="pitch">
+        <svg viewBox="0 0 420 240" xmlns="http://www.w3.org/2000/svg">
+          <rect width="420" height="240" fill="#2d8f52"/>
+          <rect x="10" y="10" width="400" height="220" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+          <!-- タッチライン強調 -->
+          <rect x="10" y="10" width="8" height="220" fill="rgba(255,255,255,0.15)"/>
+
+          <!-- ゴールエリア -->
+          <rect x="155" y="210" width="100" height="20" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
+
+          <!-- 相手の圧縮ゾーン（赤シェード） -->
+          <rect x="10" y="100" width="150" height="90" fill="rgba(192,57,43,0.12)" rx="4"/>
+          <text x="82" y="97" text-anchor="middle" fill="rgba(255,100,100,0.85)" font-size="10" font-weight="bold">プレスゾーン</text>
+
+          <!-- GK -->
+          <circle cx="205" cy="225" r="13" fill="#2471a3" stroke="white" stroke-width="2"/>
+          <text x="205" y="230" text-anchor="middle" fill="white" font-size="9" font-weight="bold">GK</text>
+
+          <!-- CB -->
+          <circle cx="150" cy="195" r="13" fill="#2471a3" stroke="white" stroke-width="2"/>
+          <text x="150" y="200" text-anchor="middle" fill="white" font-size="9" font-weight="bold">CB</text>
+          <circle cx="260" cy="195" r="13" fill="#2471a3" stroke="white" stroke-width="2"/>
+          <text x="260" y="200" text-anchor="middle" fill="white" font-size="9" font-weight="bold">CB</text>
+
+          <!-- SB（左・問題あり） -->
+          <circle cx="40" cy="160" r="15" fill="#2471a3" stroke="#f5c518" stroke-width="3"/>
+          <text x="40" y="165" text-anchor="middle" fill="white" font-size="9" font-weight="bold">SB</text>
+          <!-- ボール -->
+          <circle cx="40" cy="160" r="5" fill="#f5c518" stroke="white" stroke-width="1"/>
+
+          <!-- ボランチ -->
+          <circle cx="205" cy="155" r="13" fill="#1a6b3a" stroke="white" stroke-width="2"/>
+          <text x="205" y="160" text-anchor="middle" fill="white" font-size="8" font-weight="bold">VOL</text>
+
+          <!-- 相手WG（プレス） -->
+          <circle cx="70" cy="130" r="13" fill="#c0392b" stroke="white" stroke-width="2"/>
+          <text x="70" y="135" text-anchor="middle" fill="white" font-size="8" font-weight="bold">WG</text>
+          <!-- 相手SH（コース切り） -->
+          <circle cx="120" cy="155" r="13" fill="#c0392b" stroke="white" stroke-width="2"/>
+          <text x="120" y="160" text-anchor="middle" fill="white" font-size="8" font-weight="bold">SH</text>
+
+          <!-- プレス矢印 -->
+          <line x1="68" y1="141" x2="55" y2="153" stroke="#ff6b6b" stroke-width="2.5" marker-end="url(#arrowR)"/>
+          <!-- パスコース遮断 -->
+          <line x1="108" y1="155" x2="90" y2="160" stroke="#ff6b6b" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#arrowR)"/>
+
+          <!-- タッチライン壁 -->
+          <text x="22" y="160" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="9" transform="rotate(-90,22,160)">タッチライン</text>
+
+          <!-- 注釈 -->
+          <rect x="0" y="0" width="420" height="22" fill="rgba(0,0,0,0.4)"/>
+          <text x="210" y="15" text-anchor="middle" fill="white" font-size="11" font-weight="bold">SBはタッチライン+プレス+コース切りで三方向から囲まれる</text>
+
+          <!-- SBの逃げ道がない注記 -->
+          <rect x="10" y="175" width="100" height="16" fill="rgba(192,57,43,0.75)" rx="4"/>
+          <text x="60" y="187" text-anchor="middle" fill="white" font-size="9" font-weight="bold">逃げ道が1方向しかない</text>
+
+          <defs>
+            <marker id="arrowR" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L8,3 z" fill="#ff6b6b"/>
+            </marker>
+          </defs>
+        </svg>
+      </div>
+      <p class="pitch-note">
+        タッチライン側に張ったSBは背後が消えている。相手WGがプレス、SHがCBへのパスコースを切るだけで詰む。<br>
+        これは個人の問題ではなく<strong>立ち位置の構造的な問題</strong>。
+      </p>
+    </div>
+
+    <!-- ボールの失い方パターン -->
+    <div class="card">
+      <h3>典型的なボールの失い方（3パターン）</h3>
+      <table>
+        <thead><tr><th>パターン</th><th>何が起きているか</th><th>根本原因</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="badge-red">①体が閉じている</span></td>
+            <td>タッチライン向きで受けて選択肢が見えない</td>
+            <td>スキャンなし・オープンスタンスができていない</td>
+          </tr>
+          <tr>
+            <td><span class="badge-red">②立ち位置が低すぎ</span></td>
+            <td>WGとSHに挟まれて「受けたけど次がない」状態</td>
+            <td>タッチライン際の低い位置に立ちすぎている</td>
+          </tr>
+          <tr>
+            <td><span class="badge-red">③判断が遅れる</span></td>
+            <td>縦・斜め・バックを迷っている間にプレスが完了</td>
+            <td>受ける前に情報収集できていない</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Over50特有の要因 -->
+    <div class="card" style="border-left-color:#e67e22;">
+      <h3 style="color:#e67e22;">Over50特有の要因</h3>
+      <table>
+        <thead><tr><th>課題</th><th>具体的な影響</th></tr></thead>
+        <tbody>
+          <tr><td>反応速度の低下</td><td>プレスを認知するまで0.2〜0.3秒余計にかかる</td></tr>
+          <tr><td>スキャン頻度の低下</td><td>肩越しの確認が減り、情報不足のまま受ける</td></tr>
+          <tr><td>体の向きを作る速さの低下</td><td>オープンスタンスの準備が間に合わない</td></tr>
+          <tr><td>短距離爆発力の低下</td><td>ドリブル突破という選択肢が現実的に使いにくい</td></tr>
+        </tbody>
+      </table>
+      <div class="alert alert-good" style="margin-top:12px; margin-bottom:0;">
+        <span class="alert-icon">💡</span>
+        <div>Over50は「実行速度」が落ちても「パス精度・判断の質」は年齢とともに向上する。<br>
+        <strong>身体的速度を「立ち位置と情報収集」で補う</strong>のが正解。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 課題2 SBの判断 ===== -->
+  <div class="section" id="solution">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <h2>SBの「受ける前」と「受けた後」の判断</h2>
+      <span class="tag">INDIVIDUAL</span>
+    </div>
+
+    <!-- 受ける前の3チェック -->
+    <div class="card">
+      <h3>受ける前の3つのチェック（最重要）</h3>
+      <ul class="step-list">
+        <li>
+          <div class="step-num">1</div>
+          <div class="step-text">
+            <strong>スキャン（首振り）— CBがボールを持ったら即座に</strong>
+            <span>確認すべき4点：①相手プレスの位置と速度　②味方CBの位置　③ボランチの動き　④ウィングの位置。Over50はこのタイミングをルーティン化する（「CBが持ったら首を振る」を習慣に）。</span>
+          </div>
+        </li>
+        <li>
+          <div class="step-num">2</div>
+          <div class="step-text">
+            <strong>体の向き（オープンスタンス）— ピッチ中央方向に開く</strong>
+            <span>ゴールラインに背を向けず、<strong>中央方向に体を開いて</strong>受ける。片肩が縦方向・もう片肩がCBへ向く角度が理想。受けた瞬間に縦・斜め・バック全ての選択肢が視野に入る。</span>
+          </div>
+        </li>
+        <li>
+          <div class="step-num">3</div>
+          <div class="step-text">
+            <strong>立ち位置の調整 — ハーフスペース寄りに上がる</strong>
+            <span>タッチライン際の低い位置ではなく、<strong>相手SBと相手SHの間の高さ</strong>に立つ。相手が「どちらが行くか」迷う位置を作ることで受けた後の時間的余裕が生まれる。</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- ピッチ図：正しい立ち位置 -->
+    <div class="pitch-container">
+      <h3>SBの正しい立ち位置（ハーフスペース寄り）</h3>
+      <div class="pitch">
+        <svg viewBox="0 0 420 240" xmlns="http://www.w3.org/2000/svg">
+          <rect width="420" height="240" fill="#2d8f52"/>
+          <rect x="10" y="10" width="400" height="220" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+
+          <!-- ハーフスペースゾーン -->
+          <rect x="80" y="80" width="80" height="130" fill="rgba(245,197,24,0.18)" rx="4"/>
+          <text x="120" y="77" text-anchor="middle" fill="#f5c518" font-size="10" font-weight="bold">ハーフスペース</text>
+
+          <!-- GK -->
+          <circle cx="205" cy="225" r="13" fill="#2471a3" stroke="white" stroke-width="2"/>
+          <text x="205" y="230" text-anchor="middle" fill="white" font-size="9" font-weight="bold">GK</text>
+
+          <!-- CB -->
+          <circle cx="145" cy="200" r="13" fill="#2471a3" stroke="white" stroke-width="2"/>
+          <text x="145" y="205" text-anchor="middle" fill="white" font-size="9" font-weight="bold">CB</text>
+          <circle cx="265" cy="200" r="13" fill="#2471a3" stroke="white" stroke-width="2"/>
+          <text x="265" y="205" text-anchor="middle" fill="white" font-size="9" font-weight="bold">CB</text>
+
+          <!-- SB（正しい位置） -->
+          <circle cx="115" cy="155" r="15" fill="#2471a3" stroke="#f5c518" stroke-width="3"/>
+          <text x="115" y="160" text-anchor="middle" fill="white" font-size="9" font-weight="bold">SB</text>
+          <circle cx="115" cy="155" r="5" fill="#f5c518" stroke="white" stroke-width="1"/>
+
+          <!-- SB（悪い位置・薄く） -->
+          <circle cx="30" cy="155" r="15" fill="#c0392b" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" opacity="0.5"/>
+          <text x="30" y="160" text-anchor="middle" fill="white" font-size="8" opacity="0.6">×</text>
+          <text x="30" y="178" text-anchor="middle" fill="rgba(255,100,100,0.8)" font-size="9">低すぎ</text>
+
+          <!-- ボランチ -->
+          <circle cx="205" cy="155" r="13" fill="#1a6b3a" stroke="white" stroke-width="2"/>
+          <text x="205" y="160" text-anchor="middle" fill="white" font-size="8" font-weight="bold">VOL</text>
+
+          <!-- WG -->
+          <circle cx="45" cy="100" r="13" fill="#2471a3" stroke="white" stroke-width="2"/>
+          <text x="45" y="105" text-anchor="middle" fill="white" font-size="9" font-weight="bold">WG</text>
+
+          <!-- 相手 -->
+          <circle cx="60" cy="135" r="12" fill="#c0392b" stroke="white" stroke-width="1.5"/>
+          <text x="60" y="140" text-anchor="middle" fill="white" font-size="8">WG</text>
+          <circle cx="145" cy="135" r="12" fill="#c0392b" stroke="white" stroke-width="1.5"/>
+          <text x="145" y="140" text-anchor="middle" fill="white" font-size="8">SH</text>
+
+          <!-- パス出口矢印 -->
+          <!-- 縦（WGへ） -->
+          <line x1="110" y1="141" x2="65" y2="113" stroke="white" stroke-width="2" marker-end="url(#arrowW3)" stroke-dasharray="5,3"/>
+          <text x="72" y="124" text-anchor="middle" fill="white" font-size="9">縦</text>
+          <!-- 斜め内（VOLへ） -->
+          <line x1="130" y1="152" x2="191" y2="155" stroke="#7ec8ff" stroke-width="2" marker-end="url(#arrowB3)" stroke-dasharray="5,3"/>
+          <text x="165" y="148" text-anchor="middle" fill="#7ec8ff" font-size="9">斜め内</text>
+          <!-- バック（CBへ） -->
+          <line x1="113" y1="169" x2="143" y2="188" stroke="rgba(255,255,255,0.7)" stroke-width="2" marker-end="url(#arrowW3)" stroke-dasharray="5,3"/>
+          <text x="138" y="175" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="9">バック</text>
+
+          <!-- 注釈 -->
+          <rect x="0" y="0" width="420" height="22" fill="rgba(0,0,0,0.4)"/>
+          <text x="210" y="15" text-anchor="middle" fill="white" font-size="11" font-weight="bold">ハーフスペース寄りに立つと出口が3方向に広がる</text>
+
+          <defs>
+            <marker id="arrowW3" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L8,3 z" fill="white"/>
+            </marker>
+            <marker id="arrowB3" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L8,3 z" fill="#7ec8ff"/>
+            </marker>
+          </defs>
+        </svg>
+      </div>
+      <p class="pitch-note">
+        タッチライン際（×赤）ではなく、ハーフスペース（黄ゾーン）寄りに立つことで<br>
+        縦（WGへ）・斜め内（VOLへ）・バック（CBへ）の3方向が同時に視野に入る
+      </p>
+    </div>
+
+    <!-- 受けた後の優先順位 -->
+    <div class="card">
+      <h3>受けた後の選択肢と優先順位</h3>
+      <ul class="priority-list">
+        <li class="priority-item">
+          <div class="priority-badge p1">1位</div>
+          <div>
+            <strong>縦パス（WG・FWへ）</strong>
+            <span>相手がプレスに来た結果、縦のスペースが空いていれば即選択。一番リターンが大きい。</span>
+          </div>
+        </li>
+        <li class="priority-item">
+          <div class="priority-badge p2">2位</div>
+          <div>
+            <strong>斜め内（ボランチ・IHへ）</strong>
+            <span>サイドから圧力が来ているとき、中央への斜めパスで逆サイドへの展開につなげる。</span>
+          </div>
+        </li>
+        <li class="priority-item">
+          <div class="priority-badge p3">3位</div>
+          <div>
+            <strong>バックパス（CBまたはGKへ）</strong>
+            <span>前2つが消えたときの「リセット」。<strong>逃げではなく積極的な判断</strong>。詰まってロストするより100倍いい。</span>
+          </div>
+        </li>
+        <li class="priority-item">
+          <div class="priority-badge p4">最後</div>
+          <div>
+            <strong>ドリブル突破</strong>
+            <span>Over50では基本的に選択から外す。スペースが明確で相手が遅い場合のみ。</span>
+          </div>
+        </li>
+      </ul>
+      <div class="alert alert-warn" style="margin-top:4px;">
+        <span class="alert-icon">⚡</span>
+        <div><strong>判断基準：相手との距離で決める</strong><br>
+        相手が3m以上離れている → 縦・斜めにチャレンジ<br>
+        相手が1〜2mに詰まっている → 迷わずバックパス</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 課題3 チーム戦術 ===== -->
+  <div class="section" id="team">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <h2>SBを孤立させないチーム戦術</h2>
+      <span class="tag">TEAM SHAPE</span>
+    </div>
+
+    <!-- ピッチ図：三角形サポート -->
+    <div class="pitch-container">
+      <h3>SBを囲む「三角形」— 常に出口を2つ以上作る</h3>
+      <div class="pitch">
+        <svg viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg">
+          <rect width="420" height="260" fill="#2d8f52"/>
+          <rect x="10" y="10" width="400" height="240" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+
+          <!-- 三角形エリア -->
+          <polygon points="40,175 130,200 130,140" fill="rgba(245,197,24,0.15)" stroke="#f5c518" stroke-width="1.5" stroke-dasharray="6,4"/>
+
+          <!-- GK -->
+          <circle cx="205" cy="245" r="13" fill="#2471a3" stroke="white" stroke-width="2"/>
+          <text x="205" y="250" text-anchor="middle" fill="white" font-size="9" font-weight="bold">GK</text>
+
+          <!-- CB（斜め後ろ45度のポジション） -->
+          <circle cx="130" cy="200" r="15" fill="#2471a3" stroke="white" stroke-width="2"/>
+          <text x="130" y="205" text-anchor="middle" fill="white" font-size="9" font-weight="bold">CB</text>
+          <circle cx="280" cy="205" r="13" fill="#2471a3" stroke="white" stroke-width="2"/>
+          <text x="280" y="210" text-anchor="middle" fill="white" font-size="9" font-weight="bold">CB</text>
+
+          <!-- SB（ボール） -->
+          <circle cx="40" cy="175" r="16" fill="#2471a3" stroke="#f5c518" stroke-width="3"/>
+          <text x="40" y="180" text-anchor="middle" fill="white" font-size="10" font-weight="bold">SB</text>
+          <circle cx="40" cy="175" r="5" fill="#f5c518" stroke="white" stroke-width="1"/>
+
+          <!-- ボランチ（斜め前内側） -->
+          <circle cx="130" cy="140" r="15" fill="#1a6b3a" stroke="white" stroke-width="2"/>
+          <text x="130" y="145" text-anchor="middle" fill="white" font-size="8" font-weight="bold">VOL</text>
+
+          <!-- WG（縦15〜20m） -->
+          <circle cx="30" cy="105" r="13" fill="#2471a3" stroke="white" stroke-width="2"/>
+          <text x="30" y="110" text-anchor="middle" fill="white" font-size="9" font-weight="bold">WG</text>
+
+          <!-- 役割ラベル -->
+          <rect x="142" y="196" width="90" height="16" fill="rgba(0,0,0,0.4)" rx="4"/>
+          <text x="187" y="208" text-anchor="middle" fill="white" font-size="9">斜め後ろ45度に待機</text>
+          <rect x="142" y="132" width="90" height="16" fill="rgba(26,107,58,0.85)" rx="4"/>
+          <text x="187" y="144" text-anchor="middle" fill="white" font-size="9">斜め前内側に入る</text>
+          <rect x="42" y="88" width="90" height="16" fill="rgba(36,113,163,0.85)" rx="4"/>
+          <text x="87" y="100" text-anchor="middle" fill="white" font-size="9">15〜20m高さを保つ</text>
+
+          <!-- パスコース -->
+          <line x1="55" y1="168" x2="114" y2="148" stroke="#7ec8ff" stroke-width="2" marker-end="url(#arrowB4)" stroke-dasharray="5,3"/>
+          <line x1="40" y1="159" x2="37" y2="119" stroke="white" stroke-width="2" marker-end="url(#arrowW4)" stroke-dasharray="5,3"/>
+          <line x1="54" y1="180" x2="114" y2="192" stroke="rgba(255,255,255,0.7)" stroke-width="2" marker-end="url(#arrowW4)" stroke-dasharray="5,3"/>
+
+          <!-- 注釈 -->
+          <rect x="0" y="0" width="420" height="22" fill="rgba(0,0,0,0.4)"/>
+          <text x="210" y="15" text-anchor="middle" fill="white" font-size="11" font-weight="bold">CB・VOL・WGがSBを三角形で囲み、常に2つ以上の出口を確保</text>
+
+          <defs>
+            <marker id="arrowB4" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L8,3 z" fill="#7ec8ff"/>
+            </marker>
+            <marker id="arrowW4" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L8,3 z" fill="white"/>
+            </marker>
+          </defs>
+        </svg>
+      </div>
+      <p class="pitch-note">
+        黄色の三角形＝SBを支えるサポートゾーン<br>
+        CBは斜め後ろ45度 / VOLは斜め前内側 / WGは15〜20m高さを保つ
+      </p>
+    </div>
+
+    <!-- 役割別の動き -->
+    <div class="card">
+      <h3>SBがボールを持ったとき — 各ポジションの役割</h3>
+      <table>
+        <thead><tr><th>ポジション</th><th>立ち位置</th><th>やること</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="badge-blue">センターバック</span></td>
+            <td>SBの斜め後ろ45度</td>
+            <td>バックパスを受ける角度を保つ。真横は×（カットされる）</td>
+          </tr>
+          <tr>
+            <td><span class="badge-green">ボランチ</span></td>
+            <td>SBの斜め前・内側</td>
+            <td>ハーフスペース内側に入る。三角形の「前の頂点」として出口になる</td>
+          </tr>
+          <tr>
+            <td><span class="badge-blue">ウィング</span></td>
+            <td>SBから15〜20m前</td>
+            <td>縦パスの出口。SBに寄りすぎない。相手DFの背後でボールを待つ</td>
+          </tr>
+          <tr>
+            <td><span class="badge-yellow">GK</span></td>
+            <td>角度を作って準備</td>
+            <td>バックパスの最終受け皿。受けたら逆サイドCBへ展開してリセット</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grid2">
+      <div class="alert alert-bad">
+        <span class="alert-icon">❌</span>
+        <div>
+          <strong>よくある失敗</strong>
+          WGがSBに近づきすぎて縦のパスコースを消してしまう。ボランチがSBと同じ高さにいて三角形にならない。
+        </div>
+      </div>
+      <div class="alert alert-good">
+        <span class="alert-icon">✅</span>
+        <div>
+          <strong>グアルディオラの原則</strong>
+          「同じ水平ラインに3人以上立つな」「同じ縦ラインに2人以上立つな」。この2ルールを守れば自然に三角形ができる。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 練習メニュー ===== -->
+  <div class="section" id="training">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <h2>SBビルドアップ改善のトレーニングメニュー</h2>
+      <span class="tag">TRAINING</span>
+    </div>
+
+    <div class="training-card">
+      <div class="training-header">
+        <div class="num">1</div>
+        <span class="title">スキャン習慣化ドリル（ウォームアップ）</span>
+        <span class="time">10分</span>
+      </div>
+      <div class="training-body">
+        CB・SB・ボランチの3人でパス回し。CBがSBにパスを出す直前にコーチが数字（1〜3）を叫ぶ。SBはボールを受けた直後にその数字を答える。
+        <ul>
+          <li>数字を聞くために、SBは必ずパス前に「顔を上げていなければならない」状態になる</li>
+          <li>ボールを追うのでなく、受ける前に首を振る動作を強制的に身につける</li>
+        </ul>
+        <div class="training-point"><strong>コーチングポイント：</strong>「数字が答えられなかった＝スキャンできていない」を見える化する</div>
+      </div>
+    </div>
+
+    <div class="training-card">
+      <div class="training-header">
+        <div class="num">2</div>
+        <span class="title">2vs1＋2vs1 ゾーンドリル</span>
+        <span class="time">20分</span>
+      </div>
+      <div class="training-body">
+        後方エリア（CB＋SB vs 相手FW）→ 前方エリア（ボランチ＋WG vs 相手SH）の連続。後方の2vs1を突破したら前方エリアへパス。
+        <ul>
+          <li>Over50向け：エリアを広め（通常の1.5倍）に設定</li>
+          <li>序盤は守備側を「早歩きまで」に制限し、判断の練習を優先</li>
+          <li>慣れてきたら守備側の制限を解除</li>
+        </ul>
+        <div class="training-point"><strong>コーチングポイント：</strong>SBが詰まったときに「誰が逃げ道になれているか」をレビュー</div>
+      </div>
+    </div>
+
+    <div class="training-card">
+      <div class="training-header">
+        <div class="num">3</div>
+        <span class="title">SBを中心にした4vs2ロンド</span>
+        <span class="time">20分</span>
+      </div>
+      <div class="training-body">
+        15m×20mのエリアで CB・SB・ボランチ・WGの4人 vs 守備2人。SBは「受けてからパスまで2タッチ以内」ルール。
+        <ul>
+          <li>プレスの来た方向と逆に出せているか</li>
+          <li>バックパスを選んだとき、前を向いた選手に届けられているか</li>
+          <li>三角形のサポートが正しくできているか</li>
+        </ul>
+        <div class="training-point"><strong>コーチングポイント：</strong>SBが詰まった原因を3択で確認「①立ち位置？②スキャン？③周りのサポート？」</div>
+      </div>
+    </div>
+
+    <div class="training-card">
+      <div class="training-header">
+        <div class="num">4</div>
+        <span class="title">立ち位置ウォーク確認（補助）</span>
+        <span class="time">10分</span>
+      </div>
+      <div class="training-body">
+        コーンでゾーンを視覚化し、CB・SB・ボランチ・WGがウォーキングペースで正しい立ち位置を確認。止まりながら言語化する。
+        <ul>
+          <li>「CBがここならSBはここ」</li>
+          <li>「相手FWがこの位置ならSBはもっと内に入る」</li>
+        </ul>
+        <div class="training-point"><strong>なぜ効くか：</strong>Over50は言語化することで試合中の無意識の判断スピードが上がる。ゆっくりでも繰り返すことが重要。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 優先事項 ===== -->
+  <div class="section" id="priority">
+    <div class="section-header">
+      <div class="section-num">5</div>
+      <h2>今すぐ取り組む優先事項</h2>
+      <span class="tag">ACTION</span>
+    </div>
+
+    <table>
+      <thead><tr><th>優先度</th><th>課題</th><th>具体的な対策</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="badge-red">最高</span></td>
+          <td>SBの立ち位置が低すぎ・外すぎ</td>
+          <td>タッチライン際でなくハーフスペース寄りに立つ習慣をウォーク練習で定着</td>
+        </tr>
+        <tr>
+          <td><span class="badge-red">高</span></td>
+          <td>受ける前のスキャンがない</td>
+          <td>スキャン習慣化ドリルをウォームアップに毎回組み込む</td>
+        </tr>
+        <tr>
+          <td><span class="badge-red">高</span></td>
+          <td>CBとボランチのサポート位置がズレている</td>
+          <td>「斜め後ろ45度」「斜め前内側」のポジションを全員で確認する</td>
+        </tr>
+        <tr>
+          <td><span class="badge-blue">中</span></td>
+          <td>体の向きが閉じている</td>
+          <td>ボールを受けるときの「ピッチ中央に体を向ける」をロンドで繰り返す</td>
+        </tr>
+        <tr>
+          <td><span class="badge-blue">中</span></td>
+          <td>バックパスへの抵抗感がある</td>
+          <td>「バックパスは積極的な判断・詰まってロストが最悪」をチームで共有</td>
+        </tr>
+        <tr>
+          <td><span class="badge-green">低</span></td>
+          <td>ドリブルで突破しようとする</td>
+          <td>Over50では選択肢から外す。「パスで解決する」前提にする</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- まとめ -->
+    <div class="key-message" style="margin-top:24px;">
+      <div class="label">NEXT PRACTICE</div>
+      <h2 style="font-size:16px;">次の練習から始めること（3点）</h2>
+      <div class="pills">
+        <span class="pill">① CBがボールを持ったら即スキャン（首振り）</span>
+        <span class="pill">② SBはハーフスペース寄りに立つ</span>
+        <span class="pill">③ CB・ボランチが三角形のポジションを取る</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  Reborn Over50 | 東京都リーグ3部 | SBビルドアップ改善レポート | 2026-04-04
+</footer>
+
+<a href="index.html" id="back-top" title="トップページへ戻る">
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+    <polyline points="9 22 9 12 15 12 15 22"/>
+  </svg>
+  TOP
+</a>
+
+</body>
+</html>
