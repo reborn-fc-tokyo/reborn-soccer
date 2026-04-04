@@ -520,8 +520,7 @@
 <footer>Reborn Over50 | 東京都リーグ3部 | Tactical Knowledge Base</footer>
 
 <script>
-  // ★ Google Apps Script のウェブアプリURLをここに貼り付ける
-  const GAS_URL = '';
+  const GAS_URL = 'https://reborn-match-videos.kanesaka.workers.dev';
 
   function extractVideoId(url) {
     const patterns = [
@@ -558,9 +557,9 @@
     const btn = document.querySelector('.vf-save');
     btn.textContent = '送信中…'; btn.disabled = true;
 
-    fetch(GAS_URL, {
-      method: 'POST', mode: 'no-cors',
-      headers: { 'Content-Type': 'text/plain' },
+    await fetch(GAS_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ date, opponent, num, url, videoId, id: Date.now() })
     });
 
@@ -569,17 +568,17 @@
     document.getElementById('videoForm').classList.remove('open');
     btn.textContent = '登録'; btn.disabled = false;
 
-    setTimeout(renderVideos, 2000);
+    renderVideos();
   }
 
   async function deleteVideo(id) {
     if (!confirm('この動画を削除しますか？')) return;
-    fetch(GAS_URL, {
-      method: 'POST', mode: 'no-cors',
-      headers: { 'Content-Type': 'text/plain' },
+    await fetch(GAS_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ action: 'delete', id })
     });
-    setTimeout(renderVideos, 2000);
+    renderVideos();
   }
 
   function formatDate(d) {
