@@ -202,6 +202,37 @@
   .memo-arrow { padding: 0 12px; color: #ccc; font-size: 16px; flex-shrink: 0; }
   .memo-card:hover .memo-arrow { color: var(--blue-light); }
 
+  /* ─── 基本戦略カード ─── */
+  .strategy-card {
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 3px 18px rgba(0,0,0,0.1);
+    overflow: hidden;
+    margin-bottom: 14px;
+  }
+  .strategy-head {
+    background: linear-gradient(135deg, #1a2a3a, #2a3a4a);
+    color: white;
+    padding: 14px 20px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .strategy-head .sh-label { font-size: 10px; letter-spacing: 2px; opacity: 0.6; margin-bottom: 4px; }
+  .strategy-head .sh-title { font-size: 17px; font-weight: 900; }
+  .strategy-body { padding: 16px 20px; display: flex; gap: 16px; }
+  .strategy-col { flex: 1; min-width: 0; }
+  .strategy-col .sc-head { font-size: 10px; font-weight: 800; letter-spacing: 1.5px; margin-bottom: 8px; padding: 2px 10px; border-radius: 10px; display: inline-block; }
+  .sc-head-def { background: #fbe8e8; color: #b03030; }
+  .sc-head-att { background: #e8f0fb; color: #2060b0; }
+  .strategy-list { list-style: none; }
+  .strategy-list li { font-size: 12px; color: #444; padding: 4px 0; border-bottom: 1px solid #f5f5f5; display: flex; gap: 7px; align-items: baseline; }
+  .strategy-list li:last-child { border-bottom: none; }
+  .strategy-list li::before { content: '▸'; flex-shrink: 0; font-size: 10px; color: #aaa; }
+
+  /* NEW バッジ */
+  .new-badge { background: #e63a2a; color: white; font-size: 9px; font-weight: 900; border-radius: 4px; padding: 1px 6px; letter-spacing: 0.5px; margin-left: 6px; vertical-align: middle; }
+
   /* 区切り線 */
   .divider { border: none; border-top: 1px solid #dde4dd; margin: 8px 0 0; }
 
@@ -213,6 +244,8 @@
     .tactic-body { flex-direction: column; align-items: flex-start; gap: 10px; }
     .sec-label { font-size: 16px; }
     .practice-date { min-width: 58px; font-size: 12px; }
+    .strategy-body { flex-direction: column; gap: 12px; }
+    .strategy-list li { font-size: 11px; }
   }
 </style>
 </head>
@@ -231,12 +264,55 @@
 
 <div class="container">
 
-  <!-- ① リボーン戦術（採用済み） -->
+  <!-- ① 基本戦略 -->
   <div class="sec-head sec-green">
     <div class="sec-icon">⚽</div>
     <div>
-      <div class="sec-label">リボーン戦術</div>
+      <div class="sec-label">リボーンの基本戦略</div>
       <div class="sec-sub">チーム全員で共有する約束事</div>
+    </div>
+  </div>
+
+  <div class="strategy-card">
+    <div class="strategy-head">
+      <div>
+        <div class="sh-label">TEAM PRINCIPLES</div>
+        <div class="sh-title">守備・攻撃の基本約束事</div>
+      </div>
+    </div>
+    <div class="strategy-body">
+      <div class="strategy-col">
+        <div class="sc-head sc-head-def">DEFENSE</div>
+        <ul class="strategy-list">
+          <li>CB声だし</li>
+          <li>ディフェンスは中ぎりで敵を外に追い込む</li>
+          <li>相手がもたついたら2人ではさむ</li>
+          <li>FWからのハイプレス SB狙い</li>
+        </ul>
+      </div>
+      <div class="strategy-col">
+        <div class="sc-head sc-head-att">ATTACK</div>
+        <ul class="strategy-list">
+          <li>自陣ではパス優先</li>
+          <li>パスはリズムよく</li>
+          <li>止まってボールを持ち続けない</li>
+          <li>SBのインナーラップ・オーバーラップ</li>
+          <li>コーナーのトレイン</li>
+          <li>ワンツー</li>
+          <li>早めのクロス</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ② リボーン戦術解説 -->
+  <div class="sec-head sec-green" style="margin-top:28px;">
+    <div class="sec-icon">📋</div>
+    <div>
+      <div class="sec-label">リボーン戦術解説</div>
+      <div class="sec-sub">約束事の詳細・図解</div>
     </div>
   </div>
 
@@ -244,7 +320,7 @@
     <div class="tactic-head" style="background: linear-gradient(135deg, #1a3a6b, #2471a3);">
       <div>
         <div class="t-meta">TRANSITION</div>
-        <div class="t-title">ボール奪取直後の対応</div>
+        <div class="t-title">ボール奪取直後の対応 <span class="new-badge">NEW</span></div>
       </div>
       <div class="t-date">2026.04.04</div>
     </div>
@@ -263,7 +339,7 @@
     <div class="tactic-head" style="background: linear-gradient(135deg, #0f4c27, #1a6b3a);">
       <div>
         <div class="t-meta">BUILD-UP</div>
-        <div class="t-title">DFによるサイドチェンジ</div>
+        <div class="t-title">DFによるサイドチェンジ <span class="new-badge">NEW</span></div>
       </div>
       <div class="t-date">2026.04.04</div>
     </div>
@@ -280,7 +356,7 @@
 
   <hr class="divider">
 
-  <!-- ② 練習メニュー -->
+  <!-- ③ 練習メニュー -->
   <div class="sec-head sec-orange">
     <div class="sec-icon">🗓️</div>
     <div>
@@ -301,6 +377,22 @@
         <span class="p-tag">フリーズあり</span>
       </div>
       <div class="practice-title">2026年4月4日 練習メニュー</div>
+    </div>
+    <div class="practice-arrow">›</div>
+  </a>
+
+  <a class="practice-card" href="drill_index.html" style="border-left-color: #1a6b3a;">
+    <div class="practice-date" style="background:#e8f5ed; color:#1a6b3a;">
+      <div class="yr" style="color:#1a6b3a;">DRILL</div>
+      <div>集</div>
+    </div>
+    <div class="practice-body">
+      <div class="p-tags">
+        <span class="p-tag" style="background:#e8f5ed; color:#1a6b3a;">4対2</span>
+        <span class="p-tag" style="background:#e8f5ed; color:#1a6b3a;">5対2</span>
+        <span class="p-tag" style="background:#e8f5ed; color:#1a6b3a;">ワンツー</span>
+      </div>
+      <div class="practice-title">練習メニュー集（個別ドリル一覧）</div>
     </div>
     <div class="practice-arrow">›</div>
   </a>
