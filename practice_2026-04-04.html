@@ -17,48 +17,43 @@
 
   /* ドリルカード */
   .drill-card { background: white; border-radius: 16px; box-shadow: 0 2px 16px rgba(0,0,0,0.08); margin-bottom: 24px; overflow: hidden; }
-
   .drill-head { color: white; padding: 16px 22px; display: flex; align-items: center; gap: 14px; }
   .drill-head .d-num { font-size: 28px; font-weight: 900; opacity: .5; flex-shrink: 0; line-height: 1; }
   .drill-head .d-title { font-size: 20px; font-weight: 900; line-height: 1.3; }
   .drill-head .d-sub { font-size: 12px; opacity: .75; margin-top: 3px; }
-
-  /* 動画 */
-  .drill-video { position: relative; width: 100%; aspect-ratio: 16/9; background: #000; }
+  .drill-video { width: 100%; aspect-ratio: 16/9; background: #000; }
   .drill-video iframe { display: block; width: 100%; height: 100%; border: none; }
+  .drill-body { padding: 18px 22px; }
 
-  /* 解説 */
-  .drill-body { padding: 20px 22px; }
+  /* キーファクター */
+  .kf-title { font-size: 10px; font-weight: 800; color: #888; letter-spacing: 2px; margin-bottom: 10px; }
+  .kf-list { list-style: none; margin-bottom: 16px; }
+  .kf-list li { display: flex; gap: 10px; padding: 8px 0; border-bottom: 1px solid #f2f2f2; font-size: 13px; align-items: baseline; }
+  .kf-list li:last-child { border-bottom: none; }
+  .kf-list li::before { content: '▸'; color: #aaa; flex-shrink: 0; font-size: 11px; }
 
-  .benefit-title { font-size: 11px; font-weight: 800; color: #888; letter-spacing: 1.5px; margin-bottom: 12px; }
+  /* REBORNとの接続 */
+  .reborn-box { background: #e8f5ed; border-left: 4px solid #1a6b3a; border-radius: 0 10px 10px 0; padding: 12px 16px; }
+  .reborn-box .rb-label { font-size: 10px; font-weight: 800; color: #1a6b3a; letter-spacing: 1.5px; margin-bottom: 5px; }
+  .reborn-box .rb-text { font-size: 13px; color: #2a5a3a; line-height: 1.7; }
 
-  .benefit-list { list-style: none; }
-  .benefit-list li { display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px solid #f2f2f2; font-size: 14px; align-items: flex-start; }
-  .benefit-list li:last-child { border-bottom: none; }
-  .benefit-list li .b-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
-  .benefit-list li strong { display: block; font-weight: 800; font-size: 14px; margin-bottom: 2px; }
-  .benefit-list li span { color: #666; font-size: 12px; line-height: 1.6; }
-
-  .reborn-box { background: #e8f5ed; border-left: 4px solid #1a6b3a; border-radius: 0 10px 10px 0; padding: 12px 16px; margin-top: 16px; }
-
-  /* ミニゲーム・ルール付きカード */
+  /* ミニゲームカード */
   .rule-card { background: white; border-radius: 16px; box-shadow: 0 2px 16px rgba(0,0,0,0.08); margin-bottom: 24px; overflow: hidden; }
   .rule-head { color: white; padding: 16px 22px; display: flex; align-items: center; gap: 14px; }
-  .rule-head .r-icon { font-size: 28px; opacity: .55; flex-shrink: 0; line-height: 1; }
+  .rule-head .r-icon { font-size: 26px; opacity: .55; flex-shrink: 0; line-height: 1; }
   .rule-head .r-title { font-size: 20px; font-weight: 900; line-height: 1.3; }
   .rule-head .r-sub { font-size: 12px; opacity: .75; margin-top: 3px; }
-  .rule-body { padding: 20px 22px; }
-  .rule-option { border: 1.5px solid #ead8f5; border-radius: 12px; padding: 14px 16px; margin-bottom: 12px; }
-  .rule-option.recommended { border-color: #8b3ab0; background: #fdf8ff; }
+  .rule-body { padding: 18px 22px; }
+  .rule-option { border: 1.5px solid #e0e0e0; border-radius: 12px; padding: 14px 16px; margin-bottom: 12px; }
+  .rule-option.rec { border-color: #7a2a9a; background: #fdf8ff; }
   .rule-option:last-child { margin-bottom: 0; }
   .rule-option .ro-head { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; flex-wrap: wrap; }
-  .rule-option .ro-badge { background: #7a2a9a; color: white; font-size: 10px; font-weight: 800; border-radius: 6px; padding: 2px 10px; white-space: nowrap; }
-  .rule-option .ro-rec { background: #f5c518; color: #333; font-size: 10px; font-weight: 800; border-radius: 6px; padding: 2px 8px; white-space: nowrap; }
+  .rule-option .ro-badge { background: #555; color: white; font-size: 10px; font-weight: 800; border-radius: 6px; padding: 2px 9px; }
+  .rule-option.rec .ro-badge { background: #7a2a9a; }
+  .rule-option .ro-star { color: #f5c518; font-size: 12px; }
   .rule-option .ro-title { font-size: 14px; font-weight: 900; }
   .rule-option .ro-body { font-size: 13px; color: #444; line-height: 1.7; }
-  .rule-option .ro-note { font-size: 11px; color: #888; margin-top: 6px; border-top: 1px solid #f0e8f8; padding-top: 6px; }
-  .reborn-box .rb-label { font-size: 10px; font-weight: 800; color: #1a6b3a; letter-spacing: 1.5px; margin-bottom: 6px; }
-  .reborn-box .rb-text { font-size: 13px; color: #2a5a3a; line-height: 1.7; }
+  .rule-option .ro-note { font-size: 11px; color: #888; margin-top: 6px; }
 
   footer { text-align: center; padding: 20px; font-size: 11px; color: #aaa; border-top: 1px solid #e0e0e0; margin-top: 8px; }
   #back-top { position: fixed; bottom: 24px; right: 24px; background: #1a6b3a; color: white; border-radius: 50px; padding: 9px 16px 9px 12px; font-size: 12px; font-weight: 800; text-decoration: none; display: flex; align-items: center; gap: 6px; box-shadow: 0 4px 14px rgba(26,107,58,0.4); z-index: 999; }
@@ -69,8 +64,8 @@
     .container { padding: 16px 10px 56px; }
     .drill-head { padding: 13px 16px; }
     .drill-head .d-title { font-size: 17px; }
-    .drill-body { padding: 16px 16px; }
-    .benefit-list li { font-size: 13px; }
+    .drill-body { padding: 14px 16px; }
+    .rule-body { padding: 14px 16px; }
     #back-top { bottom: 16px; right: 14px; padding: 8px 12px 8px 10px; font-size: 11px; }
   }
 </style>
@@ -98,28 +93,16 @@
       <iframe src="https://www.youtube.com/embed/0v7qfQdSyBI" allowfullscreen loading="lazy"></iframe>
     </div>
     <div class="drill-body">
-      <div class="benefit-title">このドリルで何が身につくか</div>
-      <ul class="benefit-list">
-        <li>
-          <span class="b-icon">📐</span>
-          <div><strong>サポートの角度と距離感</strong><span>ボールホルダーに対して「どこに入れば使ってもらえるか」を体で覚える。真後ろではなく斜め45度が正解である理由を体感できる。</span></div>
-        </li>
-        <li>
-          <span class="b-icon">👁</span>
-          <div><strong>受ける前のスキャン習慣</strong><span>守備2人の位置を常に把握しながらボールを受けることで、「もらいながら次を見る」習慣がつく。</span></div>
-        </li>
-        <li>
-          <span class="b-icon">⚡</span>
-          <div><strong>1〜2タッチで出す判断スピード</strong><span>相手が2人いる中で持ちすぎると詰まる。自然と「受ける前に出し先を決めておく」判断が速くなる。</span></div>
-        </li>
-        <li>
-          <span class="b-icon">🔺</span>
-          <div><strong>三角形のパスコースを作る感覚</strong><span>常に2方向の出口を意識する立ち位置の基礎。奪取後に2人が別方向に入る約束事と同じ構造。</span></div>
-        </li>
+      <div class="kf-title">KEY FACTORS</div>
+      <ul class="kf-list">
+        <li>フリーマンを探せ（使われていない選手を常に探す）</li>
+        <li>サポートに入る距離感を調整する（近すぎず遠すぎず）</li>
+        <li>受ける前に体の向きを作っておく</li>
+        <li>相手を引き付けてからパスを出す</li>
       </ul>
       <div class="reborn-box">
         <div class="rb-label">REBORN との接続</div>
-        <div class="rb-text">奪取直後に「斜め後方45度・2方向に入る」のは、このドリルで養うサポートの角度と同じ。まずロンドで感覚を作ってから、奪取後の約束事に応用する。</div>
+        <div class="rb-text">奪取後に「斜め後方45度・2方向に入る」のはフリーマンを作る動きと同じ。ロンドで自然に身につく「使われやすい立ち位置」を、奪取直後にも再現する。</div>
       </div>
     </div>
   </div>
@@ -137,29 +120,21 @@
       <iframe src="https://www.youtube.com/embed/tIczdCSytVM" allowfullscreen loading="lazy"></iframe>
     </div>
     <div class="drill-body">
-      <div class="benefit-title">このドリルで何が身につくか</div>
-      <ul class="benefit-list">
-        <li>
-          <span class="b-icon">🔛</span>
-          <div><strong>パスを出した瞬間にスイッチが入る習慣</strong><span>「出したら即スペースへ動く」ルールなので、止まって見る癖が消える。出す前に次の場所を決めていないと動けないため、頭が体より先に動くようになる。</span></div>
-        </li>
-        <li>
-          <span class="b-icon">🗺</span>
-          <div><strong>スペースを見つけながら走る感覚</strong><span>動きながら「どこが空いているか」を判断し続けるトレーニング。止まって考えるのではなく、走りながら考える状態を作る。</span></div>
-        </li>
-        <li>
-          <span class="b-icon">⚖️</span>
-          <div><strong>チーム全体のバランスを保つ意識</strong><span>1人が動くと別の誰かがカバーしなければならない。自分の動きがチーム全体の形に影響することを体感できる。</span></div>
-        </li>
+      <div class="kf-title">KEY FACTORS</div>
+      <ul class="kf-list">
+        <li>パスを出したら必ず別のスペースへ移動する</li>
+        <li>動きながらバランスを保つ（誰かが動いたら誰かが埋める）</li>
+        <li>パスコースがないときは時間を作りながら待つ</li>
+        <li>守備を混乱させるために予測されない場所へ動く</li>
       </ul>
       <div class="reborn-box">
         <div class="rb-label">REBORN との接続</div>
-        <div class="rb-text">奪取後に「スイッチを入れてスペースへ走る」のはこのドリルで養う習慣と同じ。トリガーが「パスを出す」から「ボールを奪う」に変わるだけ。Over50は奪ってから考えると遅れるので、この「先にスイッチを入れる」感覚が特に重要。</div>
+        <div class="rb-text">ボールを奪った瞬間のスイッチと同じ構造。トリガーが「パスを出す」から「ボールを奪う」に変わるだけ。出したら止まらず動くという習慣がそのまま使える。</div>
       </div>
     </div>
   </div>
 
-  <!-- ワンツードリル -->
+  <!-- ワンツー -->
   <div class="drill-card">
     <div class="drill-head" style="background: linear-gradient(135deg, #7a2a1a, #b84020);">
       <div class="d-num">1-2</div>
@@ -172,54 +147,41 @@
       <iframe src="https://www.youtube.com/embed/eapgKgntlJ8" allowfullscreen loading="lazy"></iframe>
     </div>
     <div class="drill-body">
-      <div class="benefit-title">このドリルで何が身につくか</div>
-      <ul class="benefit-list">
-        <li>
-          <span class="b-icon">🧲</span>
-          <div><strong>相手を引き付けてから出す感覚</strong><span>ディフェンスが来る前に出しても意味がない。相手が食いついた瞬間に壁パスを使う「タイミング」を覚える。</span></div>
-        </li>
-        <li>
-          <span class="b-icon">🏃</span>
-          <div><strong>パスを出したら即走る（止まらない）</strong><span>壁パスは「出して終わり」ではなく「出してすぐ裏へ走る」がセット。止まってしまうとワンツーが成立しない。</span></div>
-        </li>
-        <li>
-          <span class="b-icon">🎯</span>
-          <div><strong>壁役の1タッチの正確さ</strong><span>壁役は受けてすぐ1タッチでリターン。受ける前に出す方向を決めておかないと間に合わない。奪取後の即出しと同じ判断。</span></div>
-        </li>
-        <li>
-          <span class="b-icon">🔀</span>
-          <div><strong>ドリブルとの使い分け判断</strong><span>ワンツーが使えない場面では自分でドリブル突破。「どっちを使うか」の判断力が養われる。</span></div>
-        </li>
+      <div class="kf-title">KEY FACTORS</div>
+      <ul class="kf-list">
+        <li>相手を引き付けてからアクションを起こす</li>
+        <li>壁役はパス直前まで味方の状況を確認する</li>
+        <li>パスするふりのフェイント（ドリブルとの使い分け）を入れる</li>
+        <li>スピードの変化を使う（突然加速する）</li>
       </ul>
       <div class="reborn-box">
         <div class="rb-label">REBORN との接続</div>
-        <div class="rb-text">奪取後に1回目のパスを出した選手がそのまま「第3の男」として走り込むのはワンツーと同じ動き。このドリルで「出して走る」を体に入れておくと、試合中に自然と出る。</div>
+        <div class="rb-text">奪取後に1回目のパスを出した選手がそのまま第3の男として走り込む動きはワンツーと同じ。「出して走る」が身につくと試合中に自然と出るようになる。</div>
       </div>
     </div>
   </div>
 
-  <!-- ミニゲーム（ルール付き） -->
+  <!-- ミニゲーム -->
   <div class="rule-card">
     <div class="rule-head" style="background: linear-gradient(135deg, #4a3a1a, #7a6020);">
       <div class="r-icon">⚽</div>
       <div>
         <div class="r-title">ミニゲーム（ルール付き）</div>
-        <div class="r-sub">2タッチ制限 ＋ ワンツー ＋ 奪取後の動き　3つ同時に練習</div>
+        <div class="r-sub">2タッチ制限 ＋ ワンツー ＋ 奪取後の動きを同時に練習</div>
       </div>
     </div>
     <div class="rule-body">
 
-      <div class="rule-option recommended">
+      <div class="rule-option rec">
         <div class="ro-head">
           <span class="ro-badge">おすすめ</span>
-          <span class="ro-rec">3つ全部入り</span>
+          <span class="ro-star">★</span>
           <span class="ro-title">2タッチ制限ゲーム</span>
         </div>
         <div class="ro-body">
-          通常ゲームを<strong>全員2タッチ以内</strong>でプレーするルール。<br>
-          受ける前に次を決めておかないと間に合わないので「スキャン習慣」「即出し」「ワンツー」「奪取後の即サポート」が全部自然に要求される。
+          全員<strong>2タッチ以内</strong>でプレーするルール。受ける前に次を決めておかないと間に合わないので、スキャン・即出し・ワンツー・奪取後サポートが全部自然に要求される。
         </div>
-        <div class="ro-note">慣れないうちはミスが増えるが、それが狙い。「止まって考える」から「動きながら考える」に強制的に切り替わる。</div>
+        <div class="ro-note">慣れないうちはミスが増えるが、それが狙い。「止まって考える」から「動きながら考える」へ強制的に切り替わる。</div>
       </div>
 
       <div class="rule-option">
@@ -228,10 +190,9 @@
           <span class="ro-title">ワンツー得点ルール</span>
         </div>
         <div class="ro-body">
-          通常ゲームに追加で「ワンツーから直接シュートして決めたら2点」のルール。<br>
-          強制はしないが<strong>使う動機</strong>ができる。ワンツーを試みる場面が自然に増える。
+          ワンツーから直接シュートして決めたら<strong>2点</strong>。強制しないが使う動機ができ、ワンツーを試みる場面が自然に増える。
         </div>
-        <div class="ro-note">2タッチ制限が難しいチームに最初に試すならこちら。</div>
+        <div class="ro-note">2タッチ制限が難しい場合の入門として。</div>
       </div>
 
       <div class="rule-option">
@@ -240,10 +201,9 @@
           <span class="ro-title">止まったら相手ボールルール</span>
         </div>
         <div class="ro-body">
-          パスを出した選手が<strong>その場に止まったら相手ボール</strong>に切り替わるルール。<br>
-          「出したら必ず動く」をゲーム内で強制する。奪取後のスイッチを入れる習慣と直結。
+          パスを出した選手がその場に<strong>止まったら相手ボール</strong>。「出したら必ず動く」を強制する。奪取後のスイッチと直結。
         </div>
-        <div class="ro-note">判定が難しいのでコーチが見ながら適用する。最初は緩めに運用してOK。</div>
+        <div class="ro-note">コーチが見ながら適用。最初は緩めに運用してOK。</div>
       </div>
 
     </div>
