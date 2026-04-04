@@ -236,6 +236,65 @@
   /* 区切り線 */
   .divider { border: none; border-top: 1px solid #dde4dd; margin: 8px 0 0; }
 
+  /* ─── 試合動画セクション ─── */
+  .video-add-btn {
+    display: flex; align-items: center; gap: 8px;
+    background: var(--blue); color: white;
+    border: none; border-radius: 10px; padding: 9px 18px;
+    font-size: 13px; font-weight: 800; cursor: pointer;
+    margin-bottom: 14px;
+  }
+  .video-add-btn:hover { background: var(--blue-light); }
+  .video-form {
+    background: white; border-radius: 14px;
+    box-shadow: 0 2px 14px rgba(0,0,0,0.1);
+    padding: 18px 20px; margin-bottom: 16px;
+    display: none;
+  }
+  .video-form.open { display: block; }
+  .vf-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+  .vf-field { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 120px; }
+  .vf-field label { font-size: 10px; font-weight: 800; color: #888; letter-spacing: 1.5px; }
+  .vf-field input, .vf-field select {
+    border: 1.5px solid #ddd; border-radius: 8px; padding: 7px 10px;
+    font-size: 13px; outline: none;
+  }
+  .vf-field input:focus, .vf-field select:focus { border-color: var(--blue-light); }
+  .vf-url { width: 100%; margin-bottom: 12px; }
+  .vf-actions { display: flex; gap: 8px; }
+  .vf-save { background: var(--blue); color: white; border: none; border-radius: 8px; padding: 8px 20px; font-size: 13px; font-weight: 800; cursor: pointer; }
+  .vf-save:hover { background: var(--blue-light); }
+  .vf-cancel { background: #f0f0f0; color: #666; border: none; border-radius: 8px; padding: 8px 16px; font-size: 13px; font-weight: 700; cursor: pointer; }
+  .video-card {
+    background: white; border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    overflow: hidden; margin-bottom: 10px;
+    display: flex; align-items: stretch;
+    border-left: 5px solid var(--blue-light);
+  }
+  .vc-thumb {
+    width: 120px; flex-shrink: 0;
+    background: #000; position: relative; overflow: hidden;
+  }
+  .vc-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .vc-thumb .play-icon {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+    width: 32px; height: 32px; background: rgba(255,0,0,0.85); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .vc-body { padding: 12px 14px; flex: 1; min-width: 0; }
+  .vc-meta { font-size: 10px; color: #999; margin-bottom: 3px; }
+  .vc-title { font-size: 14px; font-weight: 900; color: #222; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .vc-link { font-size: 11px; color: var(--blue-light); font-weight: 700; text-decoration: none; margin-top: 4px; display: inline-block; }
+  .vc-link:hover { text-decoration: underline; }
+  .vc-del { padding: 0 12px; display: flex; align-items: center; color: #ddd; font-size: 18px; cursor: pointer; background: none; border: none; flex-shrink: 0; }
+  .vc-del:hover { color: #e63a2a; }
+  .video-empty { text-align: center; color: #bbb; font-size: 13px; padding: 20px 0; }
+
+  @media (max-width: 480px) {
+    .vc-thumb { width: 90px; }
+  }
+
   footer { text-align: center; padding: 22px; font-size: 11px; color: #999; border-top: 1px solid #ddd; }
 
   @media (max-width: 480px) {
@@ -405,10 +464,156 @@
     <div class="practice-arrow">›</div>
   </a>
 
+  <hr class="divider">
+
+  <!-- ④ 試合動画 -->
+  <div class="sec-head sec-blue">
+    <div class="sec-icon">🎥</div>
+    <div>
+      <div class="sec-label">試合動画</div>
+      <div class="sec-sub">YouTube 動画を登録・管理</div>
+    </div>
+  </div>
+
+  <button class="video-add-btn" onclick="toggleForm()">
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+    動画を追加
+  </button>
+
+  <div class="video-form" id="videoForm">
+    <div class="vf-row">
+      <div class="vf-field" style="min-width:130px; flex:0 0 auto;">
+        <label>日付</label>
+        <input type="date" id="vf-date">
+      </div>
+      <div class="vf-field">
+        <label>相手チーム名</label>
+        <input type="text" id="vf-opponent" placeholder="〇〇FC">
+      </div>
+      <div class="vf-field" style="min-width:90px; flex:0 0 130px;">
+        <label>何本目</label>
+        <select id="vf-num">
+          <option value="1本目">1本目</option>
+          <option value="2本目">2本目</option>
+          <option value="3本目">3本目</option>
+          <option value="4本目">4本目</option>
+          <option value="前半">前半</option>
+          <option value="後半">後半</option>
+          <option value="全体">全体</option>
+        </select>
+      </div>
+    </div>
+    <div class="vf-field vf-url">
+      <label>YouTube URL</label>
+      <input type="url" id="vf-url" placeholder="https://www.youtube.com/watch?v=...">
+    </div>
+    <div class="vf-actions">
+      <button class="vf-save" onclick="saveVideo()">登録</button>
+      <button class="vf-cancel" onclick="toggleForm()">キャンセル</button>
+    </div>
+  </div>
+
+  <div id="videoList"></div>
 
 </div>
 
 <footer>Reborn Over50 | 東京都リーグ3部 | Tactical Knowledge Base</footer>
+
+<script>
+  const STORE_KEY = 'reborn_match_videos';
+
+  function getVideos() {
+    try { return JSON.parse(localStorage.getItem(STORE_KEY)) || []; }
+    catch(e) { return []; }
+  }
+
+  function saveVideos(list) {
+    localStorage.setItem(STORE_KEY, JSON.stringify(list));
+  }
+
+  function extractVideoId(url) {
+    const patterns = [
+      /[?&]v=([a-zA-Z0-9_-]{11})/,
+      /youtu\.be\/([a-zA-Z0-9_-]{11})/,
+      /embed\/([a-zA-Z0-9_-]{11})/
+    ];
+    for (const p of patterns) {
+      const m = url.match(p);
+      if (m) return m[1];
+    }
+    return null;
+  }
+
+  function toggleForm() {
+    const f = document.getElementById('videoForm');
+    f.classList.toggle('open');
+    if (f.classList.contains('open')) {
+      const today = new Date().toISOString().slice(0, 10);
+      document.getElementById('vf-date').value = today;
+      document.getElementById('vf-opponent').focus();
+    }
+  }
+
+  function saveVideo() {
+    const date     = document.getElementById('vf-date').value;
+    const opponent = document.getElementById('vf-opponent').value.trim();
+    const num      = document.getElementById('vf-num').value;
+    const url      = document.getElementById('vf-url').value.trim();
+
+    if (!date || !opponent || !url) { alert('日付・相手チーム・URLを入力してください'); return; }
+    const videoId = extractVideoId(url);
+    if (!videoId) { alert('YouTube の URL が認識できませんでした'); return; }
+
+    const list = getVideos();
+    list.unshift({ id: Date.now(), date, opponent, num, url, videoId });
+    saveVideos(list);
+    renderVideos();
+
+    document.getElementById('vf-opponent').value = '';
+    document.getElementById('vf-url').value = '';
+    document.getElementById('videoForm').classList.remove('open');
+  }
+
+  function deleteVideo(id) {
+    if (!confirm('この動画を削除しますか？')) return;
+    saveVideos(getVideos().filter(v => v.id !== id));
+    renderVideos();
+  }
+
+  function formatDate(dateStr) {
+    const d = new Date(dateStr);
+    return `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')}`;
+  }
+
+  function renderVideos() {
+    const list = getVideos();
+    const el = document.getElementById('videoList');
+    if (list.length === 0) {
+      el.innerHTML = '<div class="video-empty">まだ動画が登録されていません</div>';
+      return;
+    }
+    el.innerHTML = list.map(v => `
+      <div class="video-card">
+        <a class="vc-thumb" href="${v.url}" target="_blank" rel="noopener">
+          <img src="https://img.youtube.com/vi/${v.videoId}/mqdefault.jpg" alt="${v.opponent}" loading="lazy">
+          <div class="play-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </div>
+        </a>
+        <div class="vc-body">
+          <div class="vc-meta">${formatDate(v.date)} ／ ${v.num}</div>
+          <div class="vc-title">vs ${v.opponent}</div>
+          <a class="vc-link" href="${v.url}" target="_blank" rel="noopener">YouTube で見る ↗</a>
+        </div>
+        <button class="vc-del" onclick="deleteVideo(${v.id})" title="削除">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+        </button>
+      </div>
+    `).join('');
+  }
+
+  renderVideos();
+</script>
 
 </body>
 </html>
