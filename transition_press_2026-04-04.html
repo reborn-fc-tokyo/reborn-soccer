@@ -8,10 +8,7 @@
   * { box-sizing:border-box; margin:0; padding:0; }
   body { font-family:'Helvetica Neue',Arial,'Hiragino Kaku Gothic ProN',Meiryo,sans-serif; background:#f0f2f0; color:#222; line-height:1.7; }
 
-  header {
-    background:linear-gradient(135deg,#0f4c27,#1a6b3a,#2d8f52);
-    color:white; padding:36px 24px 28px; text-align:center;
-  }
+  header { background:linear-gradient(135deg,#0f4c27,#1a6b3a,#2d8f52); color:white; padding:36px 24px 28px; text-align:center; }
   header .badge { display:inline-block; background:rgba(255,255,255,0.2); border:1px solid rgba(255,255,255,0.35); border-radius:20px; padding:3px 14px; font-size:11px; letter-spacing:1px; margin-bottom:10px; }
   header h1 { font-size:22px; font-weight:900; margin-bottom:4px; }
   header p { font-size:12px; opacity:.75; }
@@ -95,100 +92,105 @@
       <div class="prow">
         <div class="n">①</div>
         <div class="who">奪取者</div>
-        <div class="body"><strong>1タッチで最寄りの味方に預ける</strong><small>「前を向いて打開」ではなく「まず外す」が正解。持ちすぎると囲まれる</small></div>
+        <div class="body"><strong>「もらった！」と叫ぶ</strong><small>周りへの合図。同時にファーストタッチで体を向けやすい方向へ転がす</small></div>
       </div>
       <div class="prow">
         <div class="n">②</div>
         <div class="who">最寄り2人</div>
-        <div class="body"><strong>奪った瞬間に三角形サポートを作る</strong><small>2方向に出口を作る。同じ方向に動くとコースが消える</small></div>
+        <div class="body"><strong>斜め後方45度・約5mに2方向で入る</strong><small>前方は相手が来るので後方へ。2人が別々の方向に入ることで2つの出口を作る</small></div>
       </div>
       <div class="prow">
         <div class="n">③</div>
-        <div class="who">全体</div>
-        <div class="body"><strong>1〜2回回して第3の男を探す</strong><small>密集を直接抜けようとしない。1〜2本つなぐとスペースのある選手が見えてくる</small></div>
+        <div class="who">サポート選手</div>
+        <div class="body"><strong>「ここ！」と叫んで場所を教える</strong><small>奪取者は密集の中で視野が狭い。声で自分の位置を知らせる</small></div>
       </div>
       <div class="prow">
         <div class="n">④</div>
-        <div class="who">奪取者</div>
-        <div class="body"><strong>ワンツーも有効：自分が第3の男になる</strong><small>出してから走る。相手のマークが外れた瞬間に返してもらうとフリーで受けられる</small></div>
+        <div class="who">受けた選手</div>
+        <div class="body"><strong>体を開いて受ける。できれば1タッチ、最大2タッチで出す</strong><small>受ける前にスキャン済みであること。次の斜め45度（前後どちらでも）へ出す</small></div>
       </div>
       <div class="prow warn">
         <div class="n">⑤</div>
-        <div class="who">最終ゴール</div>
-        <div class="body"><strong>FW（前）かDF（後ろ）に届ける</strong><small>スペースのあるFWへ縦パス、または安全にDFへ戻してリセット。密集の中央で持ち続けない</small></div>
+        <div class="who">全体</div>
+        <div class="body"><strong>まず2回つなぐことが最優先</strong><small>前でも後ろでもいい。2回つなぐと状況が変わる</small></div>
       </div>
     </div>
   </div>
 
   <!-- 図1 -->
   <div class="fig">
-    <div class="fig-label">図1 — 三角形サポートと第3の男の流れ</div>
+    <div class="fig-label">図1 — サポートの立ち位置と声</div>
     <div class="pitch">
-      <svg viewBox="0 0 500 270" xmlns="http://www.w3.org/2000/svg">
-        <rect width="500" height="270" fill="#2d8f52"/>
-        <rect x="8" y="8" width="484" height="254" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+      <svg viewBox="0 0 500 275" xmlns="http://www.w3.org/2000/svg">
+        <rect width="500" height="275" fill="#2d8f52"/>
+        <rect x="8" y="8" width="484" height="259" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
 
         <!-- 密集ゾーン -->
-        <ellipse cx="215" cy="180" rx="70" ry="50" fill="rgba(192,57,43,0.12)" stroke="rgba(255,100,100,0.4)" stroke-width="1.5" stroke-dasharray="5,3"/>
-        <text x="215" y="153" text-anchor="middle" fill="rgba(255,120,100,0.85)" font-size="10" font-weight="bold">密集</text>
+        <ellipse cx="250" cy="143" rx="70" ry="52" fill="rgba(192,57,43,0.12)" stroke="rgba(255,100,100,0.4)" stroke-width="1.5" stroke-dasharray="5,3"/>
+
+        <!-- 斜め後方45度ライン（左） -->
+        <line x1="238" y1="160" x2="140" y2="232" stroke="rgba(255,255,255,0.35)" stroke-width="1.5" stroke-dasharray="7,4"/>
+        <rect x="142" y="186" width="76" height="13" fill="rgba(0,0,0,0.35)" rx="3"/>
+        <text x="180" y="196" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="8.5">斜め後方45°</text>
+
+        <!-- 斜め後方45度ライン（右） -->
+        <line x1="262" y1="160" x2="360" y2="232" stroke="rgba(255,255,255,0.35)" stroke-width="1.5" stroke-dasharray="7,4"/>
+        <rect x="282" y="186" width="76" height="13" fill="rgba(0,0,0,0.35)" rx="3"/>
+        <text x="320" y="196" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="8.5">斜め後方45°</text>
 
         <!-- 奪取者（ボール保持） -->
-        <circle cx="220" cy="183" r="22" fill="rgba(245,197,24,0.12)" stroke="#f5c518" stroke-width="1.5" stroke-dasharray="3,2"/>
-        <circle cx="220" cy="183" r="15" fill="#2471a3" stroke="#f5c518" stroke-width="3"/>
-        <text x="220" y="188" text-anchor="middle" fill="white" font-size="9" font-weight="bold">奪取</text>
-        <circle cx="233" cy="170" r="6" fill="#f5c518" stroke="white" stroke-width="1.5"/>
+        <circle cx="250" cy="140" r="22" fill="rgba(245,197,24,0.12)" stroke="#f5c518" stroke-width="1.5" stroke-dasharray="3,2"/>
+        <circle cx="250" cy="140" r="16" fill="#2471a3" stroke="#f5c518" stroke-width="3"/>
+        <text x="250" y="145" text-anchor="middle" fill="white" font-size="9" font-weight="bold">奪取</text>
+        <circle cx="264" cy="127" r="6" fill="#f5c518" stroke="white" stroke-width="1.5"/>
+
+        <!-- 「もらった！」吹き出し -->
+        <rect x="272" y="112" width="66" height="16" fill="rgba(245,197,24,0.9)" rx="5"/>
+        <text x="305" y="123" text-anchor="middle" fill="#222" font-size="9" font-weight="bold">もらった！</text>
+        <polygon points="272,120 263,127 274,128" fill="rgba(245,197,24,0.9)"/>
 
         <!-- 相手3人 -->
-        <circle cx="192" cy="152" r="13" fill="#c0392b" stroke="white" stroke-width="1.5"/>
-        <text x="192" y="157" text-anchor="middle" fill="white" font-size="8">相手</text>
-        <circle cx="252" cy="150" r="13" fill="#c0392b" stroke="white" stroke-width="1.5"/>
-        <text x="252" y="155" text-anchor="middle" fill="white" font-size="8">相手</text>
-        <circle cx="188" cy="208" r="13" fill="#c0392b" stroke="white" stroke-width="1.5"/>
-        <text x="188" y="213" text-anchor="middle" fill="white" font-size="8">相手</text>
+        <circle cx="216" cy="105" r="13" fill="#c0392b" stroke="white" stroke-width="1.5"/>
+        <text x="216" y="110" text-anchor="middle" fill="white" font-size="8">相手</text>
+        <circle cx="286" cy="103" r="13" fill="#c0392b" stroke="white" stroke-width="1.5"/>
+        <text x="286" y="108" text-anchor="middle" fill="white" font-size="8">相手</text>
+        <circle cx="210" cy="174" r="13" fill="#c0392b" stroke="white" stroke-width="1.5"/>
+        <text x="210" y="179" text-anchor="middle" fill="white" font-size="8">相手</text>
 
-        <!-- 三角形（薄いライン） -->
-        <polygon points="220,168 100,222 318,228" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1.5" stroke-dasharray="6,4"/>
+        <!-- サポートA（左） -->
+        <circle cx="138" cy="238" r="16" fill="#2471a3" stroke="#7ec8ff" stroke-width="2.5"/>
+        <text x="138" y="244" text-anchor="middle" fill="white" font-size="11" font-weight="bold">○</text>
 
-        <!-- サポートA -->
-        <circle cx="100" cy="225" r="14" fill="#2471a3" stroke="#7ec8ff" stroke-width="2.5"/>
-        <text x="100" y="230" text-anchor="middle" fill="white" font-size="10" font-weight="bold">A</text>
+        <!-- 「ここ！」A -->
+        <rect x="63" y="227" width="48" height="16" fill="rgba(126,200,255,0.9)" rx="5"/>
+        <text x="87" y="238" text-anchor="middle" fill="#222" font-size="9" font-weight="bold">ここ！</text>
+        <polygon points="111,234 122,234 113,240" fill="rgba(126,200,255,0.9)"/>
 
-        <!-- サポートB -->
-        <circle cx="318" cy="230" r="14" fill="#2471a3" stroke="#7ec8ff" stroke-width="2.5"/>
-        <text x="318" y="235" text-anchor="middle" fill="white" font-size="10" font-weight="bold">B</text>
+        <!-- サポートB（右） -->
+        <circle cx="362" cy="238" r="16" fill="#2471a3" stroke="#7ec8ff" stroke-width="2.5"/>
+        <text x="362" y="244" text-anchor="middle" fill="white" font-size="11" font-weight="bold">○</text>
 
-        <!-- 第3の男 -->
-        <rect x="350" y="42" width="120" height="55" fill="rgba(127,255,127,0.12)" stroke="rgba(127,255,127,0.4)" stroke-width="1.5" stroke-dasharray="5,3" rx="6"/>
-        <text x="410" y="60" text-anchor="middle" fill="#7fff7f" font-size="10" font-weight="bold">スペース！</text>
-        <circle cx="410" cy="82" r="15" fill="#2471a3" stroke="#7fff7f" stroke-width="3"/>
-        <text x="410" y="87" text-anchor="middle" fill="white" font-size="10" font-weight="bold">FW</text>
+        <!-- 「ここ！」B -->
+        <rect x="389" y="227" width="48" height="16" fill="rgba(126,200,255,0.9)" rx="5"/>
+        <text x="413" y="238" text-anchor="middle" fill="#222" font-size="9" font-weight="bold">ここ！</text>
+        <polygon points="389,234 378,234 387,240" fill="rgba(126,200,255,0.9)"/>
 
-        <!-- ①奪取者→A -->
-        <line x1="205" y1="192" x2="115" y2="220" stroke="white" stroke-width="3" marker-end="url(#wt1)"/>
-        <rect x="115" y="193" width="75" height="14" fill="rgba(0,0,0,0.45)" rx="3"/>
-        <text x="152" y="203" text-anchor="middle" fill="white" font-size="9" font-weight="bold">①1タッチで預ける</text>
-
-        <!-- ②A→第3の男 -->
-        <line x1="114" y1="212" x2="394" y2="88" stroke="#7ec8ff" stroke-width="3" marker-end="url(#bt1)"/>
-        <rect x="185" y="138" width="110" height="14" fill="rgba(0,0,0,0.45)" rx="3"/>
-        <text x="240" y="148" text-anchor="middle" fill="#7ec8ff" font-size="9" font-weight="bold">②第3の男へ展開</text>
+        <!-- 約5m -->
+        <line x1="140" y1="260" x2="248" y2="260" stroke="rgba(255,255,255,0.35)" stroke-width="1"/>
+        <line x1="140" y1="255" x2="140" y2="265" stroke="rgba(255,255,255,0.35)" stroke-width="1"/>
+        <line x1="248" y1="255" x2="248" y2="265" stroke="rgba(255,255,255,0.35)" stroke-width="1"/>
+        <text x="194" y="271" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="8">約5m</text>
 
         <rect x="0" y="0" width="500" height="20" fill="rgba(0,0,0,0.4)"/>
-        <text x="250" y="14" text-anchor="middle" fill="white" font-size="10" font-weight="bold">密集を1〜2回で抜けて第3の男へ届ける</text>
-        <defs>
-          <marker id="wt1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="white"/></marker>
-          <marker id="bt1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#7ec8ff"/></marker>
-          <marker id="gt1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#7fff7f"/></marker>
-          <marker id="rt1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#ff6b6b"/></marker>
-        </defs>
+        <text x="250" y="14" text-anchor="middle" fill="white" font-size="10" font-weight="bold">斜め後方45度に2方向の出口を作る。声で場所を教える</text>
       </svg>
     </div>
-    <p class="pitch-note">AもBも「奪った瞬間に動く」約束事がないと三角形は作れない。</p>
+    <p class="pitch-note">2人が同じ方向に入るとパスコースが1本になる。必ず2方向に分かれる。</p>
   </div>
 
   <!-- 図2 -->
   <div class="fig">
-    <div class="fig-label">図2 — ワンツー（自分が第3の男になる）</div>
+    <div class="fig-label">図2 — まず2回つなぐ（方向は二の次）</div>
     <div class="pitch">
       <svg viewBox="0 0 500 215" xmlns="http://www.w3.org/2000/svg">
         <rect width="500" height="215" fill="#2d8f52"/>
@@ -201,138 +203,65 @@
         <text x="129" y="43" text-anchor="middle" fill="white" font-size="11" font-weight="800">❌ 持ちすぎる</text>
 
         <!-- NG: 奪取者 -->
-        <circle cx="148" cy="128" r="15" fill="#2471a3" stroke="#ff6b6b" stroke-width="3"/>
-        <text x="148" y="133" text-anchor="middle" fill="white" font-size="9" font-weight="bold">奪取</text>
+        <circle cx="148" cy="125" r="16" fill="#2471a3" stroke="#ff6b6b" stroke-width="3"/>
+        <text x="148" y="130" text-anchor="middle" fill="white" font-size="9" font-weight="bold">奪取</text>
 
         <!-- NG: 相手4人が囲む -->
-        <circle cx="120" cy="98" r="12" fill="#c0392b" stroke="white" stroke-width="1.5"/>
-        <text x="120" y="103" text-anchor="middle" fill="white" font-size="7">相手</text>
-        <circle cx="178" cy="98" r="12" fill="#c0392b" stroke="white" stroke-width="1.5"/>
-        <text x="178" y="103" text-anchor="middle" fill="white" font-size="7">相手</text>
-        <circle cx="115" cy="158" r="12" fill="#c0392b" stroke="white" stroke-width="1.5"/>
-        <text x="115" y="163" text-anchor="middle" fill="white" font-size="7">相手</text>
-        <circle cx="182" cy="158" r="12" fill="#c0392b" stroke="white" stroke-width="1.5"/>
-        <text x="182" y="163" text-anchor="middle" fill="white" font-size="7">相手</text>
-
-        <!-- NG: 包囲楕円と×印 -->
-        <ellipse cx="149" cy="128" rx="52" ry="46" fill="none" stroke="rgba(255,100,100,0.45)" stroke-width="1.5" stroke-dasharray="4,3"/>
-        <text x="149" y="120" text-anchor="middle" fill="#ff6b6b" font-size="20" font-weight="900">×</text>
+        <circle cx="118" cy="94" r="13" fill="#c0392b" stroke="white" stroke-width="1.5"/>
+        <text x="118" y="99" text-anchor="middle" fill="white" font-size="8">相手</text>
+        <circle cx="180" cy="94" r="13" fill="#c0392b" stroke="white" stroke-width="1.5"/>
+        <text x="180" y="99" text-anchor="middle" fill="white" font-size="8">相手</text>
+        <circle cx="112" cy="158" r="13" fill="#c0392b" stroke="white" stroke-width="1.5"/>
+        <text x="112" y="163" text-anchor="middle" fill="white" font-size="8">相手</text>
+        <circle cx="186" cy="157" r="13" fill="#c0392b" stroke="white" stroke-width="1.5"/>
+        <text x="186" y="162" text-anchor="middle" fill="white" font-size="8">相手</text>
+        <ellipse cx="149" cy="126" rx="54" ry="48" fill="none" stroke="rgba(255,100,100,0.45)" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <text x="149" y="117" text-anchor="middle" fill="#ff6b6b" font-size="20" font-weight="900">×</text>
         <rect x="22" y="185" width="200" height="13" fill="rgba(0,0,0,0.3)" rx="3"/>
-        <text x="122" y="195" text-anchor="middle" fill="rgba(255,170,170,0.9)" font-size="9">持ちすぎ → 囲まれてロスト</text>
+        <text x="122" y="195" text-anchor="middle" fill="rgba(255,170,170,0.9)" font-size="9">持つほど相手が戻ってくる</text>
 
         <!-- 右：OK -->
         <rect x="258" y="28" width="234" height="179" fill="rgba(26,107,58,0.07)"/>
         <rect x="258" y="28" width="234" height="22" fill="rgba(26,107,58,0.65)"/>
-        <text x="375" y="43" text-anchor="middle" fill="white" font-size="11" font-weight="800">✅ 出してから走る</text>
+        <text x="375" y="43" text-anchor="middle" fill="white" font-size="11" font-weight="800">✅ 2回つないで脱出</text>
 
-        <!-- OK: 奪取者 初期（ボール） -->
-        <circle cx="288" cy="155" r="22" fill="rgba(245,197,24,0.12)" stroke="#f5c518" stroke-width="1.5" stroke-dasharray="3,2"/>
-        <circle cx="288" cy="155" r="14" fill="#2471a3" stroke="#f5c518" stroke-width="3"/>
-        <text x="288" y="160" text-anchor="middle" fill="white" font-size="9" font-weight="bold">奪取</text>
-        <circle cx="300" cy="143" r="5" fill="#f5c518" stroke="white" stroke-width="1.5"/>
+        <!-- OK: 奪取者（ボール） -->
+        <circle cx="295" cy="155" r="22" fill="rgba(245,197,24,0.12)" stroke="#f5c518" stroke-width="1.5" stroke-dasharray="3,2"/>
+        <circle cx="295" cy="155" r="15" fill="#2471a3" stroke="#f5c518" stroke-width="3"/>
+        <text x="295" y="160" text-anchor="middle" fill="white" font-size="9" font-weight="bold">奪取</text>
+        <circle cx="308" cy="142" r="5" fill="#f5c518" stroke="white" stroke-width="1.5"/>
 
-        <!-- OK: 味方B -->
-        <circle cx="362" cy="183" r="13" fill="#2471a3" stroke="#7ec8ff" stroke-width="2.5"/>
-        <text x="362" y="188" text-anchor="middle" fill="white" font-size="10" font-weight="bold">B</text>
+        <!-- OK: ①サポートA（斜め後方） -->
+        <circle cx="370" cy="190" r="14" fill="#2471a3" stroke="#7ec8ff" stroke-width="2.5"/>
+        <text x="370" y="195" text-anchor="middle" fill="white" font-size="10" font-weight="bold">○</text>
 
-        <!-- OK: ①預ける A→B -->
-        <line x1="302" y1="160" x2="348" y2="177" stroke="white" stroke-width="2.5" marker-end="url(#wt2)"/>
-        <text x="318" y="154" text-anchor="middle" fill="white" font-size="9" font-weight="bold">①預ける</text>
+        <!-- OK: ①矢印 -->
+        <line x1="310" y1="161" x2="355" y2="183" stroke="white" stroke-width="2.5" marker-end="url(#wt2)"/>
+        <rect x="296" y="162" width="50" height="13" fill="rgba(0,0,0,0.4)" rx="3"/>
+        <text x="321" y="172" text-anchor="middle" fill="white" font-size="9" font-weight="bold">①1タッチ</text>
 
-        <!-- OK: ②走る（奪取者の動き） -->
-        <line x1="290" y1="141" x2="435" y2="88" stroke="#f5c518" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#yt2)"/>
-        <text x="355" y="103" text-anchor="middle" fill="#f5c518" font-size="9" font-weight="bold">②走る</text>
+        <!-- OK: ②次の選手（どこでもいい） -->
+        <circle cx="450" cy="110" r="14" fill="#2471a3" stroke="#7fff7f" stroke-width="2.5"/>
+        <text x="450" y="115" text-anchor="middle" fill="white" font-size="10" font-weight="bold">○</text>
 
-        <!-- OK: 奪取者 最終（フリー） -->
-        <circle cx="450" cy="88" r="19" fill="rgba(127,255,127,0.12)" stroke="#7fff7f" stroke-width="1.5" stroke-dasharray="3,2"/>
-        <circle cx="450" cy="88" r="13" fill="#2471a3" stroke="#7fff7f" stroke-width="2.5"/>
-        <text x="450" y="85" text-anchor="middle" fill="white" font-size="8" font-weight="bold">奪取</text>
-        <text x="450" y="95" text-anchor="middle" fill="#7fff7f" font-size="8">フリー</text>
+        <!-- OK: ②矢印 -->
+        <line x1="384" y1="180" x2="436" y2="122" stroke="#7ec8ff" stroke-width="2.5" marker-end="url(#bt2)"/>
+        <rect x="392" y="138" width="50" height="13" fill="rgba(0,0,0,0.4)" rx="3"/>
+        <text x="417" y="148" text-anchor="middle" fill="#7ec8ff" font-size="9" font-weight="bold">②1〜2タッチ</text>
 
-        <!-- OK: ③返す B→奪取者最終 -->
-        <line x1="375" y1="172" x2="437" y2="101" stroke="#7fff7f" stroke-width="2.5" marker-end="url(#gt2)"/>
-        <text x="415" y="152" text-anchor="middle" fill="#7fff7f" font-size="9" font-weight="bold">③返す</text>
+        <!-- OK: ②の方向ラベル -->
+        <rect x="420" y="85" width="72" height="14" fill="rgba(127,255,127,0.2)" stroke="rgba(127,255,127,0.5)" stroke-width="1" rx="4"/>
+        <text x="456" y="95" text-anchor="middle" fill="#7fff7f" font-size="8" font-weight="bold">前後どちらでもOK</text>
 
         <rect x="0" y="0" width="500" height="20" fill="rgba(0,0,0,0.4)"/>
-        <text x="250" y="14" text-anchor="middle" fill="white" font-size="10" font-weight="bold">ワンツー = 自分が第3の男になる</text>
+        <text x="250" y="14" text-anchor="middle" fill="white" font-size="10" font-weight="bold">2回つなぐと状況が変わる。方向は二の次</text>
         <defs>
           <marker id="wt2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="white"/></marker>
-          <marker id="gt2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#7fff7f"/></marker>
-          <marker id="yt2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#f5c518"/></marker>
+          <marker id="bt2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#7ec8ff"/></marker>
         </defs>
       </svg>
     </div>
-    <p class="pitch-note">出した後すぐ走らないとマークが外れない。パスと同時に動き出すのがコツ。</p>
-  </div>
-
-  <!-- 図3 -->
-  <div class="fig">
-    <div class="fig-label">図3 — 最終ゴール：FWへ縦 or DFへリセット</div>
-    <div class="pitch">
-      <svg viewBox="0 0 500 210" xmlns="http://www.w3.org/2000/svg">
-        <rect width="500" height="210" fill="#2d8f52"/>
-        <rect x="8" y="8" width="484" height="194" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
-        <line x1="250" y1="28" x2="250" y2="202" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" stroke-dasharray="6,4"/>
-
-        <!-- 左：FWへ縦パス -->
-        <rect x="8" y="28" width="242" height="172" fill="rgba(245,197,24,0.05)"/>
-        <rect x="8" y="28" width="242" height="22" fill="rgba(26,107,58,0.65)"/>
-        <text x="129" y="43" text-anchor="middle" fill="white" font-size="11" font-weight="800">前 → FWへ縦パス</text>
-
-        <!-- 左: 第3の男（スペースに出た選手）がボール持っている -->
-        <circle cx="148" cy="148" r="22" fill="rgba(245,197,24,0.12)" stroke="#f5c518" stroke-width="1.5" stroke-dasharray="3,2"/>
-        <circle cx="148" cy="148" r="14" fill="#2471a3" stroke="#f5c518" stroke-width="3"/>
-        <text x="148" y="153" text-anchor="middle" fill="white" font-size="8" font-weight="bold">第3の男</text>
-        <circle cx="160" cy="136" r="5" fill="#f5c518" stroke="white" stroke-width="1.5"/>
-
-        <!-- 左: FWがスペースへ走る -->
-        <circle cx="110" cy="60" r="14" fill="#2471a3" stroke="#7fff7f" stroke-width="3"/>
-        <text x="110" y="65" text-anchor="middle" fill="white" font-size="10" font-weight="bold">FW</text>
-        <line x1="110" y1="85" x2="110" y2="77" stroke="#7fff7f" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#gt3)"/>
-
-        <!-- 左: 縦パス矢印 -->
-        <line x1="140" y1="133" x2="114" y2="75" stroke="#7fff7f" stroke-width="3" marker-end="url(#gt3)"/>
-        <rect x="68" y="93" width="62" height="13" fill="rgba(0,0,0,0.4)" rx="3"/>
-        <text x="99" y="103" text-anchor="middle" fill="#7fff7f" font-size="9" font-weight="bold">縦パス！</text>
-
-        <!-- 左: 相手DFは中盤に密集（薄く） -->
-        <circle cx="185" cy="125" r="11" fill="#c0392b" stroke="white" stroke-width="1" opacity="0.4"/>
-        <text x="185" y="130" text-anchor="middle" fill="white" font-size="7" opacity="0.4">相手</text>
-        <text x="165" y="172" text-anchor="middle" fill="rgba(255,200,100,0.7)" font-size="9">相手は中盤に密集中</text>
-
-        <!-- 右：DFへリセット -->
-        <rect x="258" y="28" width="234" height="172" fill="rgba(36,113,163,0.05)"/>
-        <rect x="258" y="28" width="234" height="22" fill="rgba(36,113,163,0.7)"/>
-        <text x="375" y="43" text-anchor="middle" fill="white" font-size="11" font-weight="800">後 → DFへリセット</text>
-
-        <!-- 右: 第3の男（ボール持っている） -->
-        <circle cx="358" cy="130" r="22" fill="rgba(245,197,24,0.12)" stroke="#f5c518" stroke-width="1.5" stroke-dasharray="3,2"/>
-        <circle cx="358" cy="130" r="14" fill="#2471a3" stroke="#f5c518" stroke-width="3"/>
-        <text x="358" y="135" text-anchor="middle" fill="white" font-size="8" font-weight="bold">第3の男</text>
-        <circle cx="370" cy="118" r="5" fill="#f5c518" stroke="white" stroke-width="1.5"/>
-
-        <!-- 右: DF（CB/SB）がスペースで待つ -->
-        <circle cx="440" cy="175" r="14" fill="#2471a3" stroke="#7ec8ff" stroke-width="2.5"/>
-        <text x="440" y="180" text-anchor="middle" fill="white" font-size="9" font-weight="bold">DF</text>
-
-        <!-- 右: バックパス矢印 -->
-        <line x1="371" y1="143" x2="426" y2="163" stroke="#7ec8ff" stroke-width="3" marker-end="url(#bt3)"/>
-        <rect x="375" y="140" width="50" height="13" fill="rgba(0,0,0,0.4)" rx="3"/>
-        <text x="400" y="150" text-anchor="middle" fill="#7ec8ff" font-size="9" font-weight="bold">リセット</text>
-
-        <rect x="275" y="165" width="190" height="24" fill="rgba(36,113,163,0.15)" stroke="#7ec8ff" stroke-width="1" rx="5"/>
-        <text x="370" y="176" text-anchor="middle" fill="#7ec8ff" font-size="9" font-weight="bold">安全にDFへ戻して</text>
-        <text x="370" y="186" text-anchor="middle" fill="#7ec8ff" font-size="9" font-weight="bold">もう一度ビルドアップ</text>
-
-        <rect x="0" y="0" width="500" height="20" fill="rgba(0,0,0,0.4)"/>
-        <text x="250" y="14" text-anchor="middle" fill="white" font-size="10" font-weight="bold">密集の中央で持ち続けない。前か後ろへ届ける</text>
-        <defs>
-          <marker id="gt3" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#7fff7f"/></marker>
-          <marker id="bt3" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#7ec8ff"/></marker>
-        </defs>
-      </svg>
-    </div>
-    <p class="pitch-note">前が難しければ迷わず後ろへ。相手が密集している間は無理に前に行かない。</p>
+    <p class="pitch-note">2回つなぐだけで相手のプレスのかたちが崩れる。まずそこを目指す。</p>
   </div>
 
   <!-- 注意事項 -->
@@ -341,29 +270,29 @@
     <div class="nrow">
       <span class="icon">⚠️</span>
       <div>
-        <strong>全員が同じ方向に動くとコースが消える（②）</strong>
-        <span>サポートの2人はバラバラな方向に出口を作る。同じ方向に逃げると選択肢がゼロになる。</span>
+        <strong>2人が同じ方向に入るとコースが1本になる（②）</strong>
+        <span>必ず2方向に分かれる。左右の斜め後方にそれぞれ1人ずつ入るのが基本。</span>
       </div>
     </div>
     <div class="nrow">
       <span class="icon">⚠️</span>
       <div>
-        <strong>受ける前にスキャンしておく（①）</strong>
+        <strong>受ける前にスキャンしておく（④）</strong>
         <span>奪う前から「次にどこへ出すか」を頭に入れておく。奪ってから考えると遅い。</span>
       </div>
     </div>
     <div class="nrow">
       <span class="icon">⚠️</span>
       <div>
-        <strong>受けたら即出す。ためない（③④）</strong>
-        <span>Over50では持ちすぎると相手が戻ってくる。ワンツーの「返す」パスも早めに。</span>
+        <strong>持つほど相手が戻ってくる（⑤）</strong>
+        <span>迷いはNG。声が聞こえたら即出す。2タッチ以内が目安。</span>
       </div>
     </div>
     <div class="nrow">
       <span class="icon">💡</span>
       <div>
-        <strong>ワンツーのコツ：パスと同時に走り出す</strong>
-        <span>出した後に止まるとマークが外れない。パスを出す瞬間に走り始めるのが第3の男のタイミング。</span>
+        <strong>CBが絡む場合のみ：1人サポート、1人カバーで残る</strong>
+        <span>CBが2人とも前に出るとロスト時に失点につながる。CBが関わるときだけチャレンジ＆カバーの原則を適用する。</span>
       </div>
     </div>
   </div>
