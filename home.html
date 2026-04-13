@@ -333,80 +333,18 @@
 <div class="container">
 
   <!-- ★ 出欠入力ルール -->
-  <div class="sec-head sec-blue" style="margin-top:0;">
-    <div class="sec-icon">📅</div>
-    <div>
-      <div class="sec-label">出欠入力ルール</div>
-      <div class="sec-sub">必ず守ってください</div>
-    </div>
-  </div>
-
-  <div style="background:#fff; border-radius:14px; box-shadow:0 3px 18px rgba(0,0,0,0.1); overflow:hidden; margin-bottom:14px;">
-
-    <!-- ステップ① -->
-    <div style="display:flex; align-items:stretch; border-bottom:1px solid #f0f4f0;">
-      <div style="background:linear-gradient(135deg,#1a4b7a,#2471a3); color:#fff; min-width:80px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:20px 10px; text-align:center; flex-shrink:0;">
-        <div style="font-size:22px; font-weight:900; line-height:1;">14</div>
-        <div style="font-size:10px; font-weight:700; margin-top:2px; opacity:0.85;">日前</div>
-        <div style="font-size:9px; margin-top:6px; opacity:0.7; line-height:1.4;">同じ曜日<br>24:00</div>
+  <div style="background:#fff; border-radius:12px; box-shadow:0 2px 12px rgba(0,0,0,0.08); padding:14px 16px; margin-bottom:20px; border-left:4px solid #2471a3;">
+    <div style="font-size:11px; font-weight:800; color:#2471a3; letter-spacing:1px; margin-bottom:10px;">📅 出欠入力ルール</div>
+    <div style="display:flex; flex-direction:column; gap:7px; font-size:13px; color:#333;">
+      <div style="display:flex; gap:8px; align-items:baseline;">
+        <span style="background:#2471a3; color:#fff; border-radius:4px; padding:1px 7px; font-size:11px; font-weight:800; flex-shrink:0;">14日前</span>
+        <span>全員入力（○△✕）。△の人は確率を<a href="https://adfit.app/core/#/ans?eid=qiR0dz0AM0hi9EM6q2lT29Beu0" target="_blank" rel="noopener" style="color:#2471a3; font-weight:800;">出欠フォーム</a>のコメント欄に記入 <span style="color:#999; font-size:11px;">例：4.19 金坂 △50%</span></span>
       </div>
-      <div style="padding:16px 18px; flex:1;">
-        <div style="font-size:10px; font-weight:800; letter-spacing:1.5px; color:#2471a3; margin-bottom:6px;">STEP 1 ― 第1回入力締切</div>
-        <div style="font-size:15px; font-weight:900; color:#1a2a3a; margin-bottom:8px;">全員が出欠を入力する</div>
-        <div style="display:flex; gap:8px; flex-wrap:wrap;">
-          <div style="background:#e8f0fb; border-radius:8px; padding:6px 12px; font-size:12px; color:#1a4b7a;">
-            <span style="font-weight:800;">○ 参加</span>
-          </div>
-          <div style="background:#fff8e8; border-radius:8px; padding:6px 12px; font-size:12px; color:#b07000;">
-            <span style="font-weight:800;">△ 未定</span>
-            <span style="font-size:11px; margin-left:4px; color:#888;">→ 参加できる確率（%）を記入</span>
-          </div>
-        </div>
-        <div style="margin-top:10px; background:#fffbf0; border:1.5px solid #f0d080; border-radius:10px; padding:10px 14px;">
-          <div style="font-size:10px; font-weight:800; color:#b07000; letter-spacing:1px; margin-bottom:5px;">△の人は必ず出欠フォームのコメント欄に記入</div>
-          <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
-            <div style="font-size:13px; font-family:monospace; background:#fff; border:1px solid #e0c060; border-radius:6px; padding:4px 10px; color:#555; letter-spacing:0.05em;">4.19 金坂 △50%</div>
-            <div style="font-size:11px; color:#999;">← 日付・名前・確率の形式で</div>
-          </div>
-          <div style="margin-top:8px;">
-            <a href="https://adfit.app/core/#/ans?eid=qiR0dz0AM0hi9EM6q2lT29Beu0" target="_blank" rel="noopener"
-               style="display:inline-flex; align-items:center; gap:6px; background:#1a4b7a; color:#fff; text-decoration:none; border-radius:20px; padding:6px 14px; font-size:11px; font-weight:800;">
-              📋 出欠フォームを開く
-              <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </a>
-          </div>
-        </div>
-          <div style="background:#fde8e8; border-radius:8px; padding:6px 12px; font-size:12px; color:#b03030;">
-            <span style="font-weight:800;">✕ 欠席</span>
-          </div>
-        </div>
+      <div style="display:flex; gap:8px; align-items:baseline;">
+        <span style="background:#1a6b3a; color:#fff; border-radius:4px; padding:1px 7px; font-size:11px; font-weight:800; flex-shrink:0;">3日前</span>
+        <span>△なし・最終締切（○か✕で確定）</span>
       </div>
     </div>
-
-    <!-- ステップ② -->
-    <div style="display:flex; align-items:stretch;">
-      <div style="background:linear-gradient(135deg,#0f4c27,#1a6b3a); color:#fff; min-width:80px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:20px 10px; text-align:center; flex-shrink:0;">
-        <div style="font-size:22px; font-weight:900; line-height:1;">3</div>
-        <div style="font-size:10px; font-weight:700; margin-top:2px; opacity:0.85;">日前</div>
-        <div style="font-size:9px; margin-top:6px; opacity:0.7; line-height:1.4;">24:00<br>締切</div>
-      </div>
-      <div style="padding:16px 18px; flex:1;">
-        <div style="font-size:10px; font-weight:800; letter-spacing:1.5px; color:#1a6b3a; margin-bottom:6px;">STEP 2 ― 最終締切</div>
-        <div style="font-size:15px; font-weight:900; color:#1a2a3a; margin-bottom:8px;">△なし・最終回答を確定する</div>
-        <div style="display:flex; gap:8px; flex-wrap:wrap;">
-          <div style="background:#e8f5ed; border-radius:8px; padding:6px 12px; font-size:12px; color:#1a6b3a;">
-            <span style="font-weight:800;">○ 参加</span>
-          </div>
-          <div style="background:#fde8e8; border-radius:8px; padding:6px 12px; font-size:12px; color:#b03030;">
-            <span style="font-weight:800;">✕ 欠席</span>
-          </div>
-          <div style="background:#f0f0f0; border-radius:8px; padding:6px 12px; font-size:12px; color:#999;">
-            <span style="font-weight:800; text-decoration:line-through;">△ 不可</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
   </div>
 
   <hr class="divider" style="margin-bottom:28px;">
