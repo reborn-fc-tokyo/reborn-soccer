@@ -332,6 +332,70 @@
 
 <div class="container">
 
+  <!-- ★ 出欠入力ルール -->
+  <div class="sec-head sec-blue" style="margin-top:0;">
+    <div class="sec-icon">📅</div>
+    <div>
+      <div class="sec-label">出欠入力ルール</div>
+      <div class="sec-sub">必ず守ってください</div>
+    </div>
+  </div>
+
+  <div style="background:#fff; border-radius:14px; box-shadow:0 3px 18px rgba(0,0,0,0.1); overflow:hidden; margin-bottom:14px;">
+
+    <!-- ステップ① -->
+    <div style="display:flex; align-items:stretch; border-bottom:1px solid #f0f4f0;">
+      <div style="background:linear-gradient(135deg,#1a4b7a,#2471a3); color:#fff; min-width:80px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:20px 10px; text-align:center; flex-shrink:0;">
+        <div style="font-size:22px; font-weight:900; line-height:1;">14</div>
+        <div style="font-size:10px; font-weight:700; margin-top:2px; opacity:0.85;">日前</div>
+        <div style="font-size:9px; margin-top:6px; opacity:0.7; line-height:1.4;">同じ曜日<br>24:00</div>
+      </div>
+      <div style="padding:16px 18px; flex:1;">
+        <div style="font-size:10px; font-weight:800; letter-spacing:1.5px; color:#2471a3; margin-bottom:6px;">STEP 1 ― 第1回入力締切</div>
+        <div style="font-size:15px; font-weight:900; color:#1a2a3a; margin-bottom:8px;">全員が出欠を入力する</div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <div style="background:#e8f0fb; border-radius:8px; padding:6px 12px; font-size:12px; color:#1a4b7a;">
+            <span style="font-weight:800;">○ 参加</span>
+          </div>
+          <div style="background:#fff8e8; border-radius:8px; padding:6px 12px; font-size:12px; color:#b07000;">
+            <span style="font-weight:800;">△ 未定</span>
+            <span style="font-size:11px; margin-left:4px; color:#888;">→ 参加できる確率（%）を記入</span>
+          </div>
+          <div style="background:#fde8e8; border-radius:8px; padding:6px 12px; font-size:12px; color:#b03030;">
+            <span style="font-weight:800;">✕ 欠席</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ステップ② -->
+    <div style="display:flex; align-items:stretch;">
+      <div style="background:linear-gradient(135deg,#0f4c27,#1a6b3a); color:#fff; min-width:80px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:20px 10px; text-align:center; flex-shrink:0;">
+        <div style="font-size:22px; font-weight:900; line-height:1;">3</div>
+        <div style="font-size:10px; font-weight:700; margin-top:2px; opacity:0.85;">日前</div>
+        <div style="font-size:9px; margin-top:6px; opacity:0.7; line-height:1.4;">24:00<br>締切</div>
+      </div>
+      <div style="padding:16px 18px; flex:1;">
+        <div style="font-size:10px; font-weight:800; letter-spacing:1.5px; color:#1a6b3a; margin-bottom:6px;">STEP 2 ― 最終締切</div>
+        <div style="font-size:15px; font-weight:900; color:#1a2a3a; margin-bottom:8px;">△なし・最終回答を確定する</div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <div style="background:#e8f5ed; border-radius:8px; padding:6px 12px; font-size:12px; color:#1a6b3a;">
+            <span style="font-weight:800;">○ 参加</span>
+          </div>
+          <div style="background:#fde8e8; border-radius:8px; padding:6px 12px; font-size:12px; color:#b03030;">
+            <span style="font-weight:800;">✕ 欠席</span>
+          </div>
+          <div style="background:#f0f0f0; border-radius:8px; padding:6px 12px; font-size:12px; color:#999;">
+            <span style="font-weight:800; text-decoration:line-through;">△ 不可</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <hr class="divider" style="margin-bottom:28px;">
+
   <!-- ① 基本戦略 -->
   <div class="sec-head sec-green">
     <div class="sec-icon">⚽</div>
