@@ -324,10 +324,10 @@
   .cmt-author { font-size: 12px; font-weight: 800; color: var(--blue); }
   .cmt-date { font-size: 11px; color: #aaa; flex: 1; }
   .cmt-del-btn {
-    background: none; border: none; color: #ccc;
-    font-size: 11px; cursor: pointer; padding: 2px 5px; border-radius: 4px;
+    background: none; border: 1px solid #ddd; color: #999;
+    font-size: 11px; cursor: pointer; padding: 2px 8px; border-radius: 4px;
   }
-  .cmt-del-btn:hover { color: #e63a2a; background: #fff0f0; }
+  .cmt-del-btn:hover { color: #e63a2a; background: #fff0f0; border-color: #fca5a5; }
   .cmt-body { font-size: 13px; color: #334155; line-height: 1.65; word-break: break-word; }
   .cmt-empty { font-size: 12px; color: #bbb; text-align: center; padding: 6px 0; margin: 0; }
   .cmt-reply-btn {
@@ -854,7 +854,7 @@
         + '<span class="cmt-author">' + _esc(c.author) + '</span>'
         + '<span class="cmt-date">' + _fmtCmtDate(c.ts) + '</span>'
         + '<button class="cmt-edit-btn" onclick="editCmt(\'' + vid + '\',\'' + c.id + '\',null)">編集</button>'
-        + '<button class="cmt-del-btn" onclick="delCmt(\'' + vid + '\',\'' + c.id + '\',null)" title="削除">✕</button>'
+        + '<button class="cmt-del-btn" onclick="delCmt(\'' + vid + '\',\'' + c.id + '\',null)" title="削除">削除</button>'
         + '</div>'
         + '<div id="cib-' + vid + '-' + c.id + '">'
         + '<div class="cmt-body">' + _esc(c.text) + '</div>'
@@ -866,7 +866,7 @@
           + '<span class="cmt-author">' + _esc(r.author) + '</span>'
           + '<span class="cmt-date">' + _fmtCmtDate(r.ts) + '</span>'
           + '<button class="cmt-edit-btn" onclick="editCmt(\'' + vid + '\',\'' + c.id + '\',\'' + r.id + '\')">編集</button>'
-          + '<button class="cmt-del-btn" onclick="delCmt(\'' + vid + '\',\'' + c.id + '\',\'' + r.id + '\')" title="削除">✕</button>'
+          + '<button class="cmt-del-btn" onclick="delCmt(\'' + vid + '\',\'' + c.id + '\',\'' + r.id + '\')" title="削除">削除</button>'
           + '</div>'
           + '<div id="crb-' + vid + '-' + c.id + '-' + r.id + '">'
           + '<div class="cmt-body">' + _esc(r.text) + '</div>'
