@@ -358,11 +358,24 @@
     background: #f0f0f0; color: #666; border: none;
     border-radius: 6px; padding: 5px 10px; font-size: 12px; font-weight: 700; cursor: pointer;
   }
-  .ts-link {
-    color: var(--blue-light); font-weight: 700; text-decoration: none;
-    background: #ddeeff; padding: 1px 6px; border-radius: 4px; font-size: 11px;
+  .cmt-ts-row {
+    display: flex; align-items: center; gap: 6px;
+    margin-bottom: 6px; font-size: 12px; color: #666;
   }
-  .ts-link:hover { background: var(--blue-light); color: #fff; }
+  .cmt-inp-min, .cmt-inp-sec {
+    border: 1.5px solid #ddd; border-radius: 6px;
+    padding: 4px 6px; font-size: 12px; width: 52px;
+    outline: none; font-family: inherit; text-align: center;
+  }
+  .cmt-inp-min:focus, .cmt-inp-sec:focus { border-color: var(--blue-light); }
+  .cmt-ts-sep { font-weight: 700; color: #555; }
+  .ts-play-btn {
+    display: inline-flex; align-items: center; gap: 5px;
+    background: #ddeeff; border: 1px solid #b0d0ef;
+    color: var(--blue-light); font-size: 12px; font-weight: 700;
+    border-radius: 6px; padding: 4px 12px; cursor: pointer; margin-top: 5px;
+  }
+  .ts-play-btn:hover { background: var(--blue-light); color: #fff; border-color: var(--blue-light); }
   .ts-modal {
     display: none; position: fixed; inset: 0;
     background: rgba(0,0,0,0.72); z-index: 2000;
@@ -743,27 +756,26 @@
     }
   }
 
-  // ── Comment System (localStorage) ────────────────────────
-  function _getCmts() {
-    try { return JSON.parse(localStorage.getItem('reborn_video_cmts') || '{}'); } catch(e) { return {}; }
+  // ── Comment System (Cloudflare Worker — 全員共有) ───────────
+  var _cmtCache = {};
+
+  async function loadAllComments() {
+    try {
+      var res = await fetch(GAS_URL + '?action=comments');
+      var all = await res.json();
+      _cmtCache = all || {};
+      Object.keys(_cmtCache).forEach(function(vid) { updateCmtCount(vid); });
+    } catch(e) {}
   }
-  function _saveCmts(d) { localStorage.setItem('reborn_video_cmts', JSON.stringify(d)); }
 
   function countComments(vid) {
-    return (_getCmts()[vid] || []).reduce((n, c) => n + 1 + (c.replies ? c.replies.length : 0), 0);
+    return (_cmtCache[vid] || []).reduce(function(n, c) {
+      return n + 1 + (c.replies ? c.replies.length : 0);
+    }, 0);
   }
 
   function _esc(s) {
     return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-  }
-
-  function _linkTs(text, vid) {
-    return _esc(text).replace(/(\d{1,2}):(\d{2})(?::(\d{2}))?/g, function(m, a, b, c) {
-      var sec = (c !== undefined)
-        ? parseInt(a)*3600 + parseInt(b)*60 + parseInt(c)
-        : parseInt(a)*60 + parseInt(b);
-      return '<a class="ts-link" href="#" onclick="openTsModal(\'' + vid + '\',' + sec + ',\'' + m + '\');return false;">▶ ' + m + '</a>';
-    });
   }
 
   function _fmtCmtDate(ts) {
@@ -773,32 +785,58 @@
 
   function _lastAuthor() { return localStorage.getItem('reborn_cmt_name') || ''; }
 
-  function renderCmtPanel(vid) {
-    var panel = document.getElementById('cmt-panel-' + vid);
-    if (!panel) return;
-    var cmts = _getCmts()[vid] || [];
+  function _tsPlayBtn(vid, st) {
+    if (!st || (st.min == null && st.sec == null)) return '';
+    var min = st.min || 0, sec = st.sec || 0;
+    var label = min + ':' + String(sec).padStart(2, '0');
+    return '<button class="ts-play-btn" onclick="openTsModal(\'' + vid + '\',' + (min*60+sec) + ',\'' + label + '\')">▶ ' + label + ' から再生</button>';
+  }
+
+  function _tsRow(idMin, idSec) {
+    return '<div class="cmt-ts-row">'
+      + '<span style="color:var(--blue-light);font-weight:700;">▶</span>'
+      + '<span>動画開始時間（任意）</span>'
+      + '<input class="cmt-inp-min" id="' + idMin + '" type="number" min="0" max="999" placeholder="分">'
+      + '<span class="cmt-ts-sep">:</span>'
+      + '<input class="cmt-inp-sec" id="' + idSec + '" type="number" min="0" max="59" placeholder="秒">'
+      + '</div>';
+  }
+
+  function _readTs(idMin, idSec) {
+    var me = document.getElementById(idMin), se = document.getElementById(idSec);
+    if (!me) return null;
+    var mv = me.value.trim(), sv = se ? se.value.trim() : '';
+    if (mv === '' && sv === '') return null;
+    return { min: (mv !== '' ? parseInt(mv) : 0), sec: (sv !== '' ? parseInt(sv) : 0) };
+  }
+
+  function _buildPanelHtml(vid, cmts) {
     var la = _esc(_lastAuthor());
     var h = '<div class="cmt-list">';
-    if (cmts.length === 0) h += '<p class="cmt-empty">まだコメントがありません</p>';
-    cmts.forEach(function(c) {
+    if (!cmts || cmts.length === 0) h += '<p class="cmt-empty">まだコメントがありません</p>';
+    (cmts || []).forEach(function(c) {
       h += '<div class="cmt-item">'
         + '<div class="cmt-head"><span class="cmt-author">' + _esc(c.author) + '</span>'
         + '<span class="cmt-date">' + _fmtCmtDate(c.ts) + '</span>'
         + '<button class="cmt-del-btn" onclick="delCmt(\'' + vid + '\',\'' + c.id + '\',null)" title="削除">✕</button></div>'
-        + '<div class="cmt-body">' + _linkTs(c.text, vid) + '</div>';
+        + '<div class="cmt-body">' + _esc(c.text) + '</div>'
+        + _tsPlayBtn(vid, c.startTime);
       (c.replies || []).forEach(function(r) {
         h += '<div class="cmt-reply">'
           + '<div class="cmt-head"><span class="cmt-author">' + _esc(r.author) + '</span>'
           + '<span class="cmt-date">' + _fmtCmtDate(r.ts) + '</span>'
           + '<button class="cmt-del-btn" onclick="delCmt(\'' + vid + '\',\'' + c.id + '\',\'' + r.id + '\')" title="削除">✕</button></div>'
-          + '<div class="cmt-body">' + _linkTs(r.text, vid) + '</div></div>';
+          + '<div class="cmt-body">' + _esc(r.text) + '</div>'
+          + _tsPlayBtn(vid, r.startTime)
+          + '</div>';
       });
       h += '<button class="cmt-reply-btn" onclick="toggleRF(\'' + vid + '\',\'' + c.id + '\')">↩ 返信</button>'
         + '<div id="rf-' + vid + '-' + c.id + '" class="reply-form" style="display:none;">'
         + '<div class="cmt-inp-row">'
         + '<input class="cmt-inp-name" id="rfn-' + vid + '-' + c.id + '" placeholder="名前" value="' + la + '">'
-        + '<button class="cmt-send-btn" onclick="submitReply(\'' + vid + '\',\'' + c.id + '\')">送信</button>'
+        + '<button class="cmt-send-btn" id="rfsend-' + vid + '-' + c.id + '" onclick="submitReply(\'' + vid + '\',\'' + c.id + '\')">送信</button>'
         + '<button class="cmt-cancel-btn" onclick="toggleRF(\'' + vid + '\',\'' + c.id + '\')">×</button></div>'
+        + _tsRow('rfm-' + vid + '-' + c.id, 'rfs-' + vid + '-' + c.id)
         + '<textarea class="cmt-inp-text" id="rft-' + vid + '-' + c.id + '" placeholder="返信…" rows="2"></textarea>'
         + '</div></div>';
     });
@@ -806,10 +844,26 @@
       + '<div class="cmt-new-form">'
       + '<div class="cmt-inp-row">'
       + '<input class="cmt-inp-name" id="cfn-' + vid + '" placeholder="名前" value="' + la + '">'
-      + '<button class="cmt-send-btn" onclick="submitCmt(\'' + vid + '\')">コメント</button></div>'
-      + '<textarea class="cmt-inp-text" id="cft-' + vid + '" placeholder="コメントを入力（例: 3:50 のプレスが良かった）" rows="2"></textarea>'
+      + '<button class="cmt-send-btn" id="csend-' + vid + '" onclick="submitCmt(\'' + vid + '\')">コメント</button></div>'
+      + _tsRow('cfm-' + vid, 'cfs-' + vid)
+      + '<textarea class="cmt-inp-text" id="cft-' + vid + '" placeholder="コメントを入力" rows="2"></textarea>'
       + '</div>';
-    panel.innerHTML = h;
+    return h;
+  }
+
+  async function renderCmtPanel(vid) {
+    var panel = document.getElementById('cmt-panel-' + vid);
+    if (!panel) return;
+    panel.innerHTML = '<p class="cmt-empty">読み込み中…</p>';
+    try {
+      var res = await fetch(GAS_URL + '?action=comments&videoId=' + vid);
+      var cmts = await res.json();
+      _cmtCache[vid] = cmts;
+      updateCmtCount(vid);
+      panel.innerHTML = _buildPanelHtml(vid, cmts);
+    } catch(e) {
+      panel.innerHTML = '<p class="cmt-empty">読み込みエラー。リロードしてください。</p>';
+    }
   }
 
   function toggleCmtPanel(vid) {
@@ -827,47 +881,62 @@
     if (rf) rf.style.display = rf.style.display === 'none' ? 'block' : 'none';
   }
 
-  function submitCmt(vid) {
+  async function submitCmt(vid) {
     var name = document.getElementById('cfn-' + vid).value.trim();
     var text = document.getElementById('cft-' + vid).value.trim();
     if (!name || !text) { alert('名前とコメントを入力してください'); return; }
-    var d = _getCmts();
-    if (!d[vid]) d[vid] = [];
-    d[vid].push({ id: String(Date.now()), author: name, text: text, ts: Date.now(), replies: [] });
-    _saveCmts(d);
-    localStorage.setItem('reborn_cmt_name', name);
-    updateCmtCount(vid);
-    renderCmtPanel(vid);
-  }
-
-  function submitReply(vid, cid) {
-    var name = document.getElementById('rfn-' + vid + '-' + cid).value.trim();
-    var text = document.getElementById('rft-' + vid + '-' + cid).value.trim();
-    if (!name || !text) { alert('名前と返信を入力してください'); return; }
-    var d = _getCmts();
-    var cmt = (d[vid] || []).find(function(c) { return c.id === cid; });
-    if (!cmt) return;
-    if (!cmt.replies) cmt.replies = [];
-    cmt.replies.push({ id: String(Date.now()), author: name, text: text, ts: Date.now() });
-    _saveCmts(d);
-    localStorage.setItem('reborn_cmt_name', name);
-    updateCmtCount(vid);
-    renderCmtPanel(vid);
-  }
-
-  function delCmt(vid, cid, rid) {
-    if (!confirm('削除しますか？')) return;
-    var d = _getCmts();
-    if (!d[vid]) return;
-    if (rid === null) {
-      d[vid] = d[vid].filter(function(c) { return c.id !== cid; });
-    } else {
-      var cmt = d[vid].find(function(c) { return c.id === cid; });
-      if (cmt && cmt.replies) cmt.replies = cmt.replies.filter(function(r) { return r.id !== rid; });
+    var st  = _readTs('cfm-' + vid, 'cfs-' + vid);
+    var cmt = { id: String(Date.now()), author: name, text: text, startTime: st, ts: Date.now(), replies: [] };
+    var btn = document.getElementById('csend-' + vid);
+    if (btn) { btn.textContent = '送信中…'; btn.disabled = true; }
+    try {
+      await fetch(GAS_URL, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'addComment', videoId: vid, comment: cmt })
+      });
+      localStorage.setItem('reborn_cmt_name', name);
+      await renderCmtPanel(vid);
+    } catch(e) {
+      alert('送信エラー。しばらくしてから再試行してください。');
+      if (btn) { btn.textContent = 'コメント'; btn.disabled = false; }
     }
-    _saveCmts(d);
-    updateCmtCount(vid);
-    renderCmtPanel(vid);
+  }
+
+  async function submitReply(vid, cid) {
+    var name  = document.getElementById('rfn-' + vid + '-' + cid).value.trim();
+    var text  = document.getElementById('rft-' + vid + '-' + cid).value.trim();
+    if (!name || !text) { alert('名前と返信を入力してください'); return; }
+    var st    = _readTs('rfm-' + vid + '-' + cid, 'rfs-' + vid + '-' + cid);
+    var reply = { id: String(Date.now()), author: name, text: text, startTime: st, ts: Date.now() };
+    var btn   = document.getElementById('rfsend-' + vid + '-' + cid);
+    if (btn) { btn.textContent = '送信中…'; btn.disabled = true; }
+    try {
+      await fetch(GAS_URL, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'addReply', videoId: vid, commentId: cid, reply: reply })
+      });
+      localStorage.setItem('reborn_cmt_name', name);
+      await renderCmtPanel(vid);
+    } catch(e) {
+      alert('送信エラー。しばらくしてから再試行してください。');
+      if (btn) { btn.textContent = '送信'; btn.disabled = false; }
+    }
+  }
+
+  async function delCmt(vid, cid, rid) {
+    if (!confirm('削除しますか？')) return;
+    var payload = (rid === null)
+      ? { action: 'deleteComment', videoId: vid, commentId: cid }
+      : { action: 'deleteReply',   videoId: vid, commentId: cid, replyId: rid };
+    try {
+      await fetch(GAS_URL, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      await renderCmtPanel(vid);
+    } catch(e) {
+      alert('削除エラー。しばらくしてから再試行してください。');
+    }
   }
 
   function updateCmtCount(vid) {
@@ -889,6 +958,7 @@
   }
 
   renderVideos();
+  loadAllComments();
 </script>
 
 <!-- タイムスタンプ再生モーダル -->
