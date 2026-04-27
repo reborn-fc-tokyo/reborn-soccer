@@ -376,6 +376,18 @@
     border-radius: 6px; padding: 4px 12px; cursor: pointer; margin-top: 5px;
   }
   .ts-play-btn:hover { background: var(--blue-light); color: #fff; border-color: var(--blue-light); }
+  .cmt-edit-btn {
+    background: none; border: none; color: #ccc;
+    font-size: 11px; cursor: pointer; padding: 2px 5px; border-radius: 4px;
+  }
+  .cmt-edit-btn:hover { color: var(--blue-light); background: #e8f0fa; }
+  .cmt-edit-form { margin-top: 4px; }
+  .cmt-form-footer {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: 6px; flex-wrap: wrap; gap: 6px;
+  }
+  .cmt-form-footer .cmt-ts-row { margin-bottom: 0; }
+  .cmt-form-actions { display: flex; align-items: center; gap: 6px; margin-left: auto; }
   .ts-modal {
     display: none; position: fixed; inset: 0;
     background: rgba(0,0,0,0.72); z-index: 2000;
@@ -759,12 +771,34 @@
   // ── Comment System (Cloudflare Worker — 全員共有) ───────────
   var _cmtCache = {};
 
+  function _getPanelState(vid) {
+    try { return (JSON.parse(localStorage.getItem('reborn_panel_st') || '{}'))[vid] || null; } catch(e) { return null; }
+  }
+  function _setPanelState(vid, state) {
+    try {
+      var s = JSON.parse(localStorage.getItem('reborn_panel_st') || '{}');
+      s[vid] = state; localStorage.setItem('reborn_panel_st', JSON.stringify(s));
+    } catch(e) {}
+  }
+
   async function loadAllComments() {
     try {
       var res = await fetch(GAS_URL + '?action=comments');
       var all = await res.json();
       _cmtCache = all || {};
-      Object.keys(_cmtCache).forEach(function(vid) { updateCmtCount(vid); });
+      Object.keys(_cmtCache).forEach(function(vid) {
+        updateCmtCount(vid);
+        // コメントがあり「明示的に閉じた」以外なら自動展開
+        if (countComments(vid) > 0 && _getPanelState(vid) !== 'closed') {
+          var panel = document.getElementById('cmt-panel-' + vid);
+          var btn   = document.getElementById('cmt-btn-' + vid);
+          if (panel && panel.style.display === 'none') {
+            panel.style.display = 'block';
+            if (btn) btn.classList.add('panel-open');
+            renderCmtPanel(vid);
+          }
+        }
+      });
     } catch(e) {}
   }
 
@@ -815,40 +849,104 @@
     var h = '<div class="cmt-list">';
     if (!cmts || cmts.length === 0) h += '<p class="cmt-empty">まだコメントがありません</p>';
     (cmts || []).forEach(function(c) {
-      h += '<div class="cmt-item">'
-        + '<div class="cmt-head"><span class="cmt-author">' + _esc(c.author) + '</span>'
+      h += '<div class="cmt-item" id="ci-' + vid + '-' + c.id + '">'
+        + '<div class="cmt-head">'
+        + '<span class="cmt-author">' + _esc(c.author) + '</span>'
         + '<span class="cmt-date">' + _fmtCmtDate(c.ts) + '</span>'
-        + '<button class="cmt-del-btn" onclick="delCmt(\'' + vid + '\',\'' + c.id + '\',null)" title="削除">✕</button></div>'
+        + '<button class="cmt-edit-btn" onclick="editCmt(\'' + vid + '\',\'' + c.id + '\',null)">編集</button>'
+        + '<button class="cmt-del-btn" onclick="delCmt(\'' + vid + '\',\'' + c.id + '\',null)" title="削除">✕</button>'
+        + '</div>'
+        + '<div id="cib-' + vid + '-' + c.id + '">'
         + '<div class="cmt-body">' + _esc(c.text) + '</div>'
-        + _tsPlayBtn(vid, c.startTime);
+        + _tsPlayBtn(vid, c.startTime)
+        + '</div>';
       (c.replies || []).forEach(function(r) {
-        h += '<div class="cmt-reply">'
-          + '<div class="cmt-head"><span class="cmt-author">' + _esc(r.author) + '</span>'
+        h += '<div class="cmt-reply" id="cr-' + vid + '-' + c.id + '-' + r.id + '">'
+          + '<div class="cmt-head">'
+          + '<span class="cmt-author">' + _esc(r.author) + '</span>'
           + '<span class="cmt-date">' + _fmtCmtDate(r.ts) + '</span>'
-          + '<button class="cmt-del-btn" onclick="delCmt(\'' + vid + '\',\'' + c.id + '\',\'' + r.id + '\')" title="削除">✕</button></div>'
+          + '<button class="cmt-edit-btn" onclick="editCmt(\'' + vid + '\',\'' + c.id + '\',\'' + r.id + '\')">編集</button>'
+          + '<button class="cmt-del-btn" onclick="delCmt(\'' + vid + '\',\'' + c.id + '\',\'' + r.id + '\')" title="削除">✕</button>'
+          + '</div>'
+          + '<div id="crb-' + vid + '-' + c.id + '-' + r.id + '">'
           + '<div class="cmt-body">' + _esc(r.text) + '</div>'
           + _tsPlayBtn(vid, r.startTime)
-          + '</div>';
+          + '</div></div>';
       });
       h += '<button class="cmt-reply-btn" onclick="toggleRF(\'' + vid + '\',\'' + c.id + '\')">↩ 返信</button>'
         + '<div id="rf-' + vid + '-' + c.id + '" class="reply-form" style="display:none;">'
-        + '<div class="cmt-inp-row">'
+        + '<textarea class="cmt-inp-text" id="rft-' + vid + '-' + c.id + '" placeholder="返信…" rows="2"></textarea>'
+        + '<div class="cmt-form-footer">'
+        + _tsRow('rfm-' + vid + '-' + c.id, 'rfs-' + vid + '-' + c.id)
+        + '<div class="cmt-form-actions">'
         + '<input class="cmt-inp-name" id="rfn-' + vid + '-' + c.id + '" placeholder="名前" value="' + la + '">'
         + '<button class="cmt-send-btn" id="rfsend-' + vid + '-' + c.id + '" onclick="submitReply(\'' + vid + '\',\'' + c.id + '\')">送信</button>'
-        + '<button class="cmt-cancel-btn" onclick="toggleRF(\'' + vid + '\',\'' + c.id + '\')">×</button></div>'
-        + _tsRow('rfm-' + vid + '-' + c.id, 'rfs-' + vid + '-' + c.id)
-        + '<textarea class="cmt-inp-text" id="rft-' + vid + '-' + c.id + '" placeholder="返信…" rows="2"></textarea>'
-        + '</div></div>';
+        + '<button class="cmt-cancel-btn" onclick="toggleRF(\'' + vid + '\',\'' + c.id + '\')">×</button>'
+        + '</div></div></div></div>';
     });
     h += '</div>'
       + '<div class="cmt-new-form">'
-      + '<div class="cmt-inp-row">'
-      + '<input class="cmt-inp-name" id="cfn-' + vid + '" placeholder="名前" value="' + la + '">'
-      + '<button class="cmt-send-btn" id="csend-' + vid + '" onclick="submitCmt(\'' + vid + '\')">コメント</button></div>'
-      + _tsRow('cfm-' + vid, 'cfs-' + vid)
       + '<textarea class="cmt-inp-text" id="cft-' + vid + '" placeholder="コメントを入力" rows="2"></textarea>'
-      + '</div>';
+      + '<div class="cmt-form-footer">'
+      + _tsRow('cfm-' + vid, 'cfs-' + vid)
+      + '<div class="cmt-form-actions">'
+      + '<input class="cmt-inp-name" id="cfn-' + vid + '" placeholder="名前" value="' + la + '">'
+      + '<button class="cmt-send-btn" id="csend-' + vid + '" onclick="submitCmt(\'' + vid + '\')">コメント</button>'
+      + '</div></div></div>';
     return h;
+  }
+
+  function editCmt(vid, cid, rid) {
+    var cmts = _cmtCache[vid] || [];
+    var cmt = cmts.find(function(c) { return c.id === cid; });
+    if (!cmt) return;
+    var isReply = (rid !== null && rid !== undefined);
+    var bodyId = isReply ? 'crb-' + vid + '-' + cid + '-' + rid : 'cib-' + vid + '-' + cid;
+    var editId = isReply ? 'ef-' + vid + '-' + cid + '-' + rid  : 'ef-' + vid + '-' + cid;
+    var bodyEl = document.getElementById(bodyId);
+    if (!bodyEl) return;
+    var currentText, currentSt;
+    if (isReply) {
+      var reply = (cmt.replies || []).find(function(r) { return r.id === rid; });
+      if (!reply) return;
+      currentText = reply.text; currentSt = reply.startTime;
+    } else {
+      currentText = cmt.text; currentSt = cmt.startTime;
+    }
+    var ridParam = isReply ? '\'' + rid + '\'' : 'null';
+    bodyEl.innerHTML = '<div class="cmt-edit-form">'
+      + '<textarea class="cmt-inp-text" id="' + editId + '-t" rows="2">' + _esc(currentText) + '</textarea>'
+      + '<div class="cmt-form-footer">'
+      + _tsRow(editId + '-m', editId + '-s')
+      + '<div class="cmt-form-actions">'
+      + '<button class="cmt-send-btn" onclick="saveCmtEdit(\'' + vid + '\',\'' + cid + '\',' + ridParam + ',\'' + editId + '\')">保存</button>'
+      + '<button class="cmt-cancel-btn" onclick="renderCmtPanel(\'' + vid + '\')">キャンセル</button>'
+      + '</div></div></div>';
+    var minEl = document.getElementById(editId + '-m');
+    var secEl = document.getElementById(editId + '-s');
+    if (currentSt && minEl && currentSt.min != null) minEl.value = currentSt.min;
+    if (currentSt && secEl && currentSt.sec != null) secEl.value = currentSt.sec;
+  }
+
+  async function saveCmtEdit(vid, cid, rid, editId) {
+    var textEl = document.getElementById(editId + '-t');
+    if (!textEl) return;
+    var text = textEl.value.trim();
+    if (!text) { alert('コメントを入力してください'); return; }
+    var st = _readTs(editId + '-m', editId + '-s');
+    var isReply = (rid !== null && rid !== undefined);
+    var payload = isReply
+      ? { action: 'editReply',   videoId: vid, commentId: cid, replyId: rid, text: text, startTime: st }
+      : { action: 'editComment', videoId: vid, commentId: cid, text: text, startTime: st };
+    try {
+      await fetch(GAS_URL, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      await renderCmtPanel(vid);
+    } catch(e) {
+      alert('保存エラー。しばらくしてから再試行してください。');
+    }
   }
 
   async function renderCmtPanel(vid) {
@@ -873,6 +971,7 @@
     var open = panel.style.display !== 'none';
     panel.style.display = open ? 'none' : 'block';
     if (btn) btn.classList.toggle('panel-open', !open);
+    _setPanelState(vid, open ? 'closed' : 'open');
     if (!open) renderCmtPanel(vid);
   }
 
