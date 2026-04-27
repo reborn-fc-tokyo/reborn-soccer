@@ -296,6 +296,96 @@
     .vc-thumb { width: 90px; }
   }
 
+  /* ─── コメント & タイムスタンプ再生 ─── */
+  .vc-wrapper { margin-bottom: 10px; }
+  .vc-wrapper .video-card { margin-bottom: 0; border-radius: 12px 12px 0 0; }
+  .vc-cmt-btn {
+    width: 100%; padding: 7px 14px; background: #fff;
+    border: 1.5px solid #e2e8f5; border-top: none; border-radius: 0 0 10px 10px;
+    font-size: 12px; font-weight: 700; color: var(--blue-light);
+    cursor: pointer; text-align: left; display: flex; align-items: center; gap: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06); transition: background 0.13s;
+  }
+  .vc-cmt-btn:hover { background: #eef3ff; }
+  .vc-cmt-btn.panel-open { border-radius: 0; box-shadow: none; }
+  .cmt-panel {
+    background: #f8faff; border: 1.5px solid #e2e8f5; border-top: none;
+    border-radius: 0 0 10px 10px; padding: 14px 16px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+  }
+  .cmt-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 12px; }
+  .cmt-item { background: #fff; border-radius: 9px; padding: 10px 12px; border: 1px solid #e0eaf8; }
+  .cmt-reply {
+    background: #eef5ff; border-radius: 7px;
+    padding: 8px 10px; margin: 6px 0 0 12px;
+    border-left: 3px solid var(--blue-light);
+  }
+  .cmt-head { display: flex; align-items: center; gap: 7px; margin-bottom: 4px; }
+  .cmt-author { font-size: 12px; font-weight: 800; color: var(--blue); }
+  .cmt-date { font-size: 11px; color: #aaa; flex: 1; }
+  .cmt-del-btn {
+    background: none; border: none; color: #ccc;
+    font-size: 11px; cursor: pointer; padding: 2px 5px; border-radius: 4px;
+  }
+  .cmt-del-btn:hover { color: #e63a2a; background: #fff0f0; }
+  .cmt-body { font-size: 13px; color: #334155; line-height: 1.65; word-break: break-word; }
+  .cmt-empty { font-size: 12px; color: #bbb; text-align: center; padding: 6px 0; margin: 0; }
+  .cmt-reply-btn {
+    background: none; border: none; font-size: 11px;
+    color: var(--blue-light); cursor: pointer; margin-top: 6px; font-weight: 700; padding: 0;
+  }
+  .cmt-reply-btn:hover { text-decoration: underline; }
+  .reply-form { margin-top: 8px; }
+  .cmt-new-form { border-top: 1px solid #dde6f5; padding-top: 12px; margin-top: 4px; }
+  .cmt-inp-row { display: flex; gap: 6px; margin-bottom: 6px; align-items: center; }
+  .cmt-inp-name {
+    border: 1.5px solid #ddd; border-radius: 6px;
+    padding: 5px 8px; font-size: 12px; width: 110px; outline: none; font-family: inherit;
+  }
+  .cmt-inp-name:focus { border-color: var(--blue-light); }
+  .cmt-inp-text {
+    width: 100%; border: 1.5px solid #ddd; border-radius: 6px;
+    padding: 6px 8px; font-size: 12px; resize: vertical;
+    font-family: inherit; outline: none; display: block; box-sizing: border-box;
+  }
+  .cmt-inp-text:focus { border-color: var(--blue-light); }
+  .cmt-send-btn {
+    background: var(--blue-light); color: #fff; border: none;
+    border-radius: 6px; padding: 5px 14px; font-size: 12px; font-weight: 800; cursor: pointer;
+  }
+  .cmt-send-btn:hover { background: var(--blue); }
+  .cmt-cancel-btn {
+    background: #f0f0f0; color: #666; border: none;
+    border-radius: 6px; padding: 5px 10px; font-size: 12px; font-weight: 700; cursor: pointer;
+  }
+  .ts-link {
+    color: var(--blue-light); font-weight: 700; text-decoration: none;
+    background: #ddeeff; padding: 1px 6px; border-radius: 4px; font-size: 11px;
+  }
+  .ts-link:hover { background: var(--blue-light); color: #fff; }
+  .ts-modal {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.72); z-index: 2000;
+    align-items: center; justify-content: center;
+  }
+  .ts-modal.open { display: flex; }
+  .ts-modal-inner {
+    background: #fff; border-radius: 14px; padding: 16px;
+    max-width: 580px; width: 92%; box-shadow: 0 8px 40px rgba(0,0,0,0.3);
+  }
+  .ts-modal-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+  .ts-modal-title { font-size: 14px; font-weight: 800; color: #1a4b7a; }
+  .ts-modal-close {
+    background: #f0f0f0; border: none; border-radius: 6px;
+    padding: 4px 10px; font-size: 14px; cursor: pointer; color: #555;
+  }
+  .ts-modal-close:hover { background: #e0e0e0; }
+  .ts-video-wrap {
+    position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;
+    border-radius: 8px; background: #000;
+  }
+  .ts-video-wrap iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+
   footer { text-align: center; padding: 22px; font-size: 11px; color: #999; border-top: 1px solid #ddd; }
 
   @media (max-width: 480px) {
@@ -625,21 +715,27 @@
         return;
       }
       el.innerHTML = list.map(v => `
-        <div class="video-card">
-          <a class="vc-thumb" href="${v.url}" target="_blank" rel="noopener">
-            <img src="https://img.youtube.com/vi/${v.videoId}/mqdefault.jpg" alt="${v.opponent}" loading="lazy">
-            <div class="play-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        <div class="vc-wrapper">
+          <div class="video-card">
+            <a class="vc-thumb" href="${v.url}" target="_blank" rel="noopener">
+              <img src="https://img.youtube.com/vi/${v.videoId}/mqdefault.jpg" alt="${v.opponent}" loading="lazy">
+              <div class="play-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+            </a>
+            <div class="vc-body">
+              <div class="vc-meta">${formatDate(v.date)} ／ ${v.num}</div>
+              <div class="vc-title">vs ${v.opponent}</div>
+              <a class="vc-link" href="${v.url}" target="_blank" rel="noopener">YouTube で見る ↗</a>
             </div>
-          </a>
-          <div class="vc-body">
-            <div class="vc-meta">${formatDate(v.date)} ／ ${v.num}</div>
-            <div class="vc-title">vs ${v.opponent}</div>
-            <a class="vc-link" href="${v.url}" target="_blank" rel="noopener">YouTube で見る ↗</a>
+            <button class="vc-del" onclick="deleteVideo(${v.id})" title="削除">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+            </button>
           </div>
-          <button class="vc-del" onclick="deleteVideo(${v.id})" title="削除">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+          <button class="vc-cmt-btn" id="cmt-btn-${v.videoId}" onclick="toggleCmtPanel('${v.videoId}')">
+            💬 コメント <span id="cmt-count-${v.videoId}">${countComments(v.videoId)}</span>件
           </button>
+          <div class="cmt-panel" id="cmt-panel-${v.videoId}" style="display:none;"></div>
         </div>
       `).join('');
     } catch(e) {
@@ -647,8 +743,166 @@
     }
   }
 
+  // ── Comment System (localStorage) ────────────────────────
+  function _getCmts() {
+    try { return JSON.parse(localStorage.getItem('reborn_video_cmts') || '{}'); } catch(e) { return {}; }
+  }
+  function _saveCmts(d) { localStorage.setItem('reborn_video_cmts', JSON.stringify(d)); }
+
+  function countComments(vid) {
+    return (_getCmts()[vid] || []).reduce((n, c) => n + 1 + (c.replies ? c.replies.length : 0), 0);
+  }
+
+  function _esc(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function _linkTs(text, vid) {
+    return _esc(text).replace(/(\d{1,2}):(\d{2})(?::(\d{2}))?/g, function(m, a, b, c) {
+      var sec = (c !== undefined)
+        ? parseInt(a)*3600 + parseInt(b)*60 + parseInt(c)
+        : parseInt(a)*60 + parseInt(b);
+      return '<a class="ts-link" href="#" onclick="openTsModal(\'' + vid + '\',' + sec + ',\'' + m + '\');return false;">▶ ' + m + '</a>';
+    });
+  }
+
+  function _fmtCmtDate(ts) {
+    var d = new Date(ts);
+    return (d.getMonth()+1) + '/' + d.getDate();
+  }
+
+  function _lastAuthor() { return localStorage.getItem('reborn_cmt_name') || ''; }
+
+  function renderCmtPanel(vid) {
+    var panel = document.getElementById('cmt-panel-' + vid);
+    if (!panel) return;
+    var cmts = _getCmts()[vid] || [];
+    var la = _esc(_lastAuthor());
+    var h = '<div class="cmt-list">';
+    if (cmts.length === 0) h += '<p class="cmt-empty">まだコメントがありません</p>';
+    cmts.forEach(function(c) {
+      h += '<div class="cmt-item">'
+        + '<div class="cmt-head"><span class="cmt-author">' + _esc(c.author) + '</span>'
+        + '<span class="cmt-date">' + _fmtCmtDate(c.ts) + '</span>'
+        + '<button class="cmt-del-btn" onclick="delCmt(\'' + vid + '\',\'' + c.id + '\',null)" title="削除">✕</button></div>'
+        + '<div class="cmt-body">' + _linkTs(c.text, vid) + '</div>';
+      (c.replies || []).forEach(function(r) {
+        h += '<div class="cmt-reply">'
+          + '<div class="cmt-head"><span class="cmt-author">' + _esc(r.author) + '</span>'
+          + '<span class="cmt-date">' + _fmtCmtDate(r.ts) + '</span>'
+          + '<button class="cmt-del-btn" onclick="delCmt(\'' + vid + '\',\'' + c.id + '\',\'' + r.id + '\')" title="削除">✕</button></div>'
+          + '<div class="cmt-body">' + _linkTs(r.text, vid) + '</div></div>';
+      });
+      h += '<button class="cmt-reply-btn" onclick="toggleRF(\'' + vid + '\',\'' + c.id + '\')">↩ 返信</button>'
+        + '<div id="rf-' + vid + '-' + c.id + '" class="reply-form" style="display:none;">'
+        + '<div class="cmt-inp-row">'
+        + '<input class="cmt-inp-name" id="rfn-' + vid + '-' + c.id + '" placeholder="名前" value="' + la + '">'
+        + '<button class="cmt-send-btn" onclick="submitReply(\'' + vid + '\',\'' + c.id + '\')">送信</button>'
+        + '<button class="cmt-cancel-btn" onclick="toggleRF(\'' + vid + '\',\'' + c.id + '\')">×</button></div>'
+        + '<textarea class="cmt-inp-text" id="rft-' + vid + '-' + c.id + '" placeholder="返信…" rows="2"></textarea>'
+        + '</div></div>';
+    });
+    h += '</div>'
+      + '<div class="cmt-new-form">'
+      + '<div class="cmt-inp-row">'
+      + '<input class="cmt-inp-name" id="cfn-' + vid + '" placeholder="名前" value="' + la + '">'
+      + '<button class="cmt-send-btn" onclick="submitCmt(\'' + vid + '\')">コメント</button></div>'
+      + '<textarea class="cmt-inp-text" id="cft-' + vid + '" placeholder="コメントを入力（例: 3:50 のプレスが良かった）" rows="2"></textarea>'
+      + '</div>';
+    panel.innerHTML = h;
+  }
+
+  function toggleCmtPanel(vid) {
+    var panel = document.getElementById('cmt-panel-' + vid);
+    var btn   = document.getElementById('cmt-btn-' + vid);
+    if (!panel) return;
+    var open = panel.style.display !== 'none';
+    panel.style.display = open ? 'none' : 'block';
+    if (btn) btn.classList.toggle('panel-open', !open);
+    if (!open) renderCmtPanel(vid);
+  }
+
+  function toggleRF(vid, cid) {
+    var rf = document.getElementById('rf-' + vid + '-' + cid);
+    if (rf) rf.style.display = rf.style.display === 'none' ? 'block' : 'none';
+  }
+
+  function submitCmt(vid) {
+    var name = document.getElementById('cfn-' + vid).value.trim();
+    var text = document.getElementById('cft-' + vid).value.trim();
+    if (!name || !text) { alert('名前とコメントを入力してください'); return; }
+    var d = _getCmts();
+    if (!d[vid]) d[vid] = [];
+    d[vid].push({ id: String(Date.now()), author: name, text: text, ts: Date.now(), replies: [] });
+    _saveCmts(d);
+    localStorage.setItem('reborn_cmt_name', name);
+    updateCmtCount(vid);
+    renderCmtPanel(vid);
+  }
+
+  function submitReply(vid, cid) {
+    var name = document.getElementById('rfn-' + vid + '-' + cid).value.trim();
+    var text = document.getElementById('rft-' + vid + '-' + cid).value.trim();
+    if (!name || !text) { alert('名前と返信を入力してください'); return; }
+    var d = _getCmts();
+    var cmt = (d[vid] || []).find(function(c) { return c.id === cid; });
+    if (!cmt) return;
+    if (!cmt.replies) cmt.replies = [];
+    cmt.replies.push({ id: String(Date.now()), author: name, text: text, ts: Date.now() });
+    _saveCmts(d);
+    localStorage.setItem('reborn_cmt_name', name);
+    updateCmtCount(vid);
+    renderCmtPanel(vid);
+  }
+
+  function delCmt(vid, cid, rid) {
+    if (!confirm('削除しますか？')) return;
+    var d = _getCmts();
+    if (!d[vid]) return;
+    if (rid === null) {
+      d[vid] = d[vid].filter(function(c) { return c.id !== cid; });
+    } else {
+      var cmt = d[vid].find(function(c) { return c.id === cid; });
+      if (cmt && cmt.replies) cmt.replies = cmt.replies.filter(function(r) { return r.id !== rid; });
+    }
+    _saveCmts(d);
+    updateCmtCount(vid);
+    renderCmtPanel(vid);
+  }
+
+  function updateCmtCount(vid) {
+    var el = document.getElementById('cmt-count-' + vid);
+    if (el) el.textContent = countComments(vid);
+  }
+
+  // ── Timestamp Modal ──────────────────────────────────────
+  function openTsModal(videoId, seconds, label) {
+    document.getElementById('tsModalTitle').textContent = '▶ ' + label + ' から再生';
+    document.getElementById('tsIframe').src =
+      'https://www.youtube.com/embed/' + videoId + '?start=' + seconds + '&autoplay=1&rel=0';
+    document.getElementById('tsModal').classList.add('open');
+  }
+
+  function closeTsModal() {
+    document.getElementById('tsModal').classList.remove('open');
+    document.getElementById('tsIframe').src = '';
+  }
+
   renderVideos();
 </script>
+
+<!-- タイムスタンプ再生モーダル -->
+<div class="ts-modal" id="tsModal" onclick="if(event.target===this)closeTsModal()">
+  <div class="ts-modal-inner">
+    <div class="ts-modal-head">
+      <span class="ts-modal-title" id="tsModalTitle">動画再生</span>
+      <button class="ts-modal-close" onclick="closeTsModal()">✕ 閉じる</button>
+    </div>
+    <div class="ts-video-wrap">
+      <iframe id="tsIframe" allowfullscreen></iframe>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>
