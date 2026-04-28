@@ -622,6 +622,20 @@
     </div>
   </div>
 
+  <div class="cmt-notice" style="margin-bottom:14px;">
+    <div class="cmt-notice-title">💬 動画コメントについて</div>
+    チームで共有している戦術・約束事をベースに、気になった場面があったらどんどん書いてください。みんなの目線が監督の判断材料になります。
+    ひとつだけお願いがあります。<strong>「こう見えた」を書いてください。「こう変えよう」は書かないでください。</strong>
+    <div class="cmt-notice-ok">👍 こんなコメントが嬉しい</div>
+    <ul>
+      <li>「3:50、約束のハイプレスが遅れていた」</li>
+      <li>「あの場面、自分のポジションがずれていたと思う」</li>
+      <li>「この連携、めちゃくちゃ良かった！」</li>
+    </ul>
+    <div class="cmt-notice-ng">🙏 こちらは監督に直接どうぞ</div>
+    <ul><li>フォーメーションや戦術の変更提案</li></ul>
+  </div>
+
   <button class="video-add-btn" onclick="toggleForm()">
     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
     動画を追加
@@ -852,23 +866,9 @@
     return { min: (mv !== '' ? parseInt(mv) : 0), sec: (sv !== '' ? parseInt(sv) : 0) };
   }
 
-  var CMT_NOTICE = '<div class="cmt-notice">'
-    + '<div class="cmt-notice-title">💬 動画コメントについて</div>'
-    + 'チームで共有している戦術・約束事をベースに、気になった場面があったらどんどん書いてください。みんなの目線が監督の判断材料になります。'
-    + 'ひとつだけお願いがあります。<strong>「こう見えた」を書いてください。「こう変えよう」は書かないでください。</strong>'
-    + '<div class="cmt-notice-ok">👍 こんなコメントが嬉しい</div>'
-    + '<ul>'
-    + '<li>「3:50、約束のハイプレスが遅れていた」</li>'
-    + '<li>「あの場面、自分のポジションがずれていたと思う」</li>'
-    + '<li>「この連携、めちゃくちゃ良かった！」</li>'
-    + '</ul>'
-    + '<div class="cmt-notice-ng">🙏 こちらは監督に直接どうぞ</div>'
-    + '<ul><li>フォーメーションや戦術の変更提案</li></ul>'
-    + '</div>';
-
   function _buildPanelHtml(vid, cmts) {
     var la = _esc(_lastAuthor());
-    var h = CMT_NOTICE + '<div class="cmt-list">';
+    var h = '<div class="cmt-list">';
     if (!cmts || cmts.length === 0) h += '<p class="cmt-empty">まだコメントがありません</p>';
     (cmts || []).forEach(function(c) {
       h += '<div class="cmt-item" id="ci-' + vid + '-' + c.id + '">'
