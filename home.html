@@ -388,6 +388,14 @@
   }
   .cmt-form-footer .cmt-ts-row { margin-bottom: 0; }
   .cmt-form-actions { display: flex; align-items: center; gap: 6px; margin-left: auto; }
+  .cmt-notice {
+    background: #f0f5ff; border: 1px solid #c7d9f5; border-radius: 9px;
+    padding: 12px 14px; margin-bottom: 14px; font-size: 12px; color: #334155; line-height: 1.75;
+  }
+  .cmt-notice-title { font-weight: 800; color: #1a4b7a; margin-bottom: 6px; font-size: 13px; }
+  .cmt-notice-ok  { color: #166534; font-weight: 700; margin: 6px 0 2px; }
+  .cmt-notice-ng  { color: #9a3412; font-weight: 700; margin: 6px 0 2px; }
+  .cmt-notice ul  { padding-left: 16px; margin: 0; display: flex; flex-direction: column; gap: 2px; }
   .ts-modal {
     display: none; position: fixed; inset: 0;
     background: rgba(0,0,0,0.72); z-index: 2000;
@@ -844,9 +852,23 @@
     return { min: (mv !== '' ? parseInt(mv) : 0), sec: (sv !== '' ? parseInt(sv) : 0) };
   }
 
+  var CMT_NOTICE = '<div class="cmt-notice">'
+    + '<div class="cmt-notice-title">💬 動画コメントについて</div>'
+    + '試合を見て気になった場面があったら、どんどん書いてください。みんなの目線が監督の判断材料になります。'
+    + 'ひとつだけお願いがあります。<strong>「こう見えた」を書いてください。「こう変えよう」は書かないでください。</strong>'
+    + '<div class="cmt-notice-ok">👍 こんなコメントが嬉しい</div>'
+    + '<ul>'
+    + '<li>「3:50、約束のハイプレスが遅れていた」</li>'
+    + '<li>「あの場面、自分のポジションがずれていたと思う」</li>'
+    + '<li>「この連携、めちゃくちゃ良かった！」</li>'
+    + '</ul>'
+    + '<div class="cmt-notice-ng">🙏 こちらは監督に直接どうぞ</div>'
+    + '<ul><li>フォーメーションや戦術の変更提案</li></ul>'
+    + '</div>';
+
   function _buildPanelHtml(vid, cmts) {
     var la = _esc(_lastAuthor());
-    var h = '<div class="cmt-list">';
+    var h = CMT_NOTICE + '<div class="cmt-list">';
     if (!cmts || cmts.length === 0) h += '<p class="cmt-empty">まだコメントがありません</p>';
     (cmts || []).forEach(function(c) {
       h += '<div class="cmt-item" id="ci-' + vid + '-' + c.id + '">'
