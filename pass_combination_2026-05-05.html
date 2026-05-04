@@ -73,18 +73,31 @@
   .sn4 { background:#c2410c; }
   .sum-text { font-size:13px; font-weight:700; color:#1e3a5f; line-height:1.4; }
 
-  /* ─── 原則区切り ─── */
-  .prin-divider { display:flex; align-items:center; gap:10px; margin:32px 0 14px; }
-  .prin-divider .pd-line { flex:1; height:2px; border-radius:2px; }
-  .pd-line1 { background:linear-gradient(90deg,#dcfce7,#86efac); }
-  .pd-line2 { background:linear-gradient(90deg,#ccfbf1,#5eead4); }
-  .pd-line3 { background:linear-gradient(90deg,#ede9fe,#a78bfa); }
-  .pd-line4 { background:linear-gradient(90deg,#ffedd5,#fb923c); }
-  .prin-divider .pd-tag { font-size:10px; font-weight:800; letter-spacing:1.5px; padding:4px 14px; border-radius:20px; white-space:nowrap; }
-  .pt1 { background:#dcfce7; color:#166534; }
-  .pt2 { background:#ccfbf1; color:#0f766e; }
-  .pt3 { background:#ede9fe; color:#6d28d9; }
-  .pt4 { background:#ffedd5; color:#c2410c; }
+  /* ─── 原則区切り（カード形式） ─── */
+  .prin-divider {
+    display:flex; align-items:center; gap:16px;
+    margin:48px 0 18px; padding:14px 20px;
+    background:white; border-radius:14px;
+    box-shadow:0 3px 16px rgba(0,0,0,0.1);
+    border-left:6px solid;
+  }
+  .pd1 { border-left-color:#2471a3; }
+  .pd2 { border-left-color:#0d9488; }
+  .pd3 { border-left-color:#7c3aed; }
+  .pd4 { border-left-color:#c2410c; }
+  .pd-badge {
+    width:46px; height:46px; border-radius:12px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:22px; font-weight:900; color:white; flex-shrink:0;
+  }
+  .pd1 .pd-badge { background:#2471a3; }
+  .pd2 .pd-badge { background:#0d9488; }
+  .pd3 .pd-badge { background:#7c3aed; }
+  .pd4 .pd-badge { background:#c2410c; }
+  .pd-content { flex:1; }
+  .pd-sublabel { font-size:9px; font-weight:800; letter-spacing:2px; color:#94a3b8; margin-bottom:2px; }
+  .pd-main { font-size:16px; font-weight:900; color:#1e3a5f; margin-bottom:2px; }
+  .pd-sub { font-size:11px; color:#64748b; }
 
   @media (max-width:600px) {
     header { padding:22px 14px 18px; }
@@ -224,48 +237,53 @@
         <rect x="250" y="20" width="242" height="22" fill="rgba(26,107,58,0.7)"/>
         <text x="371" y="35" text-anchor="middle" fill="white" font-size="10" font-weight="800">✅ 幅と深さで影の外に出る</text>
 
-        <!-- ボール保持者（下） -->
-        <circle cx="371" cy="200" r="14" fill="#2471a3" stroke="white" stroke-width="2"/>
-        <text x="371" y="196" text-anchor="middle" fill="white" font-size="7" font-weight="bold">ボール</text>
-        <text x="371" y="206" text-anchor="middle" fill="white" font-size="7" font-weight="bold">保持</text>
-        <circle cx="359" cy="188" r="6" fill="#f5c518" stroke="white" stroke-width="1.5"/>
-
         <!-- 守備者1（左上） -->
-        <circle cx="335" cy="132" r="13" fill="#c0392b" stroke="white" stroke-width="1.5"/>
-        <text x="335" y="137" text-anchor="middle" fill="white" font-size="8" font-weight="bold">守</text>
-
+        <circle cx="335" cy="95" r="13" fill="#c0392b" stroke="white" stroke-width="1.5"/>
+        <text x="335" y="100" text-anchor="middle" fill="white" font-size="8" font-weight="bold">守</text>
         <!-- 守備者1の影（上） -->
-        <polygon points="322,120 348,120 340,52 306,52" fill="rgba(0,0,0,0.28)" stroke="rgba(255,100,100,0.35)" stroke-width="1" stroke-dasharray="4,3"/>
+        <polygon points="322,83 348,83 340,42 306,42" fill="rgba(0,0,0,0.28)" stroke="rgba(255,100,100,0.35)" stroke-width="1" stroke-dasharray="4,3"/>
 
         <!-- 守備者2（右上） -->
-        <circle cx="408" cy="125" r="13" fill="#c0392b" stroke="white" stroke-width="1.5"/>
-        <text x="408" y="130" text-anchor="middle" fill="white" font-size="8" font-weight="bold">守</text>
-
+        <circle cx="408" cy="88" r="13" fill="#c0392b" stroke="white" stroke-width="1.5"/>
+        <text x="408" y="93" text-anchor="middle" fill="white" font-size="8" font-weight="bold">守</text>
         <!-- 守備者2の影（上） -->
-        <polygon points="396,113 420,113 428,48 392,48" fill="rgba(0,0,0,0.28)" stroke="rgba(255,100,100,0.35)" stroke-width="1" stroke-dasharray="4,3"/>
+        <polygon points="396,76 420,76 428,38 392,38" fill="rgba(0,0,0,0.28)" stroke="rgba(255,100,100,0.35)" stroke-width="1" stroke-dasharray="4,3"/>
 
-        <!-- 味方1（左・幅で影の外） -->
-        <circle cx="270" cy="132" r="13" fill="#2471a3" stroke="#7fff7f" stroke-width="2.5"/>
-        <text x="270" y="137" text-anchor="middle" fill="white" font-size="9">○</text>
-        <text x="270" y="155" text-anchor="middle" fill="white" font-size="8" font-weight="bold">←幅</text>
-        <text x="258" y="122" fill="#7fff7f" font-size="14" font-weight="900">✓</text>
+        <!-- ボール保持者（中央） -->
+        <circle cx="371" cy="145" r="14" fill="#2471a3" stroke="white" stroke-width="2"/>
+        <text x="371" y="141" text-anchor="middle" fill="white" font-size="7" font-weight="bold">ボール</text>
+        <text x="371" y="151" text-anchor="middle" fill="white" font-size="7" font-weight="bold">保持</text>
+        <circle cx="359" cy="133" r="6" fill="#f5c518" stroke="white" stroke-width="1.5"/>
 
-        <!-- 味方2（前・深さで影の外） -->
-        <circle cx="371" cy="55" r="13" fill="#2471a3" stroke="#7fff7f" stroke-width="2.5"/>
-        <text x="371" y="60" text-anchor="middle" fill="white" font-size="9">○</text>
-        <text x="392" y="52" text-anchor="middle" fill="#7fff7f" font-size="8" font-weight="bold">深さ↑</text>
-        <text x="357" y="44" fill="#7fff7f" font-size="14" font-weight="900">✓</text>
+        <!-- 味方1（前・深さ↑・影の外） -->
+        <circle cx="371" cy="48" r="13" fill="#2471a3" stroke="#7fff7f" stroke-width="2.5"/>
+        <text x="371" y="53" text-anchor="middle" fill="white" font-size="9">○</text>
+        <text x="392" y="48" fill="#7fff7f" font-size="8" font-weight="bold">深さ↑</text>
+        <text x="356" y="38" fill="#7fff7f" font-size="13" font-weight="900">✓</text>
 
-        <!-- 味方3（右・幅で影の外） -->
-        <circle cx="468" cy="132" r="13" fill="#2471a3" stroke="#7fff7f" stroke-width="2.5"/>
-        <text x="468" y="137" text-anchor="middle" fill="white" font-size="9">○</text>
-        <text x="468" y="155" text-anchor="middle" fill="white" font-size="8" font-weight="bold">幅→</text>
-        <text x="483" y="122" fill="#7fff7f" font-size="14" font-weight="900">✓</text>
+        <!-- 味方2（左・幅←・影の外） -->
+        <circle cx="270" cy="145" r="13" fill="#2471a3" stroke="#7fff7f" stroke-width="2.5"/>
+        <text x="270" y="150" text-anchor="middle" fill="white" font-size="9">○</text>
+        <text x="268" y="167" text-anchor="middle" fill="white" font-size="8" font-weight="bold">←幅</text>
+        <text x="257" y="136" fill="#7fff7f" font-size="13" font-weight="900">✓</text>
+
+        <!-- 味方3（右・幅→・影の外） -->
+        <circle cx="468" cy="145" r="13" fill="#2471a3" stroke="#7fff7f" stroke-width="2.5"/>
+        <text x="468" y="150" text-anchor="middle" fill="white" font-size="9">○</text>
+        <text x="468" y="167" text-anchor="middle" fill="white" font-size="8" font-weight="bold">幅→</text>
+        <text x="483" y="136" fill="#7fff7f" font-size="13" font-weight="900">✓</text>
+
+        <!-- 味方4（後・深さ↓・影の外） -->
+        <circle cx="371" cy="225" r="13" fill="#2471a3" stroke="#7fff7f" stroke-width="2.5"/>
+        <text x="371" y="230" text-anchor="middle" fill="white" font-size="9">○</text>
+        <text x="392" y="228" fill="#7fff7f" font-size="8" font-weight="bold">深さ↓</text>
+        <text x="356" y="215" fill="#7fff7f" font-size="13" font-weight="900">✓</text>
 
         <!-- パスライン（通る） -->
-        <line x1="358" y1="188" x2="282" y2="143" stroke="#7fff7f" stroke-width="2" marker-end="url(#a0g)"/>
-        <line x1="362" y1="186" x2="366" y2="68" stroke="#7fff7f" stroke-width="2" marker-end="url(#a0g)"/>
-        <line x1="381" y1="190" x2="456" y2="143" stroke="#7fff7f" stroke-width="2" marker-end="url(#a0g)"/>
+        <line x1="362" y1="131" x2="367" y2="61" stroke="#7fff7f" stroke-width="2" marker-end="url(#a0g)"/>
+        <line x1="357" y1="140" x2="283" y2="145" stroke="#7fff7f" stroke-width="2" marker-end="url(#a0g)"/>
+        <line x1="385" y1="140" x2="455" y2="145" stroke="#7fff7f" stroke-width="2" marker-end="url(#a0g)"/>
+        <line x1="370" y1="159" x2="370" y2="212" stroke="#7fff7f" stroke-width="2" marker-end="url(#a0g)"/>
 
         <!-- 幅の矢印 -->
         <line x1="290" y1="245" x2="450" y2="245" stroke="white" stroke-width="1.5" marker-end="url(#a0g)"/>
@@ -302,10 +320,13 @@
     <p class="pitch-note">幅（左右）と深さ（前後）に広がると味方が影の外に出られ、パスが届くようになる。目安は10〜15m。</p>
   </div>
 
-  <div class="prin-divider">
-    <div class="pd-line pd-line1"></div>
-    <div class="pd-tag pt1">PRINCIPLE 01 ── 受け手</div>
-    <div class="pd-line pd-line1"></div>
+  <div class="prin-divider pd1">
+    <div class="pd-badge">01</div>
+    <div class="pd-content">
+      <div class="pd-sublabel">PRINCIPLE</div>
+      <div class="pd-main">受け手</div>
+      <div class="pd-sub">影の外に立ち、体を開いて受ける</div>
+    </div>
   </div>
 
   <!-- ─── 原則① ─── -->
@@ -420,10 +441,13 @@
     <p class="pitch-note">守備者の横・斜め後ろに立つだけでパスコースが生まれる。</p>
   </div>
 
-  <div class="prin-divider">
-    <div class="pd-line pd-line2"></div>
-    <div class="pd-tag pt2">PRINCIPLE 02 ── 出し手</div>
-    <div class="pd-line pd-line2"></div>
+  <div class="prin-divider pd2">
+    <div class="pd-badge">02</div>
+    <div class="pd-content">
+      <div class="pd-sublabel">PRINCIPLE</div>
+      <div class="pd-main">出し手</div>
+      <div class="pd-sub">出したら走る・空けた場所は隣が補填</div>
+    </div>
   </div>
 
   <!-- ─── 原則② ─── -->
@@ -528,10 +552,13 @@
     <p class="pitch-note">出し手がゾーンAを空けて前へ走る。ボールと無関係な右の選手がゾーンAを自動的に埋める。</p>
   </div>
 
-  <div class="prin-divider">
-    <div class="pd-line pd-line3"></div>
-    <div class="pd-tag pt3">PRINCIPLE 03 ── 第三の選手</div>
-    <div class="pd-line pd-line3"></div>
+  <div class="prin-divider pd3">
+    <div class="pd-badge">03</div>
+    <div class="pd-content">
+      <div class="pd-sublabel">PRINCIPLE</div>
+      <div class="pd-main">第三の選手</div>
+      <div class="pd-sub">受け手にボールが入る瞬間に45度で入る</div>
+    </div>
   </div>
 
   <!-- ─── 原則③ ─── -->
@@ -640,10 +667,13 @@
     <p class="pitch-note">第三の選手（③）は「ボールが動く瞬間」に動き出す。早すぎずそのタイミングが鍵。</p>
   </div>
 
-  <div class="prin-divider">
-    <div class="pd-line pd-line4"></div>
-    <div class="pd-tag pt4">PRINCIPLE 04 ── 受け手（②）</div>
-    <div class="pd-line pd-line4"></div>
+  <div class="prin-divider pd4">
+    <div class="pd-badge">04</div>
+    <div class="pd-content">
+      <div class="pd-sublabel">PRINCIPLE</div>
+      <div class="pd-main">受け手（②）</div>
+      <div class="pd-sub">受け手のタイミングで出す（こねない）</div>
+    </div>
   </div>
 
   <!-- ─── 原則④ ─── -->
@@ -689,34 +719,30 @@
         <text x="250" y="127" text-anchor="middle" fill="white" font-size="8" font-weight="bold">②</text>
         <circle cx="263" cy="107" r="6" fill="#f5c518" stroke="white" stroke-width="1.5"/>
 
-        <!-- ①前（最優先・太い緑矢印） -->
-        <line x1="250" y1="100" x2="250" y2="48" stroke="#7fff7f" stroke-width="5" marker-end="url(#a4g)"/>
-        <circle cx="250" cy="38" r="14" fill="#2471a3" stroke="#7fff7f" stroke-width="2.5"/>
-        <text x="250" y="43" text-anchor="middle" fill="white" font-size="10" font-weight="bold">③</text>
-        <rect x="258" y="60" width="62" height="26" fill="rgba(0,0,0,0.45)" rx="4"/>
-        <text x="289" y="71" text-anchor="middle" fill="#7fff7f" font-size="11" font-weight="900">①前</text>
-        <text x="289" y="82" text-anchor="middle" fill="#7fff7f" font-size="9">第一選択</text>
+        <!-- 前の受け手 -->
+        <line x1="250" y1="100" x2="250" y2="52" stroke="white" stroke-width="2.5" marker-end="url(#a4g)"/>
+        <circle cx="250" cy="42" r="13" fill="#2471a3" stroke="#7fff7f" stroke-width="2"/>
+        <text x="250" y="47" text-anchor="middle" fill="white" font-size="10">○</text>
 
-        <!-- ②横（中優先・黄色中矢印） -->
-        <line x1="268" y1="112" x2="380" y2="95" stroke="#ffe066" stroke-width="3" marker-end="url(#a4y)"/>
-        <circle cx="393" cy="90" r="13" fill="#2471a3" stroke="#ffe066" stroke-width="2"/>
-        <text x="393" y="95" text-anchor="middle" fill="white" font-size="10" font-weight="bold">○</text>
-        <rect x="395" y="105" width="62" height="26" fill="rgba(0,0,0,0.45)" rx="4"/>
-        <text x="426" y="116" text-anchor="middle" fill="#ffe066" font-size="11" font-weight="900">②横</text>
-        <text x="426" y="127" text-anchor="middle" fill="#ffe066" font-size="9">第二選択</text>
+        <!-- 右の受け手 -->
+        <line x1="268" y1="112" x2="380" y2="95" stroke="white" stroke-width="2.5" marker-end="url(#a4g)"/>
+        <circle cx="393" cy="90" r="13" fill="#2471a3" stroke="#7fff7f" stroke-width="2"/>
+        <text x="393" y="95" text-anchor="middle" fill="white" font-size="10">○</text>
 
-        <!-- ②横（逆サイド） -->
-        <line x1="232" y1="112" x2="120" y2="95" stroke="#ffe066" stroke-width="3" marker-end="url(#a4y)"/>
-        <circle cx="107" cy="90" r="13" fill="#2471a3" stroke="#ffe066" stroke-width="2"/>
-        <text x="107" y="95" text-anchor="middle" fill="white" font-size="10" font-weight="bold">○</text>
+        <!-- 左の受け手 -->
+        <line x1="232" y1="112" x2="120" y2="95" stroke="white" stroke-width="2.5" marker-end="url(#a4g)"/>
+        <circle cx="107" cy="90" r="13" fill="#2471a3" stroke="#7fff7f" stroke-width="2"/>
+        <text x="107" y="95" text-anchor="middle" fill="white" font-size="10">○</text>
 
-        <!-- ③後ろ（最後手段・薄い赤点線矢印） -->
-        <line x1="250" y1="138" x2="250" y2="190" stroke="rgba(255,150,150,0.7)" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#a4r)"/>
-        <circle cx="250" cy="200" r="13" fill="#2471a3" stroke="rgba(255,150,150,0.7)" stroke-width="1.5"/>
-        <text x="250" y="205" text-anchor="middle" fill="white" font-size="10" font-weight="bold">○</text>
-        <rect x="260" y="153" width="72" height="26" fill="rgba(0,0,0,0.4)" rx="4"/>
-        <text x="296" y="164" text-anchor="middle" fill="rgba(255,180,180,0.8)" font-size="11" font-weight="900">③後ろ</text>
-        <text x="296" y="175" text-anchor="middle" fill="rgba(255,180,180,0.8)" font-size="9">最後の手段</text>
+        <!-- 後ろの受け手 -->
+        <line x1="250" y1="138" x2="250" y2="190" stroke="white" stroke-width="2.5" marker-end="url(#a4g)"/>
+        <circle cx="250" cy="200" r="13" fill="#2471a3" stroke="#7fff7f" stroke-width="2"/>
+        <text x="250" y="205" text-anchor="middle" fill="white" font-size="10">○</text>
+
+        <!-- メッセージ -->
+        <rect x="310" y="55" width="140" height="28" fill="rgba(0,0,0,0.45)" rx="5"/>
+        <text x="380" y="66" text-anchor="middle" fill="white" font-size="9" font-weight="bold">受け手が入った</text>
+        <text x="380" y="77" text-anchor="middle" fill="#ffe066" font-size="9" font-weight="bold">どこへでも出せる</text>
 
         <!-- タイミング説明 -->
         <rect x="30" y="145" width="145" height="50" fill="rgba(194,65,12,0.3)" stroke="rgba(255,150,100,0.5)" stroke-width="1" rx="6"/>
