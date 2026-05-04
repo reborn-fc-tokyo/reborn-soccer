@@ -245,80 +245,88 @@
   <div class="fig">
     <div class="fig-label">図1 — カバーシャドウ：影の中 vs 影の外</div>
     <div class="pitch">
-      <svg viewBox="0 0 500 240" xmlns="http://www.w3.org/2000/svg">
+      <svg viewBox="0 0 500 250" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <marker id="a1w" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="white"/></marker>
           <marker id="a1g" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#7fff7f"/></marker>
           <marker id="a1r" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#ff6b6b"/></marker>
         </defs>
-        <rect width="500" height="240" fill="#2d8f52"/>
-        <rect x="8" y="8" width="484" height="224" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/>
-        <line x1="250" y1="20" x2="250" y2="232" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" stroke-dasharray="5,4"/>
+        <rect width="500" height="250" fill="#2d8f52"/>
+        <rect x="8" y="8" width="484" height="234" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/>
+        <line x1="250" y1="20" x2="250" y2="242" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" stroke-dasharray="5,4"/>
 
         <!-- タイトルバー -->
         <rect x="0" y="0" width="500" height="20" fill="rgba(0,0,0,0.4)"/>
-        <text x="250" y="14" text-anchor="middle" fill="white" font-size="10" font-weight="bold">「守備者の真後ろに立つな。横にずれろ」</text>
+        <text x="250" y="14" text-anchor="middle" fill="white" font-size="10" font-weight="bold">下から上にパス。守備者の真後ろだと影に入り届かない</text>
+
+        <!-- ゴール方向 -->
+        <text x="125" y="38" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="8">▲ ゴール方向</text>
+        <text x="375" y="38" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="8">▲ ゴール方向</text>
 
         <!-- ===== 左：NG ===== -->
         <rect x="8" y="20" width="242" height="22" fill="rgba(192,57,43,0.7)"/>
-        <text x="129" y="35" text-anchor="middle" fill="white" font-size="11" font-weight="800">❌ 影の中（パスが届かない）</text>
+        <text x="129" y="33" text-anchor="middle" fill="white" font-size="10" font-weight="800">❌ 影の中（パスが届かない）</text>
 
-        <!-- ボール -->
-        <circle cx="125" cy="68" r="9" fill="#f5c518" stroke="white" stroke-width="2"/>
-        <text x="125" y="58" text-anchor="middle" fill="white" font-size="9" font-weight="bold">ボール</text>
+        <!-- 受け手（上・影の中） -->
+        <circle cx="125" cy="68" r="15" fill="#2471a3" stroke="#ff6b6b" stroke-width="2.5"/>
+        <text x="125" y="73" text-anchor="middle" fill="white" font-size="9" font-weight="bold">受</text>
+        <text x="152" y="62" fill="#ff6b6b" font-size="20" font-weight="900">×</text>
 
-        <!-- カバーシャドウのコーン（薄暗い三角形） -->
-        <polygon points="113,100 137,100 160,210 90,210" fill="rgba(0,0,0,0.35)" stroke="rgba(255,100,100,0.5)" stroke-width="1" stroke-dasharray="4,3"/>
-        <text x="125" y="165" text-anchor="middle" fill="rgba(255,180,180,0.8)" font-size="9" font-weight="bold">影（シャドウ）</text>
+        <!-- カバーシャドウのコーン（守備者→受け手方向＝上方向） -->
+        <polygon points="110,118 140,118 155,48 95,48" fill="rgba(0,0,0,0.38)" stroke="rgba(255,100,100,0.55)" stroke-width="1" stroke-dasharray="4,3"/>
+        <text x="125" y="98" text-anchor="middle" fill="rgba(255,180,180,0.85)" font-size="9" font-weight="bold">影</text>
 
-        <!-- 守備者 -->
-        <circle cx="125" cy="110" r="15" fill="#c0392b" stroke="white" stroke-width="2"/>
-        <text x="125" y="115" text-anchor="middle" fill="white" font-size="9" font-weight="bold">守</text>
+        <!-- 守備者（中間） -->
+        <circle cx="125" cy="135" r="15" fill="#c0392b" stroke="white" stroke-width="2"/>
+        <text x="125" y="140" text-anchor="middle" fill="white" font-size="9" font-weight="bold">守</text>
 
-        <!-- 受け手（影の中） -->
-        <circle cx="125" cy="175" r="15" fill="#2471a3" stroke="#ff6b6b" stroke-width="2.5"/>
-        <text x="125" y="180" text-anchor="middle" fill="white" font-size="9" font-weight="bold">受</text>
-        <text x="167" y="180" fill="#ff6b6b" font-size="22" font-weight="900">×</text>
+        <!-- パスライン（ブロック） -->
+        <line x1="125" y1="155" x2="125" y2="178" stroke="rgba(255,100,100,0.7)" stroke-width="2" stroke-dasharray="5,3"/>
+        <text x="80" y="168" fill="#ff6b6b" font-size="9" font-weight="bold">ブロック</text>
 
-        <!-- パスライン（ブロックされてる） -->
-        <line x1="125" y1="77" x2="125" y2="93" stroke="rgba(255,100,100,0.6)" stroke-width="2" stroke-dasharray="4,3"/>
-        <text x="80" y="108" fill="#ff6b6b" font-size="9">ブロック</text>
+        <!-- 出し手・ボール（下） -->
+        <circle cx="125" cy="200" r="15" fill="#2471a3" stroke="white" stroke-width="1.5"/>
+        <text x="125" y="205" text-anchor="middle" fill="white" font-size="9" font-weight="bold">出</text>
+        <circle cx="113" cy="188" r="7" fill="#f5c518" stroke="white" stroke-width="1.5"/>
+        <text x="125" y="227" text-anchor="middle" fill="rgba(255,255,255,0.65)" font-size="9">出し手（ボール）</text>
 
         <!-- ===== 右：OK ===== -->
         <rect x="250" y="20" width="242" height="22" fill="rgba(26,107,58,0.7)"/>
-        <text x="371" y="35" text-anchor="middle" fill="white" font-size="11" font-weight="800">✅ 影の外（パスが通る）</text>
+        <text x="371" y="33" text-anchor="middle" fill="white" font-size="10" font-weight="800">✅ 影の外（パスが通る）</text>
 
-        <!-- ボール -->
-        <circle cx="295" cy="68" r="9" fill="#f5c518" stroke="white" stroke-width="2"/>
-        <text x="295" y="58" text-anchor="middle" fill="white" font-size="9" font-weight="bold">ボール</text>
+        <!-- カバーシャドウのコーン（上方向） -->
+        <polygon points="333,118 363,118 375,48 321,48" fill="rgba(0,0,0,0.3)" stroke="rgba(255,100,100,0.45)" stroke-width="1" stroke-dasharray="4,3"/>
+        <text x="348" y="90" text-anchor="middle" fill="rgba(255,180,180,0.75)" font-size="9">影</text>
 
-        <!-- カバーシャドウのコーン（下方向） -->
-        <polygon points="283,100 307,100 320,210 270,210" fill="rgba(0,0,0,0.3)" stroke="rgba(255,100,100,0.4)" stroke-width="1" stroke-dasharray="4,3"/>
-        <text x="295" y="175" text-anchor="middle" fill="rgba(255,180,180,0.7)" font-size="9">影</text>
+        <!-- 守備者（中間） -->
+        <circle cx="348" cy="135" r="15" fill="#c0392b" stroke="white" stroke-width="2"/>
+        <text x="348" y="140" text-anchor="middle" fill="white" font-size="9" font-weight="bold">守</text>
 
-        <!-- 守備者 -->
-        <circle cx="295" cy="110" r="15" fill="#c0392b" stroke="white" stroke-width="2"/>
-        <text x="295" y="115" text-anchor="middle" fill="white" font-size="9" font-weight="bold">守</text>
+        <!-- 受け手（上・影の外・横にずれた） -->
+        <circle cx="440" cy="65" r="15" fill="#2471a3" stroke="#7fff7f" stroke-width="2.5"/>
+        <text x="440" y="70" text-anchor="middle" fill="white" font-size="9" font-weight="bold">受</text>
+        <text x="460" y="55" fill="#7fff7f" font-size="18" font-weight="900">✓</text>
 
-        <!-- 受け手（影の外・横にずれた） -->
-        <circle cx="415" cy="155" r="15" fill="#2471a3" stroke="#7fff7f" stroke-width="2.5"/>
-        <text x="415" y="160" text-anchor="middle" fill="white" font-size="9" font-weight="bold">受</text>
-        <text x="435" y="145" fill="#7fff7f" font-size="18" font-weight="900">✓</text>
-
-        <!-- 横ずれの矢印 -->
-        <line x1="295" y1="175" x2="390" y2="155" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-dasharray="3,2" marker-end="url(#a1w)"/>
-        <rect x="310" y="167" width="62" height="12" fill="rgba(0,0,0,0.4)" rx="3"/>
-        <text x="341" y="176" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-size="8">横にずれる</text>
+        <!-- 横ずれ説明（守備者の真上→右へ） -->
+        <line x1="348" y1="50" x2="420" y2="58" stroke="rgba(255,255,255,0.45)" stroke-width="1.5" stroke-dasharray="3,2" marker-end="url(#a1w)"/>
+        <rect x="355" y="40" width="62" height="12" fill="rgba(0,0,0,0.45)" rx="3"/>
+        <text x="386" y="49" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-size="8">横にずれる</text>
 
         <!-- パスライン（通る） -->
-        <line x1="303" y1="76" x2="402" y2="143" stroke="#7fff7f" stroke-width="2.5" marker-end="url(#a1g)"/>
-        <rect x="335" y="100" width="60" height="12" fill="rgba(0,0,0,0.4)" rx="3"/>
-        <text x="365" y="109" text-anchor="middle" fill="#7fff7f" font-size="8">パスが通る</text>
+        <line x1="328" y1="192" x2="428" y2="80" stroke="#7fff7f" stroke-width="3" marker-end="url(#a1g)"/>
+        <rect x="355" y="128" width="62" height="12" fill="rgba(0,0,0,0.45)" rx="3"/>
+        <text x="386" y="137" text-anchor="middle" fill="#7fff7f" font-size="8" font-weight="bold">パスが通る</text>
 
-        <!-- 開いた体の向き説明 -->
-        <rect x="362" y="172" width="90" height="24" fill="rgba(36,113,163,0.3)" stroke="rgba(126,200,255,0.6)" stroke-width="1" rx="4"/>
-        <text x="407" y="182" text-anchor="middle" fill="#7ec8ff" font-size="8" font-weight="bold">体を開いて</text>
-        <text x="407" y="192" text-anchor="middle" fill="#7ec8ff" font-size="8" font-weight="bold">次のコースへ</text>
+        <!-- 出し手・ボール（下） -->
+        <circle cx="340" cy="200" r="15" fill="#2471a3" stroke="white" stroke-width="1.5"/>
+        <text x="340" y="205" text-anchor="middle" fill="white" font-size="9" font-weight="bold">出</text>
+        <circle cx="328" cy="188" r="7" fill="#f5c518" stroke="white" stroke-width="1.5"/>
+        <text x="340" y="227" text-anchor="middle" fill="rgba(255,255,255,0.65)" font-size="9">出し手（ボール）</text>
+
+        <!-- 体を開いてラベル -->
+        <rect x="390" y="82" width="82" height="24" fill="rgba(36,113,163,0.3)" stroke="rgba(126,200,255,0.6)" stroke-width="1" rx="4"/>
+        <text x="431" y="92" text-anchor="middle" fill="#7ec8ff" font-size="8" font-weight="bold">体を開いて</text>
+        <text x="431" y="102" text-anchor="middle" fill="#7ec8ff" font-size="8" font-weight="bold">次のコースへ</text>
       </svg>
     </div>
     <p class="pitch-note">守備者の横・斜め後ろに立つだけでパスコースが生まれる。</p>
