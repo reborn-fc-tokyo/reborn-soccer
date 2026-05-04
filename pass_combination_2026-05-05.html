@@ -233,72 +233,83 @@
 
   <!-- 図2: 走り込み + 補填 -->
   <div class="fig">
-    <div class="fig-label">図2 — パスを出したら走り込む + ゾーン補填</div>
+    <div class="fig-label">図2 — パスを出したら走り込む + ゾーン補填（補填は全然別の場所から）</div>
     <div class="pitch">
-      <svg viewBox="0 0 500 240" xmlns="http://www.w3.org/2000/svg">
+      <svg viewBox="0 0 500 260" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <marker id="a2w" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="white"/></marker>
           <marker id="a2b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#7ec8ff"/></marker>
           <marker id="a2g" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#7fff7f"/></marker>
-          <marker id="a2y" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#ffe066"/></marker>
         </defs>
-        <rect width="500" height="240" fill="#2d8f52"/>
-        <rect x="8" y="8" width="484" height="224" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/>
+        <rect width="500" height="260" fill="#2d8f52"/>
+        <rect x="8" y="8" width="484" height="244" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/>
         <rect x="0" y="0" width="500" height="20" fill="rgba(0,0,0,0.4)"/>
-        <text x="250" y="14" text-anchor="middle" fill="white" font-size="10" font-weight="bold">出して止まるな。走り込んで、その後は誰かが補填する</text>
+        <text x="250" y="14" text-anchor="middle" fill="white" font-size="10" font-weight="bold">補填は「ボール周辺と無関係な別の選手」が全然違う場所からカバーしに来る</text>
 
-        <!-- ゾーン（破線の四角）A地帯 -->
-        <rect x="70" y="100" width="100" height="90" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" stroke-dasharray="5,3" rx="4"/>
-        <text x="120" y="150" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="9">ゾーンA</text>
+        <!-- ゴール方向ラベル -->
+        <text x="250" y="38" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="9">▲ ゴール方向</text>
 
-        <!-- 出し手（左・ボール保持） -->
-        <circle cx="120" cy="130" r="17" fill="rgba(245,197,24,0.12)" stroke="#f5c518" stroke-width="1.5" stroke-dasharray="3,2"/>
-        <circle cx="120" cy="130" r="14" fill="#2471a3" stroke="#f5c518" stroke-width="3"/>
-        <text x="120" y="135" text-anchor="middle" fill="white" font-size="9" font-weight="bold">出し手</text>
-        <circle cx="133" cy="118" r="6" fill="#f5c518" stroke="white" stroke-width="1.5"/>
+        <!-- ─── ゾーンA（出し手がいた場所） ─── -->
+        <rect x="40" y="130" width="120" height="105" fill="rgba(255,220,50,0.1)" stroke="rgba(255,220,50,0.6)" stroke-width="1.5" stroke-dasharray="5,3" rx="4"/>
+        <text x="100" y="148" text-anchor="middle" fill="#ffe066" font-size="10" font-weight="bold">ゾーンA</text>
+        <text x="100" y="162" text-anchor="middle" fill="#ffe066" font-size="9">空いた！</text>
 
-        <!-- パス矢印（出し手 → 受け手） -->
-        <line x1="145" y1="125" x2="265" y2="105" stroke="white" stroke-width="2.5" marker-end="url(#a2w)"/>
-        <rect x="180" y="104" width="46" height="12" fill="rgba(0,0,0,0.4)" rx="3"/>
-        <text x="203" y="113" text-anchor="middle" fill="white" font-size="9" font-weight="bold">① パス</text>
+        <!-- 出し手の元の位置（ゴースト） -->
+        <circle cx="100" cy="195" r="15" fill="rgba(36,113,163,0.2)" stroke="rgba(126,200,255,0.4)" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <text x="100" y="200" text-anchor="middle" fill="rgba(200,220,255,0.6)" font-size="8">出し手</text>
+        <text x="100" y="211" text-anchor="middle" fill="rgba(200,220,255,0.6)" font-size="7">（元の位置）</text>
+
+        <!-- 出し手（ボール保持・現在） -->
+        <circle cx="140" cy="195" r="17" fill="rgba(245,197,24,0.12)" stroke="#f5c518" stroke-width="1.5" stroke-dasharray="3,2"/>
+        <circle cx="140" cy="195" r="14" fill="#2471a3" stroke="#f5c518" stroke-width="3"/>
+        <text x="140" y="200" text-anchor="middle" fill="white" font-size="9" font-weight="bold">出し手</text>
+        <circle cx="153" cy="183" r="6" fill="#f5c518" stroke="white" stroke-width="1.5"/>
+
+        <!-- ① パス矢印（出し手 → 受け手） -->
+        <line x1="160" y1="188" x2="255" y2="160" stroke="white" stroke-width="3" marker-end="url(#a2w)"/>
+        <rect x="188" y="162" width="46" height="12" fill="rgba(0,0,0,0.45)" rx="3"/>
+        <text x="211" y="171" text-anchor="middle" fill="white" font-size="9" font-weight="bold">① パス</text>
 
         <!-- 受け手（中央） -->
-        <circle cx="285" cy="100" r="14" fill="#0d9488" stroke="#7ec8ff" stroke-width="2.5"/>
-        <text x="285" y="105" text-anchor="middle" fill="white" font-size="9" font-weight="bold">受け手</text>
+        <circle cx="270" cy="152" r="14" fill="#0d9488" stroke="#7ec8ff" stroke-width="2.5"/>
+        <text x="270" y="157" text-anchor="middle" fill="white" font-size="9" font-weight="bold">受け手</text>
 
-        <!-- 走り込み矢印（出し手→スペース） -->
-        <path d="M 130 143 Q 180 200 260 180" stroke="#7ec8ff" stroke-width="2.5" fill="none" stroke-dasharray="8,4" marker-end="url(#a2b)"/>
-        <rect x="168" y="185" width="62" height="13" fill="rgba(0,0,0,0.45)" rx="3"/>
-        <text x="199" y="195" text-anchor="middle" fill="#7ec8ff" font-size="9" font-weight="bold">② 走り込む</text>
+        <!-- ② 走り込み矢印（出し手 → 前方のスペース） -->
+        <path d="M 148 180 Q 130 120 115 75" stroke="#7ec8ff" stroke-width="2.5" fill="none" stroke-dasharray="8,4" marker-end="url(#a2b)"/>
+        <rect x="60" y="108" width="62" height="13" fill="rgba(0,0,0,0.5)" rx="3"/>
+        <text x="91" y="118" text-anchor="middle" fill="#7ec8ff" font-size="9" font-weight="bold">② 前へ走る</text>
 
-        <!-- 出し手（走り込み後の位置） -->
-        <circle cx="270" cy="175" r="14" fill="rgba(36,113,163,0.5)" stroke="#7ec8ff" stroke-width="2" stroke-dasharray="3,2"/>
-        <text x="270" y="180" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="9">出し手</text>
+        <!-- 出し手（走り込み後） -->
+        <circle cx="115" cy="65" r="13" fill="rgba(36,113,163,0.55)" stroke="#7ec8ff" stroke-width="2" stroke-dasharray="3,2"/>
+        <text x="115" y="70" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="8">出し手</text>
 
         <!-- リターン矢印 -->
-        <line x1="271" y1="161" x2="275" y2="116" stroke="#7ec8ff" stroke-width="2" marker-end="url(#a2b)"/>
-        <rect x="278" y="135" width="52" height="12" fill="rgba(0,0,0,0.4)" rx="3"/>
-        <text x="304" y="144" text-anchor="middle" fill="#7ec8ff" font-size="9" font-weight="bold">リターン</text>
+        <line x1="258" y1="148" x2="128" y2="73" stroke="#7ec8ff" stroke-width="1.8" stroke-dasharray="5,3" marker-end="url(#a2b)"/>
+        <rect x="174" y="96" width="54" height="12" fill="rgba(0,0,0,0.4)" rx="3"/>
+        <text x="201" y="105" text-anchor="middle" fill="#7ec8ff" font-size="9" font-weight="bold">リターン</text>
 
-        <!-- ゾーンB（出し手が抜けた後） -->
-        <rect x="70" y="100" width="100" height="90" fill="rgba(255,220,50,0.08)" stroke="rgba(255,220,50,0.5)" stroke-width="1.5" stroke-dasharray="5,3" rx="4"/>
-        <text x="120" y="120" text-anchor="middle" fill="#ffe066" font-size="9" font-weight="bold">空いた！</text>
+        <!-- ─── 補填選手（全然別の場所・右サイド） ─── -->
+        <!-- 補填元の位置 -->
+        <circle cx="430" cy="170" r="14" fill="#2471a3" stroke="#7fff7f" stroke-width="2.5"/>
+        <text x="430" y="166" text-anchor="middle" fill="white" font-size="8" font-weight="bold">補填</text>
+        <text x="430" y="178" text-anchor="middle" fill="white" font-size="7">選手</text>
 
-        <!-- 補填選手 -->
-        <circle cx="370" cy="165" r="14" fill="#2471a3" stroke="#7fff7f" stroke-width="2.5"/>
-        <text x="370" y="170" text-anchor="middle" fill="white" font-size="9" font-weight="bold">補填</text>
+        <!-- 補填ラベル（元の場所） -->
+        <rect x="385" y="188" width="90" height="24" fill="rgba(0,0,0,0.4)" rx="4"/>
+        <text x="430" y="199" text-anchor="middle" fill="#7fff7f" font-size="8" font-weight="bold">ボール周辺と</text>
+        <text x="430" y="209" text-anchor="middle" fill="#7fff7f" font-size="8" font-weight="bold">無関係な場所</text>
 
-        <!-- 補填矢印 -->
-        <path d="M 360 155 Q 280 130 185 155" stroke="#7fff7f" stroke-width="2" fill="none" stroke-dasharray="6,3" marker-end="url(#a2g)"/>
-        <rect x="255" y="128" width="72" height="13" fill="rgba(0,0,0,0.45)" rx="3"/>
-        <text x="291" y="138" text-anchor="middle" fill="#7fff7f" font-size="9" font-weight="bold">③ ゾーンを埋める</text>
+        <!-- ③ 補填矢印（右から左へ・長い移動） -->
+        <path d="M 415 168 Q 320 200 175 205" stroke="#7fff7f" stroke-width="2.5" fill="none" stroke-dasharray="7,4" marker-end="url(#a2g)"/>
+        <rect x="258" y="208" width="100" height="13" fill="rgba(0,0,0,0.5)" rx="3"/>
+        <text x="308" y="218" text-anchor="middle" fill="#7fff7f" font-size="9" font-weight="bold">③ ゾーンAを埋める</text>
 
-        <!-- 守備者 -->
-        <circle cx="220" cy="138" r="13" fill="#c0392b" stroke="white" stroke-width="1.5"/>
-        <text x="220" y="143" text-anchor="middle" fill="white" font-size="8">守</text>
+        <!-- 補填後の位置（ゾーンA内） -->
+        <circle cx="160" cy="215" r="13" fill="rgba(46,139,87,0.5)" stroke="#7fff7f" stroke-width="2" stroke-dasharray="3,2"/>
+        <text x="160" y="220" text-anchor="middle" fill="rgba(200,255,200,0.8)" font-size="8">補填</text>
       </svg>
     </div>
-    <p class="pitch-note">出し手が走り込む→受け手がリターン→出し手がゴール前へ。補填で穴をふさぐ。</p>
+    <p class="pitch-note">出し手がゾーンAを空けて前へ走る。ボールと無関係な右の選手がゾーンAを自動的に埋める。</p>
   </div>
 
   <!-- ─── 原則③ ─── -->
