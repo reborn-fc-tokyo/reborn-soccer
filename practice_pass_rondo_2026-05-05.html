@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>狭いスペースのパス・ワンツー 練習ガイド | ReBorn F.C Over50</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif; background: #f0f2f0; color: #222; line-height: 1.7; }
+
+  header { background: linear-gradient(135deg, #0f4c27, #1a6b3a, #2d8f52); color: white; padding: 36px 24px 28px; text-align: center; }
+  header .badge { display: inline-block; background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.35); border-radius: 20px; padding: 3px 14px; font-size: 11px; letter-spacing: 1px; margin-bottom: 10px; }
+  header h1 { font-size: 22px; font-weight: 900; margin-bottom: 4px; }
+  header p { font-size: 12px; opacity: .75; }
+
+  .container { max-width: 640px; margin: 0 auto; padding: 28px 16px 72px; }
+
+  /* 核心の気づき */
+  .insight-card {
+    background: linear-gradient(135deg, #78350f, #c2410c);
+    color: white; border-radius: 16px;
+    padding: 22px 24px; margin-bottom: 28px;
+    box-shadow: 0 4px 20px rgba(194,65,12,0.35);
+  }
+  .insight-card .ic-head { font-size: 11px; font-weight: 800; letter-spacing: 2px; opacity: .75; margin-bottom: 10px; }
+  .insight-card .ic-quote { font-size: 17px; font-weight: 900; line-height: 1.5; margin-bottom: 12px; }
+  .insight-card .ic-body { font-size: 13px; opacity: .9; line-height: 1.75; }
+
+  /* ステップ表示 */
+  .step-flow { display: flex; gap: 8px; margin-bottom: 28px; flex-wrap: wrap; }
+  .step-item { display: flex; align-items: center; gap: 6px; background: white; border-radius: 30px; padding: 6px 14px; font-size: 12px; font-weight: 700; color: #1a6b3a; box-shadow: 0 1px 6px rgba(0,0,0,0.08); border: 1.5px solid #a7f3d0; }
+  .step-item .s-num { background: #1a6b3a; color: white; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 900; flex-shrink: 0; }
+
+  /* ドリルカード */
+  .drill-card { background: white; border-radius: 16px; box-shadow: 0 2px 16px rgba(0,0,0,0.08); margin-bottom: 28px; overflow: hidden; }
+  .drill-head { color: white; padding: 18px 22px; }
+  .drill-head .dh-num { font-size: 11px; font-weight: 800; letter-spacing: 2px; opacity: .65; margin-bottom: 6px; }
+  .drill-head .dh-title { font-size: 20px; font-weight: 900; line-height: 1.3; margin-bottom: 4px; }
+  .drill-head .dh-sub { font-size: 12px; opacity: .75; }
+  .head-blue { background: linear-gradient(135deg, #1a3a6b, #2471a3); }
+  .head-teal { background: linear-gradient(135deg, #134e4a, #0d9488); }
+  .head-purple { background: linear-gradient(135deg, #4c1d95, #7c3aed); }
+  .head-navy { background: linear-gradient(135deg, #0f172a, #1e3a5f); }
+
+  .video-wrap { width: 100%; aspect-ratio: 16/9; background: #000; }
+  .video-wrap iframe { display: block; width: 100%; height: 100%; border: none; }
+
+  .drill-body { padding: 18px 22px; }
+
+  .meta-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
+  .meta-chip { background: #e8f0fa; color: #2471a3; font-size: 11px; font-weight: 700; border-radius: 8px; padding: 3px 10px; }
+
+  .sec-label { font-size: 10px; font-weight: 800; color: #888; letter-spacing: 2px; margin-bottom: 10px; }
+
+  /* セットアップ表 */
+  .setup-table { width: 100%; border-collapse: collapse; margin-bottom: 18px; font-size: 13px; }
+  .setup-table th { background: #f1f5f9; color: #475569; font-size: 10px; font-weight: 800; letter-spacing: 1px; padding: 7px 10px; text-align: left; border-bottom: 2px solid #e2e8f0; }
+  .setup-table td { padding: 8px 10px; border-bottom: 1px solid #f1f5f9; color: #334155; vertical-align: top; }
+  .setup-table tr:last-child td { border-bottom: none; }
+
+  /* キーファクター */
+  .kf-list { list-style: none; margin-bottom: 18px; }
+  .kf-list li { display: flex; gap: 10px; padding: 8px 0; border-bottom: 1px solid #f2f2f2; font-size: 13px; align-items: baseline; }
+  .kf-list li:last-child { border-bottom: none; }
+  .kf-list li::before { content: '▸'; color: #2471a3; flex-shrink: 0; font-size: 11px; }
+
+  /* プログレッションバー */
+  .progression { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 18px; align-items: center; }
+  .prog-step { background: #f1f5f9; border-radius: 8px; padding: 5px 12px; font-size: 12px; color: #475569; font-weight: 600; }
+  .prog-arrow { color: #94a3b8; font-size: 12px; }
+  .prog-step.highlight { background: #1a6b3a; color: white; }
+
+  /* Over50ボックス */
+  .reborn-box { background: #e8f5ed; border-left: 4px solid #1a6b3a; border-radius: 0 10px 10px 0; padding: 12px 16px; margin-bottom: 0; }
+  .reborn-box .rb-label { font-size: 10px; font-weight: 800; color: #1a6b3a; letter-spacing: 1.5px; margin-bottom: 5px; }
+  .reborn-box .rb-text { font-size: 13px; color: #2a5a3a; line-height: 1.7; }
+
+  /* コーチングキュー */
+  .cue-box { background: #fffbeb; border-left: 4px solid #f59e0b; border-radius: 0 10px 10px 0; padding: 12px 16px; margin-top: 14px; }
+  .cue-box .cue-label { font-size: 10px; font-weight: 800; color: #92400e; letter-spacing: 1.5px; margin-bottom: 5px; }
+  .cue-box .cue-list { list-style: none; }
+  .cue-box .cue-list li { font-size: 13px; color: #78350f; padding: 3px 0; }
+  .cue-box .cue-list li::before { content: '💬 '; }
+
+  /* 区切り */
+  .divider-text { text-align: center; font-size: 11px; color: #94a3b8; font-weight: 700; letter-spacing: 2px; margin: 8px 0 24px; }
+
+  /* セッションプラン */
+  .session-card { background: white; border-radius: 16px; box-shadow: 0 2px 16px rgba(0,0,0,0.08); margin-bottom: 28px; overflow: hidden; }
+  .session-head { background: linear-gradient(135deg, #0f172a, #1e3a5f); color: white; padding: 16px 22px; }
+  .session-head .sh-title { font-size: 17px; font-weight: 900; }
+  .session-head .sh-sub { font-size: 12px; opacity: .7; margin-top: 3px; }
+  .session-body { padding: 18px 22px; }
+  .session-row { display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px solid #f1f5f9; align-items: flex-start; }
+  .session-row:last-child { border-bottom: none; }
+  .session-time { font-size: 12px; font-weight: 800; color: #2471a3; min-width: 60px; flex-shrink: 0; padding-top: 1px; }
+  .session-content { font-size: 13px; color: #334155; flex: 1; }
+  .session-content strong { color: #1a1a2e; }
+  .session-note { font-size: 11px; color: #94a3b8; margin-top: 2px; }
+
+  /* リンクセクション */
+  .links-card { background: white; border-radius: 16px; box-shadow: 0 2px 16px rgba(0,0,0,0.08); margin-bottom: 20px; overflow: hidden; }
+  .links-head { background: #1e293b; color: white; padding: 14px 22px; }
+  .links-head .lh-title { font-size: 15px; font-weight: 900; }
+  .links-body { padding: 18px 22px; }
+  .links-section-label { font-size: 10px; font-weight: 800; color: #64748b; letter-spacing: 2px; margin: 14px 0 8px; }
+  .links-section-label:first-child { margin-top: 0; }
+  .link-item { display: flex; gap: 10px; align-items: flex-start; padding: 8px 12px; border-radius: 10px; text-decoration: none; color: inherit; transition: background 0.13s; margin-bottom: 4px; border: 1px solid #f1f5f9; }
+  .link-item:hover { background: #f8fafc; border-color: #e2e8f0; }
+  .link-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+  .link-title { font-size: 13px; font-weight: 700; color: #1e3a5f; margin-bottom: 2px; }
+  .link-desc { font-size: 11px; color: #64748b; }
+
+  footer { text-align: center; padding: 20px; font-size: 11px; color: #aaa; border-top: 1px solid #e0e0e0; margin-top: 8px; }
+  #back-top { position: fixed; bottom: 24px; right: 24px; background: #1a6b3a; color: white; border-radius: 50px; padding: 9px 16px 9px 12px; font-size: 12px; font-weight: 800; text-decoration: none; display: flex; align-items: center; gap: 6px; box-shadow: 0 4px 14px rgba(26,107,58,0.4); z-index: 999; }
+
+  @media (max-width: 600px) {
+    header { padding: 22px 14px 18px; }
+    header h1 { font-size: 18px; }
+    .container { padding: 16px 10px 56px; }
+    .drill-body { padding: 14px 16px; }
+    .session-body { padding: 14px 16px; }
+    .links-body { padding: 14px 16px; }
+    #back-top { bottom: 16px; right: 14px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="badge">TRAINING GUIDE</div>
+  <h1>狭いスペースのパス・ワンツー</h1>
+  <p>ReBorn F.C Over50 | 2026.05.05 調査</p>
+</header>
+
+<div class="container">
+
+  <!-- 核心の気づき -->
+  <div class="insight-card">
+    <div class="ic-head">💡 CORE INSIGHT</div>
+    <div class="ic-quote">「速いのは脚力ではなく、ボールが来る前に次のプレーを決めているから」</div>
+    <div class="ic-body">
+      敬愛高校のような速いチームが「狭い中でも正確に回せる」理由は、パス技術だけでなく<strong>事前認知（ボール前に次の判断を終えること）</strong>の習慣にある。この認知スピードは年齢に関係なく向上できる。Over50チームにとって最も効率の良い成長領域。
+    </div>
+  </div>
+
+  <!-- ステップ -->
+  <div class="step-flow">
+    <div class="step-item"><span class="s-num">1</span>4対2ロンド</div>
+    <div class="step-item"><span class="s-num">2</span>2対1ワンツー</div>
+    <div class="step-item"><span class="s-num">3</span>ダブルトライアングル</div>
+    <div class="step-item"><span class="s-num">4</span>スモールサイドゲーム</div>
+  </div>
+
+  <!-- ─────────────────────────────────── -->
+  <!-- 練習① 4対2ロンド -->
+  <!-- ─────────────────────────────────── -->
+  <div class="drill-card">
+    <div class="drill-head head-blue">
+      <div class="dh-num">DRILL 01 — 毎練習の冒頭15分</div>
+      <div class="dh-title">4対2 ロンド（鳥かご）</div>
+      <div class="dh-sub">バルセロナが毎練習欠かさない。狭いスペースでの判断・パスの土台</div>
+    </div>
+    <div class="video-wrap">
+      <iframe src="https://www.youtube.com/embed/0v7qfQdSyBI" allowfullscreen loading="lazy"></iframe>
+    </div>
+    <div class="drill-body">
+      <div class="meta-row">
+        <span class="meta-chip">6人〜</span>
+        <span class="meta-chip">12m × 12m</span>
+        <span class="meta-chip">10〜15分</span>
+        <span class="meta-chip">3タッチ〜2タッチ</span>
+      </div>
+
+      <div class="sec-label">SETUP</div>
+      <table class="setup-table">
+        <tr><th>グリッド</th><td>12m × 12m（通常10mを広めに設定）</td></tr>
+        <tr><th>人数</th><td>攻撃4人がグリッドの辺の上に立つ、守備2人がグリッド内</td></tr>
+        <tr><th>ルール</th><td>攻撃4人がボールを回し続ける。守備2人が奪いに行く</td></tr>
+        <tr><th>交代</th><td>奪われたら交代 <strong>または</strong> 1分ごとの時間交代（Over50推奨）</td></tr>
+      </table>
+
+      <div class="sec-label">PROGRESSION</div>
+      <div class="progression">
+        <div class="prog-step">4対1（入門）</div>
+        <span class="prog-arrow">→</span>
+        <div class="prog-step highlight">4対2（標準）</div>
+        <span class="prog-arrow">→</span>
+        <div class="prog-step">5対2（有利感を体験）</div>
+        <span class="prog-arrow">→</span>
+        <div class="prog-step">2タッチ制限</div>
+        <span class="prog-arrow">→</span>
+        <div class="prog-step">1タッチ（上級）</div>
+      </div>
+
+      <div class="sec-label">KEY FACTORS</div>
+      <ul class="kf-list">
+        <li>ボールが動いている間に「次の受け手」を確認する（事前認知）</li>
+        <li>体を開いて止める——ファーストタッチで次のパス方向へボールを置く</li>
+        <li>コーナーに近づかない——グリッドの辺の中央付近でパスコースを広く保つ</li>
+        <li>守備が引きつけられた瞬間にフリーの味方へ出す</li>
+      </ul>
+
+      <div class="reborn-box">
+        <div class="rb-label">⚽ OVER 50 アレンジ</div>
+        <div class="rb-text">守備交代は「奪ったら」ではなく「1分間交代制」に。全員が同じ負荷になり、体力差でドリルが崩れない。グリッドが広いので無駄な全力ダッシュが不要——ポジション取りで勝負できる。</div>
+      </div>
+
+      <div class="cue-box">
+        <div class="cue-label">COACHING CUES</div>
+        <ul class="cue-list">
+          <li>「ボールが動いている間に観て」</li>
+          <li>「体を開いて止める」</li>
+          <li>「コーナーを避けて」</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─────────────────────────────────── -->
+  <!-- 練習② 2対1コンビネーション（ワンツー） -->
+  <!-- ─────────────────────────────────── -->
+  <div class="drill-card">
+    <div class="drill-head head-teal">
+      <div class="dh-num">DRILL 02 — ワンツー専用</div>
+      <div class="dh-title">2対1 コンビネーション突破</div>
+      <div class="dh-sub">「敵を引きつけてから出す」タイミングを体に刻む</div>
+    </div>
+    <div class="video-wrap">
+      <iframe src="https://www.youtube.com/embed/NQf00waR9sA" allowfullscreen loading="lazy"></iframe>
+    </div>
+    <div class="drill-body">
+      <div class="meta-row">
+        <span class="meta-chip">4人1組（複数セット）</span>
+        <span class="meta-chip">12m × 12m</span>
+        <span class="meta-chip">攻2・守1・待機1</span>
+      </div>
+
+      <div class="sec-label">SETUP</div>
+      <table class="setup-table">
+        <tr><th>グリッド</th><td>12m × 12m・両端にコーンゴール（幅2m）</td></tr>
+        <tr><th>ルール</th><td>ボール保持者が守備者に向かって前進 → 引きつけた瞬間に横のパートナーへ → パートナーが即リターン → ゴールへ</td></tr>
+        <tr><th>選択肢</th><td>守備者が動かなければドリブル突破も可（判断力を養う）</td></tr>
+      </table>
+
+      <div class="sec-label">STEP BY STEP</div>
+      <div class="progression">
+        <div class="prog-step">Step1: 守備なし（タイミングだけ）</div>
+        <span class="prog-arrow">→</span>
+        <div class="prog-step highlight">Step2: 歩き守備</div>
+        <span class="prog-arrow">→</span>
+        <div class="prog-step">Step3: フル守備</div>
+      </div>
+
+      <div class="sec-label">KEY FACTORS</div>
+      <ul class="kf-list">
+        <li><strong>引きつけてから出す</strong>——近づかせずに出すと守備に引っかかる</li>
+        <li>受け手（壁）はパスが来る前にすでに動き出している（先読み）</li>
+        <li>リターンパスは1タッチ・低くてスピードのあるパスで</li>
+        <li>受け手がゴールへ向かう動きと、出し手が走り込む動きを連動させる</li>
+      </ul>
+
+      <div class="reborn-box">
+        <div class="rb-label">⚽ OVER 50 アレンジ</div>
+        <div class="rb-text">Step2「歩き守備」から始め、攻撃側が成功体験を積んでから難度を上げる。ワンツーは「全力ダッシュ」ではなく「3〜4歩の方向転換」で成立する形を目指す。無理なスプリントを要求しない。</div>
+      </div>
+
+      <div class="cue-box">
+        <div class="cue-label">COACHING CUES</div>
+        <ul class="cue-list">
+          <li>「もう一歩近づかせてから」</li>
+          <li>「受け手は先に動け、壁になれ」</li>
+          <li>「リターンは低く速く」</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─────────────────────────────────── -->
+  <!-- 練習③ ダブルトライアングル -->
+  <!-- ─────────────────────────────────── -->
+  <div class="drill-card">
+    <div class="drill-head head-purple">
+      <div class="dh-num">DRILL 03 — コンビネーション応用</div>
+      <div class="dh-title">ダブルトライアングル パス＆ムーブ</div>
+      <div class="dh-sub">バルセロナ・アヤックス共通の型。ワンツー＋第三の男を繰り返す</div>
+    </div>
+    <div class="video-wrap">
+      <iframe src="https://www.youtube.com/embed/fDpEpD2X_n4" allowfullscreen loading="lazy"></iframe>
+    </div>
+    <div class="drill-body">
+      <div class="meta-row">
+        <span class="meta-chip">7人以上</span>
+        <span class="meta-chip">内側コーン間5m・外側10〜15m</span>
+        <span class="meta-chip">守備なし</span>
+      </div>
+
+      <div class="sec-label">SETUP</div>
+      <table class="setup-table">
+        <tr><th>配置</th><td>内側トライアングル（辺5m）＋外側トライアングル（辺10〜15m）を重ねて設置</td></tr>
+        <tr><th>基本の流れ</th><td>外側スタートプレイヤーが内側2人とワンツーを連続で行いながら外側コーンへ前進</td></tr>
+        <tr><th>ローテーション</th><td>5〜8分ごとにグループ入れ替え。外側（動く役）と内側（はたく役）を交互に</td></tr>
+      </table>
+
+      <div class="sec-label">KEY FACTORS</div>
+      <ul class="kf-list">
+        <li>パスを出したら必ず動く——止まると三角形が崩れる</li>
+        <li>受け手は常にオープンな体の向きで立つ（開いて受ける）</li>
+        <li>名前を呼んでからパス——受け手の意識を引き出す</li>
+        <li>内側の「はたく選手」は足元に止めず、すぐに出せる体の向きで待つ</li>
+      </ul>
+
+      <div class="reborn-box">
+        <div class="rb-label">⚽ OVER 50 アレンジ</div>
+        <div class="rb-text">「内側の選手はその場で動かず、外側だけが動く」形から始めると走行距離が激減。慣れてきたら内側も動き始める段階的アップ。「走る選手」と「立ってはたく選手」の役割を明確に分けることで体力差をカバーできる。</div>
+      </div>
+
+      <div class="cue-box">
+        <div class="cue-label">COACHING CUES</div>
+        <ul class="cue-list">
+          <li>「出したら動け、止まるな」</li>
+          <li>「オープンに立って」</li>
+          <li>「〇〇！（名前を呼んでからパス）」</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─────────────────────────────────── -->
+  <!-- 練習④ スモールサイドゲーム -->
+  <!-- ─────────────────────────────────── -->
+  <div class="drill-card">
+    <div class="drill-head head-navy">
+      <div class="dh-num">DRILL 04 — 仕上げ（試合形式）</div>
+      <div class="dh-title">4対4 ＋ フリーマン スモールサイドゲーム</div>
+      <div class="dh-sub">練習の成果を試合形式で確認。常に数的優位でパス成功体験を積む</div>
+    </div>
+    <div class="video-wrap">
+      <iframe src="https://www.youtube.com/embed/FrIYxEk6LG0" allowfullscreen loading="lazy"></iframe>
+    </div>
+    <div class="drill-body">
+      <div class="meta-row">
+        <span class="meta-chip">10人（4対4＋フリーマン2〜3人）</span>
+        <span class="meta-chip">30m × 25m</span>
+        <span class="meta-chip">2タッチ制限</span>
+      </div>
+
+      <div class="sec-label">SETUP</div>
+      <table class="setup-table">
+        <tr><th>フリーマン</th><td>常にボール保持チームの味方として参加（実質6対4の数的優位）</td></tr>
+        <tr><th>得点</th><td>相手エンドまでボールを運んだら1点（シュートなし）</td></tr>
+        <tr><th>タッチ制限</th><td>基本2タッチ。グリッド外に出たら相手ボール</td></tr>
+        <tr><th>Over50版</th><td>グリッドを広めに。フリーマンを3人に増やして常に優位に保つ</td></tr>
+      </table>
+
+      <div class="sec-label">KEY FACTORS</div>
+      <ul class="kf-list">
+        <li><strong>幅と深さ</strong>——誰かが横幅をとり、誰かが縦の深さをとる立ち位置を常に意識</li>
+        <li>ボールから離れた選手ほどポジション取りが重要（フリーマンを活用しやすくする）</li>
+        <li>2タッチ制限でファーストタッチの方向意識を養う</li>
+        <li>奪われた瞬間に切り替え（ロンドで鍛えた認知を試合に繋げる）</li>
+      </ul>
+
+      <div class="reborn-box">
+        <div class="rb-label">⚽ OVER 50 アレンジ</div>
+        <div class="rb-text">フリーマンを3人にして常に数的優位を保つ。「パスが繋がる」成功体験を試合形式で積ませることが目的。最初はタッチ自由でも可。練習のロンドやワンツーで学んだ動きが自然と出てくるか確認する。</div>
+      </div>
+
+      <div class="cue-box">
+        <div class="cue-label">COACHING CUES</div>
+        <ul class="cue-list">
+          <li>「幅をとって、深さをとって」</li>
+          <li>「フリーマンはどこにいる？」</li>
+          <li>「奪われたら即ゲーゲンプレス」</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─────────────────────────────────── -->
+  <!-- 90分セッション例 -->
+  <!-- ─────────────────────────────────── -->
+  <div class="session-card">
+    <div class="session-head">
+      <div class="sh-title">📋 90分 練習セッション例</div>
+      <div class="sh-sub">この4ドリルを1セッションで完結させる構成</div>
+    </div>
+    <div class="session-body">
+      <div class="session-row">
+        <div class="session-time">0〜20分</div>
+        <div class="session-content">
+          <strong>ウォームアップ</strong>
+          <div class="session-note">ウォーキング → 動的ストレッチ（股関節・ハムストリング中心）→ 10m距離の2人組パス交換。静的ストレッチは練習後に回す</div>
+        </div>
+      </div>
+      <div class="session-row">
+        <div class="session-time">20〜35分</div>
+        <div class="session-content">
+          <strong>DRILL 01 — 4対2ロンド（3タッチ）</strong>
+          <div class="session-note">1分交代制。グリッド12m。基本形を全員が体験できるよう複数グループで同時進行</div>
+        </div>
+      </div>
+      <div class="session-row">
+        <div class="session-time">35〜50分</div>
+        <div class="session-content">
+          <strong>DRILL 02 — 2対1コンビネーション突破</strong>
+          <div class="session-note">Step2「歩き守備」から開始。3〜4セットこなしたらStep3へ。成功率を重視</div>
+        </div>
+      </div>
+      <div class="session-row">
+        <div class="session-time">50〜65分</div>
+        <div class="session-content">
+          <strong>DRILL 03 — ダブルトライアングル</strong>
+          <div class="session-note">最初は内側固定・外側のみ動く形から。慣れたら内側も動かす</div>
+        </div>
+      </div>
+      <div class="session-row">
+        <div class="session-time">65〜80分</div>
+        <div class="session-content">
+          <strong>DRILL 04 — 4対4＋フリーマン ゲーム</strong>
+          <div class="session-note">フリーマン3人で数的優位確保。2タッチ制限。フリーズコーチングで気づきを言語化</div>
+        </div>
+      </div>
+      <div class="session-row">
+        <div class="session-time">80〜90分</div>
+        <div class="session-content">
+          <strong>クールダウン＋振り返り</strong>
+          <div class="session-note">静的ストレッチ（ハムストリング・股関節）。「今日一番気づいたこと」を1人1言でシェア</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider-text">─── 参考リンク集 ───</div>
+
+  <!-- ─────────────────────────────────── -->
+  <!-- 参考リンク集 -->
+  <!-- ─────────────────────────────────── -->
+  <div class="links-card">
+    <div class="links-head">
+      <div class="lh-title">🔗 参考リンク集</div>
+    </div>
+    <div class="links-body">
+
+      <div class="links-section-label">YouTube — ロンド（鳥かご）</div>
+      <a class="link-item" href="https://www.youtube.com/watch?v=0v7qfQdSyBI" target="_blank" rel="noopener">
+        <div class="link-icon">▶️</div>
+        <div>
+          <div class="link-title">4対2 ロンド解説（日本語）</div>
+          <div class="link-desc">外3人＋中1人 vs 守備2人。サポートポジションと体の向きの解説付き</div>
+        </div>
+      </a>
+      <a class="link-item" href="https://www.youtube.com/watch?v=kyQDbEE365I" target="_blank" rel="noopener">
+        <div class="link-icon">▶️</div>
+        <div>
+          <div class="link-title">Pep Guardiola's Bayern Possession Masterclass — 6v6+4 Rondo</div>
+          <div class="link-desc">グアルディオラが使うロンドの応用形。フリーマン活用のイメージ参考に</div>
+        </div>
+      </a>
+
+      <div class="links-section-label">YouTube — 2対1 ワンツー</div>
+      <a class="link-item" href="https://www.youtube.com/watch?v=NQf00waR9sA" target="_blank" rel="noopener">
+        <div class="link-icon">▶️</div>
+        <div>
+          <div class="link-title">考えてプレーする能力を高める「2対1」（日本語）</div>
+          <div class="link-desc">判断力向上に特化した2対1ドリルの解説動画</div>
+        </div>
+      </a>
+      <a class="link-item" href="https://www.youtube.com/watch?v=ysASaqHBVNk" target="_blank" rel="noopener">
+        <div class="link-icon">▶️</div>
+        <div>
+          <div class="link-title">【ワンツーパターン集】相手DFを崩す！効果的な連携プレー12選（日本語）</div>
+          <div class="link-desc">実戦的なワンツーのバリエーション12種類。チームで見て共通言語にするとよい</div>
+        </div>
+      </a>
+
+      <div class="links-section-label">YouTube — トライアングル・組み合わせパス</div>
+      <a class="link-item" href="https://www.youtube.com/watch?v=fDpEpD2X_n4" target="_blank" rel="noopener">
+        <div class="link-icon">▶️</div>
+        <div>
+          <div class="link-title">Double Triangle Passing Drill（英語）</div>
+          <div class="link-desc">ダブルトライアングルの基本形。内側・外側の動きが視覚的にわかりやすい</div>
+        </div>
+      </a>
+      <a class="link-item" href="https://www.youtube.com/watch?v=N_w6d6y4i58" target="_blank" rel="noopener">
+        <div class="link-icon">▶️</div>
+        <div>
+          <div class="link-title">The Ajax Triangle Passing Drill（英語）</div>
+          <div class="link-desc">アヤックス式のトライアングルパス。シンプルで繰り返しやすい形</div>
+        </div>
+      </a>
+      <a class="link-item" href="https://www.youtube.com/watch?v=NWdpkLFIPY0" target="_blank" rel="noopener">
+        <div class="link-icon">▶️</div>
+        <div>
+          <div class="link-title">Double Triangle Passing Combination U11〜U13（英語）</div>
+          <div class="link-desc">U11〜U13向けのダブルトライアングル応用形。ロングパス版も含む</div>
+        </div>
+      </a>
+
+      <div class="links-section-label">YouTube — スモールサイドゲーム（SSG）</div>
+      <a class="link-item" href="https://www.youtube.com/watch?v=FrIYxEk6LG0" target="_blank" rel="noopener">
+        <div class="link-icon">▶️</div>
+        <div>
+          <div class="link-title">4v4 Small Sided Possession Game（英語）</div>
+          <div class="link-desc">4対4のポゼッション特化ゲーム。プレッシャー下でのパス継続を練習</div>
+        </div>
+      </a>
+      <a class="link-item" href="https://www.youtube.com/watch?v=sxpl0X7gYQU" target="_blank" rel="noopener">
+        <div class="link-icon">▶️</div>
+        <div>
+          <div class="link-title">Break Out Rondo Possession Game（英語）</div>
+          <div class="link-desc">攻守の切り替えを含むポゼッションゲーム。フリーマン活用の実例</div>
+        </div>
+      </a>
+
+      <div class="links-section-label">Web — 解説記事・コーチング資料</div>
+      <a class="link-item" href="https://fb-tc.com/p3_rondo4-2/" target="_blank" rel="noopener">
+        <div class="link-icon">📄</div>
+        <div>
+          <div class="link-title">ロンド4vs2詳細解説（Football Training Catalog）</div>
+          <div class="link-desc">日本語でロンドの原則・コーチングポイントを丁寧に解説</div>
+        </div>
+      </a>
+      <a class="link-item" href="https://www.360player.com/blog/7-fun-competitive-rondo-variations" target="_blank" rel="noopener">
+        <div class="link-icon">📄</div>
+        <div>
+          <div class="link-title">7 Proven Rondo Drill Variations（360player）</div>
+          <div class="link-desc">ロンドの7つのバリエーション。難易度別・人数別の応用形を一覧で確認できる</div>
+        </div>
+      </a>
+      <a class="link-item" href="https://junior-soccer.college/2-1-regate-pared/" target="_blank" rel="noopener">
+        <div class="link-icon">📄</div>
+        <div>
+          <div class="link-title">2対1コンビネーション突破（ジュニアサッカー大学）</div>
+          <div class="link-desc">日本語の詳細解説。ステップ別の進め方と注意点あり</div>
+        </div>
+      </a>
+      <a class="link-item" href="https://onside-training.com/double-triangle-passing-drill/" target="_blank" rel="noopener">
+        <div class="link-icon">📄</div>
+        <div>
+          <div class="link-title">Double Triangle Passing Drill（Onside Training）</div>
+          <div class="link-desc">ダブルトライアングルの図解とバリエーション説明（英語）</div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<footer>ReBorn F.C Over50 | 東京都リーグ3部 | 2026.05.05 調査</footer>
+<a id="back-top" href="#">
+  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+  TOPへ
+</a>
+
+</body>
+</html>
