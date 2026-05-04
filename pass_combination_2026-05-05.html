@@ -355,14 +355,14 @@
         <rect x="8" y="20" width="242" height="22" fill="rgba(192,57,43,0.7)"/>
         <text x="129" y="33" text-anchor="middle" fill="white" font-size="10" font-weight="800">❌ 影の中（パスが届かない）</text>
 
-        <!-- 受け手（上・影の中） -->
-        <circle cx="125" cy="68" r="15" fill="#2471a3" stroke="#ff6b6b" stroke-width="2.5"/>
-        <text x="125" y="73" text-anchor="middle" fill="white" font-size="9" font-weight="bold">受</text>
-        <text x="152" y="62" fill="#ff6b6b" font-size="20" font-weight="900">×</text>
-
         <!-- カバーシャドウのコーン（守備者→受け手方向＝上方向） -->
         <polygon points="110,118 140,118 155,48 95,48" fill="rgba(0,0,0,0.38)" stroke="rgba(255,100,100,0.55)" stroke-width="1" stroke-dasharray="4,3"/>
         <text x="125" y="98" text-anchor="middle" fill="rgba(255,180,180,0.85)" font-size="9" font-weight="bold">影</text>
+
+        <!-- 受け手（上・影の中）※影の上に描画してはっきり見せる -->
+        <circle cx="125" cy="68" r="15" fill="#2471a3" stroke="#ff6b6b" stroke-width="3"/>
+        <text x="125" y="73" text-anchor="middle" fill="white" font-size="9" font-weight="bold">受</text>
+        <text x="152" y="62" fill="#ff6b6b" font-size="20" font-weight="900">×</text>
 
         <!-- 守備者（中間） -->
         <circle cx="125" cy="135" r="15" fill="#c0392b" stroke="white" stroke-width="2"/>
