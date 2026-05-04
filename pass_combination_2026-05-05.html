@@ -58,6 +58,34 @@
   #back-top { position:fixed; bottom:24px; right:24px; background:#1a6b3a; color:white; border-radius:50px; padding:9px 16px 9px 12px; font-size:12px; font-weight:800; text-decoration:none; display:flex; align-items:center; gap:6px; box-shadow:0 4px 14px rgba(26,107,58,0.4); z-index:999; }
   footer { text-align:center; padding:20px; font-size:11px; color:#aaa; border-top:1px solid #e0e0e0; margin-top:24px; }
 
+  /* ─── 4原則サマリーカード ─── */
+  .summary-card { background:white; border-radius:16px; box-shadow:0 2px 16px rgba(0,0,0,0.08); margin-bottom:28px; overflow:hidden; }
+  .summary-head { background:linear-gradient(135deg,#0f172a,#1e3a5f); color:white; padding:13px 22px; font-size:11px; font-weight:800; letter-spacing:1.5px; }
+  .summary-grid { display:grid; grid-template-columns:1fr 1fr; }
+  .sum-item { display:flex; align-items:center; gap:10px; padding:13px 16px; border-bottom:1px solid #f1f5f9; }
+  .sum-item:nth-child(odd) { border-right:1px solid #f1f5f9; }
+  .sum-item:nth-child(3), .sum-item:nth-child(4) { border-bottom:none; }
+  .sum-icon { font-size:22px; flex-shrink:0; }
+  .sum-num { width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:900; flex-shrink:0; color:white; }
+  .sn1 { background:#2471a3; }
+  .sn2 { background:#0d9488; }
+  .sn3 { background:#7c3aed; }
+  .sn4 { background:#c2410c; }
+  .sum-text { font-size:13px; font-weight:700; color:#1e3a5f; line-height:1.4; }
+
+  /* ─── 原則区切り ─── */
+  .prin-divider { display:flex; align-items:center; gap:10px; margin:32px 0 14px; }
+  .prin-divider .pd-line { flex:1; height:2px; border-radius:2px; }
+  .pd-line1 { background:linear-gradient(90deg,#dbeafe,#93c5fd); }
+  .pd-line2 { background:linear-gradient(90deg,#ccfbf1,#5eead4); }
+  .pd-line3 { background:linear-gradient(90deg,#ede9fe,#a78bfa); }
+  .pd-line4 { background:linear-gradient(90deg,#ffedd5,#fb923c); }
+  .prin-divider .pd-tag { font-size:10px; font-weight:800; letter-spacing:1.5px; padding:4px 14px; border-radius:20px; white-space:nowrap; }
+  .pt1 { background:#dbeafe; color:#1d4ed8; }
+  .pt2 { background:#ccfbf1; color:#0f766e; }
+  .pt3 { background:#ede9fe; color:#6d28d9; }
+  .pt4 { background:#ffedd5; color:#c2410c; }
+
   @media (max-width:600px) {
     header { padding:22px 14px 18px; }
     header h1 { font-size:17px; }
@@ -71,6 +99,9 @@
     .prow .body small { font-size:10px; }
     .nrow { padding:10px 14px; font-size:12px; }
     #back-top { bottom:16px; right:14px; padding:8px 12px 8px 10px; font-size:11px; }
+    .summary-grid { grid-template-columns:1fr; }
+    .sum-item:nth-child(odd) { border-right:none; }
+    .sum-item:nth-child(3) { border-bottom:1px solid #f1f5f9; }
   }
 </style>
 </head>
@@ -85,23 +116,45 @@
 
 <div class="container">
 
+  <!-- 4原則サマリー -->
+  <div class="summary-card">
+    <div class="summary-head">⚽ 4原則 ひとことまとめ</div>
+    <div class="summary-grid">
+      <div class="sum-item">
+        <span class="sum-icon">🧭</span>
+        <span class="sum-num sn1">①</span>
+        <span class="sum-text">影の外・体を開いて受ける</span>
+      </div>
+      <div class="sum-item">
+        <span class="sum-icon">🏃</span>
+        <span class="sum-num sn2">②</span>
+        <span class="sum-text">出したら走る。隣が補填</span>
+      </div>
+      <div class="sum-item">
+        <span class="sum-icon">⏱️</span>
+        <span class="sum-num sn3">③</span>
+        <span class="sum-text">動く瞬間に45度で入る</span>
+      </div>
+      <div class="sum-item">
+        <span class="sum-icon">⚡</span>
+        <span class="sum-num sn4">④</span>
+        <span class="sum-text">入ったらすぐ出す（こねない）</span>
+      </div>
+    </div>
+  </div>
+
   <!-- 前提 -->
   <div class="main-card">
-    <div class="situation green">
+    <div class="situation" style="background:linear-gradient(135deg,#14532d,#166534);">
       <div class="label">PREMISE — チーム全体で常に維持すること</div>
-      <div class="text">まず<em>幅と深さを確保する</em>。パスは<em>前 → 横 → 後ろ</em>の優先順位で選ぶ</div>
-      <div class="sub">この2つが整っていると、4原則が自然に機能する土台ができる</div>
+      <div class="text">まず<em>幅と深さを確保する</em></div>
+      <div class="sub">これが整うと4原則が自然に機能する土台ができる</div>
     </div>
     <div class="points">
       <div class="prow">
-        <div class="n" style="background:#1a6b3a;">A</div>
+        <div class="n" style="background:#166534;">A</div>
         <div class="who">チーム全体</div>
-        <div class="body"><strong>幅と深さを確保する</strong><small>幅＝左右に広がること（ピッチの端に誰かいる）。深さ＝前後に広がること（前線と後方に誰かいる）。全員が固まると三角形が作れず45度が生まれない</small></div>
-      </div>
-      <div class="prow">
-        <div class="n" style="background:#1a6b3a;">B</div>
-        <div class="who">パスの選択</div>
-        <div class="body"><strong>まずパスを動かすことが最優先。最初は方向を意識しなくてよい</strong><small>「前・横・後ろどこへ出すか」を考えているうちにタイミングを逃す。慣れてきたら自然と前を狙えるようになる</small></div>
+        <div class="body"><strong>幅と深さを確保する（目安：選手間10〜15m）</strong><small>幅＝左右に広がること。深さ＝前後に広がること。守備者1人の両側に7m以上離れて立つと、守備者1人では2人を同時に守れなくなる</small></div>
       </div>
     </div>
   </div>
@@ -234,6 +287,12 @@
     <p class="pitch-note">幅（左右）と深さ（前後）の目安は10〜15m。近すぎると守備1人に2人同時にプレッシャーされてしまう。</p>
   </div>
 
+  <div class="prin-divider">
+    <div class="pd-line pd-line1"></div>
+    <div class="pd-tag pt1">PRINCIPLE 01 ── 受け手</div>
+    <div class="pd-line pd-line1"></div>
+  </div>
+
   <!-- ─── 原則① ─── -->
   <div class="main-card">
     <div class="situation blue2">
@@ -346,6 +405,12 @@
     <p class="pitch-note">守備者の横・斜め後ろに立つだけでパスコースが生まれる。</p>
   </div>
 
+  <div class="prin-divider">
+    <div class="pd-line pd-line2"></div>
+    <div class="pd-tag pt2">PRINCIPLE 02 ── 出し手</div>
+    <div class="pd-line pd-line2"></div>
+  </div>
+
   <!-- ─── 原則② ─── -->
   <div class="main-card">
     <div class="situation teal">
@@ -448,6 +513,12 @@
     <p class="pitch-note">出し手がゾーンAを空けて前へ走る。ボールと無関係な右の選手がゾーンAを自動的に埋める。</p>
   </div>
 
+  <div class="prin-divider">
+    <div class="pd-line pd-line3"></div>
+    <div class="pd-tag pt3">PRINCIPLE 03 ── 第三の選手</div>
+    <div class="pd-line pd-line3"></div>
+  </div>
+
   <!-- ─── 原則③ ─── -->
   <div class="main-card">
     <div class="situation purple">
@@ -536,18 +607,14 @@
         <text x="413" y="163" fill="#7fff7f" font-size="16" font-weight="900">✓</text>
 
         <!-- ③の最終位置ラベル -->
-        <rect x="358" y="198" width="100" height="22" fill="rgba(124,58,237,0.3)" stroke="rgba(192,132,252,0.6)" stroke-width="1" rx="5"/>
-        <text x="408" y="213" text-anchor="middle" fill="#c084fc" font-size="9" font-weight="bold">影の外・45度の位置</text>
-
-        <!-- 入り方矢印（③→②へ） -->
-        <path d="M 380 170 Q 340 148 292 110" stroke="#c084fc" stroke-width="2.5" fill="none" stroke-dasharray="7,4" marker-end="url(#a3p)"/>
-        <rect x="316" y="128" width="66" height="13" fill="rgba(0,0,0,0.45)" rx="3"/>
-        <text x="349" y="138" text-anchor="middle" fill="#c084fc" font-size="9" font-weight="bold">今！45度で入る</text>
+        <rect x="414" y="182" width="72" height="22" fill="rgba(124,58,237,0.3)" stroke="rgba(192,132,252,0.6)" stroke-width="1" rx="5"/>
+        <text x="450" y="197" text-anchor="middle" fill="#c084fc" font-size="9" font-weight="bold">45度の位置 ✓</text>
 
         <!-- ②からのパス（叩く） -->
-        <line x1="272" y1="107" x2="380" y2="168" stroke="#ffe066" stroke-width="2" marker-end="url(#a3y)" stroke-dasharray="5,3"/>
-        <rect x="308" y="122" width="56" height="13" fill="rgba(0,0,0,0.45)" rx="3"/>
-        <text x="336" y="132" text-anchor="middle" fill="#ffe066" font-size="9" font-weight="bold">1タッチで叩く</text>
+        <line x1="272" y1="107" x2="378" y2="168" stroke="white" stroke-width="2.5" marker-end="url(#a3w)"/>
+        <rect x="298" y="120" width="70" height="24" fill="rgba(0,0,0,0.5)" rx="4"/>
+        <text x="333" y="131" text-anchor="middle" fill="white" font-size="9" font-weight="bold">②が1タッチで</text>
+        <text x="333" y="142" text-anchor="middle" fill="#ffe066" font-size="9" font-weight="bold">③に叩く</text>
 
         <!-- タイミング説明 -->
         <rect x="30" y="55" width="130" height="38" fill="rgba(0,0,0,0.4)" rx="6"/>
@@ -556,6 +623,12 @@
       </svg>
     </div>
     <p class="pitch-note">第三の選手（③）は「ボールが動く瞬間」に動き出す。早すぎずそのタイミングが鍵。</p>
+  </div>
+
+  <div class="prin-divider">
+    <div class="pd-line pd-line4"></div>
+    <div class="pd-tag pt4">PRINCIPLE 04 ── 受け手（②）</div>
+    <div class="pd-line pd-line4"></div>
   </div>
 
   <!-- ─── 原則④ ─── -->
