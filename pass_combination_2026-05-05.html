@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>狭いスペースのパス 4原則 | ReBorn F.C Over50</title>
+<style>
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:'Helvetica Neue',Arial,'Hiragino Kaku Gothic ProN',Meiryo,sans-serif; background:#f0f2f0; color:#222; line-height:1.7; }
+
+  header { background:linear-gradient(135deg,#0f4c27,#1a6b3a,#2d8f52); color:white; padding:36px 24px 28px; text-align:center; }
+  header .badge { display:inline-block; background:rgba(255,255,255,0.2); border:1px solid rgba(255,255,255,0.35); border-radius:20px; padding:3px 14px; font-size:11px; letter-spacing:1px; margin-bottom:10px; }
+  header h1 { font-size:22px; font-weight:900; margin-bottom:4px; }
+  header p { font-size:12px; opacity:.75; }
+
+  .container { max-width:820px; margin:0 auto; padding:28px 16px 64px; }
+
+  .main-card { background:white; border-radius:16px; box-shadow:0 2px 16px rgba(0,0,0,0.08); margin-bottom:24px; overflow:hidden; }
+  .situation { background:#1a4b7a; color:white; padding:18px 24px; }
+  .situation .label { font-size:10px; letter-spacing:2px; opacity:.65; margin-bottom:6px; }
+  .situation .text { font-size:15px; font-weight:800; line-height:1.6; }
+  .situation .text em { color:#7ec8ff; font-style:normal; }
+  .situation .sub { font-size:12px; opacity:.75; margin-top:6px; }
+
+  .situation.green { background:linear-gradient(135deg,#0f4c27,#1a6b3a); }
+  .situation.blue2 { background:linear-gradient(135deg,#1a3a6b,#2471a3); }
+  .situation.teal { background:linear-gradient(135deg,#134e4a,#0d9488); }
+  .situation.purple { background:linear-gradient(135deg,#4c1d95,#7c3aed); }
+  .situation.amber { background:linear-gradient(135deg,#78350f,#c2410c); }
+
+  .points { padding:8px 0; }
+  .prow { display:flex; align-items:baseline; gap:14px; padding:11px 24px; border-bottom:1px solid #f2f2f2; }
+  .prow:last-child { border-bottom:none; }
+  .prow .n { background:#1a6b3a; color:white; min-width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:900; flex-shrink:0; margin-top:1px; }
+  .prow.blue .n { background:#2471a3; }
+  .prow.teal .n { background:#0d9488; }
+  .prow.purple .n { background:#7c3aed; }
+  .prow.amber .n { background:#c2410c; }
+  .prow .who { font-size:11px; font-weight:800; color:#2471a3; min-width:80px; flex-shrink:0; padding-top:2px; }
+  .prow .body { font-size:14px; }
+  .prow .body strong { font-weight:800; display:block; }
+  .prow .body small { font-size:11px; color:#888; }
+
+  .fig { margin-bottom:24px; }
+  .fig-label { font-size:12px; font-weight:800; color:#555; letter-spacing:1px; margin-bottom:8px; padding-left:4px; }
+  .pitch { background:linear-gradient(180deg,#3a9e5c,#2d8f52); border-radius:12px; overflow:hidden; box-shadow:0 2px 12px rgba(0,0,0,0.1); }
+  .pitch svg { display:block; width:100%; }
+  .pitch-note { text-align:center; font-size:12px; color:#666; margin-top:8px; }
+
+  .notes { background:white; border-radius:16px; box-shadow:0 2px 16px rgba(0,0,0,0.08); overflow:hidden; }
+  .notes-head { background:#444; color:white; padding:12px 22px; font-size:12px; font-weight:800; letter-spacing:1px; }
+  .nrow { display:flex; gap:12px; padding:13px 22px; border-bottom:1px solid #f2f2f2; font-size:13px; align-items:flex-start; }
+  .nrow:last-child { border-bottom:none; }
+  .nrow .icon { font-size:16px; flex-shrink:0; margin-top:1px; }
+  .nrow strong { font-weight:800; display:block; margin-bottom:2px; }
+  .nrow span { color:#555; }
+
+  #back-top { position:fixed; bottom:24px; right:24px; background:#1a6b3a; color:white; border-radius:50px; padding:9px 16px 9px 12px; font-size:12px; font-weight:800; text-decoration:none; display:flex; align-items:center; gap:6px; box-shadow:0 4px 14px rgba(26,107,58,0.4); z-index:999; }
+  footer { text-align:center; padding:20px; font-size:11px; color:#aaa; border-top:1px solid #e0e0e0; margin-top:24px; }
+
+  @media (max-width:600px) {
+    header { padding:22px 14px 18px; }
+    header h1 { font-size:17px; }
+    .container { padding:16px 10px 48px; }
+    .situation { padding:13px 14px; }
+    .situation .text { font-size:13px; }
+    .prow { padding:9px 12px; gap:8px; }
+    .prow .n { min-width:22px; height:22px; font-size:10px; }
+    .prow .who { min-width:58px; font-size:10px; }
+    .prow .body { font-size:13px; }
+    .prow .body small { font-size:10px; }
+    .nrow { padding:10px 14px; font-size:12px; }
+    #back-top { bottom:16px; right:14px; padding:8px 12px 8px 10px; font-size:11px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="badge">COMBINATION PLAY</div>
+  <h1>狭いスペースのパス 4原則</h1>
+  <p>ReBorn F.C Over50 | 東京都リーグ3部 | 2026.05.05</p>
+  <p style="font-size:10px; opacity:.55; margin-top:6px;">調査・クロスチェック：バルセロナ / アヤックス / グアルディオラ / スペインRFEF / コーチング科学</p>
+</header>
+
+<div class="container">
+
+  <!-- 前提 -->
+  <div class="main-card">
+    <div class="situation green">
+      <div class="label">PREMISE — チーム全体で常に維持すること</div>
+      <div class="text">まず<em>幅と深さを確保する</em>。パスは<em>前 → 横 → 後ろ</em>の優先順位で選ぶ</div>
+      <div class="sub">この2つが整っていると、4原則が自然に機能する土台ができる</div>
+    </div>
+    <div class="points">
+      <div class="prow">
+        <div class="n" style="background:#1a6b3a;">A</div>
+        <div class="who">チーム全体</div>
+        <div class="body"><strong>幅と深さを確保する</strong><small>幅＝左右に広がること（ピッチの端に誰かいる）。深さ＝前後に広がること（前線と後方に誰かいる）。全員が固まると三角形が作れず45度が生まれない</small></div>
+      </div>
+      <div class="prow">
+        <div class="n" style="background:#1a6b3a;">B</div>
+        <div class="who">パスの選択</div>
+        <div class="body"><strong>前が空いていればまず前。ダメなら横。最後にバック</strong><small>バックパスは逃げではなく「前を作るための手段」として使う</small></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── 原則① ─── -->
+  <div class="main-card">
+    <div class="situation blue2">
+      <div class="label">PRINCIPLE 01 — 受け手</div>
+      <div class="text">守備者の影の外に立ち、<em>身体をオープンに開いて</em>受ける</div>
+      <div class="sub">受ける前のポジション取りがすべて。影の中では受けられない</div>
+    </div>
+    <div class="points">
+      <div class="prow blue">
+        <div class="n">①</div>
+        <div class="who">受け手</div>
+        <div class="body"><strong>守備者の真後ろに立たない——横にずれる</strong><small>守備者とボールが一直線になると「カバーシャドウ」でパスが届かない。横か斜め後ろへずれて影から抜け出す</small></div>
+      </div>
+      <div class="prow blue">
+        <div class="n">②</div>
+        <div class="who">受け手</div>
+        <div class="body"><strong>身体をオープン（斜め向き）に開いて止める</strong><small>体の向きを整えてから受けると、次のパスコースが自動的に2方向生まれる</small></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 図1: カバーシャドウ -->
+  <div class="fig">
+    <div class="fig-label">図1 — カバーシャドウ：影の中 vs 影の外</div>
+    <div class="pitch">
+      <svg viewBox="0 0 500 240" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="a1w" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="white"/></marker>
+          <marker id="a1g" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#7fff7f"/></marker>
+          <marker id="a1r" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#ff6b6b"/></marker>
+        </defs>
+        <rect width="500" height="240" fill="#2d8f52"/>
+        <rect x="8" y="8" width="484" height="224" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/>
+        <line x1="250" y1="20" x2="250" y2="232" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" stroke-dasharray="5,4"/>
+
+        <!-- タイトルバー -->
+        <rect x="0" y="0" width="500" height="20" fill="rgba(0,0,0,0.4)"/>
+        <text x="250" y="14" text-anchor="middle" fill="white" font-size="10" font-weight="bold">「守備者の真後ろに立つな。横にずれろ」</text>
+
+        <!-- ===== 左：NG ===== -->
+        <rect x="8" y="20" width="242" height="22" fill="rgba(192,57,43,0.7)"/>
+        <text x="129" y="35" text-anchor="middle" fill="white" font-size="11" font-weight="800">❌ 影の中（パスが届かない）</text>
+
+        <!-- ボール -->
+        <circle cx="125" cy="68" r="9" fill="#f5c518" stroke="white" stroke-width="2"/>
+        <text x="125" y="58" text-anchor="middle" fill="white" font-size="9" font-weight="bold">ボール</text>
+
+        <!-- カバーシャドウのコーン（薄暗い三角形） -->
+        <polygon points="113,100 137,100 160,210 90,210" fill="rgba(0,0,0,0.35)" stroke="rgba(255,100,100,0.5)" stroke-width="1" stroke-dasharray="4,3"/>
+        <text x="125" y="165" text-anchor="middle" fill="rgba(255,180,180,0.8)" font-size="9" font-weight="bold">影（シャドウ）</text>
+
+        <!-- 守備者 -->
+        <circle cx="125" cy="110" r="15" fill="#c0392b" stroke="white" stroke-width="2"/>
+        <text x="125" y="115" text-anchor="middle" fill="white" font-size="9" font-weight="bold">守</text>
+
+        <!-- 受け手（影の中） -->
+        <circle cx="125" cy="175" r="15" fill="#2471a3" stroke="#ff6b6b" stroke-width="2.5"/>
+        <text x="125" y="180" text-anchor="middle" fill="white" font-size="9" font-weight="bold">受</text>
+        <text x="167" y="180" fill="#ff6b6b" font-size="22" font-weight="900">×</text>
+
+        <!-- パスライン（ブロックされてる） -->
+        <line x1="125" y1="77" x2="125" y2="93" stroke="rgba(255,100,100,0.6)" stroke-width="2" stroke-dasharray="4,3"/>
+        <text x="80" y="108" fill="#ff6b6b" font-size="9">ブロック</text>
+
+        <!-- ===== 右：OK ===== -->
+        <rect x="250" y="20" width="242" height="22" fill="rgba(26,107,58,0.7)"/>
+        <text x="371" y="35" text-anchor="middle" fill="white" font-size="11" font-weight="800">✅ 影の外（パスが通る）</text>
+
+        <!-- ボール -->
+        <circle cx="295" cy="68" r="9" fill="#f5c518" stroke="white" stroke-width="2"/>
+        <text x="295" y="58" text-anchor="middle" fill="white" font-size="9" font-weight="bold">ボール</text>
+
+        <!-- カバーシャドウのコーン（下方向） -->
+        <polygon points="283,100 307,100 320,210 270,210" fill="rgba(0,0,0,0.3)" stroke="rgba(255,100,100,0.4)" stroke-width="1" stroke-dasharray="4,3"/>
+        <text x="295" y="175" text-anchor="middle" fill="rgba(255,180,180,0.7)" font-size="9">影</text>
+
+        <!-- 守備者 -->
+        <circle cx="295" cy="110" r="15" fill="#c0392b" stroke="white" stroke-width="2"/>
+        <text x="295" y="115" text-anchor="middle" fill="white" font-size="9" font-weight="bold">守</text>
+
+        <!-- 受け手（影の外・横にずれた） -->
+        <circle cx="415" cy="155" r="15" fill="#2471a3" stroke="#7fff7f" stroke-width="2.5"/>
+        <text x="415" y="160" text-anchor="middle" fill="white" font-size="9" font-weight="bold">受</text>
+        <text x="435" y="145" fill="#7fff7f" font-size="18" font-weight="900">✓</text>
+
+        <!-- 横ずれの矢印 -->
+        <line x1="295" y1="175" x2="390" y2="155" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-dasharray="3,2" marker-end="url(#a1w)"/>
+        <rect x="310" y="167" width="62" height="12" fill="rgba(0,0,0,0.4)" rx="3"/>
+        <text x="341" y="176" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-size="8">横にずれる</text>
+
+        <!-- パスライン（通る） -->
+        <line x1="303" y1="76" x2="402" y2="143" stroke="#7fff7f" stroke-width="2.5" marker-end="url(#a1g)"/>
+        <rect x="335" y="100" width="60" height="12" fill="rgba(0,0,0,0.4)" rx="3"/>
+        <text x="365" y="109" text-anchor="middle" fill="#7fff7f" font-size="8">パスが通る</text>
+
+        <!-- 開いた体の向き説明 -->
+        <rect x="362" y="172" width="90" height="24" fill="rgba(36,113,163,0.3)" stroke="rgba(126,200,255,0.6)" stroke-width="1" rx="4"/>
+        <text x="407" y="182" text-anchor="middle" fill="#7ec8ff" font-size="8" font-weight="bold">体を開いて</text>
+        <text x="407" y="192" text-anchor="middle" fill="#7ec8ff" font-size="8" font-weight="bold">次のコースへ</text>
+      </svg>
+    </div>
+    <p class="pitch-note">守備者の横・斜め後ろに立つだけでパスコースが生まれる。</p>
+  </div>
+
+  <!-- ─── 原則② ─── -->
+  <div class="main-card">
+    <div class="situation teal">
+      <div class="label">PRINCIPLE 02 — 出し手</div>
+      <div class="text">パスを出したら<em>開いたスペースへ走り込む</em>。抜けた後は<em>誰かがゾーンを埋める</em></div>
+      <div class="sub">出して止まるとワンツーが死ぬ。走り込んだ後は輪番で補填する</div>
+    </div>
+    <div class="points">
+      <div class="prow teal">
+        <div class="n">①</div>
+        <div class="who">出し手</div>
+        <div class="body"><strong>パスを出したら止まらない——受け手が開いた側へ走り込む</strong><small>受け手が体を開いた方向にスペースが生まれている。そこに飛び込むとリターンの出口ができる</small></div>
+      </div>
+      <div class="prow teal">
+        <div class="n">②</div>
+        <div class="who">補填選手</div>
+        <div class="body"><strong>走り込んだ選手が空けたゾーンを自動的に埋める（輪番）</strong><small>誰かが飛び出したら誰かがカバーする。この約束がないとゾーンが穴だらけになる</small></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 図2: 走り込み + 補填 -->
+  <div class="fig">
+    <div class="fig-label">図2 — パスを出したら走り込む + ゾーン補填</div>
+    <div class="pitch">
+      <svg viewBox="0 0 500 240" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="a2w" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="white"/></marker>
+          <marker id="a2b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#7ec8ff"/></marker>
+          <marker id="a2g" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#7fff7f"/></marker>
+          <marker id="a2y" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#ffe066"/></marker>
+        </defs>
+        <rect width="500" height="240" fill="#2d8f52"/>
+        <rect x="8" y="8" width="484" height="224" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/>
+        <rect x="0" y="0" width="500" height="20" fill="rgba(0,0,0,0.4)"/>
+        <text x="250" y="14" text-anchor="middle" fill="white" font-size="10" font-weight="bold">出して止まるな。走り込んで、その後は誰かが補填する</text>
+
+        <!-- ゾーン（破線の四角）A地帯 -->
+        <rect x="70" y="100" width="100" height="90" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" stroke-dasharray="5,3" rx="4"/>
+        <text x="120" y="150" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="9">ゾーンA</text>
+
+        <!-- 出し手（左・ボール保持） -->
+        <circle cx="120" cy="130" r="17" fill="rgba(245,197,24,0.12)" stroke="#f5c518" stroke-width="1.5" stroke-dasharray="3,2"/>
+        <circle cx="120" cy="130" r="14" fill="#2471a3" stroke="#f5c518" stroke-width="3"/>
+        <text x="120" y="135" text-anchor="middle" fill="white" font-size="9" font-weight="bold">出し手</text>
+        <circle cx="133" cy="118" r="6" fill="#f5c518" stroke="white" stroke-width="1.5"/>
+
+        <!-- パス矢印（出し手 → 受け手） -->
+        <line x1="145" y1="125" x2="265" y2="105" stroke="white" stroke-width="2.5" marker-end="url(#a2w)"/>
+        <rect x="180" y="104" width="46" height="12" fill="rgba(0,0,0,0.4)" rx="3"/>
+        <text x="203" y="113" text-anchor="middle" fill="white" font-size="9" font-weight="bold">① パス</text>
+
+        <!-- 受け手（中央） -->
+        <circle cx="285" cy="100" r="14" fill="#0d9488" stroke="#7ec8ff" stroke-width="2.5"/>
+        <text x="285" y="105" text-anchor="middle" fill="white" font-size="9" font-weight="bold">受け手</text>
+
+        <!-- 走り込み矢印（出し手→スペース） -->
+        <path d="M 130 143 Q 180 200 260 180" stroke="#7ec8ff" stroke-width="2.5" fill="none" stroke-dasharray="8,4" marker-end="url(#a2b)"/>
+        <rect x="168" y="185" width="62" height="13" fill="rgba(0,0,0,0.45)" rx="3"/>
+        <text x="199" y="195" text-anchor="middle" fill="#7ec8ff" font-size="9" font-weight="bold">② 走り込む</text>
+
+        <!-- 出し手（走り込み後の位置） -->
+        <circle cx="270" cy="175" r="14" fill="rgba(36,113,163,0.5)" stroke="#7ec8ff" stroke-width="2" stroke-dasharray="3,2"/>
+        <text x="270" y="180" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="9">出し手</text>
+
+        <!-- リターン矢印 -->
+        <line x1="271" y1="161" x2="275" y2="116" stroke="#7ec8ff" stroke-width="2" marker-end="url(#a2b)"/>
+        <rect x="278" y="135" width="52" height="12" fill="rgba(0,0,0,0.4)" rx="3"/>
+        <text x="304" y="144" text-anchor="middle" fill="#7ec8ff" font-size="9" font-weight="bold">リターン</text>
+
+        <!-- ゾーンB（出し手が抜けた後） -->
+        <rect x="70" y="100" width="100" height="90" fill="rgba(255,220,50,0.08)" stroke="rgba(255,220,50,0.5)" stroke-width="1.5" stroke-dasharray="5,3" rx="4"/>
+        <text x="120" y="120" text-anchor="middle" fill="#ffe066" font-size="9" font-weight="bold">空いた！</text>
+
+        <!-- 補填選手 -->
+        <circle cx="370" cy="165" r="14" fill="#2471a3" stroke="#7fff7f" stroke-width="2.5"/>
+        <text x="370" y="170" text-anchor="middle" fill="white" font-size="9" font-weight="bold">補填</text>
+
+        <!-- 補填矢印 -->
+        <path d="M 360 155 Q 280 130 185 155" stroke="#7fff7f" stroke-width="2" fill="none" stroke-dasharray="6,3" marker-end="url(#a2g)"/>
+        <rect x="255" y="128" width="72" height="13" fill="rgba(0,0,0,0.45)" rx="3"/>
+        <text x="291" y="138" text-anchor="middle" fill="#7fff7f" font-size="9" font-weight="bold">③ ゾーンを埋める</text>
+
+        <!-- 守備者 -->
+        <circle cx="220" cy="138" r="13" fill="#c0392b" stroke="white" stroke-width="1.5"/>
+        <text x="220" y="143" text-anchor="middle" fill="white" font-size="8">守</text>
+      </svg>
+    </div>
+    <p class="pitch-note">出し手が走り込む→受け手がリターン→出し手がゴール前へ。補填で穴をふさぐ。</p>
+  </div>
+
+  <!-- ─── 原則③ ─── -->
+  <div class="main-card">
+    <div class="situation purple">
+      <div class="label">PRINCIPLE 03 — 第三の選手</div>
+      <div class="text"><em>ボールが動いている間に</em>、守備者の影の外から<em>45度の角度で入る</em></div>
+      <div class="sub">早すぎると守備者にマークされる。ボールが動く瞬間が動き出すタイミング</div>
+    </div>
+    <div class="points">
+      <div class="prow purple">
+        <div class="n">①</div>
+        <div class="who">第三の選手</div>
+        <div class="body"><strong>ボールが①から②に向かって動き出した瞬間に動き始める</strong><small>早すぎると守備者がついてくる。ボールの動きが合図——これがタイミングの正体</small></div>
+      </div>
+      <div class="prow purple">
+        <div class="n">②</div>
+        <div class="who">第三の選手</div>
+        <div class="body"><strong>受け手（②）に対して45度の斜め方向から入る</strong><small>横並びや真後ろではなく斜め45度に立つと、受け手がそのまま1タッチで叩ける（こねる必要がない）</small></div>
+      </div>
+      <div class="prow purple">
+        <div class="n">③</div>
+        <div class="who">第三の選手</div>
+        <div class="body"><strong>守備者の影の外から入る</strong><small>斜めに入るときも、守備者の影の中に入ると受けられない。影の外に出るルートで入ること</small></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 図3: サードマン 45度 -->
+  <div class="fig">
+    <div class="fig-label">図3 — 第三の選手：45度・ボールが動くタイミングで入る</div>
+    <div class="pitch">
+      <svg viewBox="0 0 500 255" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="a3w" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="white"/></marker>
+          <marker id="a3p" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#c084fc"/></marker>
+          <marker id="a3y" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#ffe066"/></marker>
+        </defs>
+        <rect width="500" height="255" fill="#2d8f52"/>
+        <rect x="8" y="8" width="484" height="239" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/>
+        <rect x="0" y="0" width="500" height="20" fill="rgba(0,0,0,0.4)"/>
+        <text x="250" y="14" text-anchor="middle" fill="white" font-size="10" font-weight="bold">ボールが動く瞬間が合図。45度の外から入ると1タッチで叩ける</text>
+
+        <!-- ① ボール保持者（左） -->
+        <circle cx="100" cy="130" r="18" fill="rgba(245,197,24,0.12)" stroke="#f5c518" stroke-width="1.5" stroke-dasharray="3,2"/>
+        <circle cx="100" cy="130" r="14" fill="#2471a3" stroke="#f5c518" stroke-width="3"/>
+        <text x="100" y="135" text-anchor="middle" fill="white" font-size="12" font-weight="bold">①</text>
+        <circle cx="113" cy="118" r="6" fill="#f5c518" stroke="white" stroke-width="1.5"/>
+
+        <!-- パス矢印 ①→② -->
+        <line x1="116" y1="125" x2="234" y2="108" stroke="white" stroke-width="3" marker-end="url(#a3w)"/>
+        <rect x="145" y="106" width="72" height="14" fill="rgba(0,0,0,0.45)" rx="3"/>
+        <text x="181" y="116" text-anchor="middle" fill="white" font-size="9" font-weight="bold">パスが動く！←合図</text>
+
+        <!-- 守備者（②のマーカー） -->
+        <circle cx="255" cy="135" r="13" fill="#c0392b" stroke="white" stroke-width="1.5"/>
+        <text x="255" y="140" text-anchor="middle" fill="white" font-size="8">守</text>
+
+        <!-- カバーシャドウ（守備者の後ろ・真後ろ方向） -->
+        <polygon points="244,147 266,147 280,220 230,220" fill="rgba(0,0,0,0.3)" stroke="rgba(255,100,100,0.4)" stroke-width="1" stroke-dasharray="4,3"/>
+        <text x="255" y="195" text-anchor="middle" fill="rgba(255,180,180,0.7)" font-size="8">影</text>
+
+        <!-- ② 受け手（中央） -->
+        <circle cx="260" cy="100" r="14" fill="#7c3aed" stroke="#c084fc" stroke-width="2.5"/>
+        <text x="260" y="105" text-anchor="middle" fill="white" font-size="12" font-weight="bold">②</text>
+
+        <!-- 45度角ライン -->
+        <line x1="260" y1="114" x2="370" y2="175" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="4,3"/>
+        <!-- 45度角度表示 -->
+        <path d="M 260 120 A 15 15 0 0 1 270 114" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
+        <text x="280" y="125" fill="rgba(255,255,255,0.7)" font-size="9" font-weight="bold">45°</text>
+
+        <!-- ③ 第三の選手（右下・影の外） -->
+        <circle cx="390" cy="180" r="14" fill="#2471a3" stroke="#c084fc" stroke-width="2.5"/>
+        <text x="390" y="185" text-anchor="middle" fill="white" font-size="12" font-weight="bold">③</text>
+
+        <!-- 入り方矢印（ボール動く→③が動く） -->
+        <path d="M 410 175 Q 360 155 290 110" stroke="#c084fc" stroke-width="2.5" fill="none" stroke-dasharray="7,4" marker-end="url(#a3p)"/>
+        <rect x="330" y="133" width="66" height="13" fill="rgba(0,0,0,0.45)" rx="3"/>
+        <text x="363" y="143" text-anchor="middle" fill="#c084fc" font-size="9" font-weight="bold">今！影の外から</text>
+
+        <!-- 45度ラベル -->
+        <rect x="358" y="205" width="100" height="26" fill="rgba(124,58,237,0.3)" stroke="rgba(192,132,252,0.6)" stroke-width="1" rx="5"/>
+        <text x="408" y="216" text-anchor="middle" fill="#c084fc" font-size="9" font-weight="bold">② の足元にボールが</text>
+        <text x="408" y="227" text-anchor="middle" fill="#c084fc" font-size="9" font-weight="bold">来たら③が入る!</text>
+
+        <!-- ②からのパス（叩く） -->
+        <line x1="273" y1="107" x2="378" y2="172" stroke="#ffe066" stroke-width="2" marker-end="url(#a3y)" stroke-dasharray="5,3"/>
+        <rect x="310" y="125" width="56" height="13" fill="rgba(0,0,0,0.45)" rx="3"/>
+        <text x="338" y="135" text-anchor="middle" fill="#ffe066" font-size="9" font-weight="bold">1タッチで叩く</text>
+
+        <!-- タイミング説明 -->
+        <rect x="30" y="55" width="130" height="38" fill="rgba(0,0,0,0.4)" rx="6"/>
+        <text x="95" y="70" text-anchor="middle" fill="white" font-size="10" font-weight="bold">③の動き出し</text>
+        <text x="95" y="83" text-anchor="middle" fill="#ffe066" font-size="9">＝①が①→②へパスした瞬間</text>
+      </svg>
+    </div>
+    <p class="pitch-note">第三の選手（③）は「ボールが動く瞬間」に動き出す。早すぎずそのタイミングが鍵。</p>
+  </div>
+
+  <!-- ─── 原則④ ─── -->
+  <div class="main-card">
+    <div class="situation amber">
+      <div class="label">PRINCIPLE 04 — 受け手（②）</div>
+      <div class="text">前が空いていれば<em>まず前へ</em>。次の受け手のタイミングで出す——<em>こねない</em></div>
+      <div class="sub">自分のタイミングでなく、受け手が入った瞬間に出す。それがこねないということ</div>
+    </div>
+    <div class="points">
+      <div class="prow amber">
+        <div class="n">①</div>
+        <div class="who">パスの選択</div>
+        <div class="body"><strong>前 → 横 → 後ろ の優先順位で選ぶ</strong><small>前のスペースに③が入ったら即前へ。前が無ければ横。横も無い場合だけバック</small></div>
+      </div>
+      <div class="prow amber">
+        <div class="n">②</div>
+        <div class="who">タイミング</div>
+        <div class="body"><strong>受け手（③）が入った瞬間に出す——1〜2タッチで</strong><small>「③が入ったな」と思った瞬間がパスのタイミング。迷うほど守備者が戻ってくる</small></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 図4: パスの優先順位 -->
+  <div class="fig">
+    <div class="fig-label">図4 — パスの優先順位：前 → 横 → 後ろ</div>
+    <div class="pitch">
+      <svg viewBox="0 0 500 230" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="a4g" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto"><path d="M0,0 L0,8 L10,4 z" fill="#7fff7f"/></marker>
+          <marker id="a4y" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#ffe066"/></marker>
+          <marker id="a4r" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="rgba(255,150,150,0.8)"/></marker>
+        </defs>
+        <rect width="500" height="230" fill="#2d8f52"/>
+        <rect x="8" y="8" width="484" height="214" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/>
+        <rect x="0" y="0" width="500" height="20" fill="rgba(0,0,0,0.4)"/>
+        <text x="250" y="14" text-anchor="middle" fill="white" font-size="10" font-weight="bold">受け手が入った瞬間に出す。迷うほど守備者が戻ってくる</text>
+
+        <!-- ボール保持者（中央） -->
+        <circle cx="250" cy="120" r="20" fill="rgba(245,197,24,0.15)" stroke="#f5c518" stroke-width="2" stroke-dasharray="3,2"/>
+        <circle cx="250" cy="120" r="16" fill="#c2410c" stroke="#f5c518" stroke-width="3"/>
+        <text x="250" y="116" text-anchor="middle" fill="white" font-size="8" font-weight="bold">受け手</text>
+        <text x="250" y="127" text-anchor="middle" fill="white" font-size="8" font-weight="bold">②</text>
+        <circle cx="263" cy="107" r="6" fill="#f5c518" stroke="white" stroke-width="1.5"/>
+
+        <!-- ①前（最優先・太い緑矢印） -->
+        <line x1="250" y1="100" x2="250" y2="48" stroke="#7fff7f" stroke-width="5" marker-end="url(#a4g)"/>
+        <circle cx="250" cy="38" r="14" fill="#2471a3" stroke="#7fff7f" stroke-width="2.5"/>
+        <text x="250" y="43" text-anchor="middle" fill="white" font-size="10" font-weight="bold">③</text>
+        <rect x="258" y="60" width="62" height="26" fill="rgba(0,0,0,0.45)" rx="4"/>
+        <text x="289" y="71" text-anchor="middle" fill="#7fff7f" font-size="11" font-weight="900">①前</text>
+        <text x="289" y="82" text-anchor="middle" fill="#7fff7f" font-size="9">第一選択</text>
+
+        <!-- ②横（中優先・黄色中矢印） -->
+        <line x1="268" y1="112" x2="380" y2="95" stroke="#ffe066" stroke-width="3" marker-end="url(#a4y)"/>
+        <circle cx="393" cy="90" r="13" fill="#2471a3" stroke="#ffe066" stroke-width="2"/>
+        <text x="393" y="95" text-anchor="middle" fill="white" font-size="10" font-weight="bold">○</text>
+        <rect x="395" y="105" width="62" height="26" fill="rgba(0,0,0,0.45)" rx="4"/>
+        <text x="426" y="116" text-anchor="middle" fill="#ffe066" font-size="11" font-weight="900">②横</text>
+        <text x="426" y="127" text-anchor="middle" fill="#ffe066" font-size="9">第二選択</text>
+
+        <!-- ②横（逆サイド） -->
+        <line x1="232" y1="112" x2="120" y2="95" stroke="#ffe066" stroke-width="3" marker-end="url(#a4y)"/>
+        <circle cx="107" cy="90" r="13" fill="#2471a3" stroke="#ffe066" stroke-width="2"/>
+        <text x="107" y="95" text-anchor="middle" fill="white" font-size="10" font-weight="bold">○</text>
+
+        <!-- ③後ろ（最後手段・薄い赤点線矢印） -->
+        <line x1="250" y1="138" x2="250" y2="190" stroke="rgba(255,150,150,0.7)" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#a4r)"/>
+        <circle cx="250" cy="200" r="13" fill="#2471a3" stroke="rgba(255,150,150,0.7)" stroke-width="1.5"/>
+        <text x="250" y="205" text-anchor="middle" fill="white" font-size="10" font-weight="bold">○</text>
+        <rect x="260" y="153" width="72" height="26" fill="rgba(0,0,0,0.4)" rx="4"/>
+        <text x="296" y="164" text-anchor="middle" fill="rgba(255,180,180,0.8)" font-size="11" font-weight="900">③後ろ</text>
+        <text x="296" y="175" text-anchor="middle" fill="rgba(255,180,180,0.8)" font-size="9">最後の手段</text>
+
+        <!-- タイミング説明 -->
+        <rect x="30" y="145" width="145" height="50" fill="rgba(194,65,12,0.3)" stroke="rgba(255,150,100,0.5)" stroke-width="1" rx="6"/>
+        <text x="103" y="162" text-anchor="middle" fill="#fed7aa" font-size="9" font-weight="bold">③が入った瞬間に出す</text>
+        <text x="103" y="175" text-anchor="middle" fill="#fed7aa" font-size="9">迷い＝守備者が戻ってくる</text>
+        <text x="103" y="187" text-anchor="middle" fill="#ffe066" font-size="9" font-weight="bold">1〜2タッチで決める</text>
+      </svg>
+    </div>
+    <p class="pitch-note">前に③が入った瞬間が出すタイミング。自分で考えるのではなく受け手が「入ること」が合図。</p>
+  </div>
+
+  <!-- 注意事項 -->
+  <div class="notes">
+    <div class="notes-head">注意事項 / まとめ</div>
+    <div class="nrow">
+      <span class="icon">💡</span>
+      <div>
+        <strong>4原則は同時進行でつながっている</strong>
+        <span>①が体を開くから②が走れる。②が走るから③が入るスペースができる。③が入るから④が出せる——全部がつながったとき「速く見える」パスワークになる。</span>
+      </div>
+    </div>
+    <div class="nrow">
+      <span class="icon">⚠️</span>
+      <div>
+        <strong>早すぎる動き出しはNG（原則③）</strong>
+        <span>第三の選手が早く動きすぎると守備者がついてくる。ボールが動いてから動き出すのが鉄則。</span>
+      </div>
+    </div>
+    <div class="nrow">
+      <span class="icon">⚠️</span>
+      <div>
+        <strong>出し手が走り込んだら補填を忘れない（原則②）</strong>
+        <span>誰かが前に飛び出したら必ず誰かがそのゾーンを埋める。この輪番がないとチームに穴ができる。</span>
+      </div>
+    </div>
+    <div class="nrow">
+      <span class="icon">⚠️</span>
+      <div>
+        <strong>守備者の影に入ってしまうとパスが届かない（原則①③）</strong>
+        <span>受け手も第三の選手も、守備者の真後ろではなく必ず横・斜めに立つ。「横にずれる」だけでコースが生まれる。</span>
+      </div>
+    </div>
+    <div class="nrow">
+      <span class="icon">💡</span>
+      <div>
+        <strong>練習の入口は「4対2ロンド」</strong>
+        <span>この4原則はロンドを繰り返すことで自然に体に染み込む。ロンドをやりながら「今のは影から抜けてた？」「45度に入れてた？」と確認していくと定着が早い。</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>ReBorn F.C Over50 | 東京都リーグ3部 | 狭いスペースのパス4原則 | 2026.05.05</footer>
+
+<a href="home.html" id="back-top">
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+    <polyline points="9 22 9 12 15 12 15 22"/>
+  </svg>
+  TOP
+</a>
+
+</body>
+</html>
