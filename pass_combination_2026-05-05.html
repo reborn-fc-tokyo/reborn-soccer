@@ -713,75 +713,76 @@
     </div>
   </div>
 
-  <!-- 図4: パスの優先順位 -->
+  <!-- 図4: タイミング -->
   <div class="fig">
-    <div class="fig-label">図4 — パスの方向（最初は意識しなくてよい。慣れてきたら参考に）</div>
+    <div class="fig-label">図4 — 受け手が入った瞬間に出す（方向は考えなくてよい）</div>
     <div class="pitch">
       <svg viewBox="0 0 500 235" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <marker id="a4g" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L9,3.5 z" fill="#7fff7f"/></marker>
-          <marker id="a4y" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="rgba(255,220,60,0.9)"/></marker>
+          <marker id="a4w" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="white"/></marker>
         </defs>
         <rect width="500" height="235" fill="#2d8f52"/>
         <rect x="8" y="8" width="484" height="219" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/>
         <rect x="0" y="0" width="500" height="20" fill="rgba(0,0,0,0.4)"/>
-        <text x="250" y="14" text-anchor="middle" fill="white" font-size="10" font-weight="bold">受け手が入った瞬間に出す。迷うほど守備者が戻ってくる</text>
+        <text x="250" y="14" text-anchor="middle" fill="white" font-size="10" font-weight="bold">③が入った——その感覚だけでパスを出す。それだけでいい</text>
 
-        <!-- ボール保持者②（中央）＋体の向き -->
-        <circle cx="250" cy="118" r="20" fill="rgba(245,197,24,0.15)" stroke="#f5c518" stroke-width="2" stroke-dasharray="3,2"/>
+        <!-- ボール保持者②（中央）・ハーフターン -->
+        <circle cx="250" cy="118" r="20" fill="rgba(245,197,24,0.12)" stroke="#f5c518" stroke-width="2" stroke-dasharray="3,2"/>
         <circle cx="250" cy="118" r="16" fill="#c2410c" stroke="#f5c518" stroke-width="3"/>
         <text x="250" y="114" text-anchor="middle" fill="white" font-size="8" font-weight="bold">受け手</text>
         <text x="250" y="125" text-anchor="middle" fill="white" font-size="8" font-weight="bold">②</text>
         <circle cx="263" cy="105" r="6" fill="#f5c518" stroke="white" stroke-width="1.5"/>
-        <!-- 体の向き（ハーフターン・前斜め方向） -->
-        <path d="M237,108 Q195,85 162,52" stroke="rgba(255,220,100,0.7)" stroke-width="1.5" fill="none" stroke-dasharray="3,2"/>
-        <path d="M263,108 Q305,85 338,52" stroke="rgba(255,220,100,0.7)" stroke-width="1.5" fill="none" stroke-dasharray="3,2"/>
-        <rect x="210" y="130" width="80" height="11" fill="rgba(0,0,0,0.45)" rx="3"/>
-        <text x="250" y="139" text-anchor="middle" fill="rgba(255,220,100,0.9)" font-size="7.5" font-weight="bold">体をハーフターン</text>
+        <path d="M237,108 Q200,85 168,55" stroke="rgba(255,220,100,0.7)" stroke-width="1.5" fill="none" stroke-dasharray="3,2"/>
+        <rect x="210" y="130" width="80" height="11" fill="rgba(0,0,0,0.4)" rx="3"/>
+        <text x="250" y="139" text-anchor="middle" fill="rgba(255,220,100,0.85)" font-size="7.5">体をハーフターン</text>
 
-        <!-- === 優先：前斜め（太い緑・実線） === -->
-        <!-- 前左 -->
-        <line x1="237" y1="106" x2="172" y2="55" stroke="#7fff7f" stroke-width="3.5" marker-end="url(#a4g)"/>
-        <circle cx="160" cy="44" r="13" fill="#2471a3" stroke="#7fff7f" stroke-width="3"/>
-        <text x="160" y="49" text-anchor="middle" fill="white" font-size="10">○</text>
-        <rect x="144" y="26" width="32" height="13" fill="#166534" rx="4"/>
-        <text x="160" y="36" text-anchor="middle" fill="white" font-size="8" font-weight="900">優先</text>
+        <!-- === ③ 今まさに入ってきた（明るい・動きの軌跡） === -->
+        <!-- ③の軌跡（どこから来たか） -->
+        <path d="M108,80 Q128,65 152,52" stroke="rgba(127,255,127,0.4)" stroke-width="2" fill="none" stroke-dasharray="5,3"/>
+        <!-- ③の現在位置 -->
+        <circle cx="160" cy="46" r="16" fill="rgba(127,255,127,0.15)" stroke="#7fff7f" stroke-width="2" stroke-dasharray="3,2"/>
+        <circle cx="160" cy="46" r="13" fill="#2471a3" stroke="#7fff7f" stroke-width="3"/>
+        <text x="160" y="51" text-anchor="middle" fill="white" font-size="12" font-weight="bold">③</text>
+        <!-- ③ラベル -->
+        <rect x="115" y="28" width="72" height="14" fill="#166534" rx="4"/>
+        <text x="151" y="38" text-anchor="middle" fill="white" font-size="9" font-weight="900">今 入った！</text>
 
-        <!-- 前右 -->
-        <line x1="263" y1="106" x2="328" y2="55" stroke="#7fff7f" stroke-width="3.5" marker-end="url(#a4g)"/>
-        <circle cx="340" cy="44" r="13" fill="#2471a3" stroke="#7fff7f" stroke-width="3"/>
-        <text x="340" y="49" text-anchor="middle" fill="white" font-size="10">○</text>
-        <rect x="324" y="26" width="32" height="13" fill="#166534" rx="4"/>
-        <text x="340" y="36" text-anchor="middle" fill="white" font-size="8" font-weight="900">優先</text>
+        <!-- === ②から③への即パス（太い矢印） === -->
+        <line x1="236" y1="106" x2="172" y2="57" stroke="#7fff7f" stroke-width="5" marker-end="url(#a4g)"/>
+        <!-- パスラベル -->
+        <rect x="170" y="75" width="56" height="24" fill="rgba(22,101,52,0.9)" rx="6"/>
+        <text x="198" y="86" text-anchor="middle" fill="white" font-size="10" font-weight="900">即！</text>
+        <text x="198" y="96" text-anchor="middle" fill="#7fff7f" font-size="8">1〜2タッチ</text>
 
-        <!-- === 安全弁：後ろ斜め（細い黄・点線） === -->
-        <!-- 後左 -->
-        <line x1="237" y1="130" x2="168" y2="182" stroke="rgba(255,220,60,0.7)" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#a4y)"/>
-        <circle cx="158" cy="192" r="12" fill="rgba(36,113,163,0.7)" stroke="rgba(255,220,60,0.8)" stroke-width="2" stroke-dasharray="4,3"/>
-        <text x="158" y="197" text-anchor="middle" fill="white" font-size="9">○</text>
-        <rect x="132" y="203" width="40" height="13" fill="rgba(120,80,0,0.7)" rx="4"/>
-        <text x="152" y="213" text-anchor="middle" fill="#ffe066" font-size="7.5" font-weight="900">安全弁</text>
+        <!-- === 他の3ポジション（薄い・まだ入っていない） === -->
+        <circle cx="340" cy="46" r="12" fill="rgba(36,113,163,0.2)" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <text x="340" y="51" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-size="10">○</text>
 
-        <!-- 後右 -->
-        <line x1="263" y1="130" x2="332" y2="182" stroke="rgba(255,220,60,0.7)" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#a4y)"/>
-        <circle cx="342" cy="192" r="12" fill="rgba(36,113,163,0.7)" stroke="rgba(255,220,60,0.8)" stroke-width="2" stroke-dasharray="4,3"/>
-        <text x="342" y="197" text-anchor="middle" fill="white" font-size="9">○</text>
-        <rect x="328" y="203" width="40" height="13" fill="rgba(120,80,0,0.7)" rx="4"/>
-        <text x="348" y="213" text-anchor="middle" fill="#ffe066" font-size="7.5" font-weight="900">安全弁</text>
+        <circle cx="158" cy="190" r="12" fill="rgba(36,113,163,0.2)" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <text x="158" y="195" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-size="10">○</text>
 
-        <!-- タイミング説明 -->
-        <rect x="368" y="148" width="118" height="52" fill="rgba(194,65,12,0.3)" stroke="rgba(255,150,100,0.5)" stroke-width="1" rx="6"/>
-        <text x="427" y="163" text-anchor="middle" fill="#fed7aa" font-size="9" font-weight="bold">パスが出た瞬間に出す</text>
-        <text x="427" y="176" text-anchor="middle" fill="#fed7aa" font-size="9">迷い＝守備者が戻る</text>
-        <text x="427" y="189" text-anchor="middle" fill="#ffe066" font-size="9" font-weight="bold">1〜2タッチで決める</text>
+        <circle cx="342" cy="190" r="12" fill="rgba(36,113,163,0.2)" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <text x="342" y="195" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-size="10">○</text>
 
-        <!-- 凡例 -->
-        <rect x="30" y="148" width="170" height="28" fill="rgba(0,0,0,0.4)" rx="4"/>
-        <text x="115" y="160" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="8">━━ 優先（体が向く前斜め方向）</text>
-        <text x="115" y="171" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="8">- - - 安全弁（後ろ斜め）</text>
+        <!-- 薄いポジションの説明 -->
+        <rect x="300" y="105" width="90" height="28" fill="rgba(0,0,0,0.35)" rx="4"/>
+        <text x="345" y="116" text-anchor="middle" fill="rgba(255,255,255,0.55)" font-size="8">他のポジションは</text>
+        <text x="345" y="127" text-anchor="middle" fill="rgba(255,255,255,0.55)" font-size="8">まだ入っていない</text>
+
+        <!-- メインメッセージ -->
+        <rect x="28" y="148" width="220" height="62" fill="rgba(194,65,12,0.35)" stroke="rgba(255,150,100,0.5)" stroke-width="1.5" rx="8"/>
+        <text x="138" y="165" text-anchor="middle" fill="white" font-size="11" font-weight="900">③が入った</text>
+        <text x="138" y="180" text-anchor="middle" fill="#7fff7f" font-size="13" font-weight="900">→ 迷わず出す</text>
+        <text x="138" y="196" text-anchor="middle" fill="#fed7aa" font-size="9">迷い＝守備者が戻ってくる</text>
+
+        <!-- どこに入っても同じ -->
+        <rect x="300" y="148" width="182" height="28" fill="rgba(0,0,0,0.35)" rx="4"/>
+        <text x="391" y="159" text-anchor="middle" fill="rgba(255,255,255,0.75)" font-size="8">どの位置に入っても同じ</text>
+        <text x="391" y="170" text-anchor="middle" fill="rgba(255,255,255,0.75)" font-size="8">「入った感覚」だけでOK</text>
       </svg>
     </div>
-    <p class="pitch-note">体をハーフターン（斜めに開く）すると前斜め2方向が自然に見える。入った受け手にパスが出た瞬間に出す。</p>
+    <p class="pitch-note">方向は考えなくてよい。③が「入った」と感じた瞬間にパスを出す——それだけがタイミングの判断基準。</p>
   </div>
 
   <!-- 注意事項 -->
