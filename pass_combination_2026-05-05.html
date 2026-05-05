@@ -937,27 +937,28 @@
           <text x="80" y="126" text-anchor="middle" fill="white" font-size="7">ボール</text>
           <circle cx="93" cy="108" r="5" fill="#f5c518" stroke="white" stroke-width="1.5"/>
 
-          <!-- ① 最優先：縦（SH）へ -->
-          <line x1="80" y1="104" x2="80" y2="58" stroke="#7fff7f" stroke-width="3.5" marker-end="url(#sbg)"/>
-          <circle cx="80" cy="46" r="13" fill="#2471a3" stroke="#7fff7f" stroke-width="3"/>
-          <text x="80" y="51" text-anchor="middle" fill="white" font-size="9" font-weight="bold">SH</text>
-          <rect x="95" y="28" width="56" height="13" fill="#166534" rx="4"/>
-          <text x="123" y="38" text-anchor="middle" fill="white" font-size="8" font-weight="900">① 最優先</text>
+          <!-- ① 最優先：縦（SH）へ ★大きく目立たせる -->
+          <line x1="80" y1="102" x2="80" y2="52" stroke="#7fff7f" stroke-width="5" marker-end="url(#sbg)"/>
+          <circle cx="80" cy="38" r="18" fill="#2471a3" stroke="#7fff7f" stroke-width="4"/>
+          <text x="80" y="34" text-anchor="middle" fill="white" font-size="9" font-weight="bold">SH</text>
+          <text x="80" y="44" text-anchor="middle" fill="#7fff7f" font-size="8" font-weight="900">①</text>
+          <rect x="100" y="22" width="80" height="26" fill="#166534" rx="6"/>
+          <text x="140" y="33" text-anchor="middle" fill="white" font-size="10" font-weight="900">① 最優先</text>
+          <text x="140" y="44" text-anchor="middle" fill="#7fff7f" font-size="8">縦パス・オーバーラップ</text>
 
-          <!-- ② 内側（ボランチ） -->
-          <line x1="95" y1="112" x2="248" y2="90" stroke="rgba(255,255,255,0.7)" stroke-width="2" marker-end="url(#sbw)"/>
-          <circle cx="260" cy="86" r="13" fill="rgba(36,113,163,0.65)" stroke="rgba(255,255,255,0.7)" stroke-width="2"/>
-          <text x="260" y="82" text-anchor="middle" fill="white" font-size="7">ボラ</text>
-          <text x="260" y="92" text-anchor="middle" fill="white" font-size="7">ンチ</text>
-          <rect x="278" y="78" width="56" height="13" fill="rgba(50,50,80,0.85)" rx="4"/>
-          <text x="306" y="88" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="8" font-weight="800">② 内側へ</text>
+          <!-- ② 内側（ボランチ）★小さく控えめに -->
+          <line x1="93" y1="114" x2="218" y2="102" stroke="rgba(255,255,255,0.45)" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#sbw)"/>
+          <circle cx="226" cy="98" r="9" fill="rgba(36,113,163,0.4)" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+          <text x="226" y="102" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="7">ボランチ</text>
+          <rect x="238" y="92" width="60" height="12" fill="rgba(30,30,60,0.7)" rx="3"/>
+          <text x="268" y="101" text-anchor="middle" fill="rgba(255,255,255,0.65)" font-size="7.5">② 詰まれば内側</text>
 
           <!-- ③ CB（キャンセル先） -->
-          <line x1="65" y1="132" x2="65" y2="176" stroke="rgba(255,220,60,0.8)" stroke-width="2" stroke-dasharray="6,3" marker-end="url(#sby)"/>
-          <circle cx="65" cy="188" r="12" fill="rgba(36,113,163,0.6)" stroke="rgba(255,220,60,0.85)" stroke-width="2"/>
-          <text x="65" y="193" text-anchor="middle" fill="white" font-size="9" font-weight="bold">CB</text>
-          <rect x="80" y="182" width="78" height="13" fill="rgba(120,80,0,0.8)" rx="4"/>
-          <text x="119" y="192" text-anchor="middle" fill="#ffe066" font-size="8" font-weight="900">③ キャンセル先</text>
+          <line x1="65" y1="136" x2="65" y2="177" stroke="rgba(255,220,60,0.75)" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#sby)"/>
+          <circle cx="65" cy="188" r="11" fill="rgba(36,113,163,0.5)" stroke="rgba(255,220,60,0.8)" stroke-width="1.5"/>
+          <text x="65" y="192" text-anchor="middle" fill="white" font-size="8">CB</text>
+          <rect x="80" y="182" width="86" height="13" fill="rgba(100,60,0,0.75)" rx="3"/>
+          <text x="123" y="192" text-anchor="middle" fill="#ffe066" font-size="8" font-weight="800">③ キャンセル先</text>
         </svg>
       </div>
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; font-size:12px; color:#475569; line-height:1.75;">
