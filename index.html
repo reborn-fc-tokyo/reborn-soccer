@@ -57,8 +57,14 @@
     // sessionStorageに認証済みフラグがあればそのまま通す
     if (sessionStorage.getItem('reborn_auth')) location.href = 'home.html';
     function check() {
-      if (document.getElementById('pw').value === '1234') {
+      const pw = document.getElementById('pw').value;
+      if (pw === '1234' || pw === '2345') {
         sessionStorage.setItem('reborn_auth', '1');
+        if (pw === '2345') {
+          localStorage.setItem('reborn_no_count', '1');
+        } else {
+          localStorage.removeItem('reborn_no_count');
+        }
         location.href = 'home.html';
       } else {
         document.getElementById('err').style.display = 'block';
