@@ -183,34 +183,25 @@
         <text x="450" y="198" text-anchor="middle" fill="#f5c518" font-size="7">クロス</text>
         <circle cx="462" cy="180" r="6" fill="#f5c518" stroke="white" stroke-width="1.5"/>
 
-        <!-- 走り込みイメージ（3人がスペースへ） -->
-        <path d="M242,178 Q242,148 242,115" stroke="#7fff7f" stroke-width="2" fill="none" stroke-dasharray="5,3" marker-end="url(#c_ag)"/>
-        <path d="M368,178 Q368,150 368,120" stroke="rgba(255,255,255,0.45)" stroke-width="1.5" fill="none" stroke-dasharray="5,3" marker-end="url(#c_aw)"/>
-        <path d="M82,178 Q82,148 82,115" stroke="rgba(255,255,255,0.45)" stroke-width="1.5" fill="none" stroke-dasharray="5,3" marker-end="url(#c_aw)"/>
+        <!-- 3人の走り込み（スペースへ向かう点線） -->
+        <path d="M82,178 L82,118" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" fill="none" stroke-dasharray="5,3" marker-end="url(#c_aw)"/>
+        <path d="M242,178 L242,112" stroke="#7fff7f" stroke-width="2" fill="none" stroke-dasharray="5,3" marker-end="url(#c_ag)"/>
+        <path d="M368,178 L368,116" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" fill="none" stroke-dasharray="5,3" marker-end="url(#c_aw)"/>
 
-        <!-- ①ニアクロス -->
-        <path d="M447,180 Q418,62 246,110" stroke="#7fff7f" stroke-width="3" fill="none" marker-end="url(#c_ag)"/>
-        <rect x="340" y="60" width="56" height="12" fill="rgba(22,101,52,0.85)" rx="3"/>
-        <text x="368" y="69" text-anchor="middle" fill="white" font-size="8" font-weight="800">①ニア</text>
+        <!-- グランダー1本（ゴール前を横切る） -->
+        <path d="M447,182 Q310,95 82,112" stroke="#7fff7f" stroke-width="3.5" fill="none" marker-end="url(#c_ag)"/>
+        <rect x="220" y="78" width="100" height="14" fill="rgba(22,101,52,0.9)" rx="4"/>
+        <text x="270" y="88" text-anchor="middle" fill="white" font-size="9" font-weight="900">グランダー1本</text>
 
-        <!-- ②ファークロス -->
-        <path d="M446,182 Q424,74 370,118" stroke="rgba(255,255,255,0.55)" stroke-width="2" fill="none" stroke-dasharray="6,3" marker-end="url(#c_aw)"/>
-        <rect x="395" y="82" width="44" height="12" fill="rgba(50,50,80,0.8)" rx="3"/>
-        <text x="417" y="91" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="8">②ファー</text>
-
-        <!-- ③折り返し（左SHへ） -->
-        <path d="M444,184 Q380,55 85,112" stroke="rgba(255,200,100,0.6)" stroke-width="2" fill="none" stroke-dasharray="6,3" marker-end="url(#c_ag)"/>
-        <rect x="198" y="54" width="72" height="12" fill="rgba(120,80,0,0.8)" rx="3"/>
-        <text x="234" y="63" text-anchor="middle" fill="#ffe066" font-size="8" font-weight="800">③折り返し</text>
-
-        <!-- 3ポイントラベル -->
-        <rect x="130" y="226" width="196" height="14" fill="rgba(245,197,24,0.2)" stroke="rgba(245,197,24,0.5)" stroke-width="1" rx="4"/>
-        <text x="228" y="236" text-anchor="middle" fill="#ffe066" font-size="9" font-weight="900">3か所で合わせられる！</text>
+        <!-- 3つの合わせポイント -->
+        <circle cx="368" cy="116" r="7" fill="rgba(255,255,255,0.25)" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"/>
+        <circle cx="242" cy="112" r="7" fill="rgba(127,255,127,0.3)" stroke="#7fff7f" stroke-width="2"/>
+        <circle cx="82" cy="117" r="7" fill="rgba(255,255,255,0.25)" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"/>
 
         <!-- メッセージ -->
-        <rect x="28" y="258" width="155" height="40" fill="rgba(36,113,163,0.3)" stroke="rgba(255,150,100,0.5)" stroke-width="1" rx="5"/>
-        <text x="105" y="274" text-anchor="middle" fill="#ffe066" font-size="10" font-weight="bold">「走りに合わせてクロス」</text>
-        <text x="105" y="290" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="9">FWが先に走り出している</text>
+        <rect x="28" y="252" width="195" height="40" fill="rgba(36,113,163,0.3)" stroke="rgba(255,150,100,0.5)" stroke-width="1" rx="5"/>
+        <text x="125" y="268" text-anchor="middle" fill="#ffe066" font-size="10" font-weight="bold">1本で3か所狙える！</text>
+        <text x="125" y="283" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="9">誰かが合わせるだけでいい</text>
       </svg>
     </div>
     <p class="pitch-note">FWは早めのクロスを「想定して」先に走り出す。クロッサーは中が見えたら、その走りに合わせてタイミングよくクロスを入れる。</p>
