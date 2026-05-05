@@ -534,41 +534,42 @@
         <text x="66" y="113" text-anchor="middle" fill="white" font-size="8" font-weight="800">④リターン</text>
         <text x="66" y="123" text-anchor="middle" fill="#7fff7f" font-size="8">SBへ</text>
 
-        <!-- ==右：インナーラップ== -->
-        <line x1="490" y1="20" x2="490" y2="257" stroke="white" stroke-width="2.5"/>
+        <!-- ==右：インナーラップ（左SB・内側へ切り込む）== -->
+        <!-- 左タッチライン（右パネル内） -->
+        <line x1="258" y1="20" x2="258" y2="257" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
 
-        <!-- ①SBがボール保持（スタート） -->
-        <circle cx="462" cy="228" r="15" fill="#2471a3" stroke="#f5c518" stroke-width="3"/>
-        <text x="462" y="224" text-anchor="middle" fill="white" font-size="8" font-weight="bold">SB</text>
-        <text x="462" y="234" text-anchor="middle" fill="white" font-size="7">①ボール</text>
-        <circle cx="474" cy="216" r="6" fill="#f5c518" stroke="white" stroke-width="1.5"/>
+        <!-- ①SBがボール保持（左サイドスタート） -->
+        <circle cx="282" cy="228" r="15" fill="#2471a3" stroke="#f5c518" stroke-width="3"/>
+        <text x="282" y="224" text-anchor="middle" fill="white" font-size="8" font-weight="bold">SB</text>
+        <text x="282" y="234" text-anchor="middle" fill="white" font-size="7">①ボール</text>
+        <circle cx="294" cy="216" r="6" fill="#f5c518" stroke="white" stroke-width="1.5"/>
 
         <!-- ②SB→SHへパス -->
-        <line x1="448" y1="220" x2="432" y2="175" stroke="white" stroke-width="2.5" marker-end="url(#o_aw)"/>
-        <rect x="412" y="192" width="38" height="12" fill="rgba(0,0,0,0.5)" rx="3"/>
-        <text x="431" y="201" text-anchor="middle" fill="white" font-size="8">②預ける</text>
+        <line x1="296" y1="218" x2="326" y2="174" stroke="white" stroke-width="2.5" marker-end="url(#o_aw)"/>
+        <rect x="298" y="192" width="38" height="12" fill="rgba(0,0,0,0.5)" rx="3"/>
+        <text x="317" y="201" text-anchor="middle" fill="white" font-size="8">②預ける</text>
 
         <!-- SH（受ける） -->
-        <circle cx="430" cy="162" r="14" fill="#2471a3" stroke="white" stroke-width="2"/>
-        <text x="430" y="158" text-anchor="middle" fill="white" font-size="8">SH</text>
-        <text x="430" y="168" text-anchor="middle" fill="white" font-size="7">受ける</text>
+        <circle cx="330" cy="162" r="14" fill="#2471a3" stroke="white" stroke-width="2"/>
+        <text x="330" y="158" text-anchor="middle" fill="white" font-size="8">SH</text>
+        <text x="330" y="168" text-anchor="middle" fill="white" font-size="7">受ける</text>
 
-        <!-- ③SBが内側に斜めに走り込む -->
-        <path d="M450,215 Q420,185 370,150 Q330,120 298,90" stroke="#7ec8ff" stroke-width="3" fill="none" stroke-dasharray="8,4" marker-end="url(#o_ab)"/>
-        <rect x="342" y="148" width="52" height="22" fill="rgba(30,58,163,0.85)" rx="4"/>
-        <text x="368" y="158" text-anchor="middle" fill="white" font-size="8" font-weight="800">③内側へ</text>
-        <text x="368" y="168" text-anchor="middle" fill="#7ec8ff" font-size="8">斜めに走る</text>
+        <!-- ③SBが内側へ斜めに走り込む（左→中央方向） -->
+        <path d="M270,215 Q330,188 378,152 Q418,122 448,82" stroke="#7ec8ff" stroke-width="3" fill="none" stroke-dasharray="8,4" marker-end="url(#o_ab)"/>
+        <rect x="356" y="150" width="52" height="22" fill="rgba(30,58,163,0.85)" rx="4"/>
+        <text x="382" y="160" text-anchor="middle" fill="white" font-size="8" font-weight="800">③内側へ</text>
+        <text x="382" y="170" text-anchor="middle" fill="#7ec8ff" font-size="8">斜めに走る</text>
 
-        <!-- SB到達位置 -->
-        <circle cx="292" cy="82" r="13" fill="rgba(36,113,163,0.7)" stroke="#7ec8ff" stroke-width="2.5" stroke-dasharray="3,2"/>
-        <text x="292" y="78" text-anchor="middle" fill="white" font-size="7">SB</text>
-        <text x="292" y="88" text-anchor="middle" fill="#7ec8ff" font-size="7">到達</text>
+        <!-- SB到達位置（中央方向） -->
+        <circle cx="452" cy="72" r="13" fill="rgba(36,113,163,0.7)" stroke="#7ec8ff" stroke-width="2.5" stroke-dasharray="3,2"/>
+        <text x="452" y="68" text-anchor="middle" fill="white" font-size="7">SB</text>
+        <text x="452" y="78" text-anchor="middle" fill="#7ec8ff" font-size="7">到達</text>
 
         <!-- ④SHからSBへリターン -->
-        <line x1="416" y1="154" x2="306" y2="88" stroke="white" stroke-width="2.5" marker-end="url(#o_aw)"/>
-        <rect x="340" y="108" width="44" height="22" fill="rgba(0,0,0,0.5)" rx="4"/>
-        <text x="362" y="118" text-anchor="middle" fill="white" font-size="8" font-weight="800">④リターン</text>
-        <text x="362" y="128" text-anchor="middle" fill="#7ec8ff" font-size="8">SBへ</text>
+        <line x1="344" y1="150" x2="442" y2="80" stroke="white" stroke-width="2.5" marker-end="url(#o_aw)"/>
+        <rect x="368" y="104" width="44" height="22" fill="rgba(0,0,0,0.5)" rx="4"/>
+        <text x="390" y="114" text-anchor="middle" fill="white" font-size="8" font-weight="800">④リターン</text>
+        <text x="390" y="124" text-anchor="middle" fill="#7ec8ff" font-size="8">SBへ</text>
       </svg>
     </div>
     <p class="pitch-note">SBがSHに預けて走り込む（Give &amp; Go）。SHはSBが走り込んだタイミングでリターン。その先のアクションはSBが判断する。</p>
