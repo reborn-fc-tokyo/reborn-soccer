@@ -233,91 +233,67 @@
         <rect x="30" y="225" width="185" height="25" fill="rgba(0,0,0,0.38)" rx="5"/>
         <text x="122" y="237" text-anchor="middle" fill="rgba(255,180,180,0.95)" font-size="9" font-weight="bold">味方が影の中 → パスが届かない</text>
 
-        <!-- ===== 右：OK（幅と深さで影の外に出る） ===== -->
+        <!-- ===== 右：OK（X字・優先度付き） ===== -->
         <rect x="250" y="20" width="242" height="22" fill="rgba(26,107,58,0.7)"/>
-        <text x="371" y="35" text-anchor="middle" fill="white" font-size="10" font-weight="800">✅ 幅と深さで影の外に出る</text>
+        <text x="371" y="35" text-anchor="middle" fill="white" font-size="10" font-weight="800">✅ X字に広がる（前斜め優先・後ろは安全弁）</text>
 
         <!-- 守備者1（左上） -->
-        <circle cx="335" cy="95" r="13" fill="#c0392b" stroke="white" stroke-width="1.5"/>
-        <text x="335" y="100" text-anchor="middle" fill="white" font-size="8" font-weight="bold">守</text>
-        <!-- 守備者1の影（上） -->
-        <polygon points="322,83 348,83 340,42 306,42" fill="rgba(0,0,0,0.28)" stroke="rgba(255,100,100,0.35)" stroke-width="1" stroke-dasharray="4,3"/>
+        <circle cx="332" cy="108" r="12" fill="#c0392b" stroke="white" stroke-width="1.5"/>
+        <text x="332" y="113" text-anchor="middle" fill="white" font-size="8" font-weight="bold">守</text>
+        <polygon points="320,97 344,97 330,48 308,48" fill="rgba(0,0,0,0.28)" stroke="rgba(255,100,100,0.35)" stroke-width="1" stroke-dasharray="4,3"/>
 
         <!-- 守備者2（右上） -->
-        <circle cx="408" cy="88" r="13" fill="#c0392b" stroke="white" stroke-width="1.5"/>
-        <text x="408" y="93" text-anchor="middle" fill="white" font-size="8" font-weight="bold">守</text>
-        <!-- 守備者2の影（上） -->
-        <polygon points="396,76 420,76 428,38 392,38" fill="rgba(0,0,0,0.28)" stroke="rgba(255,100,100,0.35)" stroke-width="1" stroke-dasharray="4,3"/>
+        <circle cx="412" cy="100" r="12" fill="#c0392b" stroke="white" stroke-width="1.5"/>
+        <text x="412" y="105" text-anchor="middle" fill="white" font-size="8" font-weight="bold">守</text>
+        <polygon points="400,89 424,89 442,43 396,43" fill="rgba(0,0,0,0.28)" stroke="rgba(255,100,100,0.35)" stroke-width="1" stroke-dasharray="4,3"/>
 
-        <!-- ボール保持者（中央） -->
-        <circle cx="371" cy="145" r="14" fill="#2471a3" stroke="white" stroke-width="2"/>
-        <text x="371" y="141" text-anchor="middle" fill="white" font-size="7" font-weight="bold">ボール</text>
-        <text x="371" y="151" text-anchor="middle" fill="white" font-size="7" font-weight="bold">保持</text>
-        <circle cx="359" cy="133" r="6" fill="#f5c518" stroke="white" stroke-width="1.5"/>
+        <!-- ボール保持者（中央）・体の向き表示 -->
+        <circle cx="371" cy="148" r="14" fill="#2471a3" stroke="white" stroke-width="2"/>
+        <text x="371" y="144" text-anchor="middle" fill="white" font-size="7" font-weight="bold">ボール</text>
+        <text x="371" y="154" text-anchor="middle" fill="white" font-size="7" font-weight="bold">保持</text>
+        <circle cx="359" cy="136" r="6" fill="#f5c518" stroke="white" stroke-width="1.5"/>
+        <!-- 体の向き（前向きに開く） -->
+        <path d="M355,135 Q340,110 325,105" stroke="rgba(255,220,100,0.8)" stroke-width="1.5" fill="none" stroke-dasharray="3,2"/>
+        <path d="M385,135 Q400,110 418,107" stroke="rgba(255,220,100,0.8)" stroke-width="1.5" fill="none" stroke-dasharray="3,2"/>
+        <rect x="342" y="156" width="60" height="11" fill="rgba(0,0,0,0.45)" rx="3"/>
+        <text x="372" y="164" text-anchor="middle" fill="rgba(255,220,100,0.9)" font-size="7.5" font-weight="bold">体を前向きに開く</text>
 
-        <!-- 味方1（前・深さ↑・影の外） -->
-        <circle cx="371" cy="48" r="13" fill="#2471a3" stroke="#7fff7f" stroke-width="2.5"/>
-        <text x="371" y="53" text-anchor="middle" fill="white" font-size="9">○</text>
-        <text x="392" y="48" fill="#7fff7f" font-size="8" font-weight="bold">深さ↑</text>
-        <text x="356" y="38" fill="#7fff7f" font-size="13" font-weight="900">✓</text>
+        <!-- === 優先ゾーン：前斜め（太い実線・明るい緑） === -->
+        <!-- 味方A（左前・優先） -->
+        <line x1="360" y1="137" x2="285" y2="77" stroke="#7fff7f" stroke-width="3" marker-end="url(#a0g)"/>
+        <circle cx="273" cy="65" r="13" fill="#2471a3" stroke="#7fff7f" stroke-width="3"/>
+        <text x="273" y="70" text-anchor="middle" fill="white" font-size="9">○</text>
+        <rect x="255" y="48" width="32" height="13" fill="#166534" rx="4"/>
+        <text x="271" y="58" text-anchor="middle" fill="white" font-size="8" font-weight="900">優先</text>
 
-        <!-- 味方2（左・幅←・影の外） -->
-        <circle cx="270" cy="145" r="13" fill="#2471a3" stroke="#7fff7f" stroke-width="2.5"/>
-        <text x="270" y="150" text-anchor="middle" fill="white" font-size="9">○</text>
-        <text x="268" y="167" text-anchor="middle" fill="white" font-size="8" font-weight="bold">←幅</text>
-        <text x="257" y="136" fill="#7fff7f" font-size="13" font-weight="900">✓</text>
+        <!-- 味方B（右前・優先） -->
+        <line x1="382" y1="137" x2="452" y2="74" stroke="#7fff7f" stroke-width="3" marker-end="url(#a0g)"/>
+        <circle cx="463" cy="62" r="13" fill="#2471a3" stroke="#7fff7f" stroke-width="3"/>
+        <text x="463" y="67" text-anchor="middle" fill="white" font-size="9">○</text>
+        <rect x="453" y="45" width="32" height="13" fill="#166534" rx="4"/>
+        <text x="469" y="55" text-anchor="middle" fill="white" font-size="8" font-weight="900">優先</text>
 
-        <!-- 味方3（右・幅→・影の外） -->
-        <circle cx="468" cy="145" r="13" fill="#2471a3" stroke="#7fff7f" stroke-width="2.5"/>
-        <text x="468" y="150" text-anchor="middle" fill="white" font-size="9">○</text>
-        <text x="468" y="167" text-anchor="middle" fill="white" font-size="8" font-weight="bold">幅→</text>
-        <text x="483" y="136" fill="#7fff7f" font-size="13" font-weight="900">✓</text>
+        <!-- === 安全弁ゾーン：後ろ斜め（細い点線・黄色） === -->
+        <!-- 味方C（左後・安全弁） -->
+        <line x1="359" y1="159" x2="297" y2="210" stroke="rgba(255,220,60,0.7)" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#a0g)"/>
+        <circle cx="285" cy="220" r="12" fill="rgba(36,113,163,0.7)" stroke="rgba(255,220,60,0.8)" stroke-width="2" stroke-dasharray="4,3"/>
+        <text x="285" y="225" text-anchor="middle" fill="white" font-size="9">○</text>
+        <rect x="255" y="231" width="40" height="13" fill="rgba(120,80,0,0.7)" rx="4"/>
+        <text x="275" y="241" text-anchor="middle" fill="#ffe066" font-size="7.5" font-weight="900">安全弁</text>
 
-        <!-- 味方4（後・深さ↓・影の外） -->
-        <circle cx="371" cy="225" r="13" fill="#2471a3" stroke="#7fff7f" stroke-width="2.5"/>
-        <text x="371" y="230" text-anchor="middle" fill="white" font-size="9">○</text>
-        <text x="392" y="228" fill="#7fff7f" font-size="8" font-weight="bold">深さ↓</text>
-        <text x="356" y="215" fill="#7fff7f" font-size="13" font-weight="900">✓</text>
+        <!-- 味方D（右後・安全弁） -->
+        <line x1="383" y1="159" x2="447" y2="210" stroke="rgba(255,220,60,0.7)" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#a0g)"/>
+        <circle cx="458" cy="220" r="12" fill="rgba(36,113,163,0.7)" stroke="rgba(255,220,60,0.8)" stroke-width="2" stroke-dasharray="4,3"/>
+        <text x="458" y="225" text-anchor="middle" fill="white" font-size="9">○</text>
+        <rect x="448" y="231" width="40" height="13" fill="rgba(120,80,0,0.7)" rx="4"/>
+        <text x="468" y="241" text-anchor="middle" fill="#ffe066" font-size="7.5" font-weight="900">安全弁</text>
 
-        <!-- パスライン（通る） -->
-        <line x1="362" y1="131" x2="367" y2="61" stroke="#7fff7f" stroke-width="2" marker-end="url(#a0g)"/>
-        <line x1="357" y1="140" x2="283" y2="145" stroke="#7fff7f" stroke-width="2" marker-end="url(#a0g)"/>
-        <line x1="385" y1="140" x2="455" y2="145" stroke="#7fff7f" stroke-width="2" marker-end="url(#a0g)"/>
-        <line x1="370" y1="159" x2="370" y2="212" stroke="#7fff7f" stroke-width="2" marker-end="url(#a0g)"/>
-
-        <!-- 幅の矢印 -->
-        <line x1="290" y1="245" x2="450" y2="245" stroke="white" stroke-width="1.5" marker-end="url(#a0g)"/>
-        <line x1="450" y1="245" x2="290" y2="245" stroke="white" stroke-width="1.5" marker-end="url(#a0w)"/>
-        <rect x="339" y="238" width="24" height="12" fill="rgba(0,0,0,0.5)" rx="3"/>
-        <text x="351" y="247" text-anchor="middle" fill="white" font-size="8" font-weight="bold">幅</text>
-
-        <!-- 深さの矢印 -->
-        <line x1="494" y1="73" x2="494" y2="197" stroke="#7fff7f" stroke-width="1.5" marker-end="url(#a0g)"/>
-        <line x1="494" y1="197" x2="494" y2="73" stroke="#7fff7f" stroke-width="1.5" marker-end="url(#a0w)"/>
-        <rect x="480" y="128" width="26" height="12" fill="rgba(0,0,0,0.5)" rx="3"/>
-        <text x="493" y="137" text-anchor="middle" fill="#7fff7f" font-size="8" font-weight="bold">深さ</text>
-
-        <!-- 三角形ラベル -->
-        <rect x="280" y="88" width="80" height="24" fill="rgba(255,255,100,0.15)" stroke="rgba(255,255,100,0.5)" stroke-width="1" rx="4"/>
-        <text x="320" y="99" text-anchor="middle" fill="#ffe066" font-size="9" font-weight="bold">三角形が</text>
-        <text x="320" y="109" text-anchor="middle" fill="#ffe066" font-size="9" font-weight="bold">自然にできる</text>
-
-        <!-- 距離の目安（幅・横方向） -->
-        <line x1="290" y1="150" x2="368" y2="150" stroke="rgba(126,200,255,0.5)" stroke-width="1" stroke-dasharray="2,2"/>
-        <rect x="305" y="152" width="50" height="11" fill="rgba(0,0,0,0.5)" rx="2"/>
-        <text x="330" y="161" text-anchor="middle" fill="white" font-size="7.5" font-weight="bold">約10〜15m</text>
-
-        <!-- 距離の目安（深さ・縦方向） -->
-        <line x1="395" y1="75" x2="395" y2="133" stroke="rgba(127,255,127,0.5)" stroke-width="1" stroke-dasharray="2,2"/>
-        <rect x="397" y="96" width="50" height="11" fill="rgba(0,0,0,0.5)" rx="2"/>
-        <text x="422" y="105" text-anchor="middle" fill="#7fff7f" font-size="7.5" font-weight="bold">約10〜15m</text>
-
-        <!-- 距離注記 -->
-        <rect x="257" y="237" width="236" height="14" fill="rgba(0,0,0,0.4)" rx="3"/>
-        <text x="375" y="247" text-anchor="middle" fill="rgba(255,255,200,0.85)" font-size="8" font-weight="bold">味方2人の間隔が7m以上 → 守備者1人では両方同時にカバーできない</text>
+        <!-- 凡例 -->
+        <rect x="257" y="248" width="236" height="12" fill="rgba(0,0,0,0.45)" rx="3"/>
+        <text x="375" y="257" text-anchor="middle" fill="rgba(255,255,200,0.9)" font-size="7.5">━ 優先（体が向く方向・前斜め）　- - 安全弁（後斜め）</text>
       </svg>
     </div>
-    <p class="pitch-note">幅（左右）と深さ（前後）に広がると味方が影の外に出られ、パスが届くようになる。目安は10〜15m。<br>十字（上下左右）でもX字（斜め45度）でも同じ効果。むしろX字は原則③の45度の角度と一致するので理想的。</p>
+    <p class="pitch-note">X字（斜め45度）に広がると味方が影の外に出られる。体を前向きに開くと前斜め2人が自然に見えるので優先的に入る。後ろ斜め2人は安全弁として確保。目安はどの2人も7m以上の間隔。</p>
   </div>
 
   <div class="prin-divider pd1">
