@@ -214,22 +214,21 @@
   .strategy-head {
     background: linear-gradient(135deg, #1a2a3a, #2a3a4a);
     color: white;
-    padding: 14px 20px 12px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    padding: 16px 22px 14px;
   }
-  .strategy-head .sh-label { font-size: 12px; letter-spacing: 2px; opacity: 0.6; margin-bottom: 4px; }
-  .strategy-head .sh-title { font-size: 20px; font-weight: 900; }
-  .strategy-body { padding: 16px 20px; display: flex; gap: 16px; }
-  .strategy-col { flex: 1; min-width: 0; }
-  .strategy-col .sc-head { font-size: 12px; font-weight: 800; letter-spacing: 1.5px; margin-bottom: 8px; padding: 3px 10px; border-radius: 10px; display: inline-block; }
-  .sc-head-def { background: #fbe8e8; color: #b03030; }
-  .sc-head-att { background: #e8f0fb; color: #2060b0; }
-  .strategy-list { list-style: none; }
-  .strategy-list li { font-size: 14px; color: #444; padding: 5px 0; border-bottom: 1px solid #f5f5f5; display: flex; gap: 7px; align-items: baseline; }
-  .strategy-list li:last-child { border-bottom: none; }
-  .strategy-list li::before { content: ''; }
+  .strategy-head .sh-label { font-size: 12px; letter-spacing: 2px; opacity: 0.6; margin-bottom: 5px; }
+  .strategy-head .sh-title { font-size: 21px; font-weight: 900; }
+  .strategy-section { padding: 16px 22px; border-top: 1px solid #f0f0f0; }
+  .strategy-section:first-child { border-top: none; }
+  .strategy-sec-head { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .strategy-sec-tag { font-size: 12px; font-weight: 800; letter-spacing: 1.5px; padding: 4px 12px; border-radius: 20px; }
+  .tag-def { background: #fbe8e8; color: #b03030; }
+  .tag-att { background: #e8f0fb; color: #2060b0; }
+  .tag-pas { background: #e8f5ed; color: #1a6b3a; }
+  .strategy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 20px; list-style: none; }
+  .strategy-grid li { font-size: 15px; color: #333; padding: 6px 0; border-bottom: 1px solid #f5f5f5; }
+  .strategy-grid li:last-child { border-bottom: none; }
+  .strategy-grid.single-col { grid-template-columns: 1fr; }
 
   /* NEW バッジ */
   .new-badge { background: #e63a2a; color: white; font-size: 9px; font-weight: 900; border-radius: 4px; padding: 1px 6px; letter-spacing: 0.5px; margin-left: 6px; vertical-align: middle; }
@@ -494,41 +493,42 @@
         <div class="sh-title">守備・攻撃の基本約束事</div>
       </div>
     </div>
-    <div class="strategy-body">
-      <div class="strategy-col">
-        <div class="sc-head sc-head-def">DEFENSE</div>
-        <ul class="strategy-list">
-          <li>① CB声だし</li>
-          <li>② ディフェンスは中ぎりで敵を外に追い込む</li>
-          <li>③ 相手がもたついたら2人ではさむ</li>
-          <li>④ FWからのハイプレス SB狙い</li>
-        </ul>
+    <div class="strategy-section">
+      <div class="strategy-sec-head">
+        <span class="strategy-sec-tag tag-def">DEFENSE</span>
       </div>
-      <div class="strategy-col">
-        <div class="sc-head sc-head-att">ATTACK</div>
-        <ul class="strategy-list">
-          <li>① 自陣ではパス優先</li>
-          <li>② パスはリズムよく</li>
-          <li>③ 止まってボールを持ち続けない</li>
-          <li>④ SBのインナーラップ・オーバーラップ</li>
-          <li>⑤ FWへのくさびと落とし（UBT）</li>
-          <li>⑥ コーナーのトレイン</li>
-          <li>⑦ ワンツー</li>
-          <li>⑧ 早めのクロス</li>
-        </ul>
-      </div>
+      <ul class="strategy-grid">
+        <li>① CB声だし</li>
+        <li>② 中ぎりで敵を外に追い込む</li>
+        <li>③ もたついたら2人ではさむ</li>
+        <li>④ FWからのハイプレス SB狙い</li>
+      </ul>
     </div>
-    <!-- ポジショナルプレー4原則 -->
-    <div class="strategy-body" style="border-top:1px solid #eee; padding-top:14px;">
-      <div class="strategy-col">
-        <div class="sc-head sc-head-att">PASS（ポジショナルプレー）</div>
-        <ul class="strategy-list">
-          <li>影の外・体を開いて受ける</li>
-          <li>出したら走る・隣が補填</li>
-          <li>パスが出た瞬間に45度で入る</li>
-          <li>受け手のタイミングで出す（こねない）</li>
-        </ul>
+    <div class="strategy-section">
+      <div class="strategy-sec-head">
+        <span class="strategy-sec-tag tag-att">ATTACK</span>
       </div>
+      <ul class="strategy-grid">
+        <li>① 自陣ではパス優先</li>
+        <li>② パスはリズムよく</li>
+        <li>③ 止まってボールを持ち続けない</li>
+        <li>④ SBのインナーラップ・オーバーラップ</li>
+        <li>⑤ FWへのくさびと落とし（UBT）</li>
+        <li>⑥ コーナーのトレイン</li>
+        <li>⑦ ワンツー</li>
+        <li>⑧ 早めのクロス</li>
+      </ul>
+    </div>
+    <div class="strategy-section">
+      <div class="strategy-sec-head">
+        <span class="strategy-sec-tag tag-pas">PASS（ポジショナルプレー）</span>
+      </div>
+      <ul class="strategy-grid">
+        <li>① 影の外・体を開いて受ける</li>
+        <li>② 出したら走る・隣が補填</li>
+        <li>③ パスが出た瞬間に45度で入る</li>
+        <li>④ 受け手のタイミングで出す（こねない）</li>
+      </ul>
     </div>
   </div>
 
