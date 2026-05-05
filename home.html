@@ -757,6 +757,7 @@
   (async () => {
     try {
       // このページの閲覧を記録
+      if (localStorage.getItem('reborn_no_count')) return;
       await fetch(GAS_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({action:'view', page:'home'}) });
       // 各ページのカウントを取得して表示
       const res = await fetch(GAS_URL + '?action=views');
