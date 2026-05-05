@@ -664,39 +664,66 @@
         <circle cx="223" cy="155" r="7" fill="#f5c518" stroke="white" stroke-width="1.5"/>
 
         <!-- ①縦パス（MF→FW） -->
-        <line x1="213" y1="252" x2="213" y2="186" stroke="rgba(255,255,255,0.45)" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#u_aw)"/>
-        <rect x="218" y="232" width="38" height="11" fill="rgba(0,0,0,0.4)" rx="3"/>
-        <text x="237" y="241" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="8">①縦パス</text>
+        <line x1="248" y1="252" x2="220" y2="186" stroke="rgba(255,255,255,0.45)" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#u_aw)"/>
+        <rect x="232" y="228" width="38" height="11" fill="rgba(0,0,0,0.4)" rx="3"/>
+        <text x="251" y="237" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="8">①縦パス</text>
 
         <!-- ②落とし（FW→MF） -->
-        <line x1="208" y1="184" x2="208" y2="240" stroke="white" stroke-width="3" marker-end="url(#u_aw)"/>
-        <rect x="168" y="207" width="42" height="12" fill="rgba(0,0,0,0.5)" rx="3"/>
-        <text x="189" y="216" text-anchor="middle" fill="white" font-size="9" font-weight="bold">②落とし</text>
+        <line x1="208" y1="184" x2="238" y2="252" stroke="white" stroke-width="3" marker-end="url(#u_aw)"/>
+        <rect x="196" y="215" width="42" height="12" fill="rgba(0,0,0,0.5)" rx="3"/>
+        <text x="217" y="224" text-anchor="middle" fill="white" font-size="9" font-weight="bold">②落とし</text>
+
+        <!-- 左SH（スタート位置） -->
+        <circle cx="65" cy="288" r="13" fill="#2471a3" stroke="rgba(255,255,255,0.6)" stroke-width="2"/>
+        <text x="65" y="284" text-anchor="middle" fill="white" font-size="8">SH</text>
+        <text x="65" y="294" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="7">左</text>
+
+        <!-- 右SH（スタート位置） -->
+        <circle cx="420" cy="288" r="13" fill="#2471a3" stroke="rgba(255,255,255,0.6)" stroke-width="2"/>
+        <text x="420" y="284" text-anchor="middle" fill="white" font-size="8">SH</text>
+        <text x="420" y="294" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="7">右</text>
 
         <!-- MF（センターライン後方・自陣） -->
-        <circle cx="210" cy="268" r="15" fill="#2471a3" stroke="white" stroke-width="2.5"/>
-        <text x="210" y="264" text-anchor="middle" fill="white" font-size="9">MF</text>
-        <text x="210" y="274" text-anchor="middle" fill="white" font-size="7">前向きで受ける</text>
+        <circle cx="245" cy="268" r="15" fill="#2471a3" stroke="white" stroke-width="2.5"/>
+        <text x="245" y="264" text-anchor="middle" fill="white" font-size="9">MF</text>
+        <text x="245" y="274" text-anchor="middle" fill="white" font-size="7">前向きで受ける</text>
 
-        <!-- ③FW反転・裏へ（CBs右側を抜ける） -->
+        <!-- ③FW反転・裏へ -->
         <path d="M222,158 Q310,112 375,70" stroke="#7ec8ff" stroke-width="3" fill="none" stroke-dasharray="7,4" marker-end="url(#u_ab)"/>
         <rect x="284" y="92" width="74" height="22" fill="rgba(0,0,0,0.55)" rx="4"/>
         <text x="321" y="102" text-anchor="middle" fill="#7ec8ff" font-size="9" font-weight="bold">③反転・裏へ！</text>
 
-        <!-- FW到達（ゴール方向） -->
+        <!-- FW到達 -->
         <circle cx="380" cy="60" r="13" fill="rgba(36,113,163,0.6)" stroke="#7ec8ff" stroke-width="2.5" stroke-dasharray="3,2"/>
         <text x="380" y="65" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-size="8">FW</text>
 
-        <!-- ④スルーパス -->
-        <line x1="220" y1="258" x2="370" y2="70" stroke="#7fff7f" stroke-width="3" marker-end="url(#u_ag)"/>
-        <rect x="28" y="148" width="88" height="22" fill="rgba(0,0,0,0.55)" rx="4"/>
-        <text x="72" y="158" text-anchor="middle" fill="#7fff7f" font-size="9" font-weight="bold">④スルーパス</text>
-        <text x="72" y="167" text-anchor="middle" fill="#7fff7f" font-size="8">向き直す前に</text>
+        <!-- 左SHの走り込み -->
+        <path d="M65,275 Q60,190 58,90" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" fill="none" stroke-dasharray="6,3" marker-end="url(#u_aw)"/>
+        <circle cx="58" cy="82" r="11" fill="rgba(36,113,163,0.5)" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" stroke-dasharray="3,2"/>
+        <text x="58" y="86" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="7">SH左</text>
+
+        <!-- 右SHの走り込み -->
+        <path d="M420,275 Q435,190 445,90" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" fill="none" stroke-dasharray="6,3" marker-end="url(#u_aw)"/>
+        <circle cx="445" cy="82" r="11" fill="rgba(36,113,163,0.5)" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" stroke-dasharray="3,2"/>
+        <text x="445" y="86" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="7">SH右</text>
+
+        <!-- MFからの選択肢（落とした瞬間） -->
+        <!-- FWへのスルーパス -->
+        <line x1="258" y1="257" x2="372" y2="72" stroke="#7fff7f" stroke-width="2.5" marker-end="url(#u_ag)"/>
+        <!-- 左SHへのパス -->
+        <line x1="232" y1="258" x2="64" y2="90" stroke="rgba(255,255,255,0.55)" stroke-width="2" stroke-dasharray="6,3" marker-end="url(#u_aw)"/>
+        <!-- 右SHへのパス -->
+        <line x1="260" y1="256" x2="442" y2="90" stroke="rgba(255,255,255,0.55)" stroke-width="2" stroke-dasharray="6,3" marker-end="url(#u_aw)"/>
+
+        <!-- 「落としたタイミング」ラベル -->
+        <rect x="120" y="248" width="170" height="26" fill="rgba(220,38,38,0.8)" rx="5"/>
+        <text x="205" y="259" text-anchor="middle" fill="white" font-size="9" font-weight="900">落とした瞬間！全員が走り出す</text>
+        <text x="205" y="269" text-anchor="middle" fill="rgba(255,220,220,0.9)" font-size="8">どこへでも出せる</text>
 
         <!-- ラグ表示（左下） -->
-        <rect x="28" y="205" width="140" height="40" fill="rgba(36,113,163,0.3)" stroke="rgba(255,150,100,0.5)" stroke-width="1" rx="5"/>
-        <text x="98" y="220" text-anchor="middle" fill="#fed7aa" font-size="9" font-weight="bold">向き直しラグ</text>
-        <text x="98" y="235" text-anchor="middle" fill="#ffe066" font-size="10" font-weight="bold">0.5〜0.8秒</text>
+        <rect x="28" y="305" width="140" height="40" fill="rgba(36,113,163,0.3)" stroke="rgba(255,150,100,0.5)" stroke-width="1" rx="5"/>
+        <text x="98" y="320" text-anchor="middle" fill="#fed7aa" font-size="9" font-weight="bold">向き直しラグ</text>
+        <text x="98" y="335" text-anchor="middle" fill="#ffe066" font-size="10" font-weight="bold">0.5〜0.8秒</text>
       </svg>
     </div>
     <p class="pitch-note">FWへの合言葉：「縦が来たら、落として、即走れ」。MFへ：「縦を出したら前に出て、落とし受けたら裏を見ろ」。</p>
