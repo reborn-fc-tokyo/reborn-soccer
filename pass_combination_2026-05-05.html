@@ -125,6 +125,7 @@
   <h1>パスで崩す ポジショナルプレー 4原則</h1>
   <p>ReBorn F.C Over50 | 東京都リーグ3部 | 2026.05.05</p>
   <p style="font-size:10px; opacity:.55; margin-top:6px;">調査・クロスチェック：バルセロナ / アヤックス / グアルディオラ / スペインRFEF / コーチング科学</p>
+  <p id="view-count" style="font-size:11px; opacity:0.5; margin-top:4px;"></p>
 </header>
 
 <div class="container">
@@ -1070,7 +1071,12 @@
 </a>
 
 <script>
-  fetch('https://reborn-match-videos.kanesaka.workers.dev',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'view',page:'pass_combination'})}).catch(()=>{});
+  const _wurl = 'https://reborn-match-videos.kanesaka.workers.dev';
+  fetch(_wurl,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'view',page:'pass_combination'})})
+    .then(()=>fetch(_wurl+'?action=views'))
+    .then(r=>r.json())
+    .then(v=>{ const el=document.getElementById('view-count'); if(el) el.textContent='👁 '+(v['pass_combination']||0)+'回閲覧'; })
+    .catch(()=>{});
 </script>
 </body>
 </html>
