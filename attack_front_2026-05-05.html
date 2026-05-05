@@ -147,27 +147,34 @@
         <!-- タッチライン（右） -->
         <line x1="492" y1="20" x2="492" y2="312" stroke="white" stroke-width="2.5"/>
 
-        <!-- CB2人（まだ揃っていない・間が空いている） -->
-        <circle cx="170" cy="192" r="13" fill="rgba(192,57,43,0.45)" stroke="rgba(255,100,100,0.6)" stroke-width="1.5" stroke-dasharray="4,3"/>
-        <text x="170" y="197" text-anchor="middle" fill="rgba(255,180,180,0.8)" font-size="8">CB①</text>
-        <path d="M183,190 Q200,182 210,178" stroke="rgba(255,100,100,0.5)" stroke-width="1.5" fill="none" marker-end="url(#c_ar)"/>
-        <circle cx="328" cy="188" r="13" fill="rgba(192,57,43,0.45)" stroke="rgba(255,100,100,0.6)" stroke-width="1.5" stroke-dasharray="4,3"/>
-        <text x="328" y="193" text-anchor="middle" fill="rgba(255,180,180,0.8)" font-size="8">CB②</text>
-        <path d="M315,186 Q298,179 288,175" stroke="rgba(255,100,100,0.5)" stroke-width="1.5" fill="none" marker-end="url(#c_ar)"/>
-        <rect x="196" y="172" width="106" height="12" fill="rgba(0,0,0,0.4)" rx="3"/>
-        <text x="249" y="181" text-anchor="middle" fill="rgba(255,180,180,0.8)" font-size="8">まだ揃ってない（間が空いている）</text>
+        <!-- スペース（最終ラインとゴールの間） -->
+        <rect x="50" y="42" width="400" height="148" fill="rgba(127,255,127,0.06)" stroke="none"/>
+        <text x="100" y="100" text-anchor="middle" fill="rgba(127,255,127,0.35)" font-size="9">スペース</text>
 
-        <!-- FW（CB間を抜けて走り込む） -->
-        <circle cx="248" cy="160" r="14" fill="#2471a3" stroke="#7fff7f" stroke-width="2.5"/>
-        <text x="248" y="156" text-anchor="middle" fill="white" font-size="8">FW</text>
-        <text x="248" y="166" text-anchor="middle" fill="#7fff7f" font-size="7">CB間</text>
-        <path d="M235,215 Q240,190 245,172" stroke="#7fff7f" stroke-width="2" fill="none" stroke-dasharray="5,3" marker-end="url(#c_ag)"/>
+        <!-- 最終ライン（CB・FW・MFが横並び） -->
+        <line x1="50" y1="192" x2="450" y2="192" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <text x="30" y="196" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-size="7">最終</text>
+        <text x="30" y="205" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-size="7">ライン</text>
 
-        <!-- ファー走り込み -->
-        <circle cx="355" cy="172" r="14" fill="#2471a3" stroke="rgba(255,255,255,0.6)" stroke-width="2"/>
-        <text x="355" y="168" text-anchor="middle" fill="white" font-size="8">MF</text>
-        <text x="355" y="178" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="7">ファー</text>
-        <path d="M318,233 Q332,205 350,182" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" fill="none" stroke-dasharray="5,3" marker-end="url(#c_aw)"/>
+        <!-- CB2人（FWと同じラインに並んでいる） -->
+        <circle cx="158" cy="192" r="13" fill="rgba(192,57,43,0.5)" stroke="rgba(255,100,100,0.7)" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <text x="158" y="197" text-anchor="middle" fill="rgba(255,180,180,0.9)" font-size="8">CB①</text>
+        <circle cx="340" cy="192" r="13" fill="rgba(192,57,43,0.5)" stroke="rgba(255,100,100,0.7)" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <text x="340" y="197" text-anchor="middle" fill="rgba(255,180,180,0.9)" font-size="8">CB②</text>
+
+        <!-- FW（CBと並んでいる・まだパスは来ていない） -->
+        <circle cx="248" cy="192" r="14" fill="#2471a3" stroke="#7fff7f" stroke-width="2.5"/>
+        <text x="248" y="188" text-anchor="middle" fill="white" font-size="8">FW</text>
+        <text x="248" y="198" text-anchor="middle" fill="#7fff7f" font-size="7">ニア</text>
+
+        <!-- ファー（CBと並んでいる） -->
+        <circle cx="370" cy="192" r="13" fill="#2471a3" stroke="rgba(255,255,255,0.6)" stroke-width="2"/>
+        <text x="370" y="188" text-anchor="middle" fill="white" font-size="8">MF</text>
+        <text x="370" y="198" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="7">ファー</text>
+
+        <!-- FW・ファーの走り込みイメージ（スペースへ向かう） -->
+        <path d="M248,178 Q248,150 248,118" stroke="#7fff7f" stroke-width="2" fill="none" stroke-dasharray="5,3" marker-end="url(#c_ag)"/>
+        <path d="M370,178 Q370,150 370,122" stroke="rgba(255,255,255,0.45)" stroke-width="1.5" fill="none" stroke-dasharray="5,3" marker-end="url(#c_aw)"/>
 
         <!-- クロッサー -->
         <circle cx="450" cy="273" r="15" fill="#2471a3" stroke="#f5c518" stroke-width="2.5"/>
@@ -175,15 +182,16 @@
         <text x="450" y="280" text-anchor="middle" fill="white" font-size="7">クロス</text>
         <circle cx="462" cy="261" r="6" fill="#f5c518" stroke="white" stroke-width="1.5"/>
 
-        <!-- CB間へのクロス（メイン） -->
-        <path d="M446,261 Q380,193 252,162" stroke="#7fff7f" stroke-width="3" fill="none" marker-end="url(#c_ag)"/>
-        <rect x="304" y="190" width="60" height="12" fill="rgba(22,101,52,0.85)" rx="3"/>
-        <text x="334" y="199" text-anchor="middle" fill="white" font-size="8" font-weight="800">CB間へ</text>
+        <!-- ニアクロス（最終ラインとゴールの間にカーブして入る） -->
+        <path d="M446,260 Q420,80 252,112" stroke="#7fff7f" stroke-width="3" fill="none" marker-end="url(#c_ag)"/>
+        <rect x="370" y="88" width="68" height="22" fill="rgba(22,101,52,0.85)" rx="3"/>
+        <text x="404" y="98" text-anchor="middle" fill="white" font-size="8" font-weight="800">ニア</text>
+        <text x="404" y="107" text-anchor="middle" fill="#7fff7f" font-size="7">スペースへ</text>
 
-        <!-- ファークロス -->
-        <path d="M448,266 Q410,210 358,174" stroke="rgba(255,255,255,0.6)" stroke-width="2" fill="none" stroke-dasharray="6,3" marker-end="url(#c_aw)"/>
-        <rect x="358" y="162" width="40" height="12" fill="rgba(50,50,80,0.8)" rx="3"/>
-        <text x="378" y="171" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="8">ファー</text>
+        <!-- ファークロス（同様にスペースへ） -->
+        <path d="M448,264 Q430,90 372,118" stroke="rgba(255,255,255,0.6)" stroke-width="2" fill="none" stroke-dasharray="6,3" marker-end="url(#c_aw)"/>
+        <rect x="382" y="110" width="40" height="12" fill="rgba(50,50,80,0.8)" rx="3"/>
+        <text x="402" y="119" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="8">ファー</text>
 
         <!-- メッセージ -->
         <rect x="28" y="258" width="155" height="40" fill="rgba(36,113,163,0.3)" stroke="rgba(255,150,100,0.5)" stroke-width="1" rx="5"/>
