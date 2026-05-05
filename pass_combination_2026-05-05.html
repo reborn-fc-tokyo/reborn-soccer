@@ -824,6 +824,73 @@
     </div>
   </div>
 
+  <!-- 付録 -->
+  <details style="margin-top:24px; background:white; border-radius:14px; box-shadow:0 2px 12px rgba(0,0,0,0.07); overflow:hidden;">
+    <summary style="padding:14px 22px; font-size:13px; font-weight:800; color:#1e3a5f; cursor:pointer; display:flex; align-items:center; gap:10px; list-style:none; border-bottom:2px solid #f0f2f8;">
+      <span style="background:#64748b; color:white; font-size:9px; font-weight:800; padding:2px 8px; border-radius:10px; letter-spacing:1px;">付録</span>
+      📎 サイドハーフが持ったとき（X字が作れない場合）
+      <span style="margin-left:auto; font-size:11px; color:#94a3b8;">タップで開閉</span>
+    </summary>
+    <div style="padding:18px 22px;">
+      <p style="font-size:13px; color:#334155; line-height:1.75; margin-bottom:16px;">
+        タッチライン際ではピッチの外側に出られないため、完全なX字は作れない。<br>
+        代わりに<strong>T字（または三角形）</strong>で3方向のパスコースを作る。
+      </p>
+      <div style="background:#f8faff; border-radius:10px; overflow:hidden; margin-bottom:14px;">
+        <svg viewBox="0 0 460 200" xmlns="http://www.w3.org/2000/svg" style="display:block; width:100%;">
+          <defs>
+            <marker id="appg" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#7fff7f"/></marker>
+            <marker id="appy" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="rgba(255,220,60,0.9)"/></marker>
+          </defs>
+          <rect width="460" height="200" fill="#2d8f52"/>
+          <rect x="6" y="6" width="448" height="188" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+          <!-- タッチライン -->
+          <line x1="6" y1="6" x2="6" y2="194" stroke="white" stroke-width="3"/>
+          <rect x="0" y="0" width="460" height="18" fill="rgba(0,0,0,0.4)"/>
+          <text x="230" y="13" text-anchor="middle" fill="white" font-size="10" font-weight="bold">サイドハーフはX字でなくT字（三角形）でパスコースを作る</text>
+          <!-- タッチラインラベル -->
+          <text x="18" y="105" fill="rgba(255,255,255,0.5)" font-size="9" font-weight="bold" transform="rotate(-90,18,105)">タッチライン</text>
+
+          <!-- ボール保持者（サイドハーフ） -->
+          <circle cx="80" cy="108" r="16" fill="#c2410c" stroke="#f5c518" stroke-width="2.5"/>
+          <text x="80" y="104" text-anchor="middle" fill="white" font-size="7" font-weight="bold">SH</text>
+          <text x="80" y="114" text-anchor="middle" fill="white" font-size="7" font-weight="bold">ボール</text>
+          <circle cx="93" cy="96" r="5" fill="#f5c518" stroke="white" stroke-width="1.5"/>
+
+          <!-- ① 最優先：内側前方（斜め中央へ） -->
+          <line x1="94" y1="96" x2="225" y2="50" stroke="#7fff7f" stroke-width="3.5" marker-end="url(#appg)"/>
+          <circle cx="235" cy="44" r="13" fill="#2471a3" stroke="#7fff7f" stroke-width="3"/>
+          <text x="235" y="49" text-anchor="middle" fill="white" font-size="9">○</text>
+          <rect x="248" y="36" width="56" height="13" fill="#166534" rx="4"/>
+          <text x="276" y="46" text-anchor="middle" fill="white" font-size="8" font-weight="900">① 最優先</text>
+          <text x="276" y="57" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="7">内側前方へ</text>
+
+          <!-- ② 次：内側後方 -->
+          <line x1="94" y1="118" x2="225" y2="158" stroke="#7fff7f" stroke-width="2.5" marker-end="url(#appg)"/>
+          <circle cx="235" cy="164" r="12" fill="#2471a3" stroke="#7fff7f" stroke-width="2.5"/>
+          <text x="235" y="169" text-anchor="middle" fill="white" font-size="9">○</text>
+          <rect x="248" y="160" width="40" height="13" fill="#166534" rx="4"/>
+          <text x="268" y="170" text-anchor="middle" fill="white" font-size="8" font-weight="900">② 次</text>
+          <text x="268" y="181" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="7">内側後方へ</text>
+
+          <!-- ④ 安全弁：後方サポート -->
+          <line x1="65" y1="118" x2="65" y2="165" stroke="rgba(255,220,60,0.7)" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#appy)"/>
+          <circle cx="65" cy="174" r="11" fill="rgba(36,113,163,0.6)" stroke="rgba(255,220,60,0.8)" stroke-width="1.5" stroke-dasharray="4,3"/>
+          <text x="65" y="179" text-anchor="middle" fill="white" font-size="8">○</text>
+          <rect x="30" y="183" width="48" height="13" fill="rgba(120,80,0,0.7)" rx="4"/>
+          <text x="54" y="193" text-anchor="middle" fill="#ffe066" font-size="7.5" font-weight="900">③ 安全弁</text>
+
+          <!-- T字の点線 -->
+          <line x1="80" y1="108" x2="235" y2="108" stroke="rgba(255,255,100,0.25)" stroke-width="1" stroke-dasharray="4,3"/>
+          <text x="388" y="108" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="9">→ 中央へ</text>
+        </svg>
+      </div>
+      <div style="font-size:12px; color:#475569; line-height:1.8;">
+        <strong style="color:#1e3a5f;">内側前方（①）が最優先</strong>の理由：タッチライン際より中央に近い位置からのパスのほうが、守備者を動かしやすくゴールに近づく。タッチライン沿いの縦パスは相手に読まれやすいので二の次。
+      </div>
+    </div>
+  </details>
+
 </div>
 
 <footer>ReBorn F.C Over50 | 東京都リーグ3部 | 狭いスペースのパス4原則 | 2026.05.05</footer>
