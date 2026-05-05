@@ -937,35 +937,27 @@
           <text x="80" y="126" text-anchor="middle" fill="white" font-size="7">ボール</text>
           <circle cx="93" cy="108" r="5" fill="#f5c518" stroke="white" stroke-width="1.5"/>
 
-          <!-- ① 最優先：内側のボランチへ（キャンセル） -->
-          <line x1="95" y1="112" x2="248" y2="90" stroke="#7fff7f" stroke-width="3.5" marker-end="url(#sbg)"/>
-          <circle cx="260" cy="86" r="14" fill="#2471a3" stroke="#7fff7f" stroke-width="3"/>
-          <text x="260" y="82" text-anchor="middle" fill="white" font-size="7" font-weight="bold">ボラ</text>
+          <!-- ① 最優先：縦（SH）へ -->
+          <line x1="80" y1="104" x2="80" y2="58" stroke="#7fff7f" stroke-width="3.5" marker-end="url(#sbg)"/>
+          <circle cx="80" cy="46" r="13" fill="#2471a3" stroke="#7fff7f" stroke-width="3"/>
+          <text x="80" y="51" text-anchor="middle" fill="white" font-size="9" font-weight="bold">SH</text>
+          <rect x="95" y="28" width="56" height="13" fill="#166534" rx="4"/>
+          <text x="123" y="38" text-anchor="middle" fill="white" font-size="8" font-weight="900">① 最優先</text>
+
+          <!-- ② 内側（ボランチ） -->
+          <line x1="95" y1="112" x2="248" y2="90" stroke="rgba(255,255,255,0.7)" stroke-width="2" marker-end="url(#sbw)"/>
+          <circle cx="260" cy="86" r="13" fill="rgba(36,113,163,0.65)" stroke="rgba(255,255,255,0.7)" stroke-width="2"/>
+          <text x="260" y="82" text-anchor="middle" fill="white" font-size="7">ボラ</text>
           <text x="260" y="92" text-anchor="middle" fill="white" font-size="7">ンチ</text>
-          <rect x="278" y="78" width="80" height="24" fill="#166534" rx="4"/>
-          <text x="318" y="88" text-anchor="middle" fill="white" font-size="9" font-weight="900">① 最優先</text>
-          <text x="318" y="99" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="7.5">内側キャンセル</text>
+          <rect x="278" y="78" width="56" height="13" fill="rgba(50,50,80,0.85)" rx="4"/>
+          <text x="306" y="88" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="8" font-weight="800">② 内側へ</text>
 
-          <!-- ② 前方SH（縦） -->
-          <line x1="80" y1="104" x2="80" y2="56" stroke="rgba(255,255,255,0.6)" stroke-width="2" marker-end="url(#sbw)"/>
-          <circle cx="80" cy="46" r="12" fill="rgba(36,113,163,0.65)" stroke="rgba(255,255,255,0.6)" stroke-width="2"/>
-          <text x="80" y="51" text-anchor="middle" fill="white" font-size="9">SH</text>
-          <rect x="94" y="40" width="62" height="13" fill="rgba(50,50,80,0.8)" rx="4"/>
-          <text x="125" y="50" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="8" font-weight="800">② 縦（慎重）</text>
-
-          <!-- ③ CB（キャンセル先（CB）） -->
-          <line x1="65" y1="132" x2="65" y2="176" stroke="#7fff7f" stroke-width="2.5" stroke-dasharray="6,3" marker-end="url(#sbg)"/>
-          <circle cx="65" cy="188" r="12" fill="#2471a3" stroke="#7fff7f" stroke-width="2.5"/>
+          <!-- ③ CB（キャンセル先） -->
+          <line x1="65" y1="132" x2="65" y2="176" stroke="rgba(255,220,60,0.8)" stroke-width="2" stroke-dasharray="6,3" marker-end="url(#sby)"/>
+          <circle cx="65" cy="188" r="12" fill="rgba(36,113,163,0.6)" stroke="rgba(255,220,60,0.85)" stroke-width="2"/>
           <text x="65" y="193" text-anchor="middle" fill="white" font-size="9" font-weight="bold">CB</text>
-          <rect x="80" y="182" width="90" height="14" fill="#166534" rx="4"/>
-          <text x="125" y="192" text-anchor="middle" fill="white" font-size="8.5" font-weight="900">③ キャンセル先（CB）</text>
-
-          <!-- 注意マーク（高い位置に上がる） -->
-          <circle cx="80" cy="30" r="11" fill="rgba(36,113,163,0.3)" stroke="rgba(255,100,100,0.6)" stroke-width="1.5" stroke-dasharray="3,2"/>
-          <text x="80" y="35" text-anchor="middle" fill="rgba(255,150,150,0.8)" font-size="8">危</text>
-          <line x1="80" y1="58" x2="80" y2="42" stroke="rgba(255,100,100,0.6)" stroke-width="1.5" stroke-dasharray="4,3"/>
-          <rect x="96" y="22" width="90" height="14" fill="rgba(192,57,43,0.5)" rx="4"/>
-          <text x="141" y="32" text-anchor="middle" fill="rgba(255,180,180,0.9)" font-size="8">上がりすぎはリスク</text>
+          <rect x="80" y="182" width="78" height="13" fill="rgba(120,80,0,0.8)" rx="4"/>
+          <text x="119" y="192" text-anchor="middle" fill="#ffe066" font-size="8" font-weight="900">③ キャンセル先</text>
         </svg>
       </div>
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; font-size:12px; color:#475569; line-height:1.75;">
