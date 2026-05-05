@@ -757,7 +757,7 @@
   border:1px solid rgba(255,255,255,0.2); border-radius:20px;
   padding:5px 12px; font-size:10px; font-weight:700;
   cursor:pointer; z-index:999; backdrop-filter:blur(4px);
-  transition:opacity 0.2s;
+  opacity:0; pointer-events:none; transition:opacity 0.3s;
 " title="閲覧カウントのON/OFF">👁 カウント中</button>
 
 <script>
@@ -775,12 +775,23 @@
       btn.style.color = 'rgba(255,200,100,0.8)';
     }
   }
-  // 初期状態を反映
+  // 初期状態を反映 + スクロール末尾でボタン表示
   window.addEventListener('DOMContentLoaded', () => {
     const btn = document.getElementById('no-count-btn');
-    if (btn && localStorage.getItem('reborn_no_count')) {
+    if (!btn) return;
+    if (localStorage.getItem('reborn_no_count')) {
       btn.textContent = '👁 カウントなし';
       btn.style.color = 'rgba(255,200,100,0.8)';
+    }
+    // フッターが見えたらボタンを表示
+    const footer = document.querySelector('footer');
+    if (footer) {
+      const obs = new IntersectionObserver(entries => {
+        const visible = entries[0].isIntersecting;
+        btn.style.opacity = visible ? '1' : '0';
+        btn.style.pointerEvents = visible ? 'auto' : 'none';
+      }, { threshold: 0.1 });
+      obs.observe(footer);
     }
   });
 
