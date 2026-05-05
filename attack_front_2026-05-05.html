@@ -498,19 +498,15 @@
         <circle cx="300" cy="85" r="13" fill="#c0392b" stroke="white" stroke-width="1.5"/>
         <text x="300" y="90" text-anchor="middle" fill="white" font-size="8">CB</text>
 
-        <!-- ①縦パス時：CBの後退ベクトル（上向き） -->
-        <path d="M210,77 Q215,62 220,52" stroke="rgba(255,100,100,0.45)" stroke-width="1.5" fill="none" stroke-dasharray="3,2" marker-end="url(#u_aw)"/>
-        <rect x="148" y="44" width="90" height="12" fill="rgba(0,0,0,0.35)" rx="3"/>
-        <text x="193" y="53" text-anchor="middle" fill="rgba(255,180,180,0.7)" font-size="8">①縦が入る→後退</text>
-
-        <!-- 落とした瞬間：CBのベクトルが下を向く（太い赤矢印） -->
-        <line x1="210" y1="103" x2="222" y2="138" stroke="#ff6b6b" stroke-width="3.5" marker-end="url(#u_ar)"/>
-        <line x1="300" y1="98" x2="288" y2="133" stroke="#ff6b6b" stroke-width="3.5" marker-end="url(#u_ar)"/>
+        <!-- CBのベクトル：縦パスが入った瞬間から下向き（FW方向へ寄せる） -->
+        <line x1="210" y1="103" x2="220" y2="135" stroke="#ff6b6b" stroke-width="4" marker-end="url(#u_ar)"/>
+        <line x1="300" y1="98" x2="290" y2="130" stroke="#ff6b6b" stroke-width="4" marker-end="url(#u_ar)"/>
 
         <!-- 「落とした瞬間！」ラベル -->
-        <rect x="120" y="100" width="130" height="30" fill="rgba(220,38,38,0.85)" rx="6"/>
-        <text x="185" y="112" text-anchor="middle" fill="white" font-size="9" font-weight="900">落とした瞬間！</text>
-        <text x="185" y="123" text-anchor="middle" fill="rgba(255,200,200,0.95)" font-size="8">両CBのベクトルが下を向く</text>
+        <rect x="112" y="108" width="148" height="36" fill="rgba(220,38,38,0.9)" rx="6"/>
+        <text x="186" y="121" text-anchor="middle" fill="white" font-size="9" font-weight="900">落とした瞬間！</text>
+        <text x="186" y="133" text-anchor="middle" fill="rgba(255,220,220,0.95)" font-size="8">両CBのベクトルが下を向く</text>
+        <text x="186" y="143" text-anchor="middle" fill="#ffe066" font-size="8">→FWが上（裏）へ抜ける</text>
         <!-- FW -->
         <circle cx="255" cy="148" r="16" fill="rgba(245,197,24,0.15)" stroke="#f5c518" stroke-width="2" stroke-dasharray="3,2"/>
         <circle cx="255" cy="148" r="13" fill="#c2410c" stroke="#f5c518" stroke-width="2.5"/>
