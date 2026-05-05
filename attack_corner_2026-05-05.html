@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>コーナーのトレイン | ReBorn F.C Over50</title>
+<style>
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:'Helvetica Neue',Arial,'Hiragino Kaku Gothic ProN',Meiryo,sans-serif; background:#f0f2f0; color:#222; line-height:1.7; }
+  header { background:linear-gradient(135deg,#0f4c27,#1a6b3a,#2d8f52); color:white; padding:36px 24px 28px; text-align:center; }
+  header .badge { display:inline-block; background:rgba(255,255,255,0.2); border:1px solid rgba(255,255,255,0.35); border-radius:20px; padding:3px 14px; font-size:13px; letter-spacing:1px; margin-bottom:10px; }
+  header h1 { font-size:24px; font-weight:900; margin-bottom:4px; }
+  header p { font-size:13px; opacity:.75; }
+  .container { max-width:820px; margin:0 auto; padding:28px 16px 64px; }
+  .main-card { background:white; border-radius:16px; box-shadow:0 2px 16px rgba(0,0,0,0.08); margin-bottom:24px; overflow:hidden; }
+  .card-head { color:white; padding:18px 24px; }
+  .ch-label { font-size:12px; letter-spacing:2px; opacity:.65; margin-bottom:6px; }
+  .ch-title { font-size:18px; font-weight:900; }
+  .head-green { background:linear-gradient(135deg,#0f4c27,#1a6b3a); }
+  .card-body { padding:18px 24px; }
+  .prow { display:flex; align-items:baseline; gap:14px; padding:13px 0; border-bottom:1px solid #f2f2f2; }
+  .prow:last-child { border-bottom:none; }
+  .prow .n { background:#1a6b3a; color:white; min-width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:900; flex-shrink:0; }
+  .prow .body { font-size:15px; }
+  .prow .body strong { font-weight:800; display:block; }
+  .prow .body small { font-size:13px; color:#888; }
+  .fig { margin-bottom:24px; }
+  .fig-label { font-size:14px; font-weight:800; color:#555; letter-spacing:1px; margin-bottom:8px; padding-left:4px; }
+  .pitch { background:linear-gradient(180deg,#3a9e5c,#2d8f52); border-radius:12px; overflow:hidden; box-shadow:0 2px 12px rgba(0,0,0,0.1); }
+  .pitch svg { display:block; width:100%; }
+  .pitch-note { text-align:center; font-size:13px; color:#666; margin-top:8px; }
+  .notes { background:white; border-radius:16px; box-shadow:0 2px 16px rgba(0,0,0,0.08); overflow:hidden; }
+  .notes-head { background:#444; color:white; padding:12px 22px; font-size:14px; font-weight:800; }
+  .nrow { display:flex; gap:12px; padding:13px 22px; border-bottom:1px solid #f2f2f2; font-size:14px; align-items:flex-start; }
+  .nrow:last-child { border-bottom:none; }
+  .nrow .icon { font-size:18px; flex-shrink:0; }
+  .nrow strong { font-weight:800; display:block; margin-bottom:2px; }
+  .nrow span { color:#555; }
+  #back-top { position:fixed; bottom:24px; right:24px; background:#1a6b3a; color:white; border-radius:50px; padding:9px 16px 9px 12px; font-size:12px; font-weight:800; text-decoration:none; display:flex; align-items:center; gap:6px; box-shadow:0 4px 14px rgba(26,107,58,0.4); z-index:999; }
+  footer { text-align:center; padding:20px; font-size:11px; color:#aaa; border-top:1px solid #e0e0e0; margin-top:24px; }
+</style>
+</head>
+<body>
+<header>
+  <div class="badge">SET PIECE</div>
+  <h1>コーナーのトレイン</h1>
+  <p>ReBorn F.C Over50 | 東京都リーグ3部</p>
+</header>
+<div class="container">
+
+  <div class="main-card">
+    <div class="card-head head-green">
+      <div class="ch-label">CONCEPT</div>
+      <div class="ch-title">トレインとは何か</div>
+    </div>
+    <div class="card-body">
+      <div class="prow">
+        <div class="n">1</div>
+        <div class="body"><strong>複数人が列を作り、連動して動くコーナーキックの形</strong><small>3〜4人が「列車（トレイン）」のようにつながって一方向に動く。最後の選手がペラリと剥がれてゴール前に入る形が基本</small></div>
+      </div>
+      <div class="prow">
+        <div class="n">2</div>
+        <div class="body"><strong>守備者の視点を一方向に集中させてからズラす</strong><small>全員が一方向（ニア方向）に動くことで守備者の意識をニアに向かわせ、ファーや逆方向にスペースを作る</small></div>
+      </div>
+      <div class="prow">
+        <div class="n">3</div>
+        <div class="body"><strong>Over50はスプリント不要・約束事の精度が全て</strong><small>「どこに走るか」さえ決まっていればスピードは関係ない。事前の約束を守ることが成功のカギ</small></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="fig">
+    <div class="fig-label">図1 — トレインの動き（ニア方向から剥がれてファーへ）</div>
+    <div class="pitch">
+      <svg viewBox="0 0 500 290" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="ag" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#7fff7f"/></marker>
+          <marker id="ay" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#ffe066"/></marker>
+          <marker id="aw" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="rgba(255,255,255,0.7)"/></marker>
+        </defs>
+        <rect width="500" height="290" fill="#2d8f52"/>
+        <rect x="8" y="8" width="484" height="274" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <rect x="0" y="0" width="500" height="20" fill="rgba(0,0,0,0.4)"/>
+        <text x="250" y="14" text-anchor="middle" fill="white" font-size="10" font-weight="bold">全員がニア方向へ → 最後の選手がファーへ剥がれる</text>
+
+        <!-- ゴール -->
+        <rect x="150" y="24" width="200" height="22" fill="rgba(255,255,255,0.15)" stroke="white" stroke-width="2" rx="2"/>
+        <text x="250" y="39" text-anchor="middle" fill="white" font-size="9">▲ ゴール</text>
+
+        <!-- ゴールライン -->
+        <line x1="8" y1="46" x2="492" y2="46" stroke="white" stroke-width="1.5"/>
+
+        <!-- コーナーフラッグ（右） -->
+        <circle cx="490" cy="46" r="4" fill="rgba(255,220,60,0.8)" stroke="white" stroke-width="1"/>
+
+        <!-- コーナーキッカー -->
+        <circle cx="475" cy="58" r="13" fill="#2471a3" stroke="white" stroke-width="2"/>
+        <text x="475" y="54" text-anchor="middle" fill="white" font-size="7">キッカー</text>
+        <text x="475" y="64" text-anchor="middle" fill="#f5c518" font-size="7">CK</text>
+
+        <!-- ペナルティエリア -->
+        <rect x="148" y="46" width="204" height="120" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" stroke-dasharray="5,3"/>
+        <text x="250" y="170" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="9">ペナルティエリア</text>
+
+        <!-- トレインの初期位置（3人が列）→ニア方向 -->
+        <!-- 選手1（先頭・ニアに動く） -->
+        <circle cx="290" cy="130" r="14" fill="#c2410c" stroke="#ffe066" stroke-width="2.5"/>
+        <text x="290" y="126" text-anchor="middle" fill="white" font-size="8">①</text>
+        <text x="290" y="137" text-anchor="middle" fill="white" font-size="7">先頭</text>
+
+        <!-- 選手2 -->
+        <circle cx="310" cy="148" r="14" fill="#c2410c" stroke="#ffe066" stroke-width="2.5"/>
+        <text x="310" y="144" text-anchor="middle" fill="white" font-size="8">②</text>
+        <text x="310" y="155" text-anchor="middle" fill="white" font-size="7"></text>
+
+        <!-- 選手3（最後・剥がれる） -->
+        <circle cx="330" cy="166" r="14" fill="#1a6b3a" stroke="#7fff7f" stroke-width="3"/>
+        <text x="330" y="162" text-anchor="middle" fill="white" font-size="8">③</text>
+        <text x="330" y="173" text-anchor="middle" fill="#7fff7f" font-size="7">剥がれ役</text>
+
+        <!-- トレインがニアへ動く矢印 -->
+        <path d="M283,118 Q245,90 202,68" stroke="#ffe066" stroke-width="2" fill="none" stroke-dasharray="6,3" marker-end="url(#ay)"/>
+        <rect x="212" y="78" width="60" height="13" fill="rgba(0,0,0,0.5)" rx="3"/>
+        <text x="242" y="88" text-anchor="middle" fill="#ffe066" font-size="9">ニアへ動く</text>
+
+        <!-- 守備者が引っ張られる（ニア方向） -->
+        <circle cx="220" cy="80" r="12" fill="rgba(192,57,43,0.4)" stroke="rgba(255,100,100,0.6)" stroke-width="1.5" stroke-dasharray="3,2"/>
+        <text x="220" y="85" text-anchor="middle" fill="rgba(255,180,180,0.7)" font-size="7">守</text>
+        <path d="M215,70 Q200,58 188,50" stroke="rgba(255,100,100,0.5)" stroke-width="1.5" fill="none" stroke-dasharray="3,2" marker-end="url(#aw)"/>
+
+        <!-- ③がファーへ剥がれる（大きな矢印） -->
+        <path d="M319,162 Q280,140 230,100 Q195,72 168,55" stroke="#7fff7f" stroke-width="3.5" fill="none" marker-end="url(#ag)"/>
+        <rect x="195" y="100" width="78" height="26" fill="rgba(22,101,52,0.9)" rx="5"/>
+        <text x="234" y="111" text-anchor="middle" fill="white" font-size="10" font-weight="900">③がファーへ！</text>
+        <text x="234" y="122" text-anchor="middle" fill="#7fff7f" font-size="9">守備者は逆方向</text>
+
+        <!-- ③のファー到着位置 -->
+        <circle cx="165" cy="55" r="14" fill="rgba(26,107,58,0.6)" stroke="#7fff7f" stroke-width="2.5" stroke-dasharray="3,2"/>
+        <text x="165" y="60" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="8">③到着</text>
+
+        <!-- キックの弧 -->
+        <path d="M462,62 Q380,40 295,55" stroke="white" stroke-width="2" fill="none" stroke-dasharray="5,3" marker-end="url(#aw)"/>
+        <rect x="358" y="34" width="46" height="12" fill="rgba(0,0,0,0.4)" rx="3"/>
+        <text x="381" y="43" text-anchor="middle" fill="white" font-size="8">キック</text>
+
+        <!-- 別の選手（ペナ外からシュート狙い） -->
+        <circle cx="380" cy="185" r="13" fill="#2471a3" stroke="rgba(255,255,255,0.6)" stroke-width="2"/>
+        <text x="380" y="190" text-anchor="middle" fill="white" font-size="8">MF</text>
+        <rect x="350" y="200" width="80" height="12" fill="rgba(0,0,0,0.4)" rx="3"/>
+        <text x="390" y="209" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="8">こぼれ球狙い</text>
+      </svg>
+    </div>
+    <p class="pitch-note">①②がニアへ引き付け → ③がファーへ剥がれる。守備者の意識と動きを一方向に集めてからズラすのがトレインの本質。</p>
+  </div>
+
+  <div class="notes">
+    <div class="notes-head">ポイント / 注意事項</div>
+    <div class="nrow">
+      <span class="icon">🔑</span>
+      <div>
+        <strong>事前に役割を全員が把握しておく</strong>
+        <span>①②はニアへ、③はファーへ。試合中に考えてはいけない。練習で体に染み込ませる。</span>
+      </div>
+    </div>
+    <div class="nrow">
+      <span class="icon">⏱️</span>
+      <div>
+        <strong>タイミングはキッカーが「蹴る直前」に動き出す</strong>
+        <span>早すぎると守備者がついてくる。キッカーが助走を始めた瞬間が動き出しのサイン。</span>
+      </div>
+    </div>
+    <div class="nrow">
+      <span class="icon">💡</span>
+      <div>
+        <strong>ペナルティエリア外にもMFを1人置く</strong>
+        <span>クリアされたこぼれ球をペナ外から狙うMFがいると、セカンドボールを有効活用できる。</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+<footer>ReBorn F.C Over50 | 東京都リーグ3部 | コーナーのトレイン</footer>
+<a href="home.html" id="back-top">
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+  TOP
+</a>
+</body>
+</html>
