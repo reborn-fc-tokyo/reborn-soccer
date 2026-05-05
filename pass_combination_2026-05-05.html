@@ -267,7 +267,7 @@
         <path d="M356,136 Q330,110 295,90" stroke="rgba(255,220,100,0.7)" stroke-width="1.5" fill="none" stroke-dasharray="3,2"/>
         <path d="M383,136 Q408,110 445,92" stroke="rgba(255,220,100,0.7)" stroke-width="1.5" fill="none" stroke-dasharray="3,2"/>
         <rect x="342" y="157" width="60" height="11" fill="rgba(0,0,0,0.45)" rx="3"/>
-        <text x="372" y="165" text-anchor="middle" fill="rgba(255,220,100,0.9)" font-size="7.5" font-weight="bold">体を前向きに開く</text>
+        <text x="372" y="165" text-anchor="middle" fill="rgba(255,220,100,0.9)" font-size="7.5" font-weight="bold">体をハーフターン</text>
 
         <!-- === 優先ゾーン：前斜め（太い実線・明るい緑）影の外を通る === -->
         <!-- 味方A（左前・優先・影の左外） -->
@@ -304,7 +304,7 @@
         <text x="375" y="257" text-anchor="middle" fill="rgba(255,255,200,0.9)" font-size="7.5">━ 優先（体が向く方向・前斜め）　- - 安全弁（後斜め）</text>
       </svg>
     </div>
-    <p class="pitch-note">X字（斜め45度）に広がると味方が影の外に出られる。体を前向きに開くと前斜め2人が自然に見えるので優先的に入る。後ろ斜め2人は安全弁として確保。目安はどの2人も7m以上の間隔。</p>
+    <p class="pitch-note">X字（斜め45度）に広がると味方が影の外に出られる。体をハーフターンと前斜め2人が自然に見えるので優先的に入る。後ろ斜め2人は安全弁として確保。目安はどの2人も7m以上の間隔。</p>
   </div>
 
   <div class="prin-divider pd1">
@@ -332,7 +332,7 @@
       <div class="prow blue">
         <div class="n">②</div>
         <div class="who">受け手</div>
-        <div class="body"><strong>身体をオープン（斜め向き）に開いて止める</strong><small>体の向きを整えてから受けると、次のパスコースが自動的に2方向生まれる</small></div>
+        <div class="body"><strong>身体をハーフターン（斜め向き）で止める</strong><small>体の向きを整えてから受けると、次のパスコースが自動的に2方向生まれる</small></div>
       </div>
     </div>
   </div>
@@ -693,57 +693,71 @@
   <div class="fig">
     <div class="fig-label">図4 — パスの方向（最初は意識しなくてよい。慣れてきたら参考に）</div>
     <div class="pitch">
-      <svg viewBox="0 0 500 230" xmlns="http://www.w3.org/2000/svg">
+      <svg viewBox="0 0 500 235" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <marker id="a4g" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto"><path d="M0,0 L0,8 L10,4 z" fill="#7fff7f"/></marker>
-          <marker id="a4y" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#ffe066"/></marker>
-          <marker id="a4r" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="rgba(255,150,150,0.8)"/></marker>
+          <marker id="a4g" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L0,7 L9,3.5 z" fill="#7fff7f"/></marker>
+          <marker id="a4y" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="rgba(255,220,60,0.9)"/></marker>
         </defs>
-        <rect width="500" height="230" fill="#2d8f52"/>
-        <rect x="8" y="8" width="484" height="214" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/>
+        <rect width="500" height="235" fill="#2d8f52"/>
+        <rect x="8" y="8" width="484" height="219" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/>
         <rect x="0" y="0" width="500" height="20" fill="rgba(0,0,0,0.4)"/>
         <text x="250" y="14" text-anchor="middle" fill="white" font-size="10" font-weight="bold">受け手が入った瞬間に出す。迷うほど守備者が戻ってくる</text>
 
-        <!-- ボール保持者（中央） -->
-        <circle cx="250" cy="120" r="20" fill="rgba(245,197,24,0.15)" stroke="#f5c518" stroke-width="2" stroke-dasharray="3,2"/>
-        <circle cx="250" cy="120" r="16" fill="#c2410c" stroke="#f5c518" stroke-width="3"/>
-        <text x="250" y="116" text-anchor="middle" fill="white" font-size="8" font-weight="bold">受け手</text>
-        <text x="250" y="127" text-anchor="middle" fill="white" font-size="8" font-weight="bold">②</text>
-        <circle cx="263" cy="107" r="6" fill="#f5c518" stroke="white" stroke-width="1.5"/>
+        <!-- ボール保持者②（中央）＋体の向き -->
+        <circle cx="250" cy="118" r="20" fill="rgba(245,197,24,0.15)" stroke="#f5c518" stroke-width="2" stroke-dasharray="3,2"/>
+        <circle cx="250" cy="118" r="16" fill="#c2410c" stroke="#f5c518" stroke-width="3"/>
+        <text x="250" y="114" text-anchor="middle" fill="white" font-size="8" font-weight="bold">受け手</text>
+        <text x="250" y="125" text-anchor="middle" fill="white" font-size="8" font-weight="bold">②</text>
+        <circle cx="263" cy="105" r="6" fill="#f5c518" stroke="white" stroke-width="1.5"/>
+        <!-- 体の向き（ハーフターン・前斜め方向） -->
+        <path d="M237,108 Q195,85 162,52" stroke="rgba(255,220,100,0.7)" stroke-width="1.5" fill="none" stroke-dasharray="3,2"/>
+        <path d="M263,108 Q305,85 338,52" stroke="rgba(255,220,100,0.7)" stroke-width="1.5" fill="none" stroke-dasharray="3,2"/>
+        <rect x="210" y="130" width="80" height="11" fill="rgba(0,0,0,0.45)" rx="3"/>
+        <text x="250" y="139" text-anchor="middle" fill="rgba(255,220,100,0.9)" font-size="7.5" font-weight="bold">体をハーフターン</text>
 
-        <!-- 前の受け手 -->
-        <line x1="250" y1="100" x2="250" y2="52" stroke="white" stroke-width="2.5" marker-end="url(#a4g)"/>
-        <circle cx="250" cy="42" r="13" fill="#2471a3" stroke="#7fff7f" stroke-width="2"/>
-        <text x="250" y="47" text-anchor="middle" fill="white" font-size="10">○</text>
+        <!-- === 優先：前斜め（太い緑・実線） === -->
+        <!-- 前左 -->
+        <line x1="237" y1="106" x2="172" y2="55" stroke="#7fff7f" stroke-width="3.5" marker-end="url(#a4g)"/>
+        <circle cx="160" cy="44" r="13" fill="#2471a3" stroke="#7fff7f" stroke-width="3"/>
+        <text x="160" y="49" text-anchor="middle" fill="white" font-size="10">○</text>
+        <rect x="144" y="26" width="32" height="13" fill="#166534" rx="4"/>
+        <text x="160" y="36" text-anchor="middle" fill="white" font-size="8" font-weight="900">優先</text>
 
-        <!-- 右の受け手 -->
-        <line x1="268" y1="112" x2="380" y2="95" stroke="white" stroke-width="2.5" marker-end="url(#a4g)"/>
-        <circle cx="393" cy="90" r="13" fill="#2471a3" stroke="#7fff7f" stroke-width="2"/>
-        <text x="393" y="95" text-anchor="middle" fill="white" font-size="10">○</text>
+        <!-- 前右 -->
+        <line x1="263" y1="106" x2="328" y2="55" stroke="#7fff7f" stroke-width="3.5" marker-end="url(#a4g)"/>
+        <circle cx="340" cy="44" r="13" fill="#2471a3" stroke="#7fff7f" stroke-width="3"/>
+        <text x="340" y="49" text-anchor="middle" fill="white" font-size="10">○</text>
+        <rect x="324" y="26" width="32" height="13" fill="#166534" rx="4"/>
+        <text x="340" y="36" text-anchor="middle" fill="white" font-size="8" font-weight="900">優先</text>
 
-        <!-- 左の受け手 -->
-        <line x1="232" y1="112" x2="120" y2="95" stroke="white" stroke-width="2.5" marker-end="url(#a4g)"/>
-        <circle cx="107" cy="90" r="13" fill="#2471a3" stroke="#7fff7f" stroke-width="2"/>
-        <text x="107" y="95" text-anchor="middle" fill="white" font-size="10">○</text>
+        <!-- === 安全弁：後ろ斜め（細い黄・点線） === -->
+        <!-- 後左 -->
+        <line x1="237" y1="130" x2="168" y2="182" stroke="rgba(255,220,60,0.7)" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#a4y)"/>
+        <circle cx="158" cy="192" r="12" fill="rgba(36,113,163,0.7)" stroke="rgba(255,220,60,0.8)" stroke-width="2" stroke-dasharray="4,3"/>
+        <text x="158" y="197" text-anchor="middle" fill="white" font-size="9">○</text>
+        <rect x="132" y="203" width="40" height="13" fill="rgba(120,80,0,0.7)" rx="4"/>
+        <text x="152" y="213" text-anchor="middle" fill="#ffe066" font-size="7.5" font-weight="900">安全弁</text>
 
-        <!-- 後ろの受け手 -->
-        <line x1="250" y1="138" x2="250" y2="190" stroke="white" stroke-width="2.5" marker-end="url(#a4g)"/>
-        <circle cx="250" cy="200" r="13" fill="#2471a3" stroke="#7fff7f" stroke-width="2"/>
-        <text x="250" y="205" text-anchor="middle" fill="white" font-size="10">○</text>
-
-        <!-- メッセージ -->
-        <rect x="310" y="55" width="140" height="28" fill="rgba(0,0,0,0.45)" rx="5"/>
-        <text x="380" y="66" text-anchor="middle" fill="white" font-size="9" font-weight="bold">受け手が入った</text>
-        <text x="380" y="77" text-anchor="middle" fill="#ffe066" font-size="9" font-weight="bold">どこへでも出せる</text>
+        <!-- 後右 -->
+        <line x1="263" y1="130" x2="332" y2="182" stroke="rgba(255,220,60,0.7)" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#a4y)"/>
+        <circle cx="342" cy="192" r="12" fill="rgba(36,113,163,0.7)" stroke="rgba(255,220,60,0.8)" stroke-width="2" stroke-dasharray="4,3"/>
+        <text x="342" y="197" text-anchor="middle" fill="white" font-size="9">○</text>
+        <rect x="328" y="203" width="40" height="13" fill="rgba(120,80,0,0.7)" rx="4"/>
+        <text x="348" y="213" text-anchor="middle" fill="#ffe066" font-size="7.5" font-weight="900">安全弁</text>
 
         <!-- タイミング説明 -->
-        <rect x="30" y="145" width="145" height="50" fill="rgba(194,65,12,0.3)" stroke="rgba(255,150,100,0.5)" stroke-width="1" rx="6"/>
-        <text x="103" y="162" text-anchor="middle" fill="#fed7aa" font-size="9" font-weight="bold">③が入った瞬間に出す</text>
-        <text x="103" y="175" text-anchor="middle" fill="#fed7aa" font-size="9">迷い＝守備者が戻ってくる</text>
-        <text x="103" y="187" text-anchor="middle" fill="#ffe066" font-size="9" font-weight="bold">1〜2タッチで決める</text>
+        <rect x="368" y="148" width="118" height="52" fill="rgba(194,65,12,0.3)" stroke="rgba(255,150,100,0.5)" stroke-width="1" rx="6"/>
+        <text x="427" y="163" text-anchor="middle" fill="#fed7aa" font-size="9" font-weight="bold">パスが出た瞬間に出す</text>
+        <text x="427" y="176" text-anchor="middle" fill="#fed7aa" font-size="9">迷い＝守備者が戻る</text>
+        <text x="427" y="189" text-anchor="middle" fill="#ffe066" font-size="9" font-weight="bold">1〜2タッチで決める</text>
+
+        <!-- 凡例 -->
+        <rect x="30" y="148" width="170" height="28" fill="rgba(0,0,0,0.4)" rx="4"/>
+        <text x="115" y="160" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="8">━━ 優先（体が向く前斜め方向）</text>
+        <text x="115" y="171" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="8">- - - 安全弁（後ろ斜め）</text>
       </svg>
     </div>
-    <p class="pitch-note">前に③が入った瞬間が出すタイミング。自分で考えるのではなく受け手が「入ること」が合図。</p>
+    <p class="pitch-note">体をハーフターン（斜めに開く）すると前斜め2方向が自然に見える。入った受け手にパスが出た瞬間に出す。</p>
   </div>
 
   <!-- 注意事項 -->
