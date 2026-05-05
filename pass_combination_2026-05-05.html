@@ -221,63 +221,63 @@
         <rect x="0" y="0" width="500" height="20" fill="rgba(0,0,0,0.4)"/>
         <text x="250" y="14" text-anchor="middle" fill="white" font-size="10" font-weight="bold">幅と深さがないと味方が守備者の影に入り、パスが届かない</text>
 
-        <!-- ===== 左：NG（味方が影の中） ===== -->
+        <!-- ===== 左：NG（守備者が左右に広がり・味方は影の中） ===== -->
         <rect x="8" y="20" width="242" height="22" fill="rgba(192,57,43,0.7)"/>
         <text x="129" y="35" text-anchor="middle" fill="white" font-size="10" font-weight="800">❌ 味方が守備者の影の中</text>
 
-        <!-- ボール保持者（下） -->
-        <circle cx="125" cy="200" r="14" fill="#2471a3" stroke="white" stroke-width="2"/>
-        <text x="125" y="196" text-anchor="middle" fill="white" font-size="7" font-weight="bold">ボール</text>
-        <text x="125" y="206" text-anchor="middle" fill="white" font-size="7" font-weight="bold">保持</text>
-        <circle cx="113" cy="188" r="6" fill="#f5c518" stroke="white" stroke-width="1.5"/>
+        <!-- ボール保持者 -->
+        <circle cx="125" cy="158" r="14" fill="#2471a3" stroke="white" stroke-width="2"/>
+        <text x="125" y="154" text-anchor="middle" fill="white" font-size="7" font-weight="bold">ボール</text>
+        <text x="125" y="164" text-anchor="middle" fill="white" font-size="7" font-weight="bold">保持</text>
+        <circle cx="113" cy="146" r="6" fill="#f5c518" stroke="white" stroke-width="1.5"/>
 
-        <!-- 守備者1（左上方向） -->
-        <circle cx="88" cy="132" r="13" fill="#c0392b" stroke="white" stroke-width="1.5"/>
-        <text x="88" y="137" text-anchor="middle" fill="white" font-size="8" font-weight="bold">守</text>
+        <!-- 守備者1（左ゾーン担当） -->
+        <circle cx="80" cy="108" r="13" fill="#c0392b" stroke="white" stroke-width="1.5"/>
+        <text x="80" y="113" text-anchor="middle" fill="white" font-size="8" font-weight="bold">守</text>
+        <!-- 守備者1の影（上左方向・ゾーン担当） -->
+        <polygon points="67,97 93,97 78,45 48,45" fill="rgba(0,0,0,0.35)" stroke="rgba(255,100,100,0.5)" stroke-width="1" stroke-dasharray="4,3"/>
+        <text x="65" y="75" text-anchor="middle" fill="rgba(255,180,180,0.75)" font-size="8">影</text>
 
-        <!-- 守備者1の影（上方向） -->
-        <polygon points="75,120 101,120 92,52 60,52" fill="rgba(0,0,0,0.35)" stroke="rgba(255,100,100,0.5)" stroke-width="1" stroke-dasharray="4,3"/>
-        <text x="77" y="90" text-anchor="middle" fill="rgba(255,180,180,0.75)" font-size="8">影</text>
-
-        <!-- 守備者2（右上方向） -->
-        <circle cx="165" cy="125" r="13" fill="#c0392b" stroke="white" stroke-width="1.5"/>
-        <text x="165" y="130" text-anchor="middle" fill="white" font-size="8" font-weight="bold">守</text>
-
-        <!-- 守備者2の影（上方向） -->
-        <polygon points="153,113 177,113 185,48 148,48" fill="rgba(0,0,0,0.35)" stroke="rgba(255,100,100,0.5)" stroke-width="1" stroke-dasharray="4,3"/>
-        <text x="170" y="85" text-anchor="middle" fill="rgba(255,180,180,0.75)" font-size="8">影</text>
+        <!-- 守備者2（右ゾーン担当・自然な間隔） -->
+        <circle cx="170" cy="100" r="13" fill="#c0392b" stroke="white" stroke-width="1.5"/>
+        <text x="170" y="105" text-anchor="middle" fill="white" font-size="8" font-weight="bold">守</text>
+        <!-- 守備者2の影（上右方向） -->
+        <polygon points="158,89 182,89 195,45 165,45" fill="rgba(0,0,0,0.35)" stroke="rgba(255,100,100,0.5)" stroke-width="1" stroke-dasharray="4,3"/>
+        <text x="183" y="72" text-anchor="middle" fill="rgba(255,180,180,0.75)" font-size="8">影</text>
 
         <!-- 味方1（守備者1の影の中）→ × -->
-        <circle cx="74" cy="78" r="12" fill="rgba(36,113,163,0.3)" stroke="rgba(255,100,100,0.7)" stroke-width="2" stroke-dasharray="3,2"/>
-        <text x="74" y="83" text-anchor="middle" fill="rgba(200,220,255,0.7)" font-size="9">○</text>
-        <text x="55" y="72" fill="rgba(255,120,120,0.9)" font-size="16" font-weight="900">×</text>
+        <circle cx="62" cy="62" r="12" fill="rgba(36,113,163,0.3)" stroke="rgba(255,100,100,0.7)" stroke-width="2" stroke-dasharray="3,2"/>
+        <text x="62" y="67" text-anchor="middle" fill="rgba(200,220,255,0.7)" font-size="9">○</text>
+        <text x="44" y="58" fill="rgba(255,120,120,0.9)" font-size="16" font-weight="900">×</text>
 
         <!-- 味方2（守備者2の影の中）→ × -->
-        <circle cx="165" cy="72" r="12" fill="rgba(36,113,163,0.3)" stroke="rgba(255,100,100,0.7)" stroke-width="2" stroke-dasharray="3,2"/>
-        <text x="165" y="77" text-anchor="middle" fill="rgba(200,220,255,0.7)" font-size="9">○</text>
-        <text x="180" y="65" fill="rgba(255,120,120,0.9)" font-size="16" font-weight="900">×</text>
+        <circle cx="175" cy="58" r="12" fill="rgba(36,113,163,0.3)" stroke="rgba(255,100,100,0.7)" stroke-width="2" stroke-dasharray="3,2"/>
+        <text x="175" y="63" text-anchor="middle" fill="rgba(200,220,255,0.7)" font-size="9">○</text>
+        <text x="190" y="52" fill="rgba(255,120,120,0.9)" font-size="16" font-weight="900">×</text>
 
-        <!-- ブロックされたパスライン1 -->
-        <line x1="116" y1="188" x2="80" y2="90" stroke="rgba(255,100,100,0.5)" stroke-width="1.5" stroke-dasharray="5,3"/>
-        <!-- ブロックされたパスライン2 -->
-        <line x1="132" y1="188" x2="163" y2="84" stroke="rgba(255,100,100,0.5)" stroke-width="1.5" stroke-dasharray="5,3"/>
+        <!-- ブロックされたパスライン -->
+        <line x1="114" y1="146" x2="70" y2="74" stroke="rgba(255,100,100,0.5)" stroke-width="1.5" stroke-dasharray="5,3"/>
+        <line x1="133" y1="146" x2="173" y2="70" stroke="rgba(255,100,100,0.5)" stroke-width="1.5" stroke-dasharray="5,3"/>
 
         <!-- NG説明 -->
-        <rect x="30" y="225" width="185" height="25" fill="rgba(0,0,0,0.38)" rx="5"/>
-        <text x="122" y="237" text-anchor="middle" fill="rgba(255,180,180,0.95)" font-size="9" font-weight="bold">味方が影の中 → パスが届かない</text>
+        <rect x="22" y="230" width="205" height="25" fill="rgba(0,0,0,0.38)" rx="5"/>
+        <text x="124" y="242" text-anchor="middle" fill="rgba(255,180,180,0.95)" font-size="9" font-weight="bold">X字なし → 全員が守備者の影の中</text>
 
         <!-- ===== 右：OK（左向きハーフターンの例） ===== -->
         <rect x="250" y="20" width="242" height="22" fill="rgba(26,107,58,0.7)"/>
         <text x="371" y="35" text-anchor="middle" fill="white" font-size="10" font-weight="800">✅ 向いている側が優先（左向きの例）</text>
 
-        <!-- 守備者（中央・直前を塞ぐ） -->
-        <circle cx="360" cy="100" r="12" fill="#c0392b" stroke="white" stroke-width="1.5"/>
-        <text x="360" y="105" text-anchor="middle" fill="white" font-size="8" font-weight="bold">守</text>
-        <circle cx="390" cy="95" r="12" fill="#c0392b" stroke="white" stroke-width="1.5"/>
-        <text x="390" y="100" text-anchor="middle" fill="white" font-size="8" font-weight="bold">守</text>
-        <!-- 守備者の影（中央・真上方向のみ） -->
-        <polygon points="344,88 406,88 415,45 335,45" fill="rgba(0,0,0,0.28)" stroke="rgba(255,100,100,0.4)" stroke-width="1" stroke-dasharray="4,3"/>
-        <text x="375" y="72" text-anchor="middle" fill="rgba(255,180,180,0.8)" font-size="8" font-weight="bold">影（直前をふさぐ）</text>
+        <!-- 守備者1（左ゾーン担当・自然な間隔） -->
+        <circle cx="326" cy="108" r="12" fill="#c0392b" stroke="white" stroke-width="1.5"/>
+        <text x="326" y="113" text-anchor="middle" fill="white" font-size="8" font-weight="bold">守</text>
+        <polygon points="314,97 338,97 322,48 292,48" fill="rgba(0,0,0,0.28)" stroke="rgba(255,100,100,0.38)" stroke-width="1" stroke-dasharray="4,3"/>
+        <text x="308" y="76" text-anchor="middle" fill="rgba(255,180,180,0.7)" font-size="8">影</text>
+
+        <!-- 守備者2（右ゾーン担当・自然な間隔） -->
+        <circle cx="418" cy="100" r="12" fill="#c0392b" stroke="white" stroke-width="1.5"/>
+        <text x="418" y="105" text-anchor="middle" fill="white" font-size="8" font-weight="bold">守</text>
+        <polygon points="406,89 430,89 445,44 415,44" fill="rgba(0,0,0,0.28)" stroke="rgba(255,100,100,0.38)" stroke-width="1" stroke-dasharray="4,3"/>
+        <text x="435" y="70" text-anchor="middle" fill="rgba(255,180,180,0.7)" font-size="8">影</text>
 
         <!-- ボール保持者（中央）・体の向き表示 -->
         <circle cx="371" cy="148" r="14" fill="#2471a3" stroke="white" stroke-width="2"/>
