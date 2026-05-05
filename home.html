@@ -445,6 +445,7 @@
     <span>東京都リーグ 3部</span>
     <span>Over 50</span>
   </div>
+  <p id="view-count" style="font-size:13px; font-weight:800; background:rgba(255,255,255,0.18); display:inline-block; padding:3px 12px; border-radius:20px; margin-top:10px;"></p>
 </header>
 
 <div class="container">
@@ -760,6 +761,10 @@
       // 各ページのカウントを取得して表示
       const res = await fetch(GAS_URL + '?action=views');
       const views = await res.json();
+      // TOPページ自身のカウント
+      const homeEl = document.getElementById('view-count');
+      if (homeEl) homeEl.textContent = '👁 ' + (views['home'] || 0) + '回閲覧';
+      // 各戦術ページのカウント
       document.querySelectorAll('[data-view-page]').forEach(el => {
         const page = el.getAttribute('data-view-page');
         const count = views[page] || 0;
