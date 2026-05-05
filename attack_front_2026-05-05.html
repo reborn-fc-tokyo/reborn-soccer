@@ -216,7 +216,7 @@
         <rect width="500" height="320" fill="#2d8f52"/>
         <rect x="8" y="8" width="484" height="304" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
         <rect x="0" y="0" width="500" height="20" fill="rgba(0,0,0,0.4)"/>
-        <text x="250" y="14" text-anchor="middle" fill="white" font-size="10" font-weight="bold">DFをペナ内に集め → スペースを作る → ニアのこぼれを狙う</text>
+        <text x="250" y="14" text-anchor="middle" fill="white" font-size="10" font-weight="bold">トレインにDFが集まる → ニア・ファーにスペース → そこを活用</text>
 
         <!-- ゴール（正確な幅：ゴールポスト間7.32m → 146px） -->
         <rect x="177" y="20" width="146" height="22" fill="rgba(255,255,255,0.18)" stroke="white" stroke-width="2.5" rx="2"/>
@@ -252,34 +252,42 @@
         <text x="250" y="51" text-anchor="middle" fill="white" font-size="7" font-weight="bold">GK前</text>
         <text x="250" y="61" text-anchor="middle" fill="#ffe066" font-size="6">いるだけ</text>
 
-        <!-- DF（ゾーンマーキング）→ ペナ内に集まる -->
-        <circle cx="210" cy="56" r="11" fill="rgba(192,57,43,0.45)" stroke="rgba(255,100,100,0.6)" stroke-width="1.5" stroke-dasharray="3,2"/>
-        <text x="210" y="60" text-anchor="middle" fill="rgba(255,180,180,0.8)" font-size="7">守</text>
-        <circle cx="290" cy="56" r="11" fill="rgba(192,57,43,0.45)" stroke="rgba(255,100,100,0.6)" stroke-width="1.5" stroke-dasharray="3,2"/>
-        <text x="290" y="60" text-anchor="middle" fill="rgba(255,180,180,0.8)" font-size="7">守</text>
-        <circle cx="215" cy="108" r="11" fill="rgba(192,57,43,0.45)" stroke="rgba(255,100,100,0.6)" stroke-width="1.5" stroke-dasharray="3,2"/>
-        <text x="215" y="112" text-anchor="middle" fill="rgba(255,180,180,0.8)" font-size="7">守</text>
-        <circle cx="285" cy="105" r="11" fill="rgba(192,57,43,0.45)" stroke="rgba(255,100,100,0.6)" stroke-width="1.5" stroke-dasharray="3,2"/>
-        <text x="285" y="109" text-anchor="middle" fill="rgba(255,180,180,0.8)" font-size="7">守</text>
+        <!-- DF（守備者がトレイン付近に集まる） -->
+        <circle cx="238" cy="105" r="11" fill="rgba(192,57,43,0.5)" stroke="rgba(255,100,100,0.7)" stroke-width="1.5" stroke-dasharray="3,2"/>
+        <text x="238" y="109" text-anchor="middle" fill="rgba(255,180,180,0.85)" font-size="7">守</text>
+        <circle cx="258" cy="100" r="11" fill="rgba(192,57,43,0.5)" stroke="rgba(255,100,100,0.7)" stroke-width="1.5" stroke-dasharray="3,2"/>
+        <text x="258" y="104" text-anchor="middle" fill="rgba(255,180,180,0.85)" font-size="7">守</text>
+        <circle cx="280" cy="108" r="11" fill="rgba(192,57,43,0.5)" stroke="rgba(255,100,100,0.7)" stroke-width="1.5" stroke-dasharray="3,2"/>
+        <text x="280" y="112" text-anchor="middle" fill="rgba(255,180,180,0.85)" font-size="7">守</text>
+        <circle cx="252" cy="148" r="11" fill="rgba(192,57,43,0.5)" stroke="rgba(255,100,100,0.7)" stroke-width="1.5" stroke-dasharray="3,2"/>
+        <text x="252" y="152" text-anchor="middle" fill="rgba(255,180,180,0.85)" font-size="7">守</text>
 
-        <!-- ニアこぼれ狙い（ゴールエリア線付近） -->
+        <!-- ★ スペースのハイライト（守備者がトレインに集まったので生まれる） -->
+        <!-- ニア側スペース -->
+        <ellipse cx="352" cy="68" rx="30" ry="22" fill="rgba(127,255,127,0.18)" stroke="#7fff7f" stroke-width="2" stroke-dasharray="5,3"/>
+        <text x="352" y="63" text-anchor="middle" fill="#7fff7f" font-size="8" font-weight="bold">ニアスペース</text>
+        <text x="352" y="74" text-anchor="middle" fill="#7fff7f" font-size="7">★ 活用</text>
+        <!-- ファー側スペース -->
+        <ellipse cx="160" cy="72" rx="30" ry="22" fill="rgba(127,255,127,0.18)" stroke="#7fff7f" stroke-width="2" stroke-dasharray="5,3"/>
+        <text x="160" y="67" text-anchor="middle" fill="#7fff7f" font-size="8" font-weight="bold">ファースペース</text>
+        <text x="160" y="78" text-anchor="middle" fill="#7fff7f" font-size="7">★ 活用</text>
+        <!-- GK前スペース（GKが出られない） -->
+        <ellipse cx="250" cy="44" rx="22" ry="10" fill="rgba(127,255,127,0.12)" stroke="#7fff7f" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <text x="250" y="48" text-anchor="middle" fill="#7fff7f" font-size="7">GK前スペース</text>
+
+        <!-- ニアこぼれ狙い（ニアスペースに位置） -->
         <circle cx="352" cy="65" r="13" fill="#2471a3" stroke="rgba(255,255,255,0.9)" stroke-width="2.5"/>
         <text x="352" y="61" text-anchor="middle" fill="white" font-size="7" font-weight="bold">こぼれ</text>
-        <text x="352" y="71" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="6">ニア待機</text>
+        <text x="352" y="71" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="6">ニア</text>
 
-        <!-- ニア：ゴールエリア線上にもう1人 -->
+        <!-- ニア：ゴールエリア線上にもう1人（ニアスペース） -->
         <circle cx="333" cy="65" r="12" fill="#2471a3" stroke="#7fff7f" stroke-width="2"/>
         <text x="333" y="70" text-anchor="middle" fill="white" font-size="7">ニア</text>
 
-        <!-- ファー側：SBが遠めに待機 -->
-        <circle cx="148" cy="88" r="11" fill="rgba(36,113,163,0.55)" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" stroke-dasharray="3,2"/>
-        <text x="148" y="84" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="7">SB</text>
-        <text x="148" y="93" text-anchor="middle" fill="rgba(255,255,255,0.55)" font-size="6">ファー待機</text>
-
-        <!-- スペース（DFが集まっているので生まれる） -->
-        <ellipse cx="168" cy="68" rx="20" ry="15" fill="rgba(127,255,127,0.15)" stroke="#7fff7f" stroke-width="1.5" stroke-dasharray="4,3"/>
-        <text x="168" y="63" text-anchor="middle" fill="#7fff7f" font-size="8" font-weight="bold">スペース</text>
-        <text x="168" y="75" text-anchor="middle" fill="#7fff7f" font-size="7">できる</text>
+        <!-- ファー側：SBが遠めに待機（ファースペース） -->
+        <circle cx="148" cy="82" r="11" fill="rgba(36,113,163,0.65)" stroke="rgba(255,255,255,0.6)" stroke-width="2" stroke-dasharray="3,2"/>
+        <text x="148" y="78" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="7">SB</text>
+        <text x="148" y="87" text-anchor="middle" fill="rgba(255,255,255,0.65)" font-size="6">ファー待機</text>
 
         <!-- ペナ内4人（コーナー方向に向けた直線トレイン） -->
         <!-- 方向ライン（コーナー→ペナスポットの直線上に一列） -->
@@ -320,10 +328,10 @@
         <circle cx="313" cy="267" r="8" fill="white" stroke="#444" stroke-width="1"/><text x="313" y="271" text-anchor="middle" fill="#1e3a5f" font-size="8" font-weight="900">12</text>
         <circle cx="373" cy="257" r="8" fill="white" stroke="#444" stroke-width="1"/><text x="373" y="261" text-anchor="middle" fill="#1e3a5f" font-size="8" font-weight="900">13</text>
         <!-- 守備者番号 -->
-        <circle cx="223" cy="45" r="8" fill="rgba(255,200,200,0.9)" stroke="#c0392b" stroke-width="1"/><text x="223" y="49" text-anchor="middle" fill="#7f1d1d" font-size="9" font-weight="900">D1</text>
-        <circle cx="303" cy="45" r="8" fill="rgba(255,200,200,0.9)" stroke="#c0392b" stroke-width="1"/><text x="303" y="49" text-anchor="middle" fill="#7f1d1d" font-size="9" font-weight="900">D2</text>
-        <circle cx="228" cy="97" r="8" fill="rgba(255,200,200,0.9)" stroke="#c0392b" stroke-width="1"/><text x="228" y="101" text-anchor="middle" fill="#7f1d1d" font-size="9" font-weight="900">D3</text>
-        <circle cx="298" cy="94" r="8" fill="rgba(255,200,200,0.9)" stroke="#c0392b" stroke-width="1"/><text x="298" y="98" text-anchor="middle" fill="#7f1d1d" font-size="9" font-weight="900">D4</text>
+        <circle cx="251" cy="94" r="8" fill="rgba(255,200,200,0.9)" stroke="#c0392b" stroke-width="1"/><text x="251" y="98" text-anchor="middle" fill="#7f1d1d" font-size="8" font-weight="900">D1</text>
+        <circle cx="270" cy="89" r="8" fill="rgba(255,200,200,0.9)" stroke="#c0392b" stroke-width="1"/><text x="270" y="93" text-anchor="middle" fill="#7f1d1d" font-size="8" font-weight="900">D2</text>
+        <circle cx="292" cy="97" r="8" fill="rgba(255,200,200,0.9)" stroke="#c0392b" stroke-width="1"/><text x="292" y="101" text-anchor="middle" fill="#7f1d1d" font-size="8" font-weight="900">D3</text>
+        <circle cx="265" cy="137" r="8" fill="rgba(255,200,200,0.9)" stroke="#c0392b" stroke-width="1"/><text x="265" y="141" text-anchor="middle" fill="#7f1d1d" font-size="8" font-weight="900">D4</text>
 
         <!-- CKの弧（右コーナーからペナルティスポット付近へ） -->
         <path d="M478,52 Q400,28 262,122" stroke="white" stroke-width="2.5" fill="none" stroke-dasharray="6,3" marker-end="url(#k_aw)"/>
