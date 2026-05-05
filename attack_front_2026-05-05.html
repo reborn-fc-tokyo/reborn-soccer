@@ -394,7 +394,7 @@
         <rect width="500" height="330" fill="#2d8f52"/>
         <rect x="8" y="8" width="484" height="314" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
         <rect x="0" y="0" width="500" height="20" fill="rgba(0,0,0,0.4)"/>
-        <text x="250" y="14" text-anchor="middle" fill="white" font-size="10" font-weight="bold">A→B→A：BがDFの前に「信じて出す」→ Aが走り込む</text>
+        <text x="250" y="14" text-anchor="middle" fill="white" font-size="10" font-weight="bold">BがDFの間にいて「信じて出す」→ Aがゴール前に走り込む</text>
         <rect x="185" y="20" width="130" height="18" fill="rgba(255,255,255,0.13)" stroke="white" stroke-width="1.5" rx="2"/>
         <text x="250" y="32" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="8">▲ ゴール</text>
         <line x1="8" y1="38" x2="492" y2="38" stroke="white" stroke-width="1.5"/>
@@ -413,49 +413,45 @@
         <!-- 守備の間スペース -->
         <ellipse cx="252" cy="140" rx="58" ry="30" fill="rgba(255,255,100,0.12)" stroke="rgba(255,255,100,0.6)" stroke-width="2" stroke-dasharray="5,3"/>
         <text x="252" y="133" text-anchor="middle" fill="#ffe066" font-size="10" font-weight="900">守備の間</text>
-        <text x="252" y="147" text-anchor="middle" fill="#ffe066" font-size="9">スペース</text>
 
-        <!-- A（ボール保持・右下） -->
-        <circle cx="360" cy="278" r="19" fill="rgba(245,197,24,0.12)" stroke="#f5c518" stroke-width="2" stroke-dasharray="3,2"/>
-        <circle cx="360" cy="278" r="16" fill="#2471a3" stroke="#f5c518" stroke-width="3"/>
-        <text x="360" y="274" text-anchor="middle" fill="white" font-size="9" font-weight="bold">A</text>
-        <text x="360" y="285" text-anchor="middle" fill="white" font-size="8">ボール</text>
-        <circle cx="376" cy="264" r="7" fill="#f5c518" stroke="white" stroke-width="1.5"/>
+        <!-- B（DFの間に位置） -->
+        <circle cx="252" cy="148" r="16" fill="#2471a3" stroke="#7fff7f" stroke-width="3"/>
+        <text x="252" y="144" text-anchor="middle" fill="white" font-size="9" font-weight="bold">B</text>
+        <text x="252" y="155" text-anchor="middle" fill="#7fff7f" font-size="7">DFの間</text>
 
-        <!-- B（壁役・右サイド） -->
-        <circle cx="410" cy="200" r="16" fill="#2471a3" stroke="white" stroke-width="2.5"/>
-        <text x="410" y="196" text-anchor="middle" fill="white" font-size="9" font-weight="bold">B</text>
-        <text x="410" y="207" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="7">壁役</text>
+        <!-- A（ボール保持・下） -->
+        <circle cx="252" cy="278" r="19" fill="rgba(245,197,24,0.12)" stroke="#f5c518" stroke-width="2" stroke-dasharray="3,2"/>
+        <circle cx="252" cy="278" r="16" fill="#2471a3" stroke="#f5c518" stroke-width="3"/>
+        <text x="252" y="274" text-anchor="middle" fill="white" font-size="9" font-weight="bold">A</text>
+        <text x="252" y="285" text-anchor="middle" fill="white" font-size="8">ボール</text>
+        <circle cx="268" cy="264" r="7" fill="#f5c518" stroke="white" stroke-width="1.5"/>
 
         <!-- ①A→Bパス -->
-        <line x1="375" y1="265" x2="408" y2="215" stroke="white" stroke-width="3" marker-end="url(#wt_aw)"/>
-        <rect x="384" y="235" width="48" height="12" fill="rgba(0,0,0,0.55)" rx="3"/>
-        <text x="408" y="244" text-anchor="middle" fill="white" font-size="9" font-weight="bold">① パス</text>
+        <line x1="252" y1="260" x2="252" y2="166" stroke="white" stroke-width="3" marker-end="url(#wt_aw)"/>
+        <rect x="258" y="218" width="48" height="12" fill="rgba(0,0,0,0.55)" rx="3"/>
+        <text x="282" y="227" text-anchor="middle" fill="white" font-size="9" font-weight="bold">① パス</text>
 
-        <!-- ②Aが走る（ゴールへ斜めに） -->
-        <path d="M345,265 Q305,220 258,155" stroke="#7ec8ff" stroke-width="3" fill="none" stroke-dasharray="8,4" marker-end="url(#wt_ab)"/>
-        <rect x="280" y="215" width="66" height="22" fill="rgba(0,0,0,0.55)" rx="4"/>
-        <text x="313" y="225" text-anchor="middle" fill="#7ec8ff" font-size="9" font-weight="bold">② Aが走る</text>
-        <text x="313" y="234" text-anchor="middle" fill="#7ec8ff" font-size="8">（ゴールへ）</text>
+        <!-- ②Bが「信じて出す」（ゴール前へ1タッチ） -->
+        <line x1="240" y1="135" x2="205" y2="90" stroke="#7fff7f" stroke-width="3.5" marker-end="url(#wt_ag)"/>
+        <rect x="98" y="93" width="118" height="28" fill="rgba(22,101,52,0.92)" rx="4"/>
+        <text x="157" y="105" text-anchor="middle" fill="white" font-size="10" font-weight="900">② 信じて出す</text>
+        <text x="157" y="116" text-anchor="middle" fill="#7fff7f" font-size="8">DFとゴールの前・1タッチ</text>
 
-        <!-- ③B「信じて出す」（守備の間へ1タッチ） -->
-        <path d="M394,195 Q355,168 278,142" stroke="#7fff7f" stroke-width="3.5" fill="none" marker-end="url(#wt_ag)"/>
-        <rect x="290" y="155" width="110" height="28" fill="rgba(22,101,52,0.92)" rx="4"/>
-        <text x="345" y="167" text-anchor="middle" fill="white" font-size="10" font-weight="900">③ 信じて出す</text>
-        <text x="345" y="178" text-anchor="middle" fill="#7fff7f" font-size="8">DFとゴールの前に1タッチ</text>
+        <!-- ③Aがゴール前へ走り込む -->
+        <path d="M236,264 Q195,210 192,105" stroke="#7ec8ff" stroke-width="3" fill="none" stroke-dasharray="8,4" marker-end="url(#wt_ab)"/>
+        <rect x="110" y="183" width="88" height="22" fill="rgba(0,0,0,0.55)" rx="4"/>
+        <text x="154" y="193" text-anchor="middle" fill="#7ec8ff" font-size="9" font-weight="bold">③ Aがゴール前へ</text>
+        <text x="154" y="203" text-anchor="middle" fill="#7ec8ff" font-size="8">走り込む</text>
 
-        <!-- A到達（守備の間で受ける） -->
-        <circle cx="250" cy="148" r="15" fill="rgba(36,113,163,0.75)" stroke="#7fff7f" stroke-width="2.5" stroke-dasharray="3,2"/>
-        <text x="250" y="144" text-anchor="middle" fill="white" font-size="9">A</text>
-        <text x="250" y="155" text-anchor="middle" fill="#7fff7f" font-size="7">受ける</text>
-
-        <!-- シュート -->
-        <path d="M246,133 Q240,98 232,68" stroke="#7fff7f" stroke-width="3" fill="none" marker-end="url(#wt_ag)"/>
-        <rect x="170" y="68" width="72" height="13" fill="rgba(22,101,52,0.88)" rx="3"/>
-        <text x="206" y="78" text-anchor="middle" fill="white" font-size="9" font-weight="bold">シュート！</text>
+        <!-- A到達・シュート -->
+        <circle cx="195" cy="92" r="14" fill="rgba(36,113,163,0.75)" stroke="#7ec8ff" stroke-width="2.5" stroke-dasharray="3,2"/>
+        <text x="195" y="96" text-anchor="middle" fill="white" font-size="8">A</text>
+        <path d="M200,78 Q215,58 228,44" stroke="#7fff7f" stroke-width="3" fill="none" marker-end="url(#wt_ag)"/>
+        <rect x="185" y="46" width="72" height="13" fill="rgba(22,101,52,0.88)" rx="3"/>
+        <text x="221" y="56" text-anchor="middle" fill="white" font-size="9" font-weight="bold">シュート！</text>
       </svg>
     </div>
-    <p class="pitch-note">①AがBに預ける ②Aが即座に守備の間へ走る ③BはAが来ると信じてDFとゴールの前に1タッチで出す。</p>
+    <p class="pitch-note">①AからBへパス（BはDFの間にいる）②BがDFとゴールの前に1タッチで「信じて出す」③Aがゴール前に走り込んで受ける。</p>
   </div>
 
   <div style="text-align:center; margin-bottom:24px;">
