@@ -272,25 +272,29 @@
         <text x="168" y="63" text-anchor="middle" fill="#7fff7f" font-size="8" font-weight="bold">スペース</text>
         <text x="168" y="75" text-anchor="middle" fill="#7fff7f" font-size="7">できる</text>
 
-        <!-- ペナ内4人（密着してトレイン・ペナルティスポット付近） -->
-        <ellipse cx="250" cy="122" rx="38" ry="22" fill="rgba(255,255,100,0.08)" stroke="rgba(255,255,100,0.5)" stroke-width="1.5" stroke-dasharray="4,3"/>
-        <text x="250" y="100" text-anchor="middle" fill="rgba(255,255,100,0.65)" font-size="8">トレイン（密着）</text>
+        <!-- ペナ内4人（コーナー方向に向けた直線トレイン） -->
+        <!-- 方向ライン（コーナー→ペナスポットの直線上に一列） -->
+        <line x1="270" y1="115" x2="212" y2="136" stroke="rgba(255,255,100,0.4)" stroke-width="28" stroke-linecap="round"/>
+        <text x="185" y="108" text-anchor="middle" fill="rgba(255,255,100,0.7)" font-size="8" font-weight="bold">トレイン</text>
+        <text x="185" y="118" text-anchor="middle" fill="rgba(255,255,100,0.7)" font-size="7">（コーナー向き）</text>
 
-        <circle cx="232" cy="113" r="13" fill="#2471a3" stroke="#7fff7f" stroke-width="2.5"/>
-        <text x="232" y="109" text-anchor="middle" fill="white" font-size="7">ペナ</text>
-        <text x="232" y="118" text-anchor="middle" fill="#7fff7f" font-size="7">①</text>
+        <!-- 先頭（コーナー側） -->
+        <circle cx="270" cy="115" r="13" fill="#2471a3" stroke="#7fff7f" stroke-width="2.5"/>
+        <text x="270" y="111" text-anchor="middle" fill="white" font-size="7">ペナ</text>
+        <text x="270" y="120" text-anchor="middle" fill="#7fff7f" font-size="7">①</text>
 
-        <circle cx="252" cy="113" r="13" fill="#2471a3" stroke="#7fff7f" stroke-width="2.5"/>
-        <text x="252" y="109" text-anchor="middle" fill="white" font-size="7">ペナ</text>
-        <text x="252" y="118" text-anchor="middle" fill="#7fff7f" font-size="7">②</text>
+        <circle cx="251" cy="122" r="13" fill="#2471a3" stroke="#7fff7f" stroke-width="2.5"/>
+        <text x="251" y="118" text-anchor="middle" fill="white" font-size="7">ペナ</text>
+        <text x="251" y="127" text-anchor="middle" fill="#7fff7f" font-size="7">②</text>
 
-        <circle cx="237" cy="130" r="13" fill="#2471a3" stroke="#7fff7f" stroke-width="2.5"/>
-        <text x="237" y="126" text-anchor="middle" fill="white" font-size="7">ペナ</text>
-        <text x="237" y="135" text-anchor="middle" fill="#7fff7f" font-size="7">③</text>
+        <circle cx="232" cy="129" r="13" fill="#2471a3" stroke="#7fff7f" stroke-width="2.5"/>
+        <text x="232" y="125" text-anchor="middle" fill="white" font-size="7">ペナ</text>
+        <text x="232" y="134" text-anchor="middle" fill="#7fff7f" font-size="7">③</text>
 
-        <circle cx="257" cy="130" r="13" fill="#2471a3" stroke="#7fff7f" stroke-width="2.5"/>
-        <text x="257" y="126" text-anchor="middle" fill="white" font-size="7">ペナ</text>
-        <text x="257" y="135" text-anchor="middle" fill="#7fff7f" font-size="7">④</text>
+        <!-- 最後尾（ゴールから遠い側） -->
+        <circle cx="213" cy="136" r="13" fill="#2471a3" stroke="#7fff7f" stroke-width="2.5"/>
+        <text x="213" y="132" text-anchor="middle" fill="white" font-size="7">ペナ</text>
+        <text x="213" y="141" text-anchor="middle" fill="#7fff7f" font-size="7">④</text>
 
         <!-- CKの弧（右コーナーからペナルティスポット付近へ） -->
         <path d="M478,52 Q400,28 262,122" stroke="white" stroke-width="2.5" fill="none" stroke-dasharray="6,3" marker-end="url(#k_aw)"/>
