@@ -1072,13 +1072,16 @@
 
 <script>
   const _wurl = 'https://reborn-match-videos.kanesaka.workers.dev';
-  if (!localStorage.getItem('reborn_no_count')) {
-  fetch(_wurl,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'view',page:'pass_combination'})})
-    .then(()=>fetch(_wurl+'?action=views'))
-    .then(r=>r.json())
-    .then(v=>{ const el=document.getElementById('view-count'); if(el) el.textContent='👁 '+(v['pass_combination']||0)+'回閲覧'; })
-    .catch(()=>{});
-  }
+  (async () => {
+    try {
+      if (!localStorage.getItem('reborn_no_count')) {
+        await fetch(_wurl,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'view',page:'pass_combination'})});
+      }
+      const v = await fetch(_wurl+'?action=views').then(r=>r.json());
+      const el = document.getElementById('view-count');
+      if (el) el.textContent = '👁 '+(v['pass_combination']||0)+'回閲覧';
+    } catch(e) {}
+  })();
 </script>
 </body>
 </html>

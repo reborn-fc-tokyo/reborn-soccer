@@ -799,10 +799,11 @@
   // 閲覧カウント
   (async () => {
     try {
-      // このページの閲覧を記録
-      if (localStorage.getItem('reborn_no_count')) return;
-      await fetch(GAS_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({action:'view', page:'home'}) });
-      // 各ページのカウントを取得して表示
+      // カウント記録（管理者モードはスキップ）
+      if (!localStorage.getItem('reborn_no_count')) {
+        await fetch(GAS_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({action:'view', page:'home'}) });
+      }
+      // カウント表示は常に行う
       const res = await fetch(GAS_URL + '?action=views');
       const views = await res.json();
       // TOPページ自身のカウント
