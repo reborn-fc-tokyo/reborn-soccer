@@ -148,6 +148,19 @@
         <rect id="ftb" x="0" y="0" width="80" height="16" fill="rgba(255,220,60,0.85)" rx="4" opacity="0"/>
         <text id="ft" x="0" y="0" text-anchor="middle" fill="#1a1a1a" font-size="10" font-weight="900" opacity="0">前を向く！</text>
 
+        <!-- 守備者3人（固定ゾーン）：慣れてきたら追加 -->
+        <g id="def-group" opacity="0.7">
+          <!-- 左サイド中央 -->
+          <circle id="d0" cx="75" cy="170" r="15" fill="rgba(192,57,43,0.55)" stroke="rgba(255,100,100,0.9)" stroke-width="2"/>
+          <text cx="75" x="75" y="175" text-anchor="middle" fill="white" font-size="9" font-weight="bold">守</text>
+          <!-- エンドライン中央 -->
+          <circle id="d1" cx="250" cy="65" r="15" fill="rgba(192,57,43,0.55)" stroke="rgba(255,100,100,0.9)" stroke-width="2"/>
+          <text x="250" y="70" text-anchor="middle" fill="white" font-size="9" font-weight="bold">守</text>
+          <!-- 右サイド中央 -->
+          <circle id="d2" cx="425" cy="170" r="15" fill="rgba(192,57,43,0.55)" stroke="rgba(255,100,100,0.9)" stroke-width="2"/>
+          <text x="425" y="175" text-anchor="middle" fill="white" font-size="9" font-weight="bold">守</text>
+        </g>
+
         <!-- カウンター -->
         <rect x="360" y="6" width="134" height="14" fill="rgba(0,0,0,0.38)" rx="3"/>
         <text id="ct" x="427" y="16" text-anchor="middle" fill="rgba(255,255,255,0.65)" font-size="8">0 / 22 パス</text>
@@ -164,7 +177,7 @@
     <div class="step-list">
       <div class="step-item"><div class="step-num">1</div><div>3人パス＆ゴー：ゆっくり正確に → スムーズになったらスピードアップ</div></div>
       <div class="step-arr">↓ 慣れたら</div>
-      <div class="step-item"><div class="step-num">2</div><div>コーンを守備者に見立てて配置——コーンを避けながら45度の位置を取る（原則①「影の外」の感覚）</div></div>
+      <div class="step-item"><div class="step-num">2</div><div><strong>守備者ゾーン突破</strong>：数人の守備者を外周上の3か所に固定配置。3人がそのゾーンに入ったら1人だけプレッシャー（3対1）。動きながらパスを出せれば簡単に抜けられる。</div></div>
       <div class="step-arr">↓ さらに</div>
       <div class="step-item"><div class="step-num">3</div><div>4対1ロンド：守備1人を加えてプレッシャー下で判断を磨く</div></div>
     </div>
@@ -302,6 +315,8 @@ function applyState(s, anim){
   const rx=(bp2.x+s.Rp.x)/2,ry=(bp2.y+s.Rp.y)/2;
   document.getElementById('ll').setAttribute('x',lx-10);document.getElementById('ll').setAttribute('y',ly);
   document.getElementById('lr').setAttribute('x',rx+2);document.getElementById('lr').setAttribute('y',ry);
+  // 守備者更新
+  updateDefenders(s.pos[s.ball]);
   // Labels
   document.getElementById('st').textContent=s.lbl;
   document.getElementById('ct').textContent=cur+' / '+states.length+' パス';
@@ -316,6 +331,42 @@ function applyState(s, anim){
 }
 
 const INTERVAL = 1100; // ms between passes
+
+// 守備者の固定位置
+const DEFS = [
+  {id:'d0', x:75,  y:170}, // 左サイド中央
+  {id:'d1', x:250, y:65},  // エンドライン中央
+  {id:'d2', x:425, y:170}, // 右サイド中央
+];
+const DEF_RADIUS = 90; // 活性化距離
+
+function updateDefenders(ballPos) {
+  DEFS.forEach(d => {
+    const dx = ballPos.x - d.x, dy = ballPos.y - d.y;
+    const dist = Math.sqrt(dx*dx + dy*dy);
+    const el = document.getElementById(d.id);
+    if (dist < DEF_RADIUS) {
+      // ボールに近づく（少し寄る）
+      const ratio = 0.25;
+      const nx = d.x + dx*ratio, ny = d.y + dy*ratio;
+      el.setAttribute('cx', nx); el.setAttribute('cy', ny);
+      el.setAttribute('fill', 'rgba(220,38,38,0.85)');
+      el.setAttribute('stroke', '#ff4444');
+      el.setAttribute('r', '17');
+      // テキスト位置も更新
+      el.nextElementSibling.setAttribute('x', nx);
+      el.nextElementSibling.setAttribute('y', ny+4);
+    } else {
+      // 元の位置に戻る
+      el.setAttribute('cx', d.x); el.setAttribute('cy', d.y);
+      el.setAttribute('fill', 'rgba(192,57,43,0.55)');
+      el.setAttribute('stroke', 'rgba(255,100,100,0.9)');
+      el.setAttribute('r', '15');
+      el.nextElementSibling.setAttribute('x', d.x);
+      el.nextElementSibling.setAttribute('y', d.y+4);
+    }
+  });
+}
 
 function step(){
   if(paused) return;
