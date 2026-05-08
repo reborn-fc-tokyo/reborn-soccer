@@ -28,7 +28,6 @@
   .fig-label { font-size:13px; font-weight:800; color:#555; letter-spacing:1px; margin-bottom:7px; padding-left:4px; }
   .pitch { background:linear-gradient(180deg,#3a9e5c,#2d8f52); border-radius:12px; overflow:hidden; box-shadow:0 2px 12px rgba(0,0,0,0.1); }
   .pitch svg { display:block; width:100%; }
-  .pitch-note { text-align:center; font-size:13px; color:#666; margin-top:7px; margin-bottom:4px; }
   .tip-box { background:#f0fdf4; border-left:4px solid #16a34a; border-radius:8px; padding:14px 18px; margin-bottom:20px; }
   .tip-box .tip-title { font-size:13px; font-weight:900; color:#166534; margin-bottom:6px; }
   .tip-box p { font-size:14px; color:#334155; line-height:1.75; }
@@ -40,142 +39,131 @@
   .step-list { display:flex; flex-direction:column; gap:8px; }
   .step-item { display:flex; align-items:center; gap:12px; font-size:14px; color:#334155; }
   .step-num { background:#2471a3; color:white; width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:900; flex-shrink:0; }
-  .step-arrow { color:#94a3b8; font-size:12px; text-align:center; padding:2px 0 2px 36px; }
+  .step-arrow-s { color:#94a3b8; font-size:12px; text-align:center; padding:2px 0 2px 36px; }
 
-  /* アニメーションボタン */
-  .drill-controls { text-align:center; padding:14px 0 8px; }
+  .drill-controls { text-align:center; padding:14px 0 8px; display:flex; align-items:center; justify-content:center; gap:12px; flex-wrap:wrap; }
   .btn-pass { background:linear-gradient(135deg,#1a6b3a,#2d8f52); color:white; border:none; border-radius:30px; padding:12px 36px; font-size:16px; font-weight:900; cursor:pointer; box-shadow:0 4px 14px rgba(26,107,58,0.4); transition:transform 0.1s, opacity 0.2s; letter-spacing:1px; }
   .btn-pass:active { transform:scale(0.96); }
-  .btn-pass:disabled { opacity:0.5; cursor:default; }
-  .btn-reset { background:#fff; color:#555; border:2px solid #ddd; border-radius:30px; padding:10px 24px; font-size:13px; font-weight:800; cursor:pointer; margin-left:12px; transition:border-color 0.2s; }
-  .btn-reset:hover { border-color:#888; }
-  .drill-status { text-align:center; font-size:13px; color:#666; margin-top:8px; min-height:20px; }
+  .btn-pass:disabled { opacity:0.45; cursor:default; }
+  .btn-reset { background:#fff; color:#555; border:2px solid #ddd; border-radius:30px; padding:10px 22px; font-size:13px; font-weight:800; cursor:pointer; }
+  .drill-status { text-align:center; font-size:13px; color:#555; margin-top:6px; min-height:20px; padding:0 12px; }
+  .drill-counter { text-align:center; font-size:11px; color:#94a3b8; margin-top:2px; }
 
-  /* SVG transitions */
-  #player-A, #player-B, #player-C { transition: transform 0.55s cubic-bezier(0.4,0,0.2,1); }
-  #pass-arrow { transition: opacity 0.3s; }
-  #ball-dot { transition: cx 0.55s cubic-bezier(0.4,0,0.2,1), cy 0.55s cubic-bezier(0.4,0,0.2,1); }
+  #player-A, #player-B, #player-C { transition: transform 0.5s cubic-bezier(0.4,0,0.2,1); }
+  #ball-dot { transition: cx 0.5s cubic-bezier(0.4,0,0.2,1), cy 0.5s cubic-bezier(0.4,0,0.2,1); }
+  #pass-line { transition: opacity 0.25s; }
+  #guide-l, #guide-r { transition: opacity 0.3s; }
 
   #back-top { position:fixed; bottom:24px; right:24px; background:#2471a3; color:white; border-radius:50px; padding:9px 16px 9px 12px; font-size:12px; font-weight:800; text-decoration:none; display:flex; align-items:center; gap:6px; box-shadow:0 4px 14px rgba(36,113,163,0.4); z-index:999; }
   footer { text-align:center; padding:20px; font-size:11px; color:#aaa; border-top:1px solid #e0e0e0; margin-top:24px; }
 </style>
 </head>
 <body>
-
 <header>
   <div class="badge">PASSING DRILL</div>
   <h1>3人パス＆ゴー</h1>
   <p>ReBorn F.C Over50 | ポジショナルプレー 基礎ドリル | 2026.05.08</p>
 </header>
-
 <div class="container">
 
-  <!-- 概要 -->
   <div class="card">
     <div class="card-head head-blue">
       <div class="ch-label">CONCEPT</div>
-      <div class="ch-title">パスして即走る。45度に入る習慣を作る</div>
+      <div class="ch-title">パスして即走る。進行方向の45度に入る習慣を作る</div>
     </div>
     <div class="card-body">
-      <div class="prow"><div class="n">目</div><div class="body"><strong>目的</strong><small>ポジショナルプレー原則②③を体に染み込ませる。ウォームアップとして毎回実施することで「出したら走る・45度に入る」が反射になる</small></div></div>
-      <div class="prow"><div class="n">人</div><div class="body"><strong>3人一組</strong><small>A・B・C。ハーフコートを一周しながら繰り返す</small></div></div>
-      <div class="prow"><div class="n">時</div><div class="body"><strong>所要時間：約5〜8分</strong><small>ハーフコート外周 約200m。ゆっくりジョグペースでウォームアップに最適</small></div></div>
+      <div class="prow"><div class="n">目</div><div class="body"><strong>目的</strong><small>「出したら走る・45度に入る」を体に染み込ませる。ウォームアップとして毎回実施する</small></div></div>
+      <div class="prow"><div class="n">人</div><div class="body"><strong>3人一組（A・B・C）</strong><small>受け手はその場にとどまる。残り2人が進行方向の左右45度へ走る</small></div></div>
+      <div class="prow"><div class="n">時</div><div class="body"><strong>ハーフコート一周（約200m）</strong><small>左サイド→上→右サイド→下の順に繰り返す</small></div></div>
     </div>
   </div>
 
-  <!-- パス技術のコツ -->
   <div class="tip-box">
     <div class="tip-title">💡 パスの出し方：押し出して即走る</div>
-    <p>
-      大きく振りかぶって蹴るのではなく、<strong>蹴り足のインサイドで「押し出す」</strong>感覚で出す。<br>
-      押し出した勢いがそのまま走り出しの第一歩になる——止まって蹴ってから走るより<strong>テンポよく次の動きに入れる</strong>。
-    </p>
+    <p>大きく振りかぶって蹴るのではなく、<strong>インサイドで「押し出す」</strong>感覚で出す。押し出した勢いがそのまま走り出しの第一歩になる。止まって蹴ってから走るより<strong>テンポよく次の動きに入れる</strong>。</p>
   </div>
 
-  <!-- アニメーション図 -->
   <div class="fig">
-    <div class="fig-label">図1 — パスボタンを押すと三角形が前進する</div>
+    <div class="fig-label">図1 — パスボタンで三角形がハーフコートを一周する（進行方向の45度）</div>
     <div class="pitch">
-      <svg id="drill-svg" viewBox="0 0 500 340" xmlns="http://www.w3.org/2000/svg">
+      <svg id="drill-svg" viewBox="0 0 500 360" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <marker id="arr-g" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#7fff7f"/></marker>
-          <marker id="arr-b" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#7ec8ff"/></marker>
+          <marker id="arr-y" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#ffe066"/></marker>
         </defs>
+        <rect width="500" height="360" fill="#2d8f52"/>
+        <rect x="8" y="8" width="484" height="344" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <rect x="0" y="0" width="500" height="20" fill="rgba(0,0,0,0.42)"/>
+        <text x="250" y="14" text-anchor="middle" fill="white" font-size="9" font-weight="bold">受け手はその場にとどまる。残り2人が進行方向の45度へ走る</text>
 
-        <!-- 背景 -->
-        <rect width="500" height="340" fill="#2d8f52"/>
-        <rect x="8" y="8" width="484" height="324" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <!-- ハーフコート外周 -->
+        <rect x="28" y="26" width="444" height="306" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="2"/>
 
-        <!-- タイトルバー -->
-        <rect x="0" y="0" width="500" height="20" fill="rgba(0,0,0,0.4)"/>
-        <text x="250" y="14" text-anchor="middle" fill="white" font-size="9" font-weight="bold">受け手は動かない。残り2人がボール保持者の左右45度へ走る</text>
+        <!-- 進行方向ラベル -->
+        <text x="16" y="185" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-size="9" transform="rotate(-90,16,185)">↑ 左サイド</text>
+        <text x="250" y="42" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-size="9">→ 上（エンドライン）</text>
+        <text x="484" y="185" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-size="9" transform="rotate(90,484,185)">↓ 右サイド</text>
+        <text x="250" y="345" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-size="9">← 下（センターライン）</text>
 
-        <!-- ハーフコート外周（薄く） -->
-        <rect x="22" y="22" width="456" height="296" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2" stroke-dasharray="8,5"/>
-        <text x="250" y="36" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="8">ハーフコート外周</text>
-        <text x="250" y="328" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="8">← スタート</text>
+        <!-- 45度ガイドライン -->
+        <line id="guide-l" x1="0" y1="0" x2="0" y2="0" stroke="rgba(255,255,100,0.5)" stroke-width="1.5" stroke-dasharray="5,3" opacity="0.8"/>
+        <line id="guide-r" x1="0" y1="0" x2="0" y2="0" stroke="rgba(255,255,100,0.5)" stroke-width="1.5" stroke-dasharray="5,3" opacity="0.8"/>
+        <text id="lbl-l" x="0" y="0" fill="rgba(255,255,100,0.85)" font-size="9" font-weight="800">45°</text>
+        <text id="lbl-r" x="0" y="0" fill="rgba(255,255,100,0.85)" font-size="9" font-weight="800">45°</text>
 
-        <!-- 45度ガイドライン（薄い） -->
-        <line id="guide-left"  x1="0" y1="0" x2="0" y2="0" stroke="rgba(255,255,100,0.35)" stroke-width="1" stroke-dasharray="4,3"/>
-        <line id="guide-right" x1="0" y1="0" x2="0" y2="0" stroke="rgba(255,255,100,0.35)" stroke-width="1" stroke-dasharray="4,3"/>
-        <text id="angle-left"  x="0" y="0" fill="rgba(255,255,100,0.7)" font-size="9">45°</text>
-        <text id="angle-right" x="0" y="0" fill="rgba(255,255,100,0.7)" font-size="9">45°</text>
+        <!-- パス矢印 -->
+        <line id="pass-line" x1="0" y1="0" x2="0" y2="0" stroke="#7fff7f" stroke-width="4" opacity="0" marker-end="url(#arr-g)"/>
 
-        <!-- パス矢印（最初は非表示） -->
-        <line id="pass-arrow" x1="108" y1="290" x2="55" y2="243" stroke="#7fff7f" stroke-width="3.5" opacity="0" marker-end="url(#arr-g)"/>
+        <!-- コーナー表示 -->
+        <text id="corner-label" x="250" y="185" text-anchor="middle" fill="rgba(255,220,60,0)" font-size="13" font-weight="900">方向転換 →</text>
 
         <!-- プレイヤーA -->
-        <g id="player-A" transform="translate(55, 248)">
-          <circle id="ring-A" r="18" fill="rgba(36,113,163,0.25)" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-dasharray="4,3"/>
-          <circle r="14" fill="#2471a3" stroke="white" stroke-width="2"/>
+        <g id="player-A" transform="translate(43,268)">
+          <circle id="ring-A" r="19" fill="rgba(36,113,163,0.2)" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-dasharray="4,3"/>
+          <circle r="14" id="body-A" fill="#2471a3" stroke="white" stroke-width="2"/>
           <text y="5" text-anchor="middle" fill="white" font-size="13" font-weight="900">A</text>
         </g>
-
         <!-- プレイヤーB（最初ボール保持） -->
-        <g id="player-B" transform="translate(108, 295)">
-          <circle id="ring-B" r="18" fill="rgba(245,197,24,0.3)" stroke="#f5c518" stroke-width="2.5"/>
-          <circle r="14" fill="#2471a3" stroke="#f5c518" stroke-width="2.5"/>
+        <g id="player-B" transform="translate(80,305)">
+          <circle id="ring-B" r="19" fill="rgba(245,197,24,0.3)" stroke="#f5c518" stroke-width="2.5"/>
+          <circle r="14" id="body-B" fill="#2471a3" stroke="#f5c518" stroke-width="2.5"/>
           <text y="5" text-anchor="middle" fill="white" font-size="13" font-weight="900">B</text>
         </g>
-
         <!-- プレイヤーC -->
-        <g id="player-C" transform="translate(162, 248)">
-          <circle id="ring-C" r="18" fill="rgba(36,113,163,0.25)" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-dasharray="4,3"/>
-          <circle r="14" fill="#2471a3" stroke="rgba(255,255,255,0.6)" stroke-width="2"/>
+        <g id="player-C" transform="translate(117,268)">
+          <circle id="ring-C" r="19" fill="rgba(36,113,163,0.2)" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-dasharray="4,3"/>
+          <circle r="14" id="body-C" fill="#2471a3" stroke="rgba(255,255,255,0.6)" stroke-width="2"/>
           <text y="5" text-anchor="middle" fill="white" font-size="13" font-weight="900">C</text>
         </g>
 
         <!-- ボール -->
-        <circle id="ball-dot" cx="122" cy="282" r="7" fill="#f5c518" stroke="white" stroke-width="1.5"/>
+        <circle id="ball-dot" cx="94" cy="292" r="7" fill="#f5c518" stroke="white" stroke-width="1.5"/>
 
         <!-- 状態表示 -->
-        <rect id="status-bg" x="165" y="290" width="170" height="36" fill="rgba(0,0,0,0.45)" rx="6"/>
-        <text id="status-line1" x="250" y="306" text-anchor="middle" fill="#ffe066" font-size="10" font-weight="900">Bがボール</text>
-        <text id="status-line2" x="250" y="320" text-anchor="middle" fill="rgba(255,255,255,0.75)" font-size="9">A・Cが45度の位置にいる</text>
+        <rect x="140" y="308" width="220" height="36" fill="rgba(0,0,0,0.45)" rx="6"/>
+        <text id="st1" x="250" y="323" text-anchor="middle" fill="#ffe066" font-size="10" font-weight="900">Bがボール ▶ 左サイド上昇中</text>
+        <text id="st2" x="250" y="337" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="9">A・CがBの進行方向45度にいる</text>
       </svg>
     </div>
-
-    <!-- コントロール -->
     <div class="drill-controls">
       <button class="btn-pass" id="btn-pass" onclick="nextPass()">⚽ パス</button>
       <button class="btn-reset" onclick="resetDrill()">リセット</button>
     </div>
     <div class="drill-status" id="drill-status">Bがボール。「パス」を押して動かしてみよう。</div>
+    <div class="drill-counter" id="drill-counter">0 / 16 パス（16回で一周）</div>
   </div>
 
-  <!-- ステップアップ -->
   <div class="step-box">
     <div class="step-title">📈 慣れたらステップアップ</div>
     <div class="step-list">
       <div class="step-item"><div class="step-num">1</div>3人パス＆ゴー（今回）：動きの習慣を作る</div>
-      <div class="step-arrow">↓ 慣れたら</div>
+      <div class="step-arrow-s">↓ 慣れたら</div>
       <div class="step-item"><div class="step-num">2</div>4対1ロンド：守備1人を加えて「影の外」を意識する</div>
-      <div class="step-arrow">↓ さらに</div>
+      <div class="step-arrow-s">↓ さらに</div>
       <div class="step-item"><div class="step-num">3</div>4対2ロンド：プレッシャー下でタイミングを鍛える</div>
     </div>
   </div>
 
-  <!-- 注意 -->
   <div class="warn-box">
     <div class="warn-title">⚠️ この段階でできないこと</div>
     <p>守備者がいないため、原則①「影の外・体を開いて受ける」の判断は練習できません。あくまで<strong>動きのパターンと感覚を体に入れる</strong>段階です。</p>
@@ -190,153 +178,205 @@
 </a>
 
 <script>
-// ステート定義：受け手は次のステートでも同じ位置
-// {A,B,C: 位置, ball: ボール保持者, passTo: 次のパス先, desc: 説明}
-const states = [
-  { A:{x:55, y:248}, B:{x:108,y:295}, C:{x:162,y:248}, ball:'B', passTo:'A', desc:'BからAへパス。B・CがAの45度へ走る' },
-  { A:{x:55, y:248}, B:{x:108,y:202}, C:{x:12, y:202}, ball:'A', passTo:'B', desc:'AからBへパス。A・CがBの45度へ走る' },
-  { A:{x:55, y:155}, B:{x:108,y:202}, C:{x:162,y:155}, ball:'B', passTo:'C', desc:'BからCへパス。B・AがCの45度へ走る' },
-  { A:{x:215,y:108}, B:{x:108,y:108}, C:{x:162,y:155}, ball:'C', passTo:'A', desc:'CからAへパス。C・BがAの45度へ走る' },
-  { A:{x:215,y:108}, B:{x:268,y:62},  C:{x:162,y:62},  ball:'A', passTo:'B', desc:'AからBへパス。A・CがBの45度へ走る' },
-  { A:{x:215,y:35},  B:{x:268,y:62},  C:{x:322,y:35},  ball:'B', passTo:'C', desc:'BからCへパス。B・AがCの45度へ走る' },
-  { A:{x:375,y:68},  B:{x:268,y:68},  C:{x:322,y:35},  ball:'C', passTo:'A', desc:'CからAへパス。C・BがAの45度へ走る' },
-  { A:{x:375,y:68},  B:{x:428,y:35},  C:{x:322,y:35},  ball:'A', passTo:'B', desc:'AからBへパス。A・CがBの45度へ走る' },
+// 16ステートで一周。進行方向の左右45度に2人。受け手は動かない。
+// dir: 進行方向の単位ベクトル (SVGのy下向き座標)
+// L45/R45オフセット = D * [(dx+dy)*0.707, (-dx+dy)*0.707] / [( dx-dy)*0.707, (dx+dy)*0.707]
+const D = 52;
+
+function off(dx, dy) {
+  const k = D * 0.707;
+  return {
+    L: {x: k*(dx+dy),  y: k*(-dx+dy)},
+    R: {x: k*(dx-dy),  y: k*(dx+dy)}
+  };
+}
+
+function clip(x,y){return {x:Math.max(35,Math.min(465,x)), y:Math.max(32,Math.min(326,y))};}
+
+function mkState(bx, by, dx, dy, ball, passTo, seg, desc) {
+  const o = off(dx,dy);
+  const L = clip(bx+o.L.x, by+o.L.y);
+  const R = clip(bx+o.R.x, by+o.R.y);
+  return {ball:{x:bx,y:by}, L, R, ballPlayer:ball, passTo, seg, desc};
+}
+
+// 16 states: 4 up left | 4 right top | 4 down right | 4 left bottom
+const rawStates = [
+  // ── 左サイド ↑ (dir 0,-1) ──
+  [80, 305,  0,-1, 'B','R','left','左サイド上昇中'],
+  [117,268,  0,-1, 'C','L','left','左サイド上昇中'],
+  [80, 231,  0,-1, 'B','R','left','左サイド上昇中'],
+  [117,194,  0,-1, 'C','L','left','コーナー手前（方向転換→上へ）'],
+  // ── 上（エンドライン） → (dir 1,0) ──  [corner jump]
+  [80,  65,  1, 0, 'B','R','top','上を右に進行中'],
+  [117,117,  1, 0, 'C','L','top','上を右に進行中'],
+  [154, 65,  1, 0, 'A','R','top','上を右に進行中'],
+  [191,117,  1, 0, 'B','L','top','コーナー手前（方向転換→右サイドへ）'],
+  // ── 右サイド ↓ (dir 0,1) ──  [corner jump]
+  [420, 65,  0, 1, 'C','L','right','右サイド下降中'],
+  [383,117,  0, 1, 'A','R','right','右サイド下降中'],
+  [420,154,  0, 1, 'C','L','right','右サイド下降中'],
+  [383,191,  0, 1, 'A','R','right','コーナー手前（方向転換→下へ）'],
+  // ── 下（センターライン） ← (dir -1,0) ──  [corner jump]
+  [420,305, -1, 0, 'B','R','bot','下を左に進行中'],
+  [383,268, -1, 0, 'C','L','bot','下を左に進行中'],
+  [300,305, -1, 0, 'B','R','bot','下を左に進行中'],
+  [263,268, -1, 0, 'C','L','bot','一周完了！リセットしてもう一周'],
 ];
 
-const playerNames = {A:'A', B:'B', C:'C'};
-let currentState = 0;
-let animating = false;
+const states = rawStates.map(r => mkState(r[0],r[1],r[2],r[3],r[4],r[5],r[6],r[7]));
 
-function getPos(state, player) {
-  return state[player];
+// Assign A/B/C to ball / L / R positions per state
+// ball player is states[i].ballPlayer
+// The OTHER two players are L and R
+function getPositions(s) {
+  const players = ['A','B','C'];
+  const others = players.filter(p=>p!==s.ballPlayer);
+  return {
+    [s.ballPlayer]: s.ball,
+    [others[0]]: s.L,
+    [others[1]]: s.R,
+    ballHolder: s.ballPlayer,
+    passTarget: s.passTo === 'L' ? others[0] : others[1],
+    passPos: s.passTo === 'L' ? s.L : s.R,
+  };
 }
 
-function setTransform(id, x, y) {
-  document.getElementById('player-' + id).setAttribute('transform', `translate(${x},${y})`);
+// Corner transitions (state index where ball "jumps" = corner turn)
+const CORNERS = new Set([4, 8, 12]);
+const segLabels = {left:'左サイド ↑', top:'エンドライン →', right:'右サイド ↓', bot:'センターライン ←'};
+
+let cur = 0;
+let busy = false;
+
+function setPlayerPos(id, x, y) {
+  document.getElementById('player-'+id).setAttribute('transform',`translate(${x},${y})`);
+}
+function setRing(id, isBall) {
+  const ring = document.getElementById('ring-'+id);
+  if (isBall) {
+    ring.setAttribute('fill','rgba(245,197,24,0.3)');
+    ring.setAttribute('stroke','#f5c518');
+    ring.setAttribute('stroke-width','2.5');
+    ring.removeAttribute('stroke-dasharray');
+  } else {
+    ring.setAttribute('fill','rgba(36,113,163,0.2)');
+    ring.setAttribute('stroke','rgba(255,255,255,0.4)');
+    ring.setAttribute('stroke-width','1.5');
+    ring.setAttribute('stroke-dasharray','4,3');
+  }
+}
+function updateGuides(s) {
+  const bh = s.ball;
+  document.getElementById('guide-l').setAttribute('x1', bh.x);
+  document.getElementById('guide-l').setAttribute('y1', bh.y);
+  document.getElementById('guide-l').setAttribute('x2', s.L.x);
+  document.getElementById('guide-l').setAttribute('y2', s.L.y);
+  document.getElementById('guide-r').setAttribute('x1', bh.x);
+  document.getElementById('guide-r').setAttribute('y1', bh.y);
+  document.getElementById('guide-r').setAttribute('x2', s.R.x);
+  document.getElementById('guide-r').setAttribute('y2', s.R.y);
+  document.getElementById('lbl-l').setAttribute('x', (bh.x+s.L.x)/2 - 10);
+  document.getElementById('lbl-l').setAttribute('y', (bh.y+s.L.y)/2);
+  document.getElementById('lbl-r').setAttribute('x', (bh.x+s.R.x)/2 + 2);
+  document.getElementById('lbl-r').setAttribute('y', (bh.y+s.R.y)/2);
+}
+function updateBall(pos) {
+  document.getElementById('ball-dot').setAttribute('cx', pos.x+12);
+  document.getElementById('ball-dot').setAttribute('cy', pos.y-12);
+}
+function updateStatus(s, count) {
+  const pos = getPositions(s);
+  const others = ['A','B','C'].filter(p=>p!==s.ballPlayer).join('・');
+  document.getElementById('st1').textContent = `${s.ballPlayer}がボール ▶ ${segLabels[s.seg]}`;
+  document.getElementById('st2').textContent = `${others}が${s.ballPlayer}の進行方向45度にいる`;
+  document.getElementById('drill-status').textContent = s.desc;
+  document.getElementById('drill-counter').textContent = `${count} / 16 パス（16回で一周）`;
 }
 
-function updateHighlights(ballHolder) {
-  ['A','B','C'].forEach(p => {
-    const ring = document.getElementById('ring-' + p);
-    const circle = document.querySelector(`#player-${p} circle:not([id])`);
-    if (p === ballHolder) {
-      ring.setAttribute('fill', 'rgba(245,197,24,0.3)');
-      ring.setAttribute('stroke', '#f5c518');
-      ring.setAttribute('stroke-width', '2.5');
-      ring.removeAttribute('stroke-dasharray');
-      if (circle) circle.setAttribute('stroke', '#f5c518');
-    } else {
-      ring.setAttribute('fill', 'rgba(36,113,163,0.25)');
-      ring.setAttribute('stroke', 'rgba(255,255,255,0.4)');
-      ring.setAttribute('stroke-width', '1.5');
-      ring.setAttribute('stroke-dasharray', '4,3');
-      if (circle) circle.setAttribute('stroke', p === 'C' ? 'rgba(255,255,255,0.6)' : 'white');
-    }
-  });
-}
-
-function updateGuides(state) {
-  const holder = state[state.ball];
-  const others = ['A','B','C'].filter(p => p !== state.ball);
-  const p1 = state[others[0]];
-  const p2 = state[others[1]];
-  document.getElementById('guide-left').setAttribute('x1', holder.x);
-  document.getElementById('guide-left').setAttribute('y1', holder.y);
-  document.getElementById('guide-left').setAttribute('x2', p1.x);
-  document.getElementById('guide-left').setAttribute('y2', p1.y);
-  document.getElementById('guide-right').setAttribute('x1', holder.x);
-  document.getElementById('guide-right').setAttribute('y1', holder.y);
-  document.getElementById('guide-right').setAttribute('x2', p2.x);
-  document.getElementById('guide-right').setAttribute('y2', p2.y);
-  document.getElementById('angle-left').setAttribute('x', (holder.x + p1.x)/2 - 8);
-  document.getElementById('angle-left').setAttribute('y', (holder.y + p1.y)/2);
-  document.getElementById('angle-right').setAttribute('x', (holder.x + p2.x)/2 + 2);
-  document.getElementById('angle-right').setAttribute('y', (holder.y + p2.y)/2);
-}
-
-function updateStatus(text1, text2) {
-  document.getElementById('status-line1').textContent = text1;
-  document.getElementById('status-line2').textContent = text2;
-}
-
-function updateBall(state) {
-  const pos = state[state.ball];
-  document.getElementById('ball-dot').setAttribute('cx', pos.x + 12);
-  document.getElementById('ball-dot').setAttribute('cy', pos.y - 12);
+function applyState(s, instant) {
+  const pos = getPositions(s);
+  if (instant) {
+    // Temporarily disable transition
+    ['A','B','C'].forEach(p=>{
+      document.getElementById('player-'+p).style.transition='none';
+    });
+    document.getElementById('ball-dot').style.transition='none';
+  }
+  setPlayerPos('A', pos['A'].x, pos['A'].y);
+  setPlayerPos('B', pos['B'].x, pos['B'].y);
+  setPlayerPos('C', pos['C'].x, pos['C'].y);
+  ['A','B','C'].forEach(p=>setRing(p, p===s.ballPlayer));
+  updateBall(pos[s.ballPlayer]);
+  updateGuides(s);
+  if (instant) {
+    requestAnimationFrame(()=>{
+      ['A','B','C'].forEach(p=>{
+        document.getElementById('player-'+p).style.transition='';
+      });
+      document.getElementById('ball-dot').style.transition='';
+    });
+  }
 }
 
 function nextPass() {
-  if (animating) return;
-  animating = true;
+  if (busy) return;
+  busy = true;
   document.getElementById('btn-pass').disabled = true;
 
-  const s = states[currentState];
-  const fromPos = s[s.ball];
-  const toPos   = s[s.passTo];
+  const s = states[cur];
+  const pos = getPositions(s);
+  const passPos = pos.passPos;
+  const fromPos = s.ball;
 
-  // パス矢印を表示
-  const arrow = document.getElementById('pass-arrow');
-  arrow.setAttribute('x1', fromPos.x);
-  arrow.setAttribute('y1', fromPos.y);
-  arrow.setAttribute('x2', toPos.x);
-  arrow.setAttribute('y2', toPos.y);
-  arrow.style.opacity = '1';
+  // パス矢印
+  const pl = document.getElementById('pass-line');
+  pl.setAttribute('x1', fromPos.x); pl.setAttribute('y1', fromPos.y);
+  pl.setAttribute('x2', passPos.x);  pl.setAttribute('y2', passPos.y);
+  pl.style.opacity = '1';
 
-  document.getElementById('drill-status').textContent = s.desc;
+  setTimeout(()=>{
+    pl.style.opacity = '0';
+    const next = (cur+1) % states.length;
+    const ns = states[next];
 
-  // 550ms後：次のステートに移動
-  setTimeout(() => {
-    arrow.style.opacity = '0';
-    const nextIdx = (currentState + 1) % states.length;
-    const ns = states[nextIdx];
+    if (CORNERS.has(next)) {
+      // コーナー：瞬間移動（方向転換）
+      const lbl = document.getElementById('corner-label');
+      lbl.style.fill='rgba(255,220,60,0.9)';
+      lbl.textContent = '方向転換！';
+      lbl.setAttribute('x', (fromPos.x+150)/2);
+      lbl.setAttribute('y', (fromPos.y+ns.ball.y)/2);
+      setTimeout(()=>{lbl.style.fill='rgba(255,220,60,0)';}, 800);
+      applyState(ns, true); // instant (no transition for corner jump)
+    } else {
+      applyState(ns, false);
+    }
 
-    // 全プレイヤー移動（CSSトランジション）
-    setTransform('A', ns.A.x, ns.A.y);
-    setTransform('B', ns.B.x, ns.B.y);
-    setTransform('C', ns.C.x, ns.C.y);
+    cur = next;
+    updateStatus(ns, cur);
 
-    updateBall(ns);
-    updateHighlights(ns.ball);
-
-    // 移動完了後にガイド更新
-    setTimeout(() => {
-      currentState = nextIdx;
-      updateGuides(ns);
-
-      const holderName = ns.ball;
-      const receivers = ['A','B','C'].filter(p => p !== ns.ball).join('・');
-      updateStatus(`${holderName}がボール`, `${receivers}が${holderName}の45度にいる`);
-
-      if (currentState === states.length - 1) {
-        document.getElementById('drill-status').textContent = '一周完了！リセットして繰り返そう。';
-      }
-
-      animating = false;
-      document.getElementById('btn-pass').disabled = false;
+    setTimeout(()=>{
+      busy = false;
+      document.getElementById('btn-pass').disabled = (cur === states.length-1);
     }, 600);
-  }, 550);
+  }, 500);
 }
 
 function resetDrill() {
-  if (animating) return;
-  currentState = 0;
-  const s = states[0];
-  setTransform('A', s.A.x, s.A.y);
-  setTransform('B', s.B.x, s.B.y);
-  setTransform('C', s.C.x, s.C.y);
-  updateBall(s);
-  updateHighlights(s.ball);
-  updateGuides(s);
-  updateStatus('Bがボール', 'A・CがBの45度にいる');
-  document.getElementById('drill-status').textContent = 'Bがボール。「パス」を押して動かしてみよう。';
-  document.getElementById('pass-arrow').style.opacity = '0';
+  if (busy) return;
+  cur = 0;
+  applyState(states[0], true);
+  updateStatus(states[0], 0);
+  document.getElementById('pass-line').style.opacity = '0';
+  document.getElementById('corner-label').style.fill = 'rgba(255,220,60,0)';
   document.getElementById('btn-pass').disabled = false;
+  busy = false;
 }
 
-// 初期表示
-window.addEventListener('DOMContentLoaded', () => {
-  updateGuides(states[0]);
-  updateBall(states[0]);
+window.addEventListener('DOMContentLoaded', ()=>{
+  applyState(states[0], true);
+  updateStatus(states[0], 0);
 });
 </script>
 </body>
