@@ -199,7 +199,7 @@
 <script>
 // ─── 3選手の固定ID（p0,p1,p2）が各自スムーズに移動 ─────────────────
 const D = 70, k = D * 0.707;
-const B = {xn:28,xx:472,yn:28,yx:312};
+const B = {xn:38,xx:452,yn:38,yx:305};
 function cl(x,y){return {x:Math.max(B.xn,Math.min(B.xx,x)),y:Math.max(B.yn,Math.min(B.yx,y))};}
 function off(dx,dy){return {L:{x:k*(dx+dy),y:k*(-dx+dy)},R:{x:k*(dx-dy),y:k*(dx+dy)}};}
 function add(p,o){return cl(p.x+o.x,p.y+o.y);}
@@ -211,7 +211,7 @@ const SEGS = [
   {dx:0, dy:-1, n:5, lbl:'左サイド ↑'},
   {dx:1, dy:0,  n:8, lbl:'エンドライン →'},
   {dx:0, dy:1,  n:5, lbl:'右サイド ↓'},
-  {dx:-1,dy:0,  n:5, lbl:'センターライン ←'},
+  {dx:-1,dy:0,  n:8, lbl:'センターライン ←'},
 ];
 
 function buildStates(){
