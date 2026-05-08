@@ -144,10 +144,9 @@
       </svg>
     </div>
     <div class="drill-controls">
-      <button class="btn-pass" id="bp" onclick="go()">⚽ パス</button>
-      <button class="btn-reset" onclick="reset()">リセット</button>
+      <button class="btn-reset" onclick="togglePause()" id="bp">⏸ 一時停止</button>
     </div>
-    <div class="drill-info" id="di">「パス」を押すと三角形がハーフコートを一周します。</div>
+    <div class="drill-info" id="di">自動で一周します。</div>
   </div>
 
   <div class="step-box">
@@ -247,7 +246,7 @@ function buildStates(){
 }
 
 const states=buildStates();
-let cur=0, busy=false;
+let cur=0, busy=false, paused=false, timer=null;
 
 // ─── SVG animation ─────────────────────────────────────────────────
 const SPEED = 480; // ms
@@ -299,10 +298,10 @@ function applyState(s, anim){
   if(!anim) requestAnimationFrame(()=>setTransition(true));
 }
 
-function go(){
-  if(busy)return;
-  busy=true;
-  document.getElementById('bp').disabled=true;
+const INTERVAL = 1100; // ms between passes
+
+function step(){
+  if(paused) return;
   const s=states[cur];
   const from=s.pos[s.ball];
   const toIdx=s.passTo==='L'?s.leftP:s.rightP;
@@ -311,28 +310,30 @@ function go(){
   pa.setAttribute('x1',from.x);pa.setAttribute('y1',from.y);
   pa.setAttribute('x2',to.x);pa.setAttribute('y2',to.y);
   pa.style.opacity='1';
-
   setTimeout(()=>{
     pa.style.opacity='0';
-    const next=(cur+1)%states.length;
-    cur=next;
+    cur=(cur+1)%states.length;
     applyState(states[cur],true);
-    const done=cur===0;
-    document.getElementById('di').textContent=done?'一周完了！リセットしてもう一周。':'パスを出したら2歩ダッシュで次の45度へ走る。';
-    setTimeout(()=>{busy=false;document.getElementById('bp').disabled=false;},SPEED+50);
-  },460);
+    document.getElementById('ct').textContent=cur+' / '+states.length+' パス';
+    document.getElementById('di').textContent=cur===0?'一周完了！また一周します。':'パスを出したら2歩ダッシュで次の45度へ走る。';
+  },440);
 }
 
-function reset(){
-  if(busy)return;
-  cur=0;
-  document.getElementById('pa').style.opacity='0';
+function togglePause(){
+  paused=!paused;
+  document.getElementById('bp').textContent=paused?'▶ 再生':'⏸ 一時停止';
+  if(!paused) schedule();
+}
+
+function schedule(){
+  clearTimeout(timer);
+  if(!paused) timer=setTimeout(()=>{step();schedule();}, INTERVAL);
+}
+
+window.addEventListener('DOMContentLoaded',()=>{
   applyState(states[0],false);
-  document.getElementById('di').textContent='「パス」を押すと三角形がハーフコートを一周します。';
-  document.getElementById('bp').disabled=false;
-}
-
-window.addEventListener('DOMContentLoaded',()=>applyState(states[0],false));
+  schedule();
+});
 </script>
 </body>
 </html>
