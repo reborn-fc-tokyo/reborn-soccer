@@ -148,8 +148,8 @@
         <rect id="ftb" x="0" y="0" width="80" height="16" fill="rgba(255,220,60,0.85)" rx="4" opacity="0"/>
         <text id="ft" x="0" y="0" text-anchor="middle" fill="#1a1a1a" font-size="10" font-weight="900" opacity="0">前を向く！</text>
 
-        <!-- 守備者3人（固定ゾーン）：慣れてきたら追加 -->
-        <g id="def-group" opacity="0.7">
+        <!-- 守備者3人（固定ゾーン）：ステップ2で表示 -->
+        <g id="def-group" opacity="0" style="transition:opacity 0.4s">
           <!-- 左サイド中央 -->
           <circle id="d0" cx="75" cy="170" r="15" fill="rgba(192,57,43,0.55)" stroke="rgba(255,100,100,0.9)" stroke-width="2"/>
           <text cx="75" x="75" y="175" text-anchor="middle" fill="white" font-size="9" font-weight="bold">守</text>
@@ -168,6 +168,7 @@
     </div>
     <div class="drill-controls">
       <button class="btn-reset" onclick="togglePause()" id="bp">⏸ 一時停止</button>
+      <button class="btn-reset" id="bs2" onclick="toggleStep2()" style="background:#fbe8e8; color:#b03030; border-color:#f5c0c0;">ステップ2：守備を加える</button>
     </div>
     <div class="drill-info" id="di">自動で一周します。</div>
   </div>
@@ -269,7 +270,7 @@ function buildStates(){
 }
 
 const states=buildStates();
-let cur=0, busy=false, paused=false, timer=null;
+let cur=0, busy=false, paused=false, timer=null, step2=false;
 
 // ─── SVG animation ─────────────────────────────────────────────────
 const SPEED = 480; // ms
@@ -315,8 +316,8 @@ function applyState(s, anim){
   const rx=(bp2.x+s.Rp.x)/2,ry=(bp2.y+s.Rp.y)/2;
   document.getElementById('ll').setAttribute('x',lx-10);document.getElementById('ll').setAttribute('y',ly);
   document.getElementById('lr').setAttribute('x',rx+2);document.getElementById('lr').setAttribute('y',ry);
-  // 守備者更新
-  updateDefenders(s.pos[s.ball]);
+  // 守備者更新（ステップ2のみ）
+  if(step2) updateDefenders(s.pos[s.ball]);
   // Labels
   document.getElementById('st').textContent=s.lbl;
   document.getElementById('ct').textContent=cur+' / '+states.length+' パス';
@@ -393,6 +394,27 @@ function step(){
     ftb.setAttribute('opacity','1'); ft.setAttribute('opacity','1');
     setTimeout(()=>{ ftb.setAttribute('opacity','0'); ft.setAttribute('opacity','0'); }, 600);
   },440);
+}
+
+function toggleStep2(){
+  step2=!step2;
+  const dg=document.getElementById('def-group');
+  const btn=document.getElementById('bs2');
+  dg.setAttribute('opacity', step2?'0.85':'0');
+  btn.style.background=step2?'#fbe8e8':'';
+  btn.style.color=step2?'#b03030':'';
+  btn.textContent=step2?'ステップ1：守備なしに戻す':'ステップ2：守備を加える';
+  if(!step2){
+    // 守備者を元の位置に戻す
+    DEFS.forEach(d=>{
+      const el=document.getElementById(d.id);
+      el.setAttribute('cx',d.x);el.setAttribute('cy',d.y);
+      el.setAttribute('fill','rgba(192,57,43,0.55)');
+      el.setAttribute('r','15');
+      el.nextElementSibling.setAttribute('x',d.x);
+      el.nextElementSibling.setAttribute('y',d.y+4);
+    });
+  }
 }
 
 function togglePause(){
