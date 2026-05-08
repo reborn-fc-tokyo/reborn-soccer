@@ -39,8 +39,7 @@
   .step-list { display:flex; flex-direction:column; gap:8px; }
   .step-item { display:flex; align-items:center; gap:12px; font-size:14px; color:#334155; }
   .step-num { background:#2471a3; color:white; width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:900; flex-shrink:0; }
-  .step-arrow-s { color:#94a3b8; font-size:12px; text-align:center; padding:2px 0 2px 36px; }
-
+  .step-arr { color:#94a3b8; font-size:12px; text-align:center; padding:2px 0 2px 36px; }
   .drill-controls { text-align:center; padding:14px 0 8px; display:flex; align-items:center; justify-content:center; gap:12px; flex-wrap:wrap; }
   .btn-pass { background:linear-gradient(135deg,#1a6b3a,#2d8f52); color:white; border:none; border-radius:30px; padding:12px 36px; font-size:16px; font-weight:900; cursor:pointer; box-shadow:0 4px 14px rgba(26,107,58,0.4); transition:transform 0.1s, opacity 0.2s; letter-spacing:1px; }
   .btn-pass:active { transform:scale(0.96); }
@@ -48,12 +47,10 @@
   .btn-reset { background:#fff; color:#555; border:2px solid #ddd; border-radius:30px; padding:10px 22px; font-size:13px; font-weight:800; cursor:pointer; }
   .drill-status { text-align:center; font-size:13px; color:#555; margin-top:6px; min-height:20px; padding:0 12px; }
   .drill-counter { text-align:center; font-size:11px; color:#94a3b8; margin-top:2px; }
-
-  #player-A, #player-B, #player-C { transition: transform 0.5s cubic-bezier(0.4,0,0.2,1); }
-  #ball-dot { transition: cx 0.5s cubic-bezier(0.4,0,0.2,1), cy 0.5s cubic-bezier(0.4,0,0.2,1); }
-  #pass-line { transition: opacity 0.25s; }
-  #guide-l, #guide-r { transition: opacity 0.3s; }
-
+  /* SVG トランジション */
+  #p0,#p1,#p2 { transition: transform 0.5s cubic-bezier(0.4,0,0.2,1); }
+  #ball-dot   { transition: cx 0.5s cubic-bezier(0.4,0,0.2,1), cy 0.5s cubic-bezier(0.4,0,0.2,1); }
+  #pass-line  { transition: opacity 0.25s; }
   #back-top { position:fixed; bottom:24px; right:24px; background:#2471a3; color:white; border-radius:50px; padding:9px 16px 9px 12px; font-size:12px; font-weight:800; text-decoration:none; display:flex; align-items:center; gap:6px; box-shadow:0 4px 14px rgba(36,113,163,0.4); z-index:999; }
   footer { text-align:center; padding:20px; font-size:11px; color:#aaa; border-top:1px solid #e0e0e0; margin-top:24px; }
 </style>
@@ -73,23 +70,22 @@
     </div>
     <div class="card-body">
       <div class="prow"><div class="n">目</div><div class="body"><strong>目的</strong><small>「出したら走る・45度に入る」を体に染み込ませる。ウォームアップとして毎回実施する</small></div></div>
-      <div class="prow"><div class="n">人</div><div class="body"><strong>3人一組（A・B・C）</strong><small>受け手はその場にとどまる。残り2人が進行方向の左右45度へ走る</small></div></div>
+      <div class="prow"><div class="n">人</div><div class="body"><strong>3人一組</strong><small>受け手はその場にとどまる。残り2人が進行方向の左右45度へ走る</small></div></div>
       <div class="prow"><div class="n">時</div><div class="body"><strong>ハーフコート一周（約200m）</strong><small>左サイド→上→右サイド→下の順に繰り返す</small></div></div>
     </div>
   </div>
 
   <div class="tip-box">
     <div class="tip-title">💡 パスの出し方：押し出して即走る</div>
-    <p>大きく振りかぶって蹴るのではなく、<strong>インサイドで「押し出す」</strong>感覚で出す。押し出した勢いがそのまま走り出しの第一歩になる。止まって蹴ってから走るより<strong>テンポよく次の動きに入れる</strong>。</p>
+    <p>大きく振りかぶって蹴るのではなく、<strong>インサイドで「押し出す」</strong>感覚で出す。押し出した勢いがそのまま走り出しの第一歩になる——止まって蹴ってから走るより<strong>テンポよく次の動きに入れる</strong>。</p>
   </div>
 
   <div class="fig">
-    <div class="fig-label">図1 — パスボタンで三角形がハーフコートを一周する（進行方向の45度）</div>
+    <div class="fig-label">図1 — パスボタンでハーフコートを一周（進行方向の45度）</div>
     <div class="pitch">
       <svg id="drill-svg" viewBox="0 0 500 360" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <marker id="arr-g" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#7fff7f"/></marker>
-          <marker id="arr-y" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#ffe066"/></marker>
         </defs>
         <rect width="500" height="360" fill="#2d8f52"/>
         <rect x="8" y="8" width="484" height="344" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
@@ -97,59 +93,57 @@
         <text x="250" y="14" text-anchor="middle" fill="white" font-size="9" font-weight="bold">受け手はその場にとどまる。残り2人が進行方向の45度へ走る</text>
 
         <!-- ハーフコート外周 -->
-        <rect x="28" y="26" width="444" height="306" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="2"/>
-
-        <!-- 進行方向ラベル -->
-        <text x="16" y="185" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-size="9" transform="rotate(-90,16,185)">↑ 左サイド</text>
-        <text x="250" y="42" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-size="9">→ 上（エンドライン）</text>
-        <text x="484" y="185" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-size="9" transform="rotate(90,484,185)">↓ 右サイド</text>
-        <text x="250" y="345" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-size="9">← 下（センターライン）</text>
+        <rect x="28" y="26" width="444" height="306" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+        <text x="16"  y="185" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="8" transform="rotate(-90,16,185)">↑ 左サイド</text>
+        <text x="250" y="42"  text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="8">→ エンドライン</text>
+        <text x="484" y="185" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="8" transform="rotate(90,484,185)">↓ 右サイド</text>
+        <text x="250" y="345" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="8">← センターライン</text>
 
         <!-- 45度ガイドライン -->
-        <line id="guide-l" x1="0" y1="0" x2="0" y2="0" stroke="rgba(255,255,100,0.5)" stroke-width="1.5" stroke-dasharray="5,3" opacity="0.8"/>
-        <line id="guide-r" x1="0" y1="0" x2="0" y2="0" stroke="rgba(255,255,100,0.5)" stroke-width="1.5" stroke-dasharray="5,3" opacity="0.8"/>
-        <text id="lbl-l" x="0" y="0" fill="rgba(255,255,100,0.85)" font-size="9" font-weight="800">45°</text>
-        <text id="lbl-r" x="0" y="0" fill="rgba(255,255,100,0.85)" font-size="9" font-weight="800">45°</text>
+        <line id="gl" x1="0" y1="0" x2="1" y2="1" stroke="rgba(255,255,100,0.55)" stroke-width="1.5" stroke-dasharray="5,3"/>
+        <line id="gr" x1="0" y1="0" x2="1" y2="1" stroke="rgba(255,255,100,0.55)" stroke-width="1.5" stroke-dasharray="5,3"/>
+        <text id="ll" x="0" y="0" fill="rgba(255,255,100,0.8)" font-size="9" font-weight="800">45°</text>
+        <text id="lr" x="0" y="0" fill="rgba(255,255,100,0.8)" font-size="9" font-weight="800">45°</text>
 
         <!-- パス矢印 -->
-        <line id="pass-line" x1="0" y1="0" x2="0" y2="0" stroke="#7fff7f" stroke-width="4" opacity="0" marker-end="url(#arr-g)"/>
+        <line id="pass-line" x1="0" y1="0" x2="1" y2="1" stroke="#7fff7f" stroke-width="4" opacity="0" marker-end="url(#arr-g)"/>
 
         <!-- コーナー表示 -->
-        <text id="corner-label" x="250" y="185" text-anchor="middle" fill="rgba(255,220,60,0)" font-size="13" font-weight="900">方向転換 →</text>
+        <text id="clbl" x="250" y="185" text-anchor="middle" fill="rgba(255,220,60,0)" font-size="12" font-weight="900">方向転換！</text>
 
-        <!-- プレイヤーA -->
-        <g id="player-A" transform="translate(43,268)">
-          <circle id="ring-A" r="19" fill="rgba(36,113,163,0.2)" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-dasharray="4,3"/>
-          <circle r="14" id="body-A" fill="#2471a3" stroke="white" stroke-width="2"/>
-          <text y="5" text-anchor="middle" fill="white" font-size="13" font-weight="900">A</text>
+        <!-- プレイヤー0（最初ボール保持：黄リング） -->
+        <g id="p0" transform="translate(80,305)">
+          <circle r="18" fill="rgba(245,197,24,0.28)" stroke="#f5c518" stroke-width="2.5"/>
+          <circle r="13" fill="#2471a3" stroke="#f5c518" stroke-width="2"/>
+          <text y="5" text-anchor="middle" fill="#f5c518" font-size="11" font-weight="900">●</text>
         </g>
-        <!-- プレイヤーB（最初ボール保持） -->
-        <g id="player-B" transform="translate(80,305)">
-          <circle id="ring-B" r="19" fill="rgba(245,197,24,0.3)" stroke="#f5c518" stroke-width="2.5"/>
-          <circle r="14" id="body-B" fill="#2471a3" stroke="#f5c518" stroke-width="2.5"/>
-          <text y="5" text-anchor="middle" fill="white" font-size="13" font-weight="900">B</text>
+        <!-- プレイヤー1（白リング） -->
+        <g id="p1" transform="translate(43,268)">
+          <circle r="18" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.45)" stroke-width="1.5" stroke-dasharray="4,3"/>
+          <circle r="13" fill="#2471a3" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"/>
+          <text y="5" text-anchor="middle" fill="white" font-size="11">●</text>
         </g>
-        <!-- プレイヤーC -->
-        <g id="player-C" transform="translate(117,268)">
-          <circle id="ring-C" r="19" fill="rgba(36,113,163,0.2)" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-dasharray="4,3"/>
-          <circle r="14" id="body-C" fill="#2471a3" stroke="rgba(255,255,255,0.6)" stroke-width="2"/>
-          <text y="5" text-anchor="middle" fill="white" font-size="13" font-weight="900">C</text>
+        <!-- プレイヤー2（白リング） -->
+        <g id="p2" transform="translate(117,268)">
+          <circle r="18" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.45)" stroke-width="1.5" stroke-dasharray="4,3"/>
+          <circle r="13" fill="#2471a3" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"/>
+          <text y="5" text-anchor="middle" fill="white" font-size="11">●</text>
         </g>
 
         <!-- ボール -->
         <circle id="ball-dot" cx="94" cy="292" r="7" fill="#f5c518" stroke="white" stroke-width="1.5"/>
 
-        <!-- 状態表示 -->
-        <rect x="140" y="308" width="220" height="36" fill="rgba(0,0,0,0.45)" rx="6"/>
-        <text id="st1" x="250" y="323" text-anchor="middle" fill="#ffe066" font-size="10" font-weight="900">Bがボール ▶ 左サイド上昇中</text>
-        <text id="st2" x="250" y="337" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="9">A・CがBの進行方向45度にいる</text>
+        <!-- 状態テキスト -->
+        <rect x="120" y="308" width="260" height="36" fill="rgba(0,0,0,0.45)" rx="6"/>
+        <text id="st1" x="250" y="323" text-anchor="middle" fill="#ffe066" font-size="10" font-weight="900">左サイド上昇中 ↑</text>
+        <text id="st2" x="250" y="337" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="9">パスを出したら即走る</text>
       </svg>
     </div>
     <div class="drill-controls">
       <button class="btn-pass" id="btn-pass" onclick="nextPass()">⚽ パス</button>
       <button class="btn-reset" onclick="resetDrill()">リセット</button>
     </div>
-    <div class="drill-status" id="drill-status">Bがボール。「パス」を押して動かしてみよう。</div>
+    <div class="drill-status" id="drill-status">「パス」を押して動かしてみよう。</div>
     <div class="drill-counter" id="drill-counter">0 / 16 パス（16回で一周）</div>
   </div>
 
@@ -157,10 +151,10 @@
     <div class="step-title">📈 慣れたらステップアップ</div>
     <div class="step-list">
       <div class="step-item"><div class="step-num">1</div>3人パス＆ゴー（今回）：動きの習慣を作る</div>
-      <div class="step-arrow-s">↓ 慣れたら</div>
-      <div class="step-item"><div class="step-num">2</div>4対1ロンド：守備1人を加えて「影の外」を意識する</div>
-      <div class="step-arrow-s">↓ さらに</div>
-      <div class="step-item"><div class="step-num">3</div>4対2ロンド：プレッシャー下でタイミングを鍛える</div>
+      <div class="step-arr">↓ 慣れたら</div>
+      <div class="step-item"><div class="step-num">2</div>コーンを守備者に見立てて避けながら45度を取る</div>
+      <div class="step-arr">↓ さらに</div>
+      <div class="step-item"><div class="step-num">3</div>4対1ロンド：守備1人を加えて「影の外」を意識する</div>
     </div>
   </div>
 
@@ -170,7 +164,6 @@
   </div>
 
 </div>
-
 <footer>ReBorn F.C Over50 | 東京都リーグ3部 | 3人パス＆ゴー | 2026.05.08</footer>
 <a href="home.html" id="back-top">
   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
@@ -178,145 +171,165 @@
 </a>
 
 <script>
-// 16ステートで一周。進行方向の左右45度に2人。受け手は動かない。
-// dir: 進行方向の単位ベクトル (SVGのy下向き座標)
-// L45/R45オフセット = D * [(dx+dy)*0.707, (-dx+dy)*0.707] / [( dx-dy)*0.707, (dx+dy)*0.707]
-const D = 52;
+// ─────────────────────────────────────────────
+// ステート生成：受け手は動かない、残り2人が45度へ
+// ─────────────────────────────────────────────
+const D = 50;
+const BOUNDS = {xmin:32, xmax:468, ymin:30, ymax:328};
 
-function off(dx, dy) {
+function clip(x,y){ return {x:Math.max(BOUNDS.xmin,Math.min(BOUNDS.xmax,x)), y:Math.max(BOUNDS.ymin,Math.min(BOUNDS.ymax,y))}; }
+
+// 進行方向(dx,dy)に対する左右45度オフセット
+function offsets(dx, dy) {
   const k = D * 0.707;
   return {
-    L: {x: k*(dx+dy),  y: k*(-dx+dy)},
-    R: {x: k*(dx-dy),  y: k*(dx+dy)}
+    L: clip(0 + k*(dx+dy), 0 + k*(-dx+dy)),  // 相対オフセット
+    R: clip(0 + k*(dx-dy), 0 + k*(dx+dy)),
   };
 }
+function addOff(p, o){ return clip(p.x+o.x, p.y+o.y); }
 
-function clip(x,y){return {x:Math.max(35,Math.min(465,x)), y:Math.max(32,Math.min(326,y))};}
-
-function mkState(bx, by, dx, dy, ball, passTo, seg, desc) {
-  const o = off(dx,dy);
-  const L = clip(bx+o.L.x, by+o.L.y);
-  const R = clip(bx+o.R.x, by+o.R.y);
-  return {ball:{x:bx,y:by}, L, R, ballPlayer:ball, passTo, seg, desc};
-}
-
-// 16 states: 4 up left | 4 right top | 4 down right | 4 left bottom
-const rawStates = [
-  // ── 左サイド ↑ (dir 0,-1) ──
-  [80, 305,  0,-1, 'B','R','left','左サイド上昇中'],
-  [117,268,  0,-1, 'C','L','left','左サイド上昇中'],
-  [80, 231,  0,-1, 'B','R','left','左サイド上昇中'],
-  [117,194,  0,-1, 'C','L','left','コーナー手前（方向転換→上へ）'],
-  // ── 上（エンドライン） → (dir 1,0) ──  [corner jump]
-  [80,  65,  1, 0, 'B','R','top','上を右に進行中'],
-  [117,117,  1, 0, 'C','L','top','上を右に進行中'],
-  [154, 65,  1, 0, 'A','R','top','上を右に進行中'],
-  [191,117,  1, 0, 'B','L','top','コーナー手前（方向転換→右サイドへ）'],
-  // ── 右サイド ↓ (dir 0,1) ──  [corner jump]
-  [420, 65,  0, 1, 'C','L','right','右サイド下降中'],
-  [383,117,  0, 1, 'A','R','right','右サイド下降中'],
-  [420,154,  0, 1, 'C','L','right','右サイド下降中'],
-  [383,191,  0, 1, 'A','R','right','コーナー手前（方向転換→下へ）'],
-  // ── 下（センターライン） ← (dir -1,0) ──  [corner jump]
-  [420,305, -1, 0, 'B','R','bot','下を左に進行中'],
-  [383,268, -1, 0, 'C','L','bot','下を左に進行中'],
-  [300,305, -1, 0, 'B','R','bot','下を左に進行中'],
-  [263,268, -1, 0, 'C','L','bot','一周完了！リセットしてもう一周'],
+// ─────────────────────────────────────────────
+// 16 states の生成：
+// 各セグメントの進行方向と、何回パスするか
+// パスの向きは L/R 交互
+// ─────────────────────────────────────────────
+const SEGMENTS = [
+  {dx:0,  dy:-1, n:4, seg:'left', label:'左サイド ↑'},
+  {dx:1,  dy:0,  n:5, seg:'top',  label:'エンドライン →', corner:true},
+  {dx:0,  dy:1,  n:4, seg:'right',label:'右サイド ↓',    corner:true},
+  {dx:-1, dy:0,  n:3, seg:'bot',  label:'センターライン ←',corner:true},
 ];
 
-const states = rawStates.map(r => mkState(r[0],r[1],r[2],r[3],r[4],r[5],r[6],r[7]));
+function buildStates() {
+  const states = [];
+  // 初期位置
+  let ball = {x:80,  y:305};
+  let dx=0, dy=-1;
+  let o = offsets(dx, dy);
+  let L = addOff(ball, o.L);
+  let R = addOff(ball, o.R);
+  let passToL = false; // 最初は右にパス
 
-// Assign A/B/C to ball / L / R positions per state
-// ball player is states[i].ballPlayer
-// The OTHER two players are L and R
-function getPositions(s) {
-  const players = ['A','B','C'];
-  const others = players.filter(p=>p!==s.ballPlayer);
-  return {
-    [s.ballPlayer]: s.ball,
-    [others[0]]: s.L,
-    [others[1]]: s.R,
-    ballHolder: s.ballPlayer,
-    passTarget: s.passTo === 'L' ? others[0] : others[1],
-    passPos: s.passTo === 'L' ? s.L : s.R,
-  };
+  for (const seg of SEGMENTS) {
+    dx = seg.dx; dy = seg.dy;
+    // コーナー：ボールを前のセグメント末尾の受け手位置から次セグメントの位置へジャンプ
+    if (seg.corner) {
+      // 前のセグメントの最後のパス先から次の方向を使って再計算
+      // → ball はそのまま（前のセグメント最後のパス先）、L/Rを新方向で計算
+      o = offsets(dx, dy);
+      L = addOff(ball, o.L);
+      R = addOff(ball, o.R);
+    }
+
+    for (let i = 0; i < seg.n; i++) {
+      states.push({
+        ball: {...ball},
+        L: {...L},
+        R: {...R},
+        passTo: passToL ? 'L' : 'R',
+        seg: seg.seg,
+        label: seg.label,
+        corner: seg.corner && i === 0,
+      });
+
+      // 次ステートへ：受け手が新しいボール保持者になる
+      const nextBall = passToL ? {...L} : {...R};
+      o = offsets(dx, dy);
+      const newL = addOff(nextBall, o.L);
+      const newR = addOff(nextBall, o.R);
+      ball = nextBall;
+      L = newL;
+      R = newR;
+      passToL = !passToL;
+    }
+    seg.corner = true; // 2回目以降も corner 扱い
+  }
+
+  return states;
 }
 
-// Corner transitions (state index where ball "jumps" = corner turn)
-const CORNERS = new Set([4, 8, 12]);
-const segLabels = {left:'左サイド ↑', top:'エンドライン →', right:'右サイド ↓', bot:'センターライン ←'};
-
+const states = buildStates();
+// p0 = ボール保持者、p1/p2 = 受け手
+// 3つの「物体」の位置を管理（名前なし）
+// posArr[0] = ボール保持者、[1]/[2] = 受け手（L/R）
+let posArr = [
+  {...states[0].ball},
+  {...states[0].L},
+  {...states[0].R},
+];
+let ballIdx = 0; // 現在ボール保持者のインデックス（0,1,2）
 let cur = 0;
 let busy = false;
 
-function setPlayerPos(id, x, y) {
-  document.getElementById('player-'+id).setAttribute('transform',`translate(${x},${y})`);
+function setPos(idx, x, y, instant) {
+  const el = document.getElementById('p'+idx);
+  if (instant) el.style.transition = 'none';
+  el.setAttribute('transform', `translate(${x},${y})`);
+  if (instant) requestAnimationFrame(()=>{ el.style.transition = ''; });
 }
-function setRing(id, isBall) {
-  const ring = document.getElementById('ring-'+id);
-  if (isBall) {
-    ring.setAttribute('fill','rgba(245,197,24,0.3)');
-    ring.setAttribute('stroke','#f5c518');
-    ring.setAttribute('stroke-width','2.5');
-    ring.removeAttribute('stroke-dasharray');
-  } else {
-    ring.setAttribute('fill','rgba(36,113,163,0.2)');
-    ring.setAttribute('stroke','rgba(255,255,255,0.4)');
-    ring.setAttribute('stroke-width','1.5');
-    ring.setAttribute('stroke-dasharray','4,3');
+function updateBallDot(pos, instant) {
+  const bd = document.getElementById('ball-dot');
+  if (instant) bd.style.transition = 'none';
+  bd.setAttribute('cx', pos.x+11);
+  bd.setAttribute('cy', pos.y-11);
+  if (instant) requestAnimationFrame(()=>{ bd.style.transition = ''; });
+}
+function setRingBall(idx) {
+  for (let i=0;i<3;i++) {
+    const el = document.getElementById('p'+i);
+    const ring = el.querySelector('circle:first-child');
+    const body = el.querySelector('circle:nth-child(2)');
+    const txt  = el.querySelector('text');
+    if (i === idx) {
+      ring.setAttribute('fill','rgba(245,197,24,0.28)');
+      ring.setAttribute('stroke','#f5c518');
+      ring.setAttribute('stroke-width','2.5');
+      ring.removeAttribute('stroke-dasharray');
+      body.setAttribute('stroke','#f5c518');
+      txt.setAttribute('fill','#f5c518');
+    } else {
+      ring.setAttribute('fill','rgba(255,255,255,0.1)');
+      ring.setAttribute('stroke','rgba(255,255,255,0.45)');
+      ring.setAttribute('stroke-width','1.5');
+      ring.setAttribute('stroke-dasharray','4,3');
+      body.setAttribute('stroke','rgba(255,255,255,0.6)');
+      txt.setAttribute('fill','white');
+    }
   }
 }
-function updateGuides(s) {
-  const bh = s.ball;
-  document.getElementById('guide-l').setAttribute('x1', bh.x);
-  document.getElementById('guide-l').setAttribute('y1', bh.y);
-  document.getElementById('guide-l').setAttribute('x2', s.L.x);
-  document.getElementById('guide-l').setAttribute('y2', s.L.y);
-  document.getElementById('guide-r').setAttribute('x1', bh.x);
-  document.getElementById('guide-r').setAttribute('y1', bh.y);
-  document.getElementById('guide-r').setAttribute('x2', s.R.x);
-  document.getElementById('guide-r').setAttribute('y2', s.R.y);
-  document.getElementById('lbl-l').setAttribute('x', (bh.x+s.L.x)/2 - 10);
-  document.getElementById('lbl-l').setAttribute('y', (bh.y+s.L.y)/2);
-  document.getElementById('lbl-r').setAttribute('x', (bh.x+s.R.x)/2 + 2);
-  document.getElementById('lbl-r').setAttribute('y', (bh.y+s.R.y)/2);
-}
-function updateBall(pos) {
-  document.getElementById('ball-dot').setAttribute('cx', pos.x+12);
-  document.getElementById('ball-dot').setAttribute('cy', pos.y-12);
+function updateGuides(ballPos, lPos, rPos) {
+  const g = (id,x1,y1,x2,y2) => {
+    const e = document.getElementById(id);
+    e.setAttribute('x1',x1); e.setAttribute('y1',y1);
+    e.setAttribute('x2',x2); e.setAttribute('y2',y2);
+  };
+  g('gl', ballPos.x, ballPos.y, lPos.x, lPos.y);
+  g('gr', ballPos.x, ballPos.y, rPos.x, rPos.y);
+  document.getElementById('ll').setAttribute('x', (ballPos.x+lPos.x)/2-10);
+  document.getElementById('ll').setAttribute('y', (ballPos.y+lPos.y)/2);
+  document.getElementById('lr').setAttribute('x', (ballPos.x+rPos.x)/2+2);
+  document.getElementById('lr').setAttribute('y', (ballPos.y+rPos.y)/2);
 }
 function updateStatus(s, count) {
-  const pos = getPositions(s);
-  const others = ['A','B','C'].filter(p=>p!==s.ballPlayer).join('・');
-  document.getElementById('st1').textContent = `${s.ballPlayer}がボール ▶ ${segLabels[s.seg]}`;
-  document.getElementById('st2').textContent = `${others}が${s.ballPlayer}の進行方向45度にいる`;
-  document.getElementById('drill-status').textContent = s.desc;
-  document.getElementById('drill-counter').textContent = `${count} / 16 パス（16回で一周）`;
+  document.getElementById('st1').textContent = s.label;
+  document.getElementById('st2').textContent = 'パスを出したら即走る — 進行方向の45度へ';
+  document.getElementById('drill-counter').textContent = `${count} / ${states.length} パス（${states.length}回で一周）`;
+  if (count >= states.length) {
+    document.getElementById('drill-status').textContent = '一周完了！リセットしてもう一周。';
+  } else {
+    document.getElementById('drill-status').textContent = s.corner ? '方向転換！次のサイドへ進む' : 'パスを出したら即2歩ダッシュで次の45度へ走る';
+  }
 }
 
 function applyState(s, instant) {
-  const pos = getPositions(s);
-  if (instant) {
-    // Temporarily disable transition
-    ['A','B','C'].forEach(p=>{
-      document.getElementById('player-'+p).style.transition='none';
-    });
-    document.getElementById('ball-dot').style.transition='none';
-  }
-  setPlayerPos('A', pos['A'].x, pos['A'].y);
-  setPlayerPos('B', pos['B'].x, pos['B'].y);
-  setPlayerPos('C', pos['C'].x, pos['C'].y);
-  ['A','B','C'].forEach(p=>setRing(p, p===s.ballPlayer));
-  updateBall(pos[s.ballPlayer]);
-  updateGuides(s);
-  if (instant) {
-    requestAnimationFrame(()=>{
-      ['A','B','C'].forEach(p=>{
-        document.getElementById('player-'+p).style.transition='';
-      });
-      document.getElementById('ball-dot').style.transition='';
-    });
-  }
+  // p0 = ball holder（stays）, p1 = L, p2 = R
+  setPos(0, s.ball.x, s.ball.y, instant);
+  setPos(1, s.L.x,    s.L.y,    instant);
+  setPos(2, s.R.x,    s.R.y,    instant);
+  updateBallDot(s.ball, instant);
+  setRingBall(0);
+  updateGuides(s.ball, s.L, s.R);
 }
 
 function nextPass() {
@@ -325,40 +338,36 @@ function nextPass() {
   document.getElementById('btn-pass').disabled = true;
 
   const s = states[cur];
-  const pos = getPositions(s);
-  const passPos = pos.passPos;
   const fromPos = s.ball;
+  const toPos   = s.passTo === 'L' ? s.L : s.R;
 
   // パス矢印
   const pl = document.getElementById('pass-line');
-  pl.setAttribute('x1', fromPos.x); pl.setAttribute('y1', fromPos.y);
-  pl.setAttribute('x2', passPos.x);  pl.setAttribute('y2', passPos.y);
+  pl.setAttribute('x1',fromPos.x); pl.setAttribute('y1',fromPos.y);
+  pl.setAttribute('x2',toPos.x);   pl.setAttribute('y2',toPos.y);
   pl.style.opacity = '1';
 
   setTimeout(()=>{
     pl.style.opacity = '0';
     const next = (cur+1) % states.length;
     const ns = states[next];
+    const isCorner = ns.corner;
 
-    if (CORNERS.has(next)) {
-      // コーナー：瞬間移動（方向転換）
-      const lbl = document.getElementById('corner-label');
-      lbl.style.fill='rgba(255,220,60,0.9)';
-      lbl.textContent = '方向転換！';
-      lbl.setAttribute('x', (fromPos.x+150)/2);
-      lbl.setAttribute('y', (fromPos.y+ns.ball.y)/2);
-      setTimeout(()=>{lbl.style.fill='rgba(255,220,60,0)';}, 800);
-      applyState(ns, true); // instant (no transition for corner jump)
-    } else {
-      applyState(ns, false);
+    if (isCorner) {
+      const lbl = document.getElementById('clbl');
+      lbl.setAttribute('x', toPos.x);
+      lbl.setAttribute('y', toPos.y - 25);
+      lbl.style.fill = 'rgba(255,220,60,0.95)';
+      setTimeout(()=>{ lbl.style.fill='rgba(255,220,60,0)'; }, 800);
     }
 
+    applyState(ns, isCorner);
     cur = next;
     updateStatus(ns, cur);
 
     setTimeout(()=>{
       busy = false;
-      document.getElementById('btn-pass').disabled = (cur === states.length-1);
+      if (cur < states.length) document.getElementById('btn-pass').disabled = false;
     }, 600);
   }, 500);
 }
@@ -366,10 +375,11 @@ function nextPass() {
 function resetDrill() {
   if (busy) return;
   cur = 0;
+  document.getElementById('pass-line').style.opacity = '0';
+  document.getElementById('clbl').style.fill = 'rgba(255,220,60,0)';
   applyState(states[0], true);
   updateStatus(states[0], 0);
-  document.getElementById('pass-line').style.opacity = '0';
-  document.getElementById('corner-label').style.fill = 'rgba(255,220,60,0)';
+  document.getElementById('drill-status').textContent = '「パス」を押して動かしてみよう。';
   document.getElementById('btn-pass').disabled = false;
   busy = false;
 }
