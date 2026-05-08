@@ -209,9 +209,9 @@ function dist2(a,b){return (a.x-b.x)**2+(a.y-b.y)**2;}
 // Each state: pos[3] = physical positions of p0,p1,p2; ball = index of ball holder
 const SEGS = [
   {dx:0, dy:-1, n:5, lbl:'左サイド ↑'},
-  {dx:1, dy:0,  n:8, lbl:'エンドライン →'},
+  {dx:1, dy:0,  n:6, lbl:'エンドライン →'},
   {dx:0, dy:1,  n:5, lbl:'右サイド ↓'},
-  {dx:-1,dy:0,  n:7, lbl:'センターライン ←'},
+  {dx:-1,dy:0,  n:6, lbl:'センターライン ←'},
 ];
 
 function buildStates(){
