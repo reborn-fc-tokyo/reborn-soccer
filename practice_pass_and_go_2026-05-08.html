@@ -184,14 +184,15 @@ const BOUNDS = {xmin:32, xmax:468, ymin:30, ymax:328};
 
 function clip(x,y){ return {x:Math.max(BOUNDS.xmin,Math.min(BOUNDS.xmax,x)), y:Math.max(BOUNDS.ymin,Math.min(BOUNDS.ymax,y))}; }
 
-// 進行方向(dx,dy)に対する左右45度オフセット
+// 進行方向(dx,dy)に対する左右45度オフセット（raw値、clipなし）
 function offsets(dx, dy) {
   const k = D * 0.707;
   return {
-    L: clip(0 + k*(dx+dy), 0 + k*(-dx+dy)),  // 相対オフセット
-    R: clip(0 + k*(dx-dy), 0 + k*(dx+dy)),
+    L: {x: k*(dx+dy),  y: k*(-dx+dy)},
+    R: {x: k*(dx-dy),  y: k*(dx+dy)},
   };
 }
+// ボール位置にオフセットを加えてclip
 function addOff(p, o){ return clip(p.x+o.x, p.y+o.y); }
 
 // ─────────────────────────────────────────────
