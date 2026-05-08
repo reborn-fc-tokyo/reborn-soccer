@@ -211,7 +211,7 @@ const SEGS = [
   {dx:0, dy:-1, n:5, lbl:'左サイド ↑'},
   {dx:1, dy:0,  n:8, lbl:'エンドライン →'},
   {dx:0, dy:1,  n:5, lbl:'右サイド ↓'},
-  {dx:-1,dy:0,  n:8, lbl:'センターライン ←'},
+  {dx:-1,dy:0,  n:7, lbl:'センターライン ←'},
 ];
 
 function buildStates(){
@@ -244,17 +244,25 @@ function buildStates(){
       const isI0L=dist2(pos[i0],Lp)<=dist2(pos[i0],Rp);
       const leftP=isI0L?i0:i1, rightP=isI0L?i1:i0;
 
+      // クリップされない方向を優先してパス先を選ぶ
+      const LRaw={x:bp.x+o.L.x,y:bp.y+o.L.y}, RRaw={x:bp.x+o.R.x,y:bp.y+o.R.y};
+      const Lclip=(Math.abs(LRaw.x-Lp.x)>1||Math.abs(LRaw.y-Lp.y)>1);
+      const Rclip=(Math.abs(RRaw.x-Rp.x)>1||Math.abs(RRaw.y-Rp.y)>1);
+      let pt=passToL;
+      if(Lclip&&!Rclip) pt=false;
+      else if(!Lclip&&Rclip) pt=true;
+
       sts.push({
         pos:pos.map(p=>({...p})),
         ball,
         leftP,rightP,
         Lp:{...Lp},Rp:{...Rp},
-        passTo:passToL?'L':'R',
+        passTo:pt?'L':'R',
         lbl
       });
 
       // Compute next positions
-      const receiver=passToL?leftP:rightP;
+      const receiver=pt?leftP:rightP;
       const formerHolder=ball;
       const third=[0,1,2].filter(j=>j!==receiver&&j!==formerHolder)[0];
       const nb=pos[receiver]; // receiver stays
@@ -263,7 +271,7 @@ function buildStates(){
       if(passToL){pos[formerHolder]={...nR};pos[third]={...nL};}
       else{pos[formerHolder]={...nL};pos[third]={...nR};}
       ball=receiver;
-      passToL=!passToL;
+      passToL=!pt;  // 次は今回と逆方向を試みる
     }
   }
   return sts;
