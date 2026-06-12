@@ -450,6 +450,15 @@
 
 <div class="container">
 
+  <!-- ★ 次の試合の狙い アンカーボタン -->
+  <a href="#aim-section" onclick="var b=document.getElementById('aim-body');var c=document.getElementById('aim-caret');b.style.display='block';if(c)c.textContent='▼';var s=document.getElementById('aim-section');setTimeout(function(){s.scrollIntoView({behavior:'smooth',block:'start'});},10);"
+     style="display:flex; align-items:center; justify-content:center; gap:10px; text-decoration:none;
+            background:linear-gradient(135deg,#b45309,#f59e0b); color:#fff; font-weight:800; font-size:1.02rem;
+            padding:15px 20px; border-radius:12px; margin-bottom:22px; box-shadow:0 3px 14px rgba(245,158,11,0.4); cursor:pointer;">
+    🎯 6/13 北区50戦の「今節の狙い」を見る
+    <span style="font-size:0.85rem; font-weight:700; background:rgba(255,255,255,0.25); border-radius:20px; padding:3px 12px;">タップで開く ▼</span>
+  </a>
+
   <!-- ★ 出欠入力ルール -->
   <div class="sec-head sec-blue">
     <div class="sec-icon">📅</div>
@@ -492,7 +501,7 @@
   <hr class="divider" style="margin-bottom:28px;">
 
   <!-- ★ 次の試合の狙い（6/13 北区50戦） -->
-  <div class="sec-head" style="background:linear-gradient(135deg,#b45309,#f59e0b); cursor:pointer;" onclick="var b=document.getElementById('aim-body');var c=document.getElementById('aim-caret');var o=(b.style.display==='none');b.style.display=o?'block':'none';c.textContent=o?'▼':'▶';">
+  <div id="aim-section" class="sec-head" style="background:linear-gradient(135deg,#b45309,#f59e0b); cursor:pointer;" onclick="var b=document.getElementById('aim-body');var c=document.getElementById('aim-caret');var o=(b.style.display==='none');b.style.display=o?'block':'none';c.textContent=o?'▼':'▶';">
     <div class="sec-icon">🎯</div>
     <div style="flex:1;">
       <div class="sec-label">6/13 トレーニングマッチ vs 北区50 ― 今節の狙い</div>
