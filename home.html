@@ -1352,5 +1352,21 @@
   </div>
 </div>
 
+<!-- URL末尾に #aim を付けて開くと「今節の狙い」を自動展開（LINE共有用） -->
+<script>
+(function(){
+  function openAim(){
+    var b=document.getElementById('aim-body'),c=document.getElementById('aim-caret'),s=document.getElementById('aim-section');
+    if(!b)return;
+    b.style.display='block';
+    if(c)c.textContent='▼';
+    if(s)setTimeout(function(){s.scrollIntoView({behavior:'smooth',block:'start'});},120);
+  }
+  function check(){var h=location.hash;if(h==='#aim'||h==='#aim-section')openAim();}
+  if(document.readyState!=='loading')check();else document.addEventListener('DOMContentLoaded',check);
+  window.addEventListener('hashchange',check);
+})();
+</script>
+
 </body>
 </html>
