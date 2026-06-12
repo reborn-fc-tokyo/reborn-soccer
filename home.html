@@ -503,71 +503,32 @@
 
   <div id="aim-body" style="display:none;">
 
-  <div style="background:#fff8ed; border:1.5px solid #fcd34d; border-radius:12px; padding:14px 16px; margin-bottom:18px;">
-    <div style="display:flex; flex-wrap:wrap; gap:8px;">
-      <span style="background:#fef3c7; color:#92400e; border:1px solid #fcd34d; border-radius:999px; padding:5px 13px; font-size:12px; font-weight:800;">①コンパクトに</span>
-      <span style="background:#fef3c7; color:#92400e; border:1px solid #fcd34d; border-radius:999px; padding:5px 13px; font-size:12px; font-weight:800;">②ワンツー</span>
-      <span style="background:#fef3c7; color:#92400e; border:1px solid #fcd34d; border-radius:999px; padding:5px 13px; font-size:12px; font-weight:800;">③GK→カト→右へ</span>
-      <span style="background:#fef3c7; color:#92400e; border:1px solid #fcd34d; border-radius:999px; padding:5px 13px; font-size:12px; font-weight:800;">④タイトにマーク</span>
-      <span style="background:#fef3c7; color:#92400e; border:1px solid #fcd34d; border-radius:999px; padding:5px 13px; font-size:12px; font-weight:800;">⑤ボランチ流動</span>
-      <span style="background:#fef3c7; color:#92400e; border:1px solid #fcd34d; border-radius:999px; padding:5px 13px; font-size:12px; font-weight:800;">⑥他は同じ</span>
-    </div>
-  </div>
-
-  <style>
-    .aim-card{background:#fff;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,0.07);border-top:4px solid #2ecc71;padding:16px 18px;margin-bottom:14px;}
-    .aim-head{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
-    .aim-num{flex-shrink:0;width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#1a5276,#2ecc71);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.15rem;font-weight:800;}
-    .aim-title{font-size:1.05rem;font-weight:800;color:#1e3a5f;}
-    .aim-row{display:grid;grid-template-columns:60px 1fr;gap:8px 12px;align-items:start;margin-top:8px;}
-    .aim-lbl{font-size:12px;font-weight:800;padding:3px 0;border-radius:7px;text-align:center;}
-    .aim-do{background:#dcfce7;color:#166534;} .aim-why{background:#dbeafe;color:#1d4ed8;} .aim-ng{background:#fee2e2;color:#991b1b;}
-    .aim-txt{font-size:13.5px;color:#334155;padding-top:2px;} .aim-txt b{color:#15803d;}
-    .aim-key{background:#f0fdf4;border:1px dashed #86efac;border-radius:8px;padding:7px 11px;margin-top:10px;font-size:12.5px;color:#166534;}
-    .aim-diagram{margin-top:11px;background:#0f5132;border-radius:10px;padding:11px;}
-    .aim-cap{color:#d1fae5;font-size:11.5px;text-align:center;margin-top:7px;}
-    @media(max-width:600px){.aim-row{grid-template-columns:52px 1fr;}}
-  </style>
-
-  <div class="aim-card">
-    <div class="aim-head"><div class="aim-num">1</div><div class="aim-title">前線とDFラインをコンパクトに</div></div>
-    <div class="aim-row"><div class="aim-lbl aim-do">やる</div><div class="aim-txt">前線・中盤・最終ラインの<b>3本のラインを近く</b>保つ。ボールサイドに全員でスライドして圧縮する。</div></div>
-    <div class="aim-row"><div class="aim-lbl aim-why">なぜ</div><div class="aim-txt">間が空くと…<b>守り</b>＝取られた瞬間に空いたスペースを使われてピンチ／<b>攻め</b>＝距離が遠くサポートが届かず厚みが出ない。</div></div>
-    <div class="aim-key">📏 <b>目安：</b>ライン間の縦距離を縮める。最終ラインの選手同士は <b>6〜8m</b>。「隣と声が届く距離」。</div>
-  </div>
-
-  <div class="aim-card">
-    <div class="aim-head"><div class="aim-num">2</div><div class="aim-title">ワンツーを使う</div></div>
-    <div class="aim-row"><div class="aim-lbl aim-do">やる</div><div class="aim-txt">出したら<b>止まらず空いた方へ走る</b>。受け手は守備者の<b>影の外（横・斜め）</b>に立ち、体を開いて受ける。</div></div>
-    <div class="aim-row"><div class="aim-lbl aim-why">なぜ</div><div class="aim-txt">縦パス1本より、ワンツーで相手1人を一気に置き去りにできる。走る量よりタイミングと立ち位置で勝つ。</div></div>
-    <div class="aim-key">📏 <b>距離：</b>ワンツー直前は <b>3〜6m</b>。<b>ボールが動いている瞬間</b>に三人目が斜め45度で入る。</div>
-  </div>
-
-  <div class="aim-card">
-    <div class="aim-head"><div class="aim-num">3</div><div class="aim-title">ゴールキックの約束（カト＋右のスペース）</div></div>
-    <div class="aim-row"><div class="aim-lbl aim-do">やる</div><div class="aim-txt">ゴールキック → <b>カトがヘディングで競る</b> → あらかじめ<b>右サイドを空けておく</b> → そこへヘディングで<b>逸らして／落として</b>味方が走り込む。</div></div>
-    <div class="aim-row"><div class="aim-lbl aim-why">なぜ</div><div class="aim-txt">落下点と逸らす方向を<b>事前に全員で共有</b>すれば、こぼれ球を拾いやすく二次攻撃につながる。</div></div>
-    <div class="aim-key">📌 <b>流れ：</b>GK →（カトが競る）→ 右の空きスペースへヘディングで逸らす → 走り込んで狙う</div>
-  </div>
-
-  <div class="aim-card">
-    <div class="aim-head"><div class="aim-num">4</div><div class="aim-title">マークはタイトに</div></div>
-    <div class="aim-row"><div class="aim-lbl aim-do">やる</div><div class="aim-txt">相手に<b>パスを出させない／自由に前を向かせない</b>距離まで寄せる。体を当てられる間合いをキープ。</div></div>
-    <div class="aim-row"><div class="aim-lbl aim-ng">NG</div><div class="aim-txt"><b>数メートル離れて立つのはNG。</b>「見てるだけ」では簡単に前を向かれて運ばれる。</div></div>
-    <div class="aim-key">👀 <b>コツ：</b>受ける前に首を振って（スキャン）ボールと相手を同時に見る。寄せる時は<b>正面でなく半身</b>で。</div>
-  </div>
-
-  <div class="aim-card">
-    <div class="aim-head"><div class="aim-num">5</div><div class="aim-title">ビルドアップ時のボランチの流動<span style="font-size:12px;background:#fef3c7;color:#92400e;border-radius:6px;padding:2px 8px;margin-left:8px;">今節のテーマ</span></div></div>
-    <div class="aim-row"><div class="aim-lbl aim-do">やる</div><div class="aim-txt">サイドに展開して<b>スペースが無い</b>とき、<b>ボランチが流動的に動いてスペースを作る</b> → 空いたそこへ<b>もう1人のボランチが入る</b>。</div></div>
-    <div class="aim-row"><div class="aim-lbl aim-why">なぜ</div><div class="aim-txt">立ち位置が固まると相手も止めやすい。1人が動いて相手を連れ出す → 空いた所を相方が使い、前進口を作る。</div></div>
-    <div class="aim-key">🔑 <b>鉄則：</b>同時に動くのは<b>1人だけ</b>。1人が出たら<b>隣が連鎖で1つずつ埋める</b>（バラバラに戻らない）。</div>
-  </div>
-
-  <div class="aim-card" style="border-top-color:#94a3b8;">
-    <div class="aim-head"><div class="aim-num" style="background:linear-gradient(135deg,#475569,#94a3b8);">6</div><div class="aim-title">その他は同じ戦略</div></div>
-    <div class="aim-txt" style="padding-top:2px;">①〜⑤以外は<b>これまで通り</b>。新しく足すのは上の5点だけ。今節の<b>テーマは1つ＝⑤ボランチの流動</b>を試すこと。まず①コンパクトさを土台に。</div>
-  </div>
+  <ol style="list-style:none; padding:0; margin:0;">
+    <li style="display:flex; align-items:center; gap:13px; background:#fff; border-radius:12px; border-left:5px solid #f59e0b; box-shadow:0 2px 10px rgba(0,0,0,0.06); padding:13px 18px; margin-bottom:10px;">
+      <span style="flex-shrink:0; width:34px; height:34px; border-radius:50%; background:linear-gradient(135deg,#b45309,#f59e0b); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1.05rem;">1</span>
+      <span style="font-size:1.05rem; font-weight:800; color:#1e3a5f;">前線とDFラインをコンパクトに</span>
+    </li>
+    <li style="display:flex; align-items:center; gap:13px; background:#fff; border-radius:12px; border-left:5px solid #f59e0b; box-shadow:0 2px 10px rgba(0,0,0,0.06); padding:13px 18px; margin-bottom:10px;">
+      <span style="flex-shrink:0; width:34px; height:34px; border-radius:50%; background:linear-gradient(135deg,#b45309,#f59e0b); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1.05rem;">2</span>
+      <span style="font-size:1.05rem; font-weight:800; color:#1e3a5f;">ワンツーを使う</span>
+    </li>
+    <li style="display:flex; align-items:center; gap:13px; background:#fff; border-radius:12px; border-left:5px solid #f59e0b; box-shadow:0 2px 10px rgba(0,0,0,0.06); padding:13px 18px; margin-bottom:10px;">
+      <span style="flex-shrink:0; width:34px; height:34px; border-radius:50%; background:linear-gradient(135deg,#b45309,#f59e0b); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1.05rem;">3</span>
+      <span style="font-size:1.05rem; font-weight:800; color:#1e3a5f;">ゴールキック：カトのヘディング → 右のスペースへ</span>
+    </li>
+    <li style="display:flex; align-items:center; gap:13px; background:#fff; border-radius:12px; border-left:5px solid #f59e0b; box-shadow:0 2px 10px rgba(0,0,0,0.06); padding:13px 18px; margin-bottom:10px;">
+      <span style="flex-shrink:0; width:34px; height:34px; border-radius:50%; background:linear-gradient(135deg,#b45309,#f59e0b); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1.05rem;">4</span>
+      <span style="font-size:1.05rem; font-weight:800; color:#1e3a5f;">マークはタイトに</span>
+    </li>
+    <li style="display:flex; align-items:center; gap:13px; background:#fff; border-radius:12px; border-left:5px solid #f59e0b; box-shadow:0 2px 10px rgba(0,0,0,0.06); padding:13px 18px; margin-bottom:10px;">
+      <span style="flex-shrink:0; width:34px; height:34px; border-radius:50%; background:linear-gradient(135deg,#b45309,#f59e0b); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1.05rem;">5</span>
+      <span style="font-size:1.05rem; font-weight:800; color:#1e3a5f;">ビルドアップ時のボランチの流動<span style="font-size:12px; background:#fef3c7; color:#92400e; border-radius:6px; padding:2px 8px; margin-left:8px; font-weight:800;">今節のテーマ</span></span>
+    </li>
+    <li style="display:flex; align-items:center; gap:13px; background:#fff; border-radius:12px; border-left:5px solid #94a3b8; box-shadow:0 2px 10px rgba(0,0,0,0.06); padding:13px 18px; margin-bottom:10px;">
+      <span style="flex-shrink:0; width:34px; height:34px; border-radius:50%; background:linear-gradient(135deg,#475569,#94a3b8); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1.05rem;">6</span>
+      <span style="font-size:1.05rem; font-weight:800; color:#1e3a5f;">その他は同じ戦略</span>
+    </li>
+  </ol>
 
   </div><!-- /#aim-body -->
 
