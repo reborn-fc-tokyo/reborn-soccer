@@ -1107,13 +1107,15 @@
     return '<button class="ts-play-btn" onclick="openTs(\'' + vid + '\',' + (min*60+sec) + ',\'' + label + '\')">▶ ' + label + suffix + '</button>';
   }
 
-  // 再生ボタンの振り分け：YouTube=モーダル埋め込み / VEO=別タブで #t=秒数 付きで開く
-  // （VEOは X-Frame-Options: DENY のため iframe 埋め込み不可）
+  // 再生ボタンの振り分け：YouTube=モーダル埋め込み / VEO=別タブで #t=MM:SS 付きで開く
+  // （VEOは X-Frame-Options: DENY のため iframe 埋め込み不可。時間指定はVEO共有リンクと同じ MM:SS 形式）
   function openTs(vid, seconds, label) {
     var v = _videoIndex[vid];
     if (v && isVeoUrl(v.url)) {
       var base = v.url.split('#')[0];
-      window.open(base + '#t=' + seconds, '_blank', 'noopener');
+      var mm = Math.floor(seconds / 60), ss = Math.floor(seconds % 60);
+      var tc = (mm < 10 ? '0' : '') + mm + ':' + (ss < 10 ? '0' : '') + ss;
+      window.open(base + '#t=' + tc, '_blank', 'noopener');
       return;
     }
     openTsModal(vid, seconds, label);
