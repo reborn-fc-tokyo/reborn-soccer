@@ -60,6 +60,10 @@
   .ab-btn:active { transform:scale(0.96); }
   .ab-cap { font-size:12px; font-weight:700; line-height:1.45; }
   .pitch-note { text-align:center; font-size:12px; color:#666; margin-top:8px; }
+  .fig-pre { background:white; border-left:5px solid #c0392b; border-radius:8px; box-shadow:0 1px 8px rgba(0,0,0,0.06); padding:10px 14px; margin-bottom:9px; }
+  .fig-pre div { font-size:13px; font-weight:800; padding:3px 0; }
+  .fig-pre div span { display:inline-block; min-width:20px; color:#c0392b; font-weight:900; }
+  .fig-pre div.sw span { color:#8a5200; }
   .hid { opacity:0; transition:opacity .35s ease; }
 
   .voice { background:white; border-radius:16px; box-shadow:0 2px 16px rgba(0,0,0,0.08); overflow:hidden; margin-bottom:22px; }
@@ -243,6 +247,10 @@
   <!-- 図1 -->
   <div class="fig">
     <div class="fig-label">図1 — 第一ルール：スイーパーの出し先は「左CB・右CB・GK」／ボールが動いたらGKも動く</div>
+    <div class="fig-pre">
+      <div><span>①</span>自陣ゴール前へは出せない（ゴール正面を横切るパスは禁止）</div>
+      <div class="sw"><span>②</span>出し先はスイーパー次第（スイーパーの向きで並びも出し先も決まる）</div>
+    </div>
     <div class="pitch">
       <svg id="fig1" viewBox="0 0 520 360" xmlns="http://www.w3.org/2000/svg">
         <rect width="520" height="360" fill="#2d8f52"/>
@@ -256,6 +264,20 @@
         <text x="260" y="15" text-anchor="middle" fill="white" font-size="11" font-weight="bold">スイーパーの出し先は 左CB・右CB・GK の3つ／GKはボール側へ立ち直す</text>
 
         <g class="trails"></g>
+
+        <g id="f1-ng" class="hid">
+          <rect x="146" y="284" width="228" height="20" fill="rgba(192,57,43,0.32)" stroke="#ff6b6b" stroke-width="1.5" stroke-dasharray="6,4" rx="6"/>
+          <line x1="152" y1="294" x2="368" y2="294" stroke="#ff6b6b" stroke-width="3" stroke-dasharray="9,6"/>
+          <text x="196" y="300" text-anchor="middle" fill="#ff6b6b" font-size="20" font-weight="bold">✕</text>
+          <text x="326" y="300" text-anchor="middle" fill="#ff6b6b" font-size="20" font-weight="bold">✕</text>
+          <rect x="162" y="258" width="196" height="19" fill="rgba(0,0,0,0.6)" rx="4"/>
+          <text x="260" y="272" text-anchor="middle" fill="#ff9c8f" font-size="11" font-weight="bold">① ゴール前へは出せない</text>
+        </g>
+        <g id="f1-swhi" class="hid">
+          <circle cx="260" cy="254" r="32" fill="none" stroke="#ffd166" stroke-width="2.5" stroke-dasharray="7,5"/>
+          <rect x="154" y="196" width="212" height="19" fill="rgba(0,0,0,0.6)" rx="4"/>
+          <text x="260" y="210" text-anchor="middle" fill="#ffd166" font-size="11" font-weight="bold">② 出し先はスイーパー次第</text>
+        </g>
 
         <g id="f1-lane1" class="hid">
           <line x1="124" y1="228" x2="188" y2="290" stroke="#7fff7f" stroke-width="2.5" stroke-dasharray="6,4"/>
@@ -811,20 +833,25 @@
   var FIGS = {
     fig1: {
       ball: [260,254],
-      cap0: '再生：スイーパーの出し先は 左CB・右CB・GK の3つ',
+      cap0: '再生：① ゴール前へは出せない ② 出し先はスイーパー次第',
       legs: [
+        { to:[260,254], dur:350, hold:1500, noTrail:true, show:['#f1-ng'],
+          cap:'① まず前提：自陣ゴール前へは出せない。ゴール正面を横切るパスは禁止' },
+        { to:[260,254], dur:350, hold:1500, noTrail:true, show:['#f1-swhi'],
+          cap:'② 出し先はスイーパー次第。前を向いていれば一番後ろで受けて配る（CBは前）' },
         { to:[108,214], dur:700, hold:450, color:'#ffffff', marker:'m1w', no:'1',
-          cap:'① 出し先その1：左CBへ大きく展開。ボールが動いた＝GKも動く', move:[{sel:'#f1-gk', to:[200,300]}] },
+          hide:['#f1-ng','#f1-swhi'],
+          cap:'③ 出し先その1：左CBへ大きく展開。ボールが動いた＝GKも動く', move:[{sel:'#f1-gk', to:[200,300]}] },
         { to:[108,214], dur:450, hold:1100, noTrail:true, show:['#f1-lane1'],
-          cap:'② GKは左CBの斜め後ろ45度へ立ち直す＝これで「戻せる」' },
+          cap:'④ GKは左CBの斜め後ろ45度へ立ち直す＝これで「戻せる」' },
         { to:[260,254], dur:600, hold:400, color:'#7ec8ff', marker:'m1b', hide:['#f1-lane1'],
-          cap:'③ スイーパーへ戻す（前を向けるので一番後ろで受ける）', move:[{sel:'#f1-gk', to:[260,310]}] },
+          cap:'⑤ スイーパーへ戻す（前を向けるので一番後ろで受ける）', move:[{sel:'#f1-gk', to:[260,310]}] },
         { to:[260,310], dur:480, hold:700, color:'#f5c518', marker:'m1y', no:'2',
-          cap:'④ 出し先その2：GK。前を向けない・迷ったら迷わず後ろのGKへ' },
+          cap:'⑥ 出し先その2：GK。前を向けない・迷ったら迷わず後ろのGKへ' },
         { to:[412,214], dur:750, hold:450, color:'#ffffff', marker:'m1w', no:'3',
-          cap:'⑤ 出し先その3：GKからダイレクトで逆サイドの右CBへ。GKは出したらまた立ち直す', move:[{sel:'#f1-gk', to:[320,300]}] },
+          cap:'⑦ 出し先その3：GKからダイレクトで逆サイドの右CBへ。GKは出したらまた立ち直す', move:[{sel:'#f1-gk', to:[320,300]}] },
         { to:[412,214], dur:450, hold:1400, noTrail:true, show:['#f1-lane2'],
-          cap:'⑥ いつでも逃げ道がある状態。これが第一ルール' }
+          cap:'⑧ いつでも逃げ道がある状態。これが第一ルール' }
       ]
     },
     fig2: {
