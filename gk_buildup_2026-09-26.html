@@ -150,6 +150,76 @@
     </div>
   </div>
 
+  <!-- スイーパーの立ち位置 2パターン -->
+  <div class="main-card">
+    <div class="situation blue">
+      <div class="label">POSITION — スイーパーの立ち位置</div>
+      <div class="text">スイーパーの向きで並びが決まる。<em>前を向いていればCBは前、後ろを向いていればCBは後ろ</em></div>
+      <div class="sub">判断はスイーパーの向きだけ。ここが決まっていないと「誰が一番後ろか」が毎回変わり、落とす先もGKの角度も決まらない。</div>
+    </div>
+    <div class="points">
+      <div class="prow">
+        <div class="n">A</div>
+        <div class="who">前を向いている</div>
+        <div class="body"><strong>CBは「前」。スイーパーが3人の一番後ろになる</strong><small>前が見えているので、一番深い位置から全部を見て配る。両CBは外・前へ開く。GKはさらにその後ろ</small></div>
+      </div>
+      <div class="prow warn">
+        <div class="n">B</div>
+        <div class="who">後ろを向いている</div>
+        <div class="body"><strong>CBは「後ろ」。スイーパーが前に出て、両CBが斜め後ろになる</strong><small>FWを背負って後ろ向き＝前を向けないので、落とす先が斜め後ろに2枚（＋GK）必要。両CBは深く外に構える</small></div>
+      </div>
+      <div class="prow gk">
+        <div class="n">◎</div>
+        <div class="who">GK</div>
+        <div class="body"><strong>どちらの形でもGKは一番後ろ・斜め後ろ45度</strong><small>スイーパーの向きは本人に見えないことも多い。AとBの切り替えはGKが声で伝える（「下がれ！」＝A／「前で受けろ！」＝B）</small></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="fig">
+    <div class="fig-label">図0 — スイーパーの向きで並びが決まる（左：前向き＝CBは前 ／ 右：後ろ向き＝CBは後ろ）</div>
+    <div class="pitch">
+      <svg viewBox="0 0 520 230" xmlns="http://www.w3.org/2000/svg">
+        <rect width="520" height="230" fill="#2d8f52"/>
+        <rect x="0" y="0" width="520" height="24" fill="rgba(0,0,0,0.45)"/>
+        <text x="130" y="16" text-anchor="middle" fill="#7fff7f" font-size="11" font-weight="bold">A スイーパーが前向き → CBは前</text>
+        <text x="392" y="16" text-anchor="middle" fill="#ffd166" font-size="11" font-weight="bold">B スイーパーが後ろ向き → CBは後ろ</text>
+        <line x1="260" y1="28" x2="260" y2="222" stroke="rgba(255,255,255,0.45)" stroke-width="2" stroke-dasharray="7,6"/>
+
+        <!-- A 前向き -->
+        <line x1="112" y1="112" x2="66" y2="82" stroke="#7fff7f" stroke-width="2.5" stroke-dasharray="6,4" marker-end="url(#f0g)"/>
+        <line x1="148" y1="112" x2="194" y2="82" stroke="#7fff7f" stroke-width="2.5" stroke-dasharray="6,4" marker-end="url(#f0g)"/>
+        <g><circle cx="50" cy="72" r="16" fill="#2471a3" stroke="#7ec8ff" stroke-width="2.5"/><text x="50" y="76" text-anchor="middle" fill="white" font-size="10" font-weight="bold">左CB</text></g>
+        <g><circle cx="210" cy="72" r="16" fill="#2471a3" stroke="#7ec8ff" stroke-width="2.5"/><text x="210" y="76" text-anchor="middle" fill="white" font-size="10" font-weight="bold">右CB</text></g>
+        <g><circle cx="130" cy="126" r="18" fill="#1a4b7a" stroke="#7fff7f" stroke-width="3"/><text x="130" y="123" text-anchor="middle" fill="white" font-size="9" font-weight="bold">スイー</text><text x="130" y="134" text-anchor="middle" fill="white" font-size="9" font-weight="bold">パー</text></g>
+        <g><circle cx="130" cy="186" r="15" fill="#f0a020" stroke="white" stroke-width="2"/><text x="130" y="190" text-anchor="middle" fill="#3a2000" font-size="10" font-weight="bold">GK</text></g>
+        <rect x="26" y="204" width="208" height="18" fill="rgba(0,0,0,0.5)" rx="4"/>
+        <text x="130" y="217" text-anchor="middle" fill="#cfffd8" font-size="10" font-weight="bold">一番深い位置から全部を見て配る</text>
+
+        <!-- B 背負い -->
+        <circle cx="392" cy="48" r="13" fill="#c0392b" stroke="white" stroke-width="1.5"/>
+        <text x="392" y="52" text-anchor="middle" fill="white" font-size="8">FW</text>
+        <line x1="392" y1="62" x2="392" y2="70" stroke="#ff6b6b" stroke-width="2" marker-end="url(#f0r)"/>
+        <line x1="374" y1="104" x2="340" y2="128" stroke="#ffd166" stroke-width="2.5" stroke-dasharray="6,4" marker-end="url(#f0o)"/>
+        <line x1="410" y1="104" x2="444" y2="128" stroke="#ffd166" stroke-width="2.5" stroke-dasharray="6,4" marker-end="url(#f0o)"/>
+        <line x1="392" y1="110" x2="392" y2="164" stroke="#ffd166" stroke-width="2.5" stroke-dasharray="6,4" marker-end="url(#f0o)"/>
+        <g><circle cx="392" cy="90" r="18" fill="#1a4b7a" stroke="#ffd166" stroke-width="3"/><text x="392" y="87" text-anchor="middle" fill="white" font-size="9" font-weight="bold">スイー</text><text x="392" y="98" text-anchor="middle" fill="white" font-size="9" font-weight="bold">パー</text></g>
+        <g><circle cx="322" cy="142" r="16" fill="#2471a3" stroke="#7ec8ff" stroke-width="2.5"/><text x="322" y="146" text-anchor="middle" fill="white" font-size="10" font-weight="bold">左CB</text></g>
+        <g><circle cx="462" cy="142" r="16" fill="#2471a3" stroke="#7ec8ff" stroke-width="2.5"/><text x="462" y="146" text-anchor="middle" fill="white" font-size="10" font-weight="bold">右CB</text></g>
+        <g><circle cx="392" cy="186" r="15" fill="#f0a020" stroke="white" stroke-width="2"/><text x="392" y="190" text-anchor="middle" fill="#3a2000" font-size="10" font-weight="bold">GK</text></g>
+        <rect x="286" y="204" width="212" height="18" fill="rgba(0,0,0,0.5)" rx="4"/>
+        <text x="392" y="217" text-anchor="middle" fill="#ffe9b8" font-size="10" font-weight="bold">落とす先が斜め後ろに2枚＋GK</text>
+
+        <defs>
+          <marker id="f0g" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#7fff7f"/></marker>
+          <marker id="f0o" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#ffd166"/></marker>
+          <marker id="f0r" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#ff6b6b"/></marker>
+        </defs>
+      </svg>
+    </div>
+    <p class="pitch-note">判断は「スイーパーが前を向いているか／後ろを向いているか」だけ。迷ったらGKが「下がれ！」「前で受けろ！」と声で決める。</p>
+  </div>
+
   <!-- 第一ルール -->
   <div class="rule rule1">
     <div class="rule-head">
@@ -163,6 +233,7 @@
         <li><b>ボール側へスライドする。</b>左CBが持ったらゴール中央より左、右CBが持ったら右。パスを出したらまた立ち直す</li>
         <li><b>ペナルティエリアの中で構わない。</b>無理に出ない。「角度」が作れていればそれで十分</li>
         <li><b>詰まる前から見えていること</b>が価値。味方が振り向いてからGKを探すのでは遅い</li>
+        <li><b>スイーパーが前向き（CBは前）でも、後ろ向き（CBは後ろ）でも、GKはさらにその斜め後ろ。</b>並びが変わってもGKの役割は同じ</li>
         <li class="ng">ゴール中央に突っ立つ＝角度ゼロ。足元に来て一番危ないパスになる</li>
         <li class="ng">ボールを目で追うだけで足が動かない＝味方の逃げ道が消える</li>
       </ul>
@@ -171,7 +242,7 @@
 
   <!-- 図1 -->
   <div class="fig">
-    <div class="fig-label">図1 — 第一ルール：ボールが動いたらGKも動く（助けになる位置に立ち直す）</div>
+    <div class="fig-label">図1 — 第一ルール：スイーパーの出し先は「左CB・右CB・GK」／ボールが動いたらGKも動く</div>
     <div class="pitch">
       <svg id="fig1" viewBox="0 0 520 360" xmlns="http://www.w3.org/2000/svg">
         <rect width="520" height="360" fill="#2d8f52"/>
@@ -182,19 +253,19 @@
         <path d="M206,223 A 67 67 0 0 1 314,223" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1.2"/>
         <rect x="233" y="340" width="54" height="8" fill="rgba(255,255,255,0.75)"/>
         <rect x="0" y="0" width="520" height="22" fill="rgba(0,0,0,0.4)"/>
-        <text x="260" y="15" text-anchor="middle" fill="white" font-size="11" font-weight="bold">GKはボール側へスライドして「斜め後ろ45度・約10m」に立ち直す</text>
+        <text x="260" y="15" text-anchor="middle" fill="white" font-size="11" font-weight="bold">スイーパーの出し先は 左CB・右CB・GK の3つ／GKはボール側へ立ち直す</text>
 
         <g class="trails"></g>
 
         <g id="f1-lane1" class="hid">
-          <line x1="124" y1="272" x2="186" y2="294" stroke="#7fff7f" stroke-width="2.5" stroke-dasharray="6,4"/>
-          <rect x="26" y="300" width="126" height="18" fill="rgba(0,0,0,0.55)" rx="4"/>
-          <text x="89" y="313" text-anchor="middle" fill="#7fff7f" font-size="11" font-weight="bold">戻せる角度 ○</text>
+          <line x1="124" y1="228" x2="188" y2="290" stroke="#7fff7f" stroke-width="2.5" stroke-dasharray="6,4"/>
+          <rect x="18" y="252" width="126" height="18" fill="rgba(0,0,0,0.55)" rx="4"/>
+          <text x="81" y="265" text-anchor="middle" fill="#7fff7f" font-size="11" font-weight="bold">戻せる角度 ○</text>
         </g>
         <g id="f1-lane2" class="hid">
-          <line x1="396" y1="272" x2="334" y2="294" stroke="#7fff7f" stroke-width="2.5" stroke-dasharray="6,4"/>
-          <rect x="366" y="300" width="126" height="18" fill="rgba(0,0,0,0.55)" rx="4"/>
-          <text x="429" y="313" text-anchor="middle" fill="#7fff7f" font-size="11" font-weight="bold">戻せる角度 ○</text>
+          <line x1="396" y1="228" x2="332" y2="290" stroke="#7fff7f" stroke-width="2.5" stroke-dasharray="6,4"/>
+          <rect x="376" y="252" width="126" height="18" fill="rgba(0,0,0,0.55)" rx="4"/>
+          <text x="439" y="265" text-anchor="middle" fill="#7fff7f" font-size="11" font-weight="bold">戻せる角度 ○</text>
         </g>
 
         <circle cx="205" cy="146" r="13" fill="#c0392b" stroke="white" stroke-width="1.5"/>
@@ -202,14 +273,15 @@
         <circle cx="318" cy="146" r="13" fill="#c0392b" stroke="white" stroke-width="1.5"/>
         <text x="318" y="150" text-anchor="middle" fill="white" font-size="8">FW</text>
 
-        <g><circle cx="108" cy="262" r="17" fill="#2471a3" stroke="#7ec8ff" stroke-width="2.5"/><text x="108" y="266" text-anchor="middle" fill="white" font-size="10" font-weight="bold">左CB</text></g>
-        <g><circle cx="412" cy="262" r="17" fill="#2471a3" stroke="#7ec8ff" stroke-width="2.5"/><text x="412" y="266" text-anchor="middle" fill="white" font-size="10" font-weight="bold">右CB</text></g>
-        <g><circle cx="260" cy="190" r="19" fill="#1a4b7a" stroke="#ffd166" stroke-width="2.5"/><text x="260" y="187" text-anchor="middle" fill="white" font-size="9" font-weight="bold">スイー</text><text x="260" y="198" text-anchor="middle" fill="white" font-size="9" font-weight="bold">パー</text></g>
+        <g><circle cx="108" cy="214" r="17" fill="#2471a3" stroke="#7ec8ff" stroke-width="2.5"/><text x="108" y="218" text-anchor="middle" fill="white" font-size="10" font-weight="bold">左CB</text></g>
+        <g><circle cx="412" cy="214" r="17" fill="#2471a3" stroke="#7ec8ff" stroke-width="2.5"/><text x="412" y="218" text-anchor="middle" fill="white" font-size="10" font-weight="bold">右CB</text></g>
+        <g><circle cx="260" cy="254" r="19" fill="#1a4b7a" stroke="#ffd166" stroke-width="2.5"/><text x="260" y="251" text-anchor="middle" fill="white" font-size="9" font-weight="bold">スイー</text><text x="260" y="262" text-anchor="middle" fill="white" font-size="9" font-weight="bold">パー</text></g>
         <g class="mv" id="f1-gk" data-hx="260" data-hy="310"><circle cx="260" cy="310" r="16" fill="#f0a020" stroke="white" stroke-width="2"/><text x="260" y="314" text-anchor="middle" fill="#3a2000" font-size="10" font-weight="bold">GK</text></g>
 
-        <circle class="ball" cx="260" cy="190" r="7" fill="#f5c518" stroke="#3a2f00" stroke-width="1.5"/>
+        <circle class="ball" cx="260" cy="254" r="7" fill="#f5c518" stroke="#3a2f00" stroke-width="1.5"/>
         <defs>
           <marker id="m1w" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="white"/></marker>
+          <marker id="m1y" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#f5c518"/></marker>
           <marker id="m1b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#7ec8ff"/></marker>
         </defs>
       </svg>
@@ -240,7 +312,7 @@
 
   <!-- 図2 -->
   <div class="fig">
-    <div class="fig-label">図2 — 第二ルール：距離感・パスコースはGKが声で調整する（狭い → 広げる）</div>
+    <div class="fig-label">図2 — 第二ルール：距離感・パスコースはGKが声で調整する（狭い → 広げる・下がる）</div>
     <div class="pitch">
       <svg id="fig2" viewBox="0 0 520 360" xmlns="http://www.w3.org/2000/svg">
         <rect width="520" height="360" fill="#2d8f52"/>
@@ -265,10 +337,10 @@
           <text x="398" y="312" text-anchor="middle" fill="#2a1a00" font-size="11" font-weight="bold">GK「開け！ もっと外！ 深く！」</text>
         </g>
         <g id="f2-lanes" class="hid">
-          <line x1="243" y1="200" x2="126" y2="256" stroke="#7fff7f" stroke-width="2.2" stroke-dasharray="6,4"/>
-          <line x1="277" y1="200" x2="394" y2="256" stroke="#7fff7f" stroke-width="2.2" stroke-dasharray="6,4"/>
-          <line x1="245" y1="302" x2="126" y2="274" stroke="#7fff7f" stroke-width="2.2" stroke-dasharray="6,4"/>
-          <line x1="275" y1="302" x2="394" y2="274" stroke="#7fff7f" stroke-width="2.2" stroke-dasharray="6,4"/>
+          <line x1="244" y1="246" x2="126" y2="222" stroke="#7fff7f" stroke-width="2.2" stroke-dasharray="6,4"/>
+          <line x1="276" y1="246" x2="394" y2="222" stroke="#7fff7f" stroke-width="2.2" stroke-dasharray="6,4"/>
+          <line x1="246" y1="300" x2="126" y2="228" stroke="#7fff7f" stroke-width="2.2" stroke-dasharray="6,4"/>
+          <line x1="274" y1="300" x2="394" y2="228" stroke="#7fff7f" stroke-width="2.2" stroke-dasharray="6,4"/>
           <rect x="178" y="98" width="164" height="19" fill="rgba(0,0,0,0.6)" rx="4"/>
           <text x="260" y="112" text-anchor="middle" fill="#7fff7f" font-size="11" font-weight="bold">コースが4本に増えた</text>
         </g>
@@ -481,10 +553,10 @@
       <svg id="fig5" viewBox="0 0 520 360" xmlns="http://www.w3.org/2000/svg">
         <rect width="520" height="360" fill="#2d8f52"/>
         <rect x="6" y="6" width="508" height="348" fill="none" stroke="rgba(255,255,255,0.28)" stroke-width="1.5"/>
-        <rect x="340" y="190" width="174" height="160" fill="rgba(192,57,43,0.14)" rx="6"/>
-        <text x="427" y="210" text-anchor="middle" fill="rgba(255,150,130,0.9)" font-size="11" font-weight="bold">囲まれている</text>
-        <rect x="8" y="120" width="170" height="150" fill="rgba(245,197,24,0.13)" stroke="#f5c518" stroke-width="1" stroke-dasharray="6,5" rx="8"/>
-        <text x="93" y="142" text-anchor="middle" fill="#f5c518" font-size="12" font-weight="bold">左が空く</text>
+        <rect x="336" y="140" width="178" height="150" fill="rgba(192,57,43,0.14)" rx="6"/>
+        <text x="425" y="160" text-anchor="middle" fill="rgba(255,150,130,0.9)" font-size="11" font-weight="bold">囲まれている</text>
+        <rect x="8" y="88" width="170" height="150" fill="rgba(245,197,24,0.13)" stroke="#f5c518" stroke-width="1" stroke-dasharray="6,5" rx="8"/>
+        <text x="93" y="110" text-anchor="middle" fill="#f5c518" font-size="12" font-weight="bold">左が空く</text>
         <line x1="6" y1="112" x2="514" y2="112" stroke="rgba(255,255,255,0.16)" stroke-width="1" stroke-dasharray="8,6"/>
         <rect x="112" y="223" width="296" height="121" fill="none" stroke="rgba(255,255,255,0.28)" stroke-width="1.5"/>
         <rect x="193" y="304" width="134" height="40" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="1.2"/>
@@ -494,19 +566,19 @@
 
         <g class="trails"></g>
 
-        <circle cx="470" cy="240" r="13" fill="#c0392b" stroke="white" stroke-width="1.5"/>
-        <text x="470" y="244" text-anchor="middle" fill="white" font-size="8">WG</text>
-        <circle cx="372" cy="192" r="13" fill="#c0392b" stroke="white" stroke-width="1.5"/>
-        <text x="372" y="196" text-anchor="middle" fill="white" font-size="8">FW</text>
-        <line x1="458" y1="248" x2="436" y2="254" stroke="#ff6b6b" stroke-width="2" marker-end="url(#m5r)"/>
+        <circle cx="470" cy="192" r="13" fill="#c0392b" stroke="white" stroke-width="1.5"/>
+        <text x="470" y="196" text-anchor="middle" fill="white" font-size="8">WG</text>
+        <circle cx="356" cy="150" r="13" fill="#c0392b" stroke="white" stroke-width="1.5"/>
+        <text x="356" y="154" text-anchor="middle" fill="white" font-size="8">FW</text>
+        <line x1="458" y1="200" x2="436" y2="206" stroke="#ff6b6b" stroke-width="2" marker-end="url(#m5r)"/>
 
-        <g><circle cx="108" cy="262" r="17" fill="#2471a3" stroke="#7ec8ff" stroke-width="2.5"/><text x="108" y="266" text-anchor="middle" fill="white" font-size="10" font-weight="bold">左CB</text></g>
-        <g><circle cx="412" cy="262" r="17" fill="#2471a3" stroke="#f5c518" stroke-width="3"/><text x="412" y="266" text-anchor="middle" fill="white" font-size="10" font-weight="bold">右CB</text></g>
-        <g><circle cx="260" cy="190" r="19" fill="#1a4b7a" stroke="#7fff7f" stroke-width="3"/><text x="260" y="187" text-anchor="middle" fill="white" font-size="9" font-weight="bold">スイー</text><text x="260" y="198" text-anchor="middle" fill="white" font-size="9" font-weight="bold">パー</text></g>
+        <g><circle cx="108" cy="214" r="17" fill="#2471a3" stroke="#7ec8ff" stroke-width="2.5"/><text x="108" y="218" text-anchor="middle" fill="white" font-size="10" font-weight="bold">左CB</text></g>
+        <g><circle cx="412" cy="214" r="17" fill="#2471a3" stroke="#f5c518" stroke-width="3"/><text x="412" y="218" text-anchor="middle" fill="white" font-size="10" font-weight="bold">右CB</text></g>
+        <g><circle cx="260" cy="254" r="19" fill="#1a4b7a" stroke="#7fff7f" stroke-width="3"/><text x="260" y="251" text-anchor="middle" fill="white" font-size="9" font-weight="bold">スイー</text><text x="260" y="262" text-anchor="middle" fill="white" font-size="9" font-weight="bold">パー</text></g>
         <g><circle cx="260" cy="310" r="16" fill="#f0a020" stroke="white" stroke-width="2"/><text x="260" y="314" text-anchor="middle" fill="#3a2000" font-size="10" font-weight="bold">GK</text></g>
         <g><circle cx="42" cy="168" r="16" fill="#2471a3" stroke="#7fff7f" stroke-width="2.5"/><text x="42" y="172" text-anchor="middle" fill="white" font-size="9" font-weight="bold">左MF</text></g>
 
-        <circle class="ball" cx="412" cy="262" r="7" fill="#f5c518" stroke="#3a2f00" stroke-width="1.5"/>
+        <circle class="ball" cx="412" cy="214" r="7" fill="#f5c518" stroke="#3a2f00" stroke-width="1.5"/>
         <defs>
           <marker id="m5r" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#ff6b6b"/></marker>
           <marker id="m5y" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#f5c518"/></marker>
@@ -575,18 +647,18 @@
         <text x="196" y="154" text-anchor="middle" fill="white" font-size="8">FW</text>
         <circle cx="326" cy="150" r="13" fill="#c0392b" stroke="white" stroke-width="1.5"/>
         <text x="326" y="154" text-anchor="middle" fill="white" font-size="8">FW</text>
-        <circle cx="470" cy="238" r="13" fill="#c0392b" stroke="white" stroke-width="1.5"/>
-        <text x="470" y="242" text-anchor="middle" fill="white" font-size="8">WG</text>
-        <line x1="458" y1="246" x2="436" y2="253" stroke="#ff6b6b" stroke-width="2" marker-end="url(#m6r)"/>
+        <circle cx="470" cy="190" r="13" fill="#c0392b" stroke="white" stroke-width="1.5"/>
+        <text x="470" y="194" text-anchor="middle" fill="white" font-size="8">WG</text>
+        <line x1="458" y1="198" x2="436" y2="205" stroke="#ff6b6b" stroke-width="2" marker-end="url(#m6r)"/>
 
-        <g><circle cx="108" cy="262" r="17" fill="#2471a3" stroke="#7ec8ff" stroke-width="2.5"/><text x="108" y="266" text-anchor="middle" fill="white" font-size="10" font-weight="bold">左CB</text></g>
-        <g><circle cx="412" cy="262" r="17" fill="#2471a3" stroke="#f5c518" stroke-width="3"/><text x="412" y="266" text-anchor="middle" fill="white" font-size="10" font-weight="bold">右CB</text></g>
-        <g><circle cx="260" cy="190" r="19" fill="#1a4b7a" stroke="#ffd166" stroke-width="2.5"/><text x="260" y="187" text-anchor="middle" fill="white" font-size="9" font-weight="bold">スイー</text><text x="260" y="198" text-anchor="middle" fill="white" font-size="9" font-weight="bold">パー</text></g>
+        <g><circle cx="108" cy="214" r="17" fill="#2471a3" stroke="#7ec8ff" stroke-width="2.5"/><text x="108" y="218" text-anchor="middle" fill="white" font-size="10" font-weight="bold">左CB</text></g>
+        <g><circle cx="412" cy="214" r="17" fill="#2471a3" stroke="#f5c518" stroke-width="3"/><text x="412" y="218" text-anchor="middle" fill="white" font-size="10" font-weight="bold">右CB</text></g>
+        <g><circle cx="260" cy="254" r="19" fill="#1a4b7a" stroke="#ffd166" stroke-width="2.5"/><text x="260" y="251" text-anchor="middle" fill="white" font-size="9" font-weight="bold">スイー</text><text x="260" y="262" text-anchor="middle" fill="white" font-size="9" font-weight="bold">パー</text></g>
         <g><circle cx="260" cy="310" r="16" fill="#f0a020" stroke="white" stroke-width="2"/><text x="260" y="314" text-anchor="middle" fill="#3a2000" font-size="10" font-weight="bold">GK</text></g>
         <g><circle cx="260" cy="96" r="18" fill="#2471a3" stroke="#ffd166" stroke-width="3"/><text x="260" y="93" text-anchor="middle" fill="white" font-size="9" font-weight="bold">ボラ</text><text x="260" y="104" text-anchor="middle" fill="white" font-size="9" font-weight="bold">ンチ</text></g>
         <g><circle cx="42" cy="168" r="16" fill="#2471a3" stroke="#7fff7f" stroke-width="2.5"/><text x="42" y="172" text-anchor="middle" fill="white" font-size="9" font-weight="bold">左MF</text></g>
 
-        <circle class="ball" cx="412" cy="262" r="7" fill="#f5c518" stroke="#3a2f00" stroke-width="1.5"/>
+        <circle class="ball" cx="412" cy="214" r="7" fill="#f5c518" stroke="#3a2f00" stroke-width="1.5"/>
         <defs>
           <marker id="m6r" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#ff6b6b"/></marker>
           <marker id="m6y" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#f5c518"/></marker>
@@ -716,6 +788,7 @@
   <!-- まとめ -->
   <div class="notes">
     <div class="notes-head">📌 GKを使うビルドアップ まとめ</div>
+    <div class="nrow"><span class="icon">📍</span><span><strong>立ち位置</strong>スイーパーが前を向いていればCBは前（スイーパーが一番後ろ）／後ろを向いていればCBは後ろ（斜め後ろ）。GKはどちらでもさらに斜め後ろ45度</span></div>
     <div class="nrow"><span class="icon">🥇</span><span><strong>第一ルール</strong>GKは、スイーパー・CBが詰まったときに助けになる位置に必ずいる（斜め後ろ45度・8〜12m・ボール側へスライド・出したら立ち直す）</span></div>
     <div class="nrow"><span class="icon">🥈</span><span><strong>第二ルール</strong>ビルドアップ・サイドチェンジではCBは広がる（チームの約束事）。その微調整＝パスコース・距離感はGKが声でやる（広がれ・下がれ・横一列やめろ・距離12〜18m）</span></div>
     <div class="nrow"><span class="icon">1️⃣</span><span><strong>パターン①</strong>スイーパーがマークされていたら、GK経由でサイドチェンジ（左CB→GK→右CB→右サイド）</span></div>
@@ -737,19 +810,21 @@
 
   var FIGS = {
     fig1: {
-      ball: [260,190],
-      cap0: '再生：ボールが動くたびにGKが立ち直す',
+      ball: [260,254],
+      cap0: '再生：スイーパーの出し先は 左CB・右CB・GK の3つ',
       legs: [
-        { to:[108,262], dur:700, hold:450, color:'#ffffff', marker:'m1w', no:'1',
-          cap:'① 左CBへ大きく展開。ボールが動いた＝GKも動く', move:[{sel:'#f1-gk', to:[200,300]}] },
-        { to:[108,262], dur:450, hold:1100, noTrail:true, show:['#f1-lane1'],
-          cap:'② GKは左CBの斜め後ろ45度・約10mへ立ち直す＝これで「戻せる」' },
-        { to:[260,190], dur:600, hold:400, color:'#7ec8ff', marker:'m1b', hide:['#f1-lane1'],
-          cap:'③ スイーパーへ戻す（GKも中央へ戻る）', move:[{sel:'#f1-gk', to:[260,310]}] },
-        { to:[412,262], dur:700, hold:450, color:'#ffffff', marker:'m1w', no:'2',
-          cap:'④ 逆サイドの右CBへ。GKもボール側（右）へスライド', move:[{sel:'#f1-gk', to:[320,300]}] },
-        { to:[412,262], dur:450, hold:1400, noTrail:true, show:['#f1-lane2'],
-          cap:'⑤ いつでも逃げ道がある状態。これが第一ルール' }
+        { to:[108,214], dur:700, hold:450, color:'#ffffff', marker:'m1w', no:'1',
+          cap:'① 出し先その1：左CBへ大きく展開。ボールが動いた＝GKも動く', move:[{sel:'#f1-gk', to:[200,300]}] },
+        { to:[108,214], dur:450, hold:1100, noTrail:true, show:['#f1-lane1'],
+          cap:'② GKは左CBの斜め後ろ45度へ立ち直す＝これで「戻せる」' },
+        { to:[260,254], dur:600, hold:400, color:'#7ec8ff', marker:'m1b', hide:['#f1-lane1'],
+          cap:'③ スイーパーへ戻す（前を向けるので一番後ろで受ける）', move:[{sel:'#f1-gk', to:[260,310]}] },
+        { to:[260,310], dur:480, hold:700, color:'#f5c518', marker:'m1y', no:'2',
+          cap:'④ 出し先その2：GK。前を向けない・迷ったら迷わず後ろのGKへ' },
+        { to:[412,214], dur:750, hold:450, color:'#ffffff', marker:'m1w', no:'3',
+          cap:'⑤ 出し先その3：GKからダイレクトで逆サイドの右CBへ。GKは出したらまた立ち直す', move:[{sel:'#f1-gk', to:[320,300]}] },
+        { to:[412,214], dur:450, hold:1400, noTrail:true, show:['#f1-lane2'],
+          cap:'⑥ いつでも逃げ道がある状態。これが第一ルール' }
       ]
     },
     fig2: {
@@ -758,12 +833,12 @@
       legs: [
         { to:[260,252], dur:350, hold:1200, noTrail:true, show:['#f2-bad'],
           cap:'① エリアの中で3人が近すぎ・横一列 → 相手1人で3人とも消される' },
-        { to:[260,190], dur:1000, hold:400, noTrail:true, hide:['#f2-bad'], show:['#f2-voice'],
-          cap:'② GKが声で調整「左、もっと外！右も外！スイーパー半歩前！」',
-          move:[{sel:'#f2-lcb', to:[108,266]},{sel:'#f2-rcb', to:[412,266]},{sel:'#f2-sw', to:[260,190]}] },
-        { to:[260,190], dur:400, hold:1300, noTrail:true, show:['#f2-lanes'],
-          cap:'③ エリアの幅いっぱい（距離12〜18m）→ パスコースが4本に増えた' },
-        { to:[108,266], dur:650, hold:1300, color:'#7fff7f', marker:'m2g', no:'1',
+        { to:[260,254], dur:1000, hold:400, noTrail:true, hide:['#f2-bad'], show:['#f2-voice'],
+          cap:'② GKが声で調整「左右はもっと外！スイーパーは下がって前を向け！」',
+          move:[{sel:'#f2-lcb', to:[108,214]},{sel:'#f2-rcb', to:[412,214]},{sel:'#f2-sw', to:[260,254]}] },
+        { to:[260,254], dur:400, hold:1300, noTrail:true, show:['#f2-lanes'],
+          cap:'③ 両CBは外・前／スイーパーは深く前向き → パスコースが4本に増えた' },
+        { to:[108,214], dur:650, hold:1300, color:'#7fff7f', marker:'m2g', no:'1',
           cap:'④ ここで初めて「繋げる」。調整してから出す' }
       ]
     },
@@ -795,22 +870,22 @@
       ]
     },
     fig5: {
-      ball: [412,262],
+      ball: [412,214],
       cap0: '再生：右CB→GK→スイーパー／逆の左CB',
       legs: [
         { to:[260,310], dur:600, hold:550, color:'#f5c518', marker:'m5y', no:'1',
           cap:'① 外に蹴るのはまだ早い。囲まれる前にGKへ' },
-        { to:[260,190], dur:520, hold:1200, color:'#7fff7f', marker:'m5g', no:'A',
+        { to:[260,254], dur:520, hold:1200, color:'#7fff7f', marker:'m5g', no:'A',
           cap:'②-A スイーパーが前を向けるなら最優先（最短で前進）' },
         { to:[260,310], teleport:true, fade:true, hold:250, cap:'（中央が埋まっていた場合：Bパターン）' },
-        { to:[108,262], dur:700, hold:600, color:'#7ec8ff', marker:'m5b', no:'B',
+        { to:[108,214], dur:700, hold:600, color:'#7ec8ff', marker:'m5b', no:'B',
           cap:'②-B ワンタッチで逆の左CBへ＝一番安全なサイドチェンジ' },
         { to:[42,168], dur:700, hold:1400, color:'#7fff7f', marker:'m5g', no:'C',
           cap:'③ 右が囲まれている間、左は完全に空いている → そのまま左サイドへ' }
       ]
     },
     fig6: {
-      ball: [412,262],
+      ball: [412,214],
       cap0: '再生：右CB→GK→ボランチ／逆サイド',
       legs: [
         { to:[260,310], dur:600, hold:450, color:'#f5c518', marker:'m6y', no:'1',
