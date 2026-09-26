@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GKを使うビルドアップ（3バック＋GK） | ReBorn F.C Over50</title>
+<script>if(!sessionStorage.getItem('reborn_auth'))location.href='index.html';</script>
+<style>
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:'Helvetica Neue',Arial,'Hiragino Kaku Gothic ProN',Meiryo,sans-serif; background:#f0f2f0; color:#222; line-height:1.7; }
+
+  header { background:linear-gradient(135deg,#0b3d2c,#12715a,#f0a020); color:white; padding:36px 24px 28px; text-align:center; }
+  header .badge { display:inline-block; background:rgba(255,255,255,0.2); border:1px solid rgba(255,255,255,0.35); border-radius:20px; padding:3px 14px; font-size:11px; letter-spacing:1px; margin-bottom:10px; }
+  header h1 { font-size:22px; font-weight:900; margin-bottom:4px; }
+  header p { font-size:12px; opacity:.8; }
+
+  .container { max-width:820px; margin:0 auto; padding:28px 16px 64px; }
+
+  .main-card { background:white; border-radius:16px; box-shadow:0 2px 16px rgba(0,0,0,0.08); margin-bottom:22px; overflow:hidden; }
+  .situation { background:#0b3d2c; color:white; padding:18px 24px; }
+  .situation .label { font-size:10px; letter-spacing:2px; opacity:.65; margin-bottom:6px; }
+  .situation .text { font-size:15px; font-weight:800; line-height:1.6; }
+  .situation .text em { color:#ffd166; font-style:normal; }
+  .situation .sub { font-size:12px; opacity:.8; margin-top:6px; }
+  .situation.blue { background:#1a4b7a; }
+  .situation.orange { background:#8a5200; }
+
+  .points { padding:8px 0; }
+  .prow { display:flex; align-items:baseline; gap:14px; padding:11px 24px; border-bottom:1px solid #f2f2f2; }
+  .prow:last-child { border-bottom:none; }
+  .prow .n { background:#12715a; color:white; min-width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:900; flex-shrink:0; margin-top:1px; }
+  .prow.warn .n { background:#c0392b; }
+  .prow.gk .n { background:#f0a020; color:#3a2000; }
+  .prow .who { font-size:11px; font-weight:800; color:#12715a; min-width:92px; flex-shrink:0; padding-top:2px; }
+  .prow .body { font-size:14px; }
+  .prow .body strong { font-weight:800; display:block; }
+  .prow .body small { font-size:11px; color:#888; display:block; }
+
+  .rule { border-radius:16px; overflow:hidden; margin-bottom:20px; box-shadow:0 3px 18px rgba(0,0,0,0.12); }
+  .rule-head { display:flex; align-items:center; gap:12px; padding:14px 20px; color:white; }
+  .rule1 .rule-head { background:linear-gradient(135deg,#8e1b1b,#c0392b); }
+  .rule2 .rule-head { background:linear-gradient(135deg,#8a5200,#f0a020); }
+  .rule-head .rn { background:rgba(255,255,255,0.22); border:1px solid rgba(255,255,255,0.45); border-radius:8px; font-size:11px; font-weight:900; padding:5px 9px; letter-spacing:1px; flex-shrink:0; }
+  .rule-head .rt { font-size:16px; font-weight:900; line-height:1.45; }
+  .rule-body { background:white; padding:16px 20px; }
+  .rule-body .lead { font-size:14px; font-weight:800; margin-bottom:10px; }
+  .rule-body ul { list-style:none; }
+  .rule-body li { font-size:13px; padding:7px 0 7px 22px; position:relative; border-bottom:1px dashed #eee; }
+  .rule-body li:last-child { border-bottom:none; }
+  .rule-body li:before { content:"\25B8"; position:absolute; left:4px; color:#12715a; font-weight:900; }
+  .rule-body li.ng:before { content:"\2715"; color:#c0392b; }
+  .rule-body li b { font-weight:900; }
+
+  .fig { margin-bottom:24px; }
+  .fig-label { font-size:12px; font-weight:800; color:#555; letter-spacing:1px; margin-bottom:8px; padding-left:4px; }
+  .pitch { background:#2d8f52; border-radius:12px 12px 0 0; overflow:hidden; box-shadow:0 2px 12px rgba(0,0,0,0.1); }
+  .pitch svg { display:block; width:100%; }
+  .anim-bar { background:#17241d; color:#eafff4; border-radius:0 0 12px 12px; padding:9px 12px; display:flex; align-items:center; gap:10px; }
+  .ab-btn { background:#f0a020; color:#2a1a00; border:none; border-radius:20px; font-size:11px; font-weight:900; padding:6px 13px; cursor:pointer; flex-shrink:0; font-family:inherit; }
+  .ab-btn:active { transform:scale(0.96); }
+  .ab-cap { font-size:12px; font-weight:700; line-height:1.45; }
+  .pitch-note { text-align:center; font-size:12px; color:#666; margin-top:8px; }
+  .hid { opacity:0; transition:opacity .35s ease; }
+
+  .voice { background:white; border-radius:16px; box-shadow:0 2px 16px rgba(0,0,0,0.08); overflow:hidden; margin-bottom:22px; }
+  .voice-head { background:#f0a020; color:#3a2000; padding:12px 22px; font-size:13px; font-weight:900; letter-spacing:1px; }
+  .vrow { padding:12px 20px; border-bottom:1px solid #f2f2f2; }
+  .vrow:last-child { border-bottom:none; }
+  .vrow .vto { font-size:11px; font-weight:900; color:#8a5200; margin-bottom:4px; }
+  .vrow .vsay { font-size:14px; font-weight:800; color:#12715a; }
+  .vrow .vwhy { font-size:11px; color:#888; }
+
+  .notes { background:white; border-radius:16px; box-shadow:0 2px 16px rgba(0,0,0,0.08); overflow:hidden; margin-bottom:22px; }
+  .notes-head { background:#444; color:white; padding:12px 22px; font-size:12px; font-weight:800; letter-spacing:1px; }
+  .notes-head.ng { background:#8e1b1b; }
+  .notes-head.res { background:#1a4b7a; }
+  .nrow { display:flex; gap:12px; padding:13px 22px; border-bottom:1px solid #f2f2f2; font-size:13px; align-items:flex-start; }
+  .nrow:last-child { border-bottom:none; }
+  .nrow .icon { font-size:16px; flex-shrink:0; margin-top:1px; }
+  .nrow strong { font-weight:900; display:block; margin-bottom:2px; }
+  .nrow span { color:#555; }
+  .nrow small { display:block; color:#999; font-size:11px; margin-top:3px; }
+
+  #back-top { position:fixed; bottom:24px; right:24px; background:#12715a; color:white; border-radius:50px; padding:9px 16px 9px 12px; font-size:12px; font-weight:800; text-decoration:none; display:flex; align-items:center; gap:6px; box-shadow:0 4px 14px rgba(18,113,90,0.4); z-index:999; }
+  footer { text-align:center; padding:20px; font-size:11px; color:#aaa; border-top:1px solid #e0e0e0; margin-top:24px; }
+
+  @media (max-width: 600px) {
+    header { padding: 22px 14px 18px; }
+    header h1 { font-size: 17px; }
+    header p { font-size: 11px; }
+    .container { padding: 16px 10px 48px; }
+    .situation { padding: 13px 14px; }
+    .situation .text { font-size: 13px; }
+    .situation .sub { font-size: 11px; }
+    .prow { padding: 9px 12px; gap: 8px; }
+    .prow .n { min-width: 22px; height: 22px; font-size: 10px; }
+    .prow .who { min-width: 54px; font-size: 10px; }
+    .prow .body { font-size: 13px; }
+    .rule-head { padding:12px 14px; gap:9px; }
+    .rule-head .rt { font-size: 14px; }
+    .rule-body { padding: 13px 14px; }
+    .fig-label { font-size: 11px; }
+    .ab-cap { font-size: 11px; }
+    .ab-btn { font-size:10px; padding:5px 11px; }
+    .pitch-note { font-size: 11px; }
+    .notes-head, .voice-head { padding: 10px 14px; font-size: 11px; }
+    .nrow, .vrow { padding: 10px 14px; font-size: 12px; }
+    #back-top { bottom: 16px; right: 14px; padding: 8px 12px 8px 10px; font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="badge">BUILD-UP · 3BACKS + GK</div>
+  <h1>GKを使うビルドアップ</h1>
+  <p>ReBorn F.C Over50 | 左CB・スイーパー・右CB＋GK の4人で外す | 2026.09.26</p>
+</header>
+
+<div class="container">
+
+  <!-- 前提 -->
+  <div class="main-card">
+    <div class="situation">
+      <div class="label">SITUATION</div>
+      <div class="text">自陣のビルドアップ。<em>左CB・スイーパー・右CB＋GK の4人</em>でボールを動かして相手のプレスを外す</div>
+      <div class="sub">3バックは中央が詰まりやすい。だから「後ろにもう1人（GK）いる」を前提に組み立てる。GKを使うのは逃げではなく、数的優位（相手2トップに対して4対2）を作る手段。</div>
+    </div>
+    <div class="points">
+      <div class="prow gk">
+        <div class="n">◎</div>
+        <div class="who">大原則</div>
+        <div class="body"><strong>GKは「もう1人のフィールドプレーヤー」</strong><small>4人で回せば相手2トップに対して常に1人多い。GKを使わない＝わざわざ3対2で難しくやっているだけ</small></div>
+      </div>
+      <div class="prow">
+        <div class="n">◎</div>
+        <div class="who">全員</div>
+        <div class="body"><strong>GKへのバックパスは失敗ではない</strong><small>戻す＝次の攻撃の準備。戻したことを責めない。むしろ「戻せる形」を毎回用意しておく</small></div>
+      </div>
+      <div class="prow warn">
+        <div class="n">!</div>
+        <div class="who">GK</div>
+        <div class="body"><strong>GKはミスができない。だから「触ってから考える」を無くす</strong><small>受ける前に出し先を決め、声で味方を動かしておく → ダイレクト or 2タッチで出す</small></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 第一ルール -->
+  <div class="rule rule1">
+    <div class="rule-head">
+      <div class="rn">第一ルール</div>
+      <div class="rt">GKは、スイーパー・CBが詰まったときに<br>助けになる位置に「必ず」いる</div>
+    </div>
+    <div class="rule-body">
+      <div class="lead">ボールが動いたら、GKも動く。立ち止まっているGKは、味方から見て「いないのと同じ」。</div>
+      <ul>
+        <li><b>ボール保持者から見て斜め後ろ45度・8〜12m</b>に立ち直す（真後ろはコースが詰まる／遠すぎると届かない）</li>
+        <li><b>ボール側へスライドする。</b>左CBが持ったらゴール中央より左、右CBが持ったら右。パスを出したらまた立ち直す</li>
+        <li><b>ペナルティエリアの中で構わない。</b>無理に出ない。「角度」が作れていればそれで十分</li>
+        <li><b>詰まる前から見えていること</b>が価値。味方が振り向いてからGKを探すのでは遅い</li>
+        <li class="ng">ゴール中央に突っ立つ＝角度ゼロ。足元に来て一番危ないパスになる</li>
+        <li class="ng">ボールを目で追うだけで足が動かない＝味方の逃げ道が消える</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 図1 -->
+  <div class="fig">
+    <div class="fig-label">図1 — 第一ルール：ボールが動いたらGKも動く（助けになる位置に立ち直す）</div>
+    <div class="pitch">
+      <svg id="fig1" viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
+        <rect width="500" height="300" fill="#2d8f52"/>
+        <rect x="6" y="6" width="488" height="288" fill="none" stroke="rgba(255,255,255,0.28)" stroke-width="1.5"/>
+        <rect x="120" y="222" width="260" height="72" fill="none" stroke="rgba(255,255,255,0.28)" stroke-width="1.5"/>
+        <rect x="190" y="268" width="120" height="26" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="1.2"/>
+        <rect x="215" y="289" width="70" height="7" fill="rgba(255,255,255,0.75)"/>
+        <rect x="0" y="0" width="500" height="20" fill="rgba(0,0,0,0.4)"/>
+        <text x="250" y="14" text-anchor="middle" fill="white" font-size="10" font-weight="bold">GKはボール側へスライドして「斜め後ろ45度・約10m」に立ち直す</text>
+
+        <g class="trails"></g>
+
+        <g id="f1-lane1" class="hid">
+          <line x1="158" y1="248" x2="196" y2="263" stroke="#7fff7f" stroke-width="2.5" stroke-dasharray="5,4"/>
+          <rect x="116" y="272" width="106" height="15" fill="rgba(0,0,0,0.55)" rx="3"/>
+          <text x="169" y="283" text-anchor="middle" fill="#7fff7f" font-size="9" font-weight="bold">戻せる角度 ○</text>
+        </g>
+        <g id="f1-lane2" class="hid">
+          <line x1="342" y1="248" x2="304" y2="263" stroke="#7fff7f" stroke-width="2.5" stroke-dasharray="5,4"/>
+          <rect x="278" y="272" width="106" height="15" fill="rgba(0,0,0,0.55)" rx="3"/>
+          <text x="331" y="283" text-anchor="middle" fill="#7fff7f" font-size="9" font-weight="bold">戻せる角度 ○</text>
+        </g>
+
+        <circle cx="205" cy="186" r="12" fill="#c0392b" stroke="white" stroke-width="1.5"/>
+        <text x="205" y="190" text-anchor="middle" fill="white" font-size="7">FW</text>
+        <circle cx="300" cy="186" r="12" fill="#c0392b" stroke="white" stroke-width="1.5"/>
+        <text x="300" y="190" text-anchor="middle" fill="white" font-size="7">FW</text>
+
+        <g><circle cx="150" cy="240" r="14" fill="#2471a3" stroke="#7ec8ff" stroke-width="2.5"/><text x="150" y="244" text-anchor="middle" fill="white" font-size="9" font-weight="bold">左CB</text></g>
+        <g><circle cx="350" cy="240" r="14" fill="#2471a3" stroke="#7ec8ff" stroke-width="2.5"/><text x="350" y="244" text-anchor="middle" fill="white" font-size="9" font-weight="bold">右CB</text></g>
+        <g><circle cx="250" cy="222" r="16" fill="#1a4b7a" stroke="#ffd166" stroke-width="2.5"/><text x="250" y="219" text-anchor="middle" fill="white" font-size="8" font-weight="bold">スイー</text><text x="250" y="229" text-anchor="middle" fill="white" font-size="8" font-weight="bold">パー</text></g>
+        <g class="mv" id="f1-gk" data-hx="250" data-hy="272"><circle cx="250" cy="272" r="13" fill="#f0a020" stroke="white" stroke-width="2"/><text x="250" y="276" text-anchor="middle" fill="#3a2000" font-size="9" font-weight="bold">GK</text></g>
+
+        <circle class="ball" cx="250" cy="222" r="6" fill="#f5c518" stroke="#3a2f00" stroke-width="1.5"/>
+        <defs>
+          <marker id="m1w" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="white"/></marker>
+          <marker id="m1b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#7ec8ff"/></marker>
+        </defs>
+      </svg>
+    </div>
+    <div class="anim-bar"><button class="ab-btn" data-fig="fig1">⏸ 一時停止</button><span class="ab-cap" id="cap-fig1">再生中…</span></div>
+    <p class="pitch-note">GKの4〜5歩が、味方の「逃げ道あり／なし」を決める。ゴール中央で突っ立つのが一番危ない。</p>
+  </div>
+
+  <!-- 第二ルール -->
+  <div class="rule rule2">
+    <div class="rule-head">
+      <div class="rn">第二ルール</div>
+      <div class="rt">4人の「パスコース・距離感」の調整は<br>GKが声でやる（調整役はGK）</div>
+    </div>
+    <div class="rule-body">
+      <div class="lead">一番後ろのGKだけが、4人全員と相手を同時に見ている。だから位置の修正はGKが指示する。選手は自分で迷わなくていい。</div>
+      <ul>
+        <li><b>「開け！」</b>＝味方同士が近すぎる。相手1人に2人まとめて消されている状態</li>
+        <li><b>「下がれ！」「一列上がれ！」</b>＝縦の距離が合っていない。GKから見た角度を作り直す</li>
+        <li><b>「横一列やめろ！」</b>＝3人が同じ高さだとどこへ出しても前進にならない。スイーパーが半歩前・両CBは少し深く広く</li>
+        <li><b>距離の目安：CBとスイーパーの間は12〜18m。</b>隣同士が7m以上離れていれば、相手1人では両方を守れない</li>
+        <li><b>相手が寄ってきた側と逆を先に空けておく。</b>GKが逆サイドのCBを早めに動かしておく</li>
+        <li class="ng">GKが黙っている＝4人がバラバラのまま。そのミスは「出した人」のミスではなく調整不足</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 図2 -->
+  <div class="fig">
+    <div class="fig-label">図2 — 第二ルール：距離感・パスコースはGKが声で調整する</div>
+    <div class="pitch">
+      <svg id="fig2" viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
+        <rect width="500" height="300" fill="#2d8f52"/>
+        <rect x="6" y="6" width="488" height="288" fill="none" stroke="rgba(255,255,255,0.28)" stroke-width="1.5"/>
+        <rect x="120" y="222" width="260" height="72" fill="none" stroke="rgba(255,255,255,0.28)" stroke-width="1.5"/>
+        <rect x="190" y="268" width="120" height="26" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="1.2"/>
+        <rect x="215" y="289" width="70" height="7" fill="rgba(255,255,255,0.75)"/>
+        <rect x="0" y="0" width="500" height="20" fill="rgba(0,0,0,0.4)"/>
+        <text x="250" y="14" text-anchor="middle" fill="white" font-size="10" font-weight="bold">近すぎ・横一列 → GKの声で「開く・深くなる」→ コースが増える</text>
+
+        <g class="trails"></g>
+
+        <g id="f2-bad" class="hid">
+          <path d="M250,196 L186,246 L316,246 z" fill="rgba(192,57,43,0.3)" stroke="#ff6b6b" stroke-width="1.5" stroke-dasharray="4,3"/>
+          <rect x="176" y="252" width="150" height="16" fill="rgba(0,0,0,0.6)" rx="3"/>
+          <text x="251" y="264" text-anchor="middle" fill="#ff9c8f" font-size="10" font-weight="bold">相手1人で3人とも消える</text>
+        </g>
+        <g id="f2-voice" class="hid">
+          <rect x="286" y="258" width="152" height="20" fill="rgba(240,160,32,0.95)" rx="10"/>
+          <text x="362" y="272" text-anchor="middle" fill="#2a1a00" font-size="10" font-weight="bold">GK「開け！ もっと広がれ！」</text>
+        </g>
+        <g id="f2-lanes" class="hid">
+          <line x1="236" y1="216" x2="152" y2="242" stroke="#7fff7f" stroke-width="2" stroke-dasharray="5,4"/>
+          <line x1="264" y1="216" x2="348" y2="242" stroke="#7fff7f" stroke-width="2" stroke-dasharray="5,4"/>
+          <line x1="238" y1="266" x2="152" y2="250" stroke="#7fff7f" stroke-width="2" stroke-dasharray="5,4"/>
+          <line x1="262" y1="266" x2="348" y2="250" stroke="#7fff7f" stroke-width="2" stroke-dasharray="5,4"/>
+          <rect x="176" y="176" width="150" height="16" fill="rgba(0,0,0,0.6)" rx="3"/>
+          <text x="251" y="188" text-anchor="middle" fill="#7fff7f" font-size="10" font-weight="bold">コースが4本に増えた</text>
+        </g>
+
+        <circle cx="250" cy="182" r="12" fill="#c0392b" stroke="white" stroke-width="1.5"/>
+        <text x="250" y="186" text-anchor="middle" fill="white" font-size="7">FW</text>
+
+        <g class="mv" id="f2-lcb" data-hx="206" data-hy="238"><circle cx="206" cy="238" r="14" fill="#2471a3" stroke="#7ec8ff" stroke-width="2.5"/><text x="206" y="242" text-anchor="middle" fill="white" font-size="9" font-weight="bold">左CB</text></g>
+        <g class="mv" id="f2-rcb" data-hx="296" data-hy="238"><circle cx="296" cy="238" r="14" fill="#2471a3" stroke="#7ec8ff" stroke-width="2.5"/><text x="296" y="242" text-anchor="middle" fill="white" font-size="9" font-weight="bold">右CB</text></g>
+        <g class="mv" id="f2-sw" data-hx="250" data-hy="230"><circle cx="250" cy="230" r="16" fill="#1a4b7a" stroke="#ffd166" stroke-width="2.5"/><text x="250" y="227" text-anchor="middle" fill="white" font-size="8" font-weight="bold">スイー</text><text x="250" y="237" text-anchor="middle" fill="white" font-size="8" font-weight="bold">パー</text></g>
+        <g><circle cx="250" cy="272" r="13" fill="#f0a020" stroke="white" stroke-width="2"/><text x="250" y="276" text-anchor="middle" fill="#3a2000" font-size="9" font-weight="bold">GK</text></g>
+
+        <circle class="ball" cx="250" cy="230" r="6" fill="#f5c518" stroke="#3a2f00" stroke-width="1.5"/>
+        <defs>
+          <marker id="m2g" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#7fff7f"/></marker>
+        </defs>
+      </svg>
+    </div>
+    <div class="anim-bar"><button class="ab-btn" data-fig="fig2">⏸ 一時停止</button><span class="ab-cap" id="cap-fig2">再生中…</span></div>
+    <p class="pitch-note">「調整してから出す」。GKが位置を直させてからボールを動かすと、同じメンバーでもコースが倍になる。</p>
+  </div>
+
+  <!-- ===== パターン① ===== -->
+  <div class="main-card">
+    <div class="situation blue">
+      <div class="label">PATTERN ① — スイーパーからもらう（その1）</div>
+      <div class="text">サイドチェンジしたいが、<em>スイーパーにマークが付いている</em>とき → GK経由で逆サイドへ</div>
+      <div class="sub">中央のスイーパーを経由できないときに、そのまま横パスを狙う・前に蹴る…が一番事故る。ひとつ後ろ（GK）を使えば、同じサイドチェンジが安全にできる。</div>
+    </div>
+    <div class="points">
+      <div class="prow">
+        <div class="n">①</div>
+        <div class="who">左CB（出し手）</div>
+        <div class="body"><strong>スイーパーが消されていると見えたら、迷わずGKへ</strong><small>横（同じ高さ）に出すのは禁止。後ろは安全・横は事故</small></div>
+      </div>
+      <div class="prow gk">
+        <div class="n">②</div>
+        <div class="who">GK</div>
+        <div class="body"><strong>受ける前から「逆サイドが空いている」を見て、ダイレクトで右CBへ</strong><small>止めて考えると相手FWが間に入る。1〜2タッチで逆へ</small></div>
+      </div>
+      <div class="prow">
+        <div class="n">③</div>
+        <div class="who">右CB</div>
+        <div class="body"><strong>もらう前に外へ開いて深く</strong><small>GKの正面に立たない。開いて受ければ、そのまま前を向ける</small></div>
+      </div>
+      <div class="prow warn">
+        <div class="n">④</div>
+        <div class="who">右MF・右サイド</div>
+        <div class="body"><strong>相手が左に寄っている2〜3秒が勝負</strong><small>右CBが受けた瞬間に前向きの選択肢を出す。ここで止まると全部やり直し</small></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="fig">
+    <div class="fig-label">図3 — ① スイーパーがマークされている → GK経由のサイドチェンジ</div>
+    <div class="pitch">
+      <svg id="fig3" viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
+        <rect width="500" height="300" fill="#2d8f52"/>
+        <rect x="6" y="6" width="488" height="288" fill="none" stroke="rgba(255,255,255,0.28)" stroke-width="1.5"/>
+        <rect x="120" y="222" width="260" height="72" fill="none" stroke="rgba(255,255,255,0.28)" stroke-width="1.5"/>
+        <rect x="190" y="268" width="120" height="26" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="1.2"/>
+        <rect x="215" y="289" width="70" height="7" fill="rgba(255,255,255,0.75)"/>
+        <rect x="6" y="150" width="180" height="140" fill="rgba(192,57,43,0.12)" rx="4"/>
+        <text x="96" y="166" text-anchor="middle" fill="rgba(255,150,130,0.9)" font-size="10" font-weight="bold">相手が左に寄っている</text>
+        <rect x="330" y="120" width="164" height="90" fill="rgba(245,197,24,0.14)" stroke="#f5c518" stroke-width="1" stroke-dasharray="5,4" rx="6"/>
+        <text x="412" y="138" text-anchor="middle" fill="#f5c518" font-size="11" font-weight="bold">右はガラ空き</text>
+        <rect x="0" y="0" width="500" height="20" fill="rgba(0,0,0,0.4)"/>
+        <text x="250" y="14" text-anchor="middle" fill="white" font-size="10" font-weight="bold">中央が使えない → GKを1枚後ろの中継点にして逆サイドへ</text>
+
+        <g class="trails"></g>
+
+        <g id="f3-x" class="hid">
+          <line x1="164" y1="236" x2="234" y2="224" stroke="#ff6b6b" stroke-width="2.5" stroke-dasharray="5,4"/>
+          <text x="199" y="218" text-anchor="middle" fill="#ff6b6b" font-size="16" font-weight="bold">✕</text>
+          <rect x="258" y="196" width="78" height="16" fill="rgba(0,0,0,0.6)" rx="3"/>
+          <text x="297" y="208" text-anchor="middle" fill="#ff9c8f" font-size="10" font-weight="bold">マークされた</text>
+        </g>
+
+        <circle cx="250" cy="198" r="12" fill="#c0392b" stroke="white" stroke-width="1.5"/>
+        <text x="250" y="202" text-anchor="middle" fill="white" font-size="7">FW</text>
+        <circle cx="178" cy="206" r="12" fill="#c0392b" stroke="white" stroke-width="1.5"/>
+        <text x="178" y="210" text-anchor="middle" fill="white" font-size="7">FW</text>
+        <line x1="176" y1="219" x2="160" y2="228" stroke="#ff6b6b" stroke-width="2" marker-end="url(#m3r)"/>
+
+        <g><circle cx="150" cy="240" r="14" fill="#2471a3" stroke="#f5c518" stroke-width="3"/><text x="150" y="244" text-anchor="middle" fill="white" font-size="9" font-weight="bold">左CB</text></g>
+        <g class="mv" id="f3-rcb" data-hx="350" data-hy="240"><circle cx="350" cy="240" r="14" fill="#2471a3" stroke="#7ec8ff" stroke-width="2.5"/><text x="350" y="244" text-anchor="middle" fill="white" font-size="9" font-weight="bold">右CB</text></g>
+        <g><circle cx="250" cy="222" r="16" fill="#1a4b7a" stroke="#ffd166" stroke-width="2.5"/><text x="250" y="219" text-anchor="middle" fill="white" font-size="8" font-weight="bold">スイー</text><text x="250" y="229" text-anchor="middle" fill="white" font-size="8" font-weight="bold">パー</text></g>
+        <g><circle cx="250" cy="272" r="13" fill="#f0a020" stroke="white" stroke-width="2"/><text x="250" y="276" text-anchor="middle" fill="#3a2000" font-size="9" font-weight="bold">GK</text></g>
+        <g><circle cx="455" cy="190" r="13" fill="#2471a3" stroke="#7fff7f" stroke-width="2.5"/><text x="455" y="194" text-anchor="middle" fill="white" font-size="8" font-weight="bold">右MF</text></g>
+
+        <circle class="ball" cx="150" cy="240" r="6" fill="#f5c518" stroke="#3a2f00" stroke-width="1.5"/>
+        <defs>
+          <marker id="m3r" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#ff6b6b"/></marker>
+          <marker id="m3y" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#f5c518"/></marker>
+          <marker id="m3b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#7ec8ff"/></marker>
+          <marker id="m3g" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#7fff7f"/></marker>
+        </defs>
+      </svg>
+    </div>
+    <div class="anim-bar"><button class="ab-btn" data-fig="fig3">⏸ 一時停止</button><span class="ab-cap" id="cap-fig3">再生中…</span></div>
+    <p class="pitch-note">中央を切られたら「前に無理やり」ではなく「後ろを1枚使って逆サイド」。相手が戻るのに2〜3秒かかる。</p>
+  </div>
+
+  <!-- ===== パターン② ===== -->
+  <div class="main-card">
+    <div class="situation blue">
+      <div class="label">PATTERN ② — スイーパーからもらう（その2）</div>
+      <div class="text">スイーパーがプレスを受けた → <em>GKへバックパス → ダイレクト or 2タッチで右CBか左CB</em></div>
+      <div class="sub">来た方向と逆のCBへ出すのが原則。相手FWが右から来ていれば左CB、左から来ていれば右CB。GKは「どちらか」を受ける前に決めておく。</div>
+    </div>
+    <div class="points">
+      <div class="prow">
+        <div class="n">①</div>
+        <div class="who">スイーパー</div>
+        <div class="body"><strong>捕まってから戻さない。捕まる前に戻す</strong><small>相手が5m以内に来た時点でGKへ。ボールは相手が触れない足（外側の足）に置く</small></div>
+      </div>
+      <div class="prow gk">
+        <div class="n">②</div>
+        <div class="who">GK</div>
+        <div class="body"><strong>相手が来た側と逆のCBへ。ダイレクト、遅くても2タッチ</strong><small>3タッチ目は「迷った」サイン。迷ったら前へ大きく蹴ってやり直す（自陣ゴール前で持たない）</small></div>
+      </div>
+      <div class="prow">
+        <div class="n">③</div>
+        <div class="who">両CB</div>
+        <div class="body"><strong>スイーパーがGKへ戻す動きを見た瞬間に、左右へ開いて深くなる</strong><small>GKが顔を上げたときに「2つの選択肢」が見えている状態を作る</small></div>
+      </div>
+      <div class="prow warn">
+        <div class="n">④</div>
+        <div class="who">全員</div>
+        <div class="body"><strong>自陣ゴール前を横切るパスは禁止</strong><small>GK→CBは斜め前に開いた相手へ。ゴール正面での横パスは一番失点に直結する</small></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="fig">
+    <div class="fig-label">図4 — ② スイーパー→GK→ダイレクト（A：左CB ／ B：右CB）</div>
+    <div class="pitch">
+      <svg id="fig4" viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
+        <rect width="500" height="300" fill="#2d8f52"/>
+        <rect x="6" y="6" width="488" height="288" fill="none" stroke="rgba(255,255,255,0.28)" stroke-width="1.5"/>
+        <rect x="120" y="222" width="260" height="72" fill="none" stroke="rgba(255,255,255,0.28)" stroke-width="1.5"/>
+        <rect x="190" y="268" width="120" height="26" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="1.2"/>
+        <rect x="215" y="289" width="70" height="7" fill="rgba(255,255,255,0.75)"/>
+        <rect x="0" y="0" width="500" height="20" fill="rgba(0,0,0,0.4)"/>
+        <text x="250" y="14" text-anchor="middle" fill="white" font-size="10" font-weight="bold">来た方向と「逆」のCBへ。ダイレクト or 2タッチまで</text>
+
+        <g class="trails"></g>
+
+        <circle cx="292" cy="192" r="12" fill="#c0392b" stroke="white" stroke-width="1.5"/>
+        <text x="292" y="196" text-anchor="middle" fill="white" font-size="7">FW</text>
+        <line x1="284" y1="203" x2="266" y2="212" stroke="#ff6b6b" stroke-width="2" marker-end="url(#m4r)"/>
+        <rect x="306" y="176" width="120" height="16" fill="rgba(0,0,0,0.55)" rx="3"/>
+        <text x="366" y="188" text-anchor="middle" fill="#ff9c8f" font-size="10" font-weight="bold">相手は右から来ている</text>
+
+        <g><circle cx="150" cy="240" r="14" fill="#2471a3" stroke="#7fff7f" stroke-width="3"/><text x="150" y="244" text-anchor="middle" fill="white" font-size="9" font-weight="bold">左CB</text></g>
+        <g><circle cx="350" cy="240" r="14" fill="#2471a3" stroke="#7ec8ff" stroke-width="2.5"/><text x="350" y="244" text-anchor="middle" fill="white" font-size="9" font-weight="bold">右CB</text></g>
+        <g><circle cx="250" cy="222" r="16" fill="#1a4b7a" stroke="#f5c518" stroke-width="3"/><text x="250" y="219" text-anchor="middle" fill="white" font-size="8" font-weight="bold">スイー</text><text x="250" y="229" text-anchor="middle" fill="white" font-size="8" font-weight="bold">パー</text></g>
+        <g><circle cx="250" cy="272" r="13" fill="#f0a020" stroke="white" stroke-width="2"/><text x="250" y="276" text-anchor="middle" fill="#3a2000" font-size="9" font-weight="bold">GK</text></g>
+
+        <circle class="ball" cx="250" cy="222" r="6" fill="#f5c518" stroke="#3a2f00" stroke-width="1.5"/>
+        <defs>
+          <marker id="m4r" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#ff6b6b"/></marker>
+          <marker id="m4y" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#f5c518"/></marker>
+          <marker id="m4g" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#7fff7f"/></marker>
+          <marker id="m4b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#7ec8ff"/></marker>
+        </defs>
+      </svg>
+    </div>
+    <div class="anim-bar"><button class="ab-btn" data-fig="fig4">⏸ 一時停止</button><span class="ab-cap" id="cap-fig4">再生中…</span></div>
+    <p class="pitch-note">GKは「A（逆サイド）が第一候補、消されていればB」を受ける前に決めておく。決めてあれば1タッチで出せる。</p>
+  </div>
+
+  <!-- ===== パターン③ ===== -->
+  <div class="main-card">
+    <div class="situation orange">
+      <div class="label">PATTERN ③ — 右CBからもらう（その1）</div>
+      <div class="text">右CBがサイドで囲まれた → <em>GKへ戻す → スイーパー or 逆の左CB</em></div>
+      <div class="sub">サイドは一番危ない場所（タッチラインが味方1人分の役をしてしまう）。囲まれる前に後ろへ逃がし、GKが中央（スイーパー）か逆サイド（左CB）へ配る。</div>
+    </div>
+    <div class="points">
+      <div class="prow">
+        <div class="n">①</div>
+        <div class="who">右CB</div>
+        <div class="body"><strong>外に蹴るのはまだ早い。まずGK</strong><small>相手が来ていても、後ろは空いている。判断は「来たら戻す」で固定</small></div>
+      </div>
+      <div class="prow gk">
+        <div class="n">②</div>
+        <div class="who">GK（A案）</div>
+        <div class="body"><strong>スイーパーが前を向けるなら最優先</strong><small>最短・最速で前進できる。ただしスイーパーの背中に相手がいないことを声で確認（「フリー！」「後ろいる！」）</small></div>
+      </div>
+      <div class="prow gk">
+        <div class="n">③</div>
+        <div class="who">GK（B案）</div>
+        <div class="body"><strong>中央が埋まっていたら、ワンタッチで逆の左CBへ</strong><small>これが一番安全なサイドチェンジ。左CBはあらかじめ外へ開いて深く待つ</small></div>
+      </div>
+      <div class="prow warn">
+        <div class="n">④</div>
+        <div class="who">左CB・左MF</div>
+        <div class="body"><strong>右で囲まれている間に、左は必ず開いて待っておく</strong><small>「GKが持ってから動く」のでは間に合わない。右が詰まった瞬間が準備の合図</small></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="fig">
+    <div class="fig-label">図5 — ③ 右CB→GK→（A：スイーパー ／ B：逆の左CB → 左サイド）</div>
+    <div class="pitch">
+      <svg id="fig5" viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
+        <rect width="500" height="300" fill="#2d8f52"/>
+        <rect x="6" y="6" width="488" height="288" fill="none" stroke="rgba(255,255,255,0.28)" stroke-width="1.5"/>
+        <rect x="120" y="222" width="260" height="72" fill="none" stroke="rgba(255,255,255,0.28)" stroke-width="1.5"/>
+        <rect x="190" y="268" width="120" height="26" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="1.2"/>
+        <rect x="215" y="289" width="70" height="7" fill="rgba(255,255,255,0.75)"/>
+        <rect x="336" y="190" width="158" height="104" fill="rgba(192,57,43,0.14)" rx="4"/>
+        <text x="415" y="206" text-anchor="middle" fill="rgba(255,150,130,0.9)" font-size="10" font-weight="bold">囲まれている</text>
+        <rect x="8" y="150" width="150" height="100" fill="rgba(245,197,24,0.13)" stroke="#f5c518" stroke-width="1" stroke-dasharray="5,4" rx="6"/>
+        <text x="83" y="166" text-anchor="middle" fill="#f5c518" font-size="11" font-weight="bold">左が空く</text>
+        <rect x="0" y="0" width="500" height="20" fill="rgba(0,0,0,0.4)"/>
+        <text x="250" y="14" text-anchor="middle" fill="white" font-size="10" font-weight="bold">サイドで囲まれたら後ろへ。GKが中央か逆サイドへ配り直す</text>
+
+        <g class="trails"></g>
+
+        <circle cx="404" cy="214" r="12" fill="#c0392b" stroke="white" stroke-width="1.5"/>
+        <text x="404" y="218" text-anchor="middle" fill="white" font-size="7">WG</text>
+        <circle cx="330" cy="196" r="12" fill="#c0392b" stroke="white" stroke-width="1.5"/>
+        <text x="330" y="200" text-anchor="middle" fill="white" font-size="7">FW</text>
+        <line x1="396" y1="224" x2="368" y2="234" stroke="#ff6b6b" stroke-width="2" marker-end="url(#m5r)"/>
+
+        <g><circle cx="150" cy="240" r="14" fill="#2471a3" stroke="#7ec8ff" stroke-width="2.5"/><text x="150" y="244" text-anchor="middle" fill="white" font-size="9" font-weight="bold">左CB</text></g>
+        <g><circle cx="350" cy="240" r="14" fill="#2471a3" stroke="#f5c518" stroke-width="3"/><text x="350" y="244" text-anchor="middle" fill="white" font-size="9" font-weight="bold">右CB</text></g>
+        <g><circle cx="250" cy="222" r="16" fill="#1a4b7a" stroke="#7fff7f" stroke-width="3"/><text x="250" y="219" text-anchor="middle" fill="white" font-size="8" font-weight="bold">スイー</text><text x="250" y="229" text-anchor="middle" fill="white" font-size="8" font-weight="bold">パー</text></g>
+        <g><circle cx="250" cy="272" r="13" fill="#f0a020" stroke="white" stroke-width="2"/><text x="250" y="276" text-anchor="middle" fill="#3a2000" font-size="9" font-weight="bold">GK</text></g>
+        <g><circle cx="45" cy="190" r="13" fill="#2471a3" stroke="#7fff7f" stroke-width="2.5"/><text x="45" y="194" text-anchor="middle" fill="white" font-size="8" font-weight="bold">左MF</text></g>
+
+        <circle class="ball" cx="350" cy="240" r="6" fill="#f5c518" stroke="#3a2f00" stroke-width="1.5"/>
+        <defs>
+          <marker id="m5r" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#ff6b6b"/></marker>
+          <marker id="m5y" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#f5c518"/></marker>
+          <marker id="m5g" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#7fff7f"/></marker>
+          <marker id="m5b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#7ec8ff"/></marker>
+        </defs>
+      </svg>
+    </div>
+    <div class="anim-bar"><button class="ab-btn" data-fig="fig5">⏸ 一時停止</button><span class="ab-cap" id="cap-fig5">再生中…</span></div>
+    <p class="pitch-note">右で囲まれているときが、左が一番空いているとき。GKはその「反対側」を最初から見ておく。</p>
+  </div>
+
+  <!-- ===== パターン④ ===== -->
+  <div class="main-card">
+    <div class="situation orange">
+      <div class="label">PATTERN ④ — 右CBからもらう（その2）</div>
+      <div class="text">右CB→GK → <em>空いていればボランチへ（1列飛ばして前進）／消されていれば逆サイドへ大きく</em></div>
+      <div class="sub">相手2トップがCBを追いかけている＝その背中（ボランチの位置）が空く。GKから縦に1本入れば、一気に2列前進できる。入らないときは無理をせず逆サイドへ。</div>
+    </div>
+    <div class="points">
+      <div class="prow gk">
+        <div class="n">①</div>
+        <div class="who">GK</div>
+        <div class="body"><strong>受ける前に、相手2トップの「間」を見る</strong><small>ボランチがそこに立っていれば縦パス。立っていなければ要求の声（「間に入れ！」）</small></div>
+      </div>
+      <div class="prow">
+        <div class="n">②</div>
+        <div class="who">ボランチ</div>
+        <div class="body"><strong>相手FWの背中に入って、身体を開いて待つ</strong><small>背中で受けて前を向ける体勢なら最優先で使う。無理なら「無理！」と声で断る</small></div>
+      </div>
+      <div class="prow gk">
+        <div class="n">③</div>
+        <div class="who">GK</div>
+        <div class="body"><strong>縦が無ければ、逆サイドの左MFへ大きく</strong><small>Over50は「縦が無い＝蹴る」でよい。ただし蹴り先を決めてから（味方の頭を狙う）</small></div>
+      </div>
+      <div class="prow warn">
+        <div class="n">④</div>
+        <div class="who">全員</div>
+        <div class="body"><strong>GKが持ったら、全員が一度顔を上げて「出し先」になる</strong><small>誰も動かない＝GKの選択肢ゼロ＝苦しいクリア。もらう気配を出すのが仕事</small></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="fig">
+    <div class="fig-label">図6 — ④ 右CB→GK→（A：ボランチへ縦 ／ B：逆サイドの左MFへ大きく）</div>
+    <div class="pitch">
+      <svg id="fig6" viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
+        <rect width="500" height="300" fill="#2d8f52"/>
+        <rect x="6" y="6" width="488" height="288" fill="none" stroke="rgba(255,255,255,0.28)" stroke-width="1.5"/>
+        <rect x="120" y="222" width="260" height="72" fill="none" stroke="rgba(255,255,255,0.28)" stroke-width="1.5"/>
+        <rect x="190" y="268" width="120" height="26" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="1.2"/>
+        <rect x="215" y="289" width="70" height="7" fill="rgba(255,255,255,0.75)"/>
+        <rect x="0" y="0" width="500" height="20" fill="rgba(0,0,0,0.4)"/>
+        <text x="250" y="14" text-anchor="middle" fill="white" font-size="10" font-weight="bold">相手FWがCBを追う → その背中（ボランチの位置）が空く</text>
+
+        <g class="trails"></g>
+
+        <g id="f6-scan" class="hid">
+          <ellipse cx="250" cy="160" rx="60" ry="26" fill="rgba(245,197,24,0.18)" stroke="#f5c518" stroke-width="1.5" stroke-dasharray="5,4"/>
+          <rect x="188" y="120" width="124" height="16" fill="rgba(0,0,0,0.6)" rx="3"/>
+          <text x="250" y="132" text-anchor="middle" fill="#f5c518" font-size="10" font-weight="bold">2トップの間が空いた</text>
+        </g>
+
+        <circle cx="196" cy="196" r="12" fill="#c0392b" stroke="white" stroke-width="1.5"/>
+        <text x="196" y="200" text-anchor="middle" fill="white" font-size="7">FW</text>
+        <circle cx="318" cy="196" r="12" fill="#c0392b" stroke="white" stroke-width="1.5"/>
+        <text x="318" y="200" text-anchor="middle" fill="white" font-size="7">FW</text>
+        <circle cx="392" cy="216" r="12" fill="#c0392b" stroke="white" stroke-width="1.5"/>
+        <text x="392" y="220" text-anchor="middle" fill="white" font-size="7">WG</text>
+        <line x1="384" y1="226" x2="366" y2="234" stroke="#ff6b6b" stroke-width="2" marker-end="url(#m6r)"/>
+
+        <g><circle cx="150" cy="240" r="14" fill="#2471a3" stroke="#7ec8ff" stroke-width="2.5"/><text x="150" y="244" text-anchor="middle" fill="white" font-size="9" font-weight="bold">左CB</text></g>
+        <g><circle cx="350" cy="240" r="14" fill="#2471a3" stroke="#f5c518" stroke-width="3"/><text x="350" y="244" text-anchor="middle" fill="white" font-size="9" font-weight="bold">右CB</text></g>
+        <g><circle cx="250" cy="222" r="16" fill="#1a4b7a" stroke="#ffd166" stroke-width="2.5"/><text x="250" y="219" text-anchor="middle" fill="white" font-size="8" font-weight="bold">スイー</text><text x="250" y="229" text-anchor="middle" fill="white" font-size="8" font-weight="bold">パー</text></g>
+        <g><circle cx="250" cy="272" r="13" fill="#f0a020" stroke="white" stroke-width="2"/><text x="250" y="276" text-anchor="middle" fill="#3a2000" font-size="9" font-weight="bold">GK</text></g>
+        <g><circle cx="250" cy="160" r="15" fill="#2471a3" stroke="#ffd166" stroke-width="3"/><text x="250" y="157" text-anchor="middle" fill="white" font-size="8" font-weight="bold">ボラ</text><text x="250" y="166" text-anchor="middle" fill="white" font-size="8" font-weight="bold">ンチ</text></g>
+        <g><circle cx="45" cy="190" r="13" fill="#2471a3" stroke="#7fff7f" stroke-width="2.5"/><text x="45" y="194" text-anchor="middle" fill="white" font-size="8" font-weight="bold">左MF</text></g>
+
+        <circle class="ball" cx="350" cy="240" r="6" fill="#f5c518" stroke="#3a2f00" stroke-width="1.5"/>
+        <defs>
+          <marker id="m6r" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#ff6b6b"/></marker>
+          <marker id="m6y" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#f5c518"/></marker>
+          <marker id="m6o" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#ffd166"/></marker>
+          <marker id="m6g" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#7fff7f"/></marker>
+        </defs>
+      </svg>
+    </div>
+    <div class="anim-bar"><button class="ab-btn" data-fig="fig6">⏸ 一時停止</button><span class="ab-cap" id="cap-fig6">再生中…</span></div>
+    <p class="pitch-note">縦に入ればGK1本で2列前進。入らないなら迷わず逆サイドへ。「無い時に無理をしない」がGKの仕事。</p>
+  </div>
+
+  <!-- ===== ⑤ 声かけ ===== -->
+  <div class="main-card">
+    <div class="situation">
+      <div class="label">MOST IMPORTANT ⑤</div>
+      <div class="text">GKはミスができない。だから<em>パスをもらう前から、出し元と出し先の両方に声を出す</em></div>
+      <div class="sub">「触ってから考える」とタッチが増え、相手が間に入る。声を先に出しておけば、受けた瞬間にはもう出し先が決まっていて、ワンタッチ・2タッチで出せる。</div>
+    </div>
+    <div class="points">
+      <div class="prow gk">
+        <div class="n">①</div>
+        <div class="who">出し元へ</div>
+        <div class="body"><strong>どう戻してほしいかを先に指定する</strong><small>「右足に！」「強く！」「ゆっくり！」「持つな、すぐ！」</small></div>
+      </div>
+      <div class="prow gk">
+        <div class="n">②</div>
+        <div class="who">出し先へ</div>
+        <div class="body"><strong>もらう準備をさせておく</strong><small>「右CB開け！」「ダイレクトで出すぞ！」「動くな、そこ！」</small></div>
+      </div>
+      <div class="prow warn">
+        <div class="n">③</div>
+        <div class="who">GK</div>
+        <div class="body"><strong>声が出せなかったときは、無理につながない</strong><small>声なし＝準備なし。そのときは前へ大きく、または外へ。安全を選ぶのは弱さではない</small></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="voice">
+    <div class="voice-head">🗣 GKの声かけ 定型フレーズ（これだけ覚える）</div>
+    <div class="vrow"><div class="vto">受ける前 → 出し元（スイーパー・CB）へ</div><div class="vsay">「右足に！」「持つな、すぐ！」「ゆっくり！（＝余裕あり）」</div><div class="vwhy">どの足にどう来るか分かれば、GKは止めずにさばける</div></div>
+    <div class="vrow"><div class="vto">受ける前 → 出し先（逆CB・ボランチ）へ</div><div class="vsay">「右CB開け！」「ダイレクトで出すぞ！」「間に入れ！」</div><div class="vwhy">出し先が動き終わっていれば、ワンタッチで通る</div></div>
+    <div class="vrow"><div class="vto">ボール保持者の状況を伝える</div><div class="vsay">「フリー！（＝時間あり）」「後ろいる！」「1人来てる！」</div><div class="vwhy">GKだけが全員の背中を見ている。見えていない情報を渡すのが仕事</div></div>
+    <div class="vrow"><div class="vto">位置の調整（第二ルール）</div><div class="vsay">「開け！」「下がれ！」「横一列やめろ！」「距離！」</div><div class="vwhy">4人の距離感・パスコースの調整はGKの担当</div></div>
+    <div class="vrow"><div class="vto">切り替え（危ないとき）</div><div class="vsay">「無理！蹴れ！」「外！」</div><div class="vwhy">自陣ゴール前でつなぐのをやめる合図。GKが出していい（<a href="endgame_simple_2026-06-14.html" style="color:#12715a; font-weight:900;">終盤シンプル戦術</a>と同じ考え方）</div></div>
+  </div>
+
+  <div class="fig">
+    <div class="fig-label">図7 — ⑤ 声を先に出す → 受けた瞬間にワンタッチで出す</div>
+    <div class="pitch">
+      <svg id="fig7" viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
+        <rect width="500" height="300" fill="#2d8f52"/>
+        <rect x="6" y="6" width="488" height="288" fill="none" stroke="rgba(255,255,255,0.28)" stroke-width="1.5"/>
+        <rect x="120" y="222" width="260" height="72" fill="none" stroke="rgba(255,255,255,0.28)" stroke-width="1.5"/>
+        <rect x="190" y="268" width="120" height="26" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="1.2"/>
+        <rect x="215" y="289" width="70" height="7" fill="rgba(255,255,255,0.75)"/>
+        <rect x="0" y="0" width="500" height="20" fill="rgba(0,0,0,0.4)"/>
+        <text x="250" y="14" text-anchor="middle" fill="white" font-size="10" font-weight="bold">ボールが来る前に「出し元」と「出し先」の両方へ声</text>
+
+        <g class="trails"></g>
+
+        <g id="f7-b1" class="hid">
+          <rect x="112" y="252" width="118" height="20" fill="rgba(240,160,32,0.95)" rx="10"/>
+          <text x="171" y="266" text-anchor="middle" fill="#2a1a00" font-size="10" font-weight="bold">「右足に！ゆっくり！」</text>
+          <line x1="230" y1="258" x2="242" y2="252" stroke="#f0a020" stroke-width="2.5"/>
+        </g>
+        <g id="f7-b2" class="hid">
+          <rect x="282" y="276" width="176" height="20" fill="rgba(240,160,32,0.95)" rx="10"/>
+          <text x="370" y="290" text-anchor="middle" fill="#2a1a00" font-size="10" font-weight="bold">「右CB開け！ダイレクトで出す！」</text>
+          <line x1="282" y1="282" x2="264" y2="276" stroke="#f0a020" stroke-width="2.5"/>
+        </g>
+
+        <circle cx="250" cy="192" r="12" fill="#c0392b" stroke="white" stroke-width="1.5"/>
+        <text x="250" y="196" text-anchor="middle" fill="white" font-size="7">FW</text>
+        <line x1="250" y1="205" x2="250" y2="200" stroke="#ff6b6b" stroke-width="2" marker-end="url(#m7r)"/>
+
+        <g><circle cx="150" cy="240" r="14" fill="#2471a3" stroke="#7ec8ff" stroke-width="2.5"/><text x="150" y="244" text-anchor="middle" fill="white" font-size="9" font-weight="bold">左CB</text></g>
+        <g><circle cx="350" cy="240" r="14" fill="#2471a3" stroke="#7fff7f" stroke-width="3"/><text x="350" y="244" text-anchor="middle" fill="white" font-size="9" font-weight="bold">右CB</text></g>
+        <g><circle cx="250" cy="222" r="16" fill="#1a4b7a" stroke="#f5c518" stroke-width="3"/><text x="250" y="219" text-anchor="middle" fill="white" font-size="8" font-weight="bold">スイー</text><text x="250" y="229" text-anchor="middle" fill="white" font-size="8" font-weight="bold">パー</text></g>
+        <g><circle cx="250" cy="272" r="13" fill="#f0a020" stroke="white" stroke-width="2"/><text x="250" y="276" text-anchor="middle" fill="#3a2000" font-size="9" font-weight="bold">GK</text></g>
+
+        <circle class="ball" cx="250" cy="222" r="6" fill="#f5c518" stroke="#3a2f00" stroke-width="1.5"/>
+        <defs>
+          <marker id="m7r" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#ff6b6b"/></marker>
+          <marker id="m7y" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#f5c518"/></marker>
+          <marker id="m7b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#7ec8ff"/></marker>
+        </defs>
+      </svg>
+    </div>
+    <div class="anim-bar"><button class="ab-btn" data-fig="fig7">⏸ 一時停止</button><span class="ab-cap" id="cap-fig7">再生中…</span></div>
+    <p class="pitch-note">GKがミスできないのは当たり前。だから「受ける前」に全部決めて、声で味方を動かしておく。</p>
+  </div>
+
+  <!-- NG -->
+  <div class="notes">
+    <div class="notes-head ng">⚠️ これをやると事故る（禁止事項）</div>
+    <div class="nrow"><span class="icon">🚫</span><span><strong>自陣ゴール前を横切るパス</strong>GK→CB・CB→CBで、ゴール正面を横断するパスは禁止。必ず斜め前に開いた相手へ</span></div>
+    <div class="nrow"><span class="icon">🚫</span><span><strong>GKの3タッチ目</strong>3タッチ目は「迷った」証拠。迷ったら大きく蹴る。持ち続けるのが一番危ない</span></div>
+    <div class="nrow"><span class="icon">🚫</span><span><strong>捕まってから戻す</strong>相手が5m以内に来てから戻すとGKが1対1にされる。来る前に戻す（早めに離す）</span></div>
+    <div class="nrow"><span class="icon">🚫</span><span><strong>GKの正面に立つ</strong>出し先が正面にいるとコースが1本もない。必ず左右に開いて、深く</span></div>
+    <div class="nrow"><span class="icon">🚫</span><span><strong>GKが黙る</strong>声なし＝準備なし。声が出ないときはつながず、安全を選ぶ</span></div>
+  </div>
+
+  <!-- 練習 -->
+  <div class="notes">
+    <div class="notes-head">🗓 練習で確認すること（10分でできる）</div>
+    <div class="nrow"><span class="icon">1️⃣</span><span><strong>GK＋3バックのダイヤ回し（5分）</strong>相手なしで、GK・左CB・スイーパー・右CBの4人でボールを回す。GKは毎回「立ち直す」動きを入れる。ダイレクト or 2タッチ限定<small>世界共通の基本練習：GKを入れた菱形（ダイヤ）でパス角度とサポート位置を作る</small></span></div>
+    <div class="nrow"><span class="icon">2️⃣</span><span><strong>4対2（GK＋3バック vs 2トップ）（5分）</strong>相手2人がプレス。4人はGKを必ず1回使ってから前進。GKが声で位置を調整する練習も同時にやる<small>4対2＝常に1人余っている状態を体で覚える</small></span></div>
+    <div class="nrow"><span class="icon">3️⃣</span><span><strong>声だけチェック（3分）</strong>ボールを触る前に必ず声を出す。声がなかったプレーはやり直し。「右足に」「開け」「フリー」だけでよい</span></div>
+  </div>
+
+  <!-- 調査 -->
+  <div class="notes">
+    <div class="notes-head res">🌍 海外のベストプラクティス調査（2026.09.26）</div>
+    <div class="nrow"><span class="icon">🇪🇸</span><span><strong>GKは「+1」＝もう1人のフィールドプレーヤー（スペイン／バルセロナ・グアルディオラ）</strong>ビルドアップ時にGKを組み込み、数的優位（11対10）を作ってプレスを外す。GKを最後方の「フォルス1（false 1）」として使う設計<small>出典：Coaches' Voice「The modern goalkeeper」／グアルディオラのビルドアップ分析</small></span></div>
+    <div class="nrow"><span class="icon">🌐</span><span><strong>「はっきりした角度」と「相手からの距離」（FIFA公式トレーニングセンター）</strong>ボールを持っていない間、GKは味方が出せる角度を確保し続ける。プレッシャーから離れた位置に立つことで、味方はリスクの低いパスを選べる<small>出典：FIFA Training Centre「Goalkeepers' build-up: supporting, receiving and passing」「Goalkeeper's positioning in and out of possession」</small></span></div>
+    <div class="nrow"><span class="icon">🔷</span><span><strong>菱形（ダイヤ）と「後ろと先の両方のサポート」（FIFAタレントコーチ）</strong>ボール保持者の周りに菱形を作る。中央から運ぶときは受け手の「先」と「後ろ」の両方にサポートを置く＝後ろのサポートがGK<small>出典：FIFA Training Centre「Support and off-the-ball movements」</small></span></div>
+    <div class="nrow"><span class="icon">♻️</span><span><strong>出したら、また立ち直す（Coaches' Voice）</strong>モダンGKはパスを出した後もフィールドプレーヤーと同じように再調整し、もう一度パスコースを提供し続ける＝これを本ページの第一ルールにした<small>出典：Coaches' Voice「The modern goalkeeper」</small></span></div>
+    <div class="nrow"><span class="icon">⚡</span><span><strong>パスは「速く・正確に・強く」、受ける前に左右をスキャン（FIFA）</strong>受ける前から見ておくことで最初のタッチでプレッシャーを外せる。判断は「どのスペースを取るか」から始まる<small>出典：FIFA Training Centre（GKビルドアップ）</small></span></div>
+    <div class="nrow"><span class="icon">🗣</span><span><strong>GKは「接触前」に指示を出す（イングランド系GKコーチング標準）</strong>ボールに触れる前に「開け（get wide）」を指示しておく／できる限り1タッチでプレーし、相手に整える時間を与えない／直接前に出せなければ1列飛ばす<small>出典：GKコミュニケーション標準（Session Planner / Keeperstop）</small></span></div>
+    <div class="nrow"><span class="icon">⚖️</span><span><strong>リスク管理：ゴール前で失う代償は最大（Coaches' Voice）</strong>後ろからつなぐこと自体にリスクがある。だから「無い時は無理をしない」は世界共通の原則。アリソンも安全側の判断を徹底している<small>→ ReBornでは「声が出せなかったら蹴る」として明文化</small></span></div>
+  </div>
+
+  <!-- まとめ -->
+  <div class="notes">
+    <div class="notes-head">📌 GKを使うビルドアップ まとめ</div>
+    <div class="nrow"><span class="icon">🥇</span><span><strong>第一ルール</strong>GKは、スイーパー・CBが詰まったときに助けになる位置に必ずいる（斜め後ろ45度・8〜12m・ボール側へスライド・出したら立ち直す）</span></div>
+    <div class="nrow"><span class="icon">🥈</span><span><strong>第二ルール</strong>4人のパスコース・距離感の調整はGKが声でやる（開け・下がれ・横一列やめろ・距離12〜18m）</span></div>
+    <div class="nrow"><span class="icon">1️⃣</span><span><strong>パターン①</strong>スイーパーがマークされていたら、GK経由でサイドチェンジ（左CB→GK→右CB→右サイド）</span></div>
+    <div class="nrow"><span class="icon">2️⃣</span><span><strong>パターン②</strong>スイーパー→GK→ダイレクト or 2タッチで「相手が来た側と逆」のCBへ</span></div>
+    <div class="nrow"><span class="icon">3️⃣</span><span><strong>パターン③</strong>右CB→GK→スイーパー（前を向けるなら最優先）or 逆の左CB（一番安全なサイドチェンジ）</span></div>
+    <div class="nrow"><span class="icon">4️⃣</span><span><strong>パターン④</strong>右CB→GK→2トップの間のボランチへ縦（1本で2列前進）／無ければ逆サイドへ大きく</span></div>
+    <div class="nrow"><span class="icon">🗣</span><span><strong>⑤ 声かけ</strong>GKは受ける前に、出し元（「右足に！」）と出し先（「開け！ダイレクトで出す！」）の両方へ声。声がなければつながず蹴る</span></div>
+  </div>
+
+</div>
+
+<a id="back-top" href="home.html">⌂ トップへ</a>
+<footer>ReBorn F.C Over50 — GKを使うビルドアップ（3バック＋GK） / 2026.09.26</footer>
+
+<script>
+(function(){
+  var NS = 'http://www.w3.org/2000/svg';
+  var ease = function(t){ return t<0.5 ? 2*t*t : -1+(4-2*t)*t; };
+
+  var FIGS = {
+    fig1: {
+      ball: [250,222],
+      cap0: '再生：ボールが動くたびにGKが立ち直す',
+      legs: [
+        { to:[150,240], dur:650, hold:450, color:'#ffffff', marker:'m1w', no:'1',
+          cap:'① 左CBへパス。ボールが動いた＝GKも動く', move:[{sel:'#f1-gk', to:[203,266]}] },
+        { to:[150,240], dur:450, hold:1100, noTrail:true, show:['#f1-lane1'],
+          cap:'② GKは左CBの斜め後ろ45度・約10mへ立ち直す＝これで「戻せる」' },
+        { to:[250,222], dur:550, hold:400, color:'#7ec8ff', marker:'m1b', hide:['#f1-lane1'],
+          cap:'③ スイーパーへ戻す（GKも中央へ戻る）', move:[{sel:'#f1-gk', to:[250,272]}] },
+        { to:[350,240], dur:650, hold:450, color:'#ffffff', marker:'m1w', no:'2',
+          cap:'④ 右CBへ。GKもボール側（右）へスライド', move:[{sel:'#f1-gk', to:[297,266]}] },
+        { to:[350,240], dur:450, hold:1400, noTrail:true, show:['#f1-lane2'],
+          cap:'⑤ いつでも逃げ道がある状態。これが第一ルール' }
+      ]
+    },
+    fig2: {
+      ball: [250,230],
+      cap0: '再生：GKが声で距離感を調整する',
+      legs: [
+        { to:[250,230], dur:350, hold:1200, noTrail:true, show:['#f2-bad'],
+          cap:'① 3人が近すぎ・横一列 → 相手1人で3人とも消される' },
+        { to:[250,212], dur:900, hold:400, noTrail:true, hide:['#f2-bad'], show:['#f2-voice'],
+          cap:'② GKが声で調整「左、5m開け！右も開け！スイーパー半歩前！」',
+          move:[{sel:'#f2-lcb', to:[140,246]},{sel:'#f2-rcb', to:[360,246]},{sel:'#f2-sw', to:[250,212]}] },
+        { to:[250,212], dur:400, hold:1300, noTrail:true, show:['#f2-lanes'],
+          cap:'③ 距離12〜18m・角度ができた → パスコースが4本に増えた' },
+        { to:[140,246], dur:600, hold:1300, color:'#7fff7f', marker:'m2g', no:'1',
+          cap:'④ ここで初めて「繋げる」。調整してから出す' }
+      ]
+    },
+    fig3: {
+      ball: [150,240],
+      cap0: '再生：GK経由のサイドチェンジ',
+      legs: [
+        { to:[150,240], dur:350, hold:1100, noTrail:true, show:['#f3-x'],
+          cap:'① スイーパーにマークが付いている＝中央のコースは無い' },
+        { to:[250,272], dur:500, hold:500, color:'#f5c518', marker:'m3y', no:'1',
+          cap:'② 横に出さず、迷わずGKへ落とす（後ろは安全・横は事故）' },
+        { to:[350,240], dur:620, hold:700, color:'#7ec8ff', marker:'m3b', no:'2',
+          cap:'③ GKはダイレクトで右CBへ＝GK経由のサイドチェンジ', move:[{sel:'#f3-rcb', to:[366,246]}] },
+        { to:[455,190], dur:650, hold:1400, color:'#7fff7f', marker:'m3g', no:'3',
+          cap:'④ 相手が左に寄っている2〜3秒で、空いた右サイドへ展開' }
+      ]
+    },
+    fig4: {
+      ball: [250,222],
+      cap0: '再生：スイーパー→GK→逆サイドのCB',
+      legs: [
+        { to:[250,272], dur:480, hold:550, color:'#f5c518', marker:'m4y', no:'1',
+          cap:'① 捕まる前にGKへ。相手が触れない足に置いて戻す' },
+        { to:[150,240], dur:560, hold:1200, color:'#7fff7f', marker:'m4g', no:'A',
+          cap:'②-A 相手は右から来ている → 逆の左CBへダイレクト（第一候補）' },
+        { to:[250,272], teleport:true, fade:true, hold:250, cap:'（もう一度GKから：Bパターン）' },
+        { to:[350,240], dur:560, hold:1400, color:'#7ec8ff', marker:'m4b', no:'B',
+          cap:'②-B 左が消されていれば右CBへ。ここまでで2タッチ以内' }
+      ]
+    },
+    fig5: {
+      ball: [350,240],
+      cap0: '再生：右CB→GK→スイーパー／逆の左CB',
+      legs: [
+        { to:[250,272], dur:520, hold:550, color:'#f5c518', marker:'m5y', no:'1',
+          cap:'① 外に蹴るのはまだ早い。囲まれる前にGKへ' },
+        { to:[250,222], dur:500, hold:1200, color:'#7fff7f', marker:'m5g', no:'A',
+          cap:'②-A スイーパーが前を向けるなら最優先（最短で前進）' },
+        { to:[250,272], teleport:true, fade:true, hold:250, cap:'（中央が埋まっていた場合：Bパターン）' },
+        { to:[150,240], dur:620, hold:600, color:'#7ec8ff', marker:'m5b', no:'B',
+          cap:'②-B ワンタッチで逆の左CBへ＝一番安全なサイドチェンジ' },
+        { to:[45,190], dur:620, hold:1400, color:'#7fff7f', marker:'m5g', no:'C',
+          cap:'③ 右が囲まれている間、左は完全に空いている → そのまま左サイドへ' }
+      ]
+    },
+    fig6: {
+      ball: [350,240],
+      cap0: '再生：右CB→GK→ボランチ／逆サイド',
+      legs: [
+        { to:[250,272], dur:520, hold:450, color:'#f5c518', marker:'m6y', no:'1',
+          cap:'① 右CBからGKへ' },
+        { to:[250,272], dur:350, hold:1000, noTrail:true, show:['#f6-scan'],
+          cap:'② GKは出す前に確認：相手2トップの「間」にボランチがいるか' },
+        { to:[250,160], dur:620, hold:1300, color:'#ffd166', marker:'m6o', no:'A',
+          cap:'③-A 空いていればボランチへ縦パス＝1本で2列前進' },
+        { to:[250,272], teleport:true, fade:true, hold:250, cap:'（縦が消されていた場合：Bパターン）' },
+        { to:[45,190], dur:720, hold:1400, color:'#7fff7f', marker:'m6g', no:'B',
+          cap:'③-B 縦が無ければ逆サイドの左MFへ大きく。無い時に無理をしない' }
+      ]
+    },
+    fig7: {
+      ball: [250,222],
+      cap0: '再生：声が先、ボールは後',
+      legs: [
+        { to:[250,222], dur:350, hold:1100, noTrail:true, show:['#f7-b1'],
+          cap:'① ボールが来る前に「出し元」へ：「右足に！ゆっくり！」' },
+        { to:[250,222], dur:350, hold:1100, noTrail:true, show:['#f7-b2'],
+          cap:'② 同時に「出し先」へ：「右CB開け！ダイレクトで出すぞ！」' },
+        { to:[250,272], dur:480, hold:350, color:'#f5c518', marker:'m7y', no:'1',
+          cap:'③ 声が先にあるから、GKは考えずに受けられる' },
+        { to:[350,240], dur:540, hold:1400, color:'#7ec8ff', marker:'m7b', no:'2',
+          cap:'④ ワンタッチで右CBへ。GKが触る回数は最小にする' }
+      ]
+    }
+  };
+
+  function Fig(id, cfg){
+    this.id = id; this.cfg = cfg;
+    this.svg = document.getElementById(id);
+    if(!this.svg) return;
+    this.trails = this.svg.querySelector('.trails');
+    this.ballEl = this.svg.querySelector('.ball');
+    this.capEl = document.getElementById('cap-' + id);
+    this.btn = document.querySelector('.ab-btn[data-fig="' + id + '"]');
+    this.token = 0; this.playing = false; this.i = 0;
+    var self = this;
+    if(this.btn) this.btn.addEventListener('click', function(){ self.playing ? self.pause() : self.play(); });
+    this.reset();
+  }
+
+  Fig.prototype.reset = function(){
+    while(this.trails.firstChild) this.trails.removeChild(this.trails.firstChild);
+    this.pos = this.cfg.ball.slice();
+    this.ballEl.setAttribute('cx', this.pos[0]);
+    this.ballEl.setAttribute('cy', this.pos[1]);
+    var mv = this.svg.querySelectorAll('.mv');
+    for(var i=0;i<mv.length;i++) mv[i].removeAttribute('transform');
+    var hid = this.svg.querySelectorAll('.hid');
+    for(var j=0;j<hid.length;j++) hid[j].style.opacity = 0;
+    this.i = 0;
+    if(this.capEl) this.capEl.textContent = this.cfg.cap0 || '';
+  };
+
+  Fig.prototype.play = function(){
+    if(this.playing) return;
+    this.playing = true;
+    if(this.btn) this.btn.textContent = '⏸ 一時停止';
+    this.step(++this.token);
+  };
+
+  Fig.prototype.pause = function(){
+    this.playing = false; this.token++;
+    if(this.btn) this.btn.textContent = '▶ 再生';
+  };
+
+  Fig.prototype.wait = function(ms, token, next){
+    var self = this;
+    setTimeout(function(){ if(self.token === token) next(); }, ms);
+  };
+
+  Fig.prototype.step = function(token){
+    var self = this;
+    if(this.token !== token) return;
+    if(this.i >= this.cfg.legs.length){
+      this.wait(1200, token, function(){
+        if(self.token !== token) return;
+        self.reset();
+        self.wait(350, token, function(){ self.step(token); });
+      });
+      return;
+    }
+    var leg = this.cfg.legs[this.i];
+    if(this.capEl && leg.cap) this.capEl.textContent = leg.cap;
+    if(leg.fade){
+      var kids = this.trails.childNodes;
+      for(var k=0;k<kids.length;k++){ if(kids[k].setAttribute) kids[k].setAttribute('opacity', 0.25); }
+    }
+    if(leg.show) for(var s=0;s<leg.show.length;s++){ var es=this.svg.querySelector(leg.show[s]); if(es) es.style.opacity = 1; }
+    if(leg.hide) for(var h=0;h<leg.hide.length;h++){ var eh=this.svg.querySelector(leg.hide[h]); if(eh) eh.style.opacity = 0; }
+
+    this.travel(leg, token, function(){
+      if(self.token !== token) return;
+      self.i++;
+      self.wait(leg.hold || 500, token, function(){ self.step(token); });
+    });
+  };
+
+  Fig.prototype.travel = function(leg, token, done){
+    var self = this, from = this.pos.slice(), to = leg.to;
+    if(leg.teleport){
+      this.pos = to.slice();
+      this.ballEl.setAttribute('cx', to[0]);
+      this.ballEl.setAttribute('cy', to[1]);
+      done(); return;
+    }
+    var line = null;
+    if(!leg.noTrail){
+      line = document.createElementNS(NS, 'line');
+      line.setAttribute('x1', from[0]); line.setAttribute('y1', from[1]);
+      line.setAttribute('x2', from[0]); line.setAttribute('y2', from[1]);
+      line.setAttribute('stroke', leg.color || '#ffffff');
+      line.setAttribute('stroke-width', 3.5);
+      line.setAttribute('stroke-linecap', 'round');
+      if(leg.marker) line.setAttribute('marker-end', 'url(#' + leg.marker + ')');
+      this.trails.appendChild(line);
+    }
+    var moves = [];
+    if(leg.move){
+      for(var m=0;m<leg.move.length;m++){
+        var el = this.svg.querySelector(leg.move[m].sel);
+        if(!el) continue;
+        var hx = parseFloat(el.getAttribute('data-hx')), hy = parseFloat(el.getAttribute('data-hy'));
+        var cx = 0, cy = 0, tr = el.getAttribute('transform');
+        if(tr){ var mm = /translate\(([-\d.]+)[ ,]+([-\d.]+)\)/.exec(tr); if(mm){ cx = parseFloat(mm[1]); cy = parseFloat(mm[2]); } }
+        moves.push({ el:el, f:[cx,cy], t:[leg.move[m].to[0]-hx, leg.move[m].to[1]-hy] });
+      }
+    }
+    var dur = leg.dur || 700, t0 = null;
+    function frame(now){
+      if(self.token !== token) return;
+      if(t0 === null) t0 = now;
+      var p = Math.min(1, (now - t0) / dur), e = ease(p);
+      var x = from[0] + (to[0] - from[0]) * e, y = from[1] + (to[1] - from[1]) * e;
+      self.ballEl.setAttribute('cx', x); self.ballEl.setAttribute('cy', y);
+      if(line){ line.setAttribute('x2', x); line.setAttribute('y2', y); }
+      for(var i=0;i<moves.length;i++){
+        var mx = moves[i].f[0] + (moves[i].t[0] - moves[i].f[0]) * e;
+        var my = moves[i].f[1] + (moves[i].t[1] - moves[i].f[1]) * e;
+        moves[i].el.setAttribute('transform', 'translate(' + mx + ',' + my + ')');
+      }
+      if(p < 1){ requestAnimationFrame(frame); }
+      else {
+        self.pos = to.slice();
+        if(leg.no){
+          var cxm = (from[0] + to[0]) / 2, cym = (from[1] + to[1]) / 2;
+          var c = document.createElementNS(NS, 'circle');
+          c.setAttribute('cx', cxm); c.setAttribute('cy', cym); c.setAttribute('r', 9);
+          c.setAttribute('fill', 'rgba(0,0,0,0.6)'); c.setAttribute('stroke', leg.color || '#fff'); c.setAttribute('stroke-width', 1.5);
+          var t = document.createElementNS(NS, 'text');
+          t.setAttribute('x', cxm); t.setAttribute('y', cym + 3.5); t.setAttribute('text-anchor', 'middle');
+          t.setAttribute('fill', leg.color || '#fff'); t.setAttribute('font-size', 10); t.setAttribute('font-weight', 'bold');
+          t.textContent = leg.no;
+          self.trails.appendChild(c); self.trails.appendChild(t);
+        }
+        done();
+      }
+    }
+    requestAnimationFrame(frame);
+  };
+
+  var figs = [];
+  for(var id in FIGS){ if(FIGS.hasOwnProperty(id)){ var f = new Fig(id, FIGS[id]); if(f.svg) figs.push(f); } }
+
+  if('IntersectionObserver' in window){
+    var obs = new IntersectionObserver(function(entries){
+      for(var i=0;i<entries.length;i++){
+        var fig = null;
+        for(var j=0;j<figs.length;j++){ if(figs[j].svg === entries[i].target) fig = figs[j]; }
+        if(!fig) continue;
+        if(entries[i].isIntersecting){ if(!fig.userPaused) fig.play(); }
+        else if(fig.playing){ fig.pause(); fig.userPaused = false; if(fig.btn) fig.btn.textContent = '▶ 再生'; }
+      }
+    }, { threshold: 0.25 });
+    for(var k=0;k<figs.length;k++){
+      obs.observe(figs[k].svg);
+      (function(fig){
+        if(fig.btn) fig.btn.addEventListener('click', function(){ fig.userPaused = !fig.playing; });
+      })(figs[k]);
+    }
+  } else {
+    for(var n=0;n<figs.length;n++) figs[n].play();
+  }
+})();
+</script>
+
+</body>
+</html>
