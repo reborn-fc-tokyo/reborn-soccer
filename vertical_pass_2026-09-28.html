@@ -275,7 +275,7 @@
 
   <!-- 図2 -->
   <div class="fig">
-    <div class="fig-label">図2 — ○ 条件が揃った縦：蹴ると同時に2枚目が走る（FWが1人にならない）</div>
+    <div class="fig-label">図2 — ○ 背後へ蹴る＝マークがずれる（相手がボールと味方の間から外れる）＋2枚目が同時に走る</div>
     <div class="pitch">
       <svg id="fig2" viewBox="0 0 540 372" xmlns="http://www.w3.org/2000/svg">
         <rect width="540" height="372" fill="#2d8f52"/>
@@ -294,18 +294,28 @@
         <g class="trails"></g>
 
         <g id="g2-cond" class="hid">
-          <rect x="196" y="112" width="228" height="19" fill="rgba(0,0,0,0.62)" rx="4"/>
-          <text x="310" y="126" text-anchor="middle" fill="#9dffb4" font-size="11" font-weight="bold">①FWが余裕を持って収まる ②2枚目が同時に走る</text>
+          <rect x="120" y="290" width="300" height="19" fill="rgba(0,0,0,0.62)" rx="4"/>
+          <text x="270" y="304" text-anchor="middle" fill="#9dffb4" font-size="11" font-weight="bold">①FWが余裕を持って収まる ②2枚目が同時に走る</text>
         </g>
-        <g id="g2-two" class="hid">
-          <rect x="356" y="196" width="150" height="19" fill="rgba(0,0,0,0.62)" rx="4"/>
-          <text x="431" y="210" text-anchor="middle" fill="#9dffb4" font-size="11" font-weight="bold">近くに2枚＝続く</text>
+        <g id="g2-block" class="hid">
+          <line x1="234" y1="50" x2="314" y2="88" stroke="#ff6b6b" stroke-width="3" stroke-dasharray="8,6"/>
+          <text x="276" y="62" text-anchor="middle" fill="#ff6b6b" font-size="18" font-weight="bold">✕</text>
+          <rect x="120" y="110" width="212" height="19" fill="rgba(0,0,0,0.62)" rx="4"/>
+          <text x="226" y="124" text-anchor="middle" fill="#ff9c8f" font-size="11" font-weight="bold">相手がボールとFWの間にいる</text>
+        </g>
+        <g id="g2-clear" class="hid">
+          <line x1="456" y1="88" x2="432" y2="124" stroke="#7fff7f" stroke-width="3" stroke-dasharray="7,5"/>
+          <circle cx="426" cy="46" r="24" fill="none" stroke="#ffd166" stroke-width="2" stroke-dasharray="6,5"/>
+          <rect x="250" y="150" width="228" height="19" fill="rgba(0,0,0,0.66)" rx="4"/>
+          <text x="364" y="164" text-anchor="middle" fill="#9dffb4" font-size="11" font-weight="bold">マークがずれた＝間にいない</text>
+          <rect x="336" y="24" width="180" height="18" fill="rgba(0,0,0,0.6)" rx="4"/>
+          <text x="426" y="37" text-anchor="middle" fill="#ffd166" font-size="10" font-weight="bold">相手は追いかける側＝背後に置く</text>
         </g>
 
-        <circle cx="368" cy="58" r="13" fill="#c0392b" stroke="white" stroke-width="1.5"/><text x="368" y="62" text-anchor="middle" fill="white" font-size="8">SB</text>
-        <circle cx="388" cy="126" r="13" fill="#c0392b" stroke="white" stroke-width="1.5"/><text x="388" y="130" text-anchor="middle" fill="white" font-size="8">CB</text>
+        <g class="mv" id="f2-osb" data-hx="278" data-hy="72"><circle cx="278" cy="72" r="13" fill="#c0392b" stroke="white" stroke-width="1.5"/><text x="278" y="76" text-anchor="middle" fill="white" font-size="8">SB</text></g>
+        <g class="mv" id="f2-ocb" data-hx="388" data-hy="126"><circle cx="388" cy="126" r="13" fill="#c0392b" stroke="white" stroke-width="1.5"/><text x="388" y="130" text-anchor="middle" fill="white" font-size="8">CB</text></g>
         <circle cx="388" cy="232" r="13" fill="#c0392b" stroke="white" stroke-width="1.5"/><text x="388" y="236" text-anchor="middle" fill="white" font-size="8">CB</text>
-        <circle cx="288" cy="82" r="13" fill="#c0392b" stroke="white" stroke-width="1.5"/><text x="288" y="86" text-anchor="middle" fill="white" font-size="8">MF</text>
+        <circle cx="252" cy="118" r="13" fill="#c0392b" stroke="white" stroke-width="1.5"/><text x="252" y="122" text-anchor="middle" fill="white" font-size="8">MF</text>
         <circle cx="288" cy="256" r="13" fill="#c0392b" stroke="white" stroke-width="1.5"/><text x="288" y="260" text-anchor="middle" fill="white" font-size="8">MF</text>
         <circle cx="368" cy="296" r="13" fill="#c0392b" stroke="white" stroke-width="1.5"/><text x="368" y="300" text-anchor="middle" fill="white" font-size="8">SB</text>
         <circle cx="516" cy="175" r="13" fill="#f0a020" stroke="white" stroke-width="1.5"/><text x="516" y="179" text-anchor="middle" fill="#3a2000" font-size="8" font-weight="bold">GK</text>
@@ -321,7 +331,7 @@
 
         <circle class="ball" cx="152" cy="252" r="7" fill="#f5c518" stroke="#3a2f00" stroke-width="1.5"/>
         <rect x="0" y="348" width="540" height="24" fill="rgba(0,0,0,0.45)"/>
-        <text x="270" y="364" text-anchor="middle" fill="white" font-size="11" font-weight="bold">攻撃方向 →　／　同じロングでも、2枚目が同時に走れば「1本」が「3本」になる</text>
+        <text x="270" y="364" text-anchor="middle" fill="white" font-size="11" font-weight="bold">攻撃方向 →　／　背後へ蹴る＝マークがずれる（相手がボールと味方の間から外れる）</text>
         <defs>
           <marker id="g2b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#7ec8ff"/></marker>
           <marker id="g2w" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="white"/></marker>
@@ -331,7 +341,7 @@
       </svg>
     </div>
     <div class="anim-bar"><button class="ab-btn" data-fig="fig2">⏸ 一時停止</button><span class="ab-cap" id="cap-fig2">再生中…</span></div>
-    <p class="pitch-note">「2枚目が走れないなら蹴らない」。この1つの条件だけで、孤立する縦はほぼ消える。</p>
+    <p class="pitch-note">足元へ出すと相手が間にいて奪われる。背後へ出すと相手は追う側＝間から外れる（マークがずれる）。そこへ2枚目が来れば続く。</p>
   </div>
 
   <!-- 楔 -->
@@ -362,7 +372,7 @@
 
   <!-- 図3 -->
   <div class="fig">
-    <div class="fig-label">図3 — ○ 楔 → 落とし → 全体で20m上がる（FWの脚を残す）</div>
+    <div class="fig-label">図3 — ○ 楔 → 落とし（＝相手が前にずれる）→ 背後が空く → 全体で20m上がる</div>
     <div class="pitch">
       <svg id="fig3" viewBox="0 0 540 372" xmlns="http://www.w3.org/2000/svg">
         <rect width="540" height="372" fill="#2d8f52"/>
@@ -380,10 +390,22 @@
 
         <g class="trails"></g>
 
+        <g id="g3-shift" class="hid">
+          <circle cx="288" cy="120" r="13" fill="none" stroke="rgba(255,107,107,0.55)" stroke-width="1.5" stroke-dasharray="5,4"/>
+          <circle cx="288" cy="236" r="13" fill="none" stroke="rgba(255,107,107,0.55)" stroke-width="1.5" stroke-dasharray="5,4"/>
+          <circle cx="392" cy="130" r="13" fill="none" stroke="rgba(255,107,107,0.55)" stroke-width="1.5" stroke-dasharray="5,4"/>
+          <circle cx="392" cy="226" r="13" fill="none" stroke="rgba(255,107,107,0.55)" stroke-width="1.5" stroke-dasharray="5,4"/>
+          <line x1="276" y1="126" x2="256" y2="146" stroke="#ff6b6b" stroke-width="2.5" marker-end="url(#g3r)"/>
+          <line x1="276" y1="230" x2="256" y2="210" stroke="#ff6b6b" stroke-width="2.5" marker-end="url(#g3r)"/>
+          <line x1="379" y1="132" x2="348" y2="140" stroke="#ff6b6b" stroke-width="2.5" marker-end="url(#g3r)"/>
+          <line x1="379" y1="224" x2="348" y2="216" stroke="#ff6b6b" stroke-width="2.5" marker-end="url(#g3r)"/>
+          <rect x="176" y="58" width="196" height="19" fill="rgba(0,0,0,0.64)" rx="4"/>
+          <text x="274" y="72" text-anchor="middle" fill="#ff9c8f" font-size="11" font-weight="bold">落とした瞬間、相手が前にずれる</text>
+        </g>
         <g id="g3-gap" class="hid">
-          <rect x="300" y="60" width="90" height="230" fill="rgba(245,197,24,0.16)" stroke="#f5c518" stroke-width="1" stroke-dasharray="6,5" rx="8"/>
-          <rect x="262" y="34" width="166" height="19" fill="rgba(0,0,0,0.62)" rx="4"/>
-          <text x="345" y="48" text-anchor="middle" fill="#f5c518" font-size="11" font-weight="bold">ライン間が空く</text>
+          <rect x="356" y="62" width="94" height="226" fill="rgba(245,197,24,0.16)" stroke="#f5c518" stroke-width="1" stroke-dasharray="6,5" rx="8"/>
+          <rect x="320" y="34" width="166" height="19" fill="rgba(0,0,0,0.62)" rx="4"/>
+          <text x="403" y="48" text-anchor="middle" fill="#f5c518" font-size="11" font-weight="bold">ずれた背後が空く → 裏抜け</text>
         </g>
         <g id="g3-up" class="hid">
           <rect x="150" y="300" width="230" height="19" fill="rgba(0,0,0,0.62)" rx="4"/>
@@ -403,7 +425,7 @@
         <g><circle cx="120" cy="175" r="16" fill="#1a4b7a" stroke="#f5c518" stroke-width="3"/><text x="120" y="179" text-anchor="middle" fill="white" font-size="8" font-weight="bold">スイパ</text></g>
         <g><circle cx="152" cy="96" r="16" fill="#2471a3" stroke="#7ec8ff" stroke-width="2.5"/><text x="152" y="100" text-anchor="middle" fill="white" font-size="9" font-weight="bold">左CB</text></g>
         <g><circle cx="152" cy="252" r="16" fill="#2471a3" stroke="#7ec8ff" stroke-width="2.5"/><text x="152" y="256" text-anchor="middle" fill="white" font-size="9" font-weight="bold">右CB</text></g>
-        <g><circle cx="330" cy="175" r="17" fill="#1a4b7a" stroke="#f5c518" stroke-width="3"/><text x="330" y="179" text-anchor="middle" fill="white" font-size="10" font-weight="bold">FW</text></g>
+        <g class="mv" id="f3-fw" data-hx="330" data-hy="175"><circle cx="330" cy="175" r="17" fill="#1a4b7a" stroke="#f5c518" stroke-width="3"/><text x="330" y="179" text-anchor="middle" fill="white" font-size="10" font-weight="bold">FW</text></g>
         <g class="mv" id="f3-top" data-hx="262" data-hy="210"><circle cx="262" cy="210" r="16" fill="#2471a3" stroke="#7fff7f" stroke-width="3"/><text x="262" y="214" text-anchor="middle" fill="white" font-size="8" font-weight="bold">トップ下</text></g>
         <g class="mv" id="f3-lmf" data-hx="230" data-hy="48"><circle cx="230" cy="48" r="16" fill="#2471a3" stroke="#7ec8ff" stroke-width="2.5"/><text x="230" y="52" text-anchor="middle" fill="white" font-size="9" font-weight="bold">左MF</text></g>
         <g class="mv" id="f3-rmf" data-hx="230" data-hy="302"><circle cx="230" cy="302" r="16" fill="#2471a3" stroke="#7ec8ff" stroke-width="2.5"/><text x="230" y="306" text-anchor="middle" fill="white" font-size="9" font-weight="bold">右MF</text></g>
@@ -411,8 +433,9 @@
 
         <circle class="ball" cx="120" cy="175" r="7" fill="#f5c518" stroke="#3a2f00" stroke-width="1.5"/>
         <rect x="0" y="348" width="540" height="24" fill="rgba(0,0,0,0.45)"/>
-        <text x="270" y="364" text-anchor="middle" fill="white" font-size="11" font-weight="bold">攻撃方向 →　／　楔は相手を「前へ」引き出す＝崩す方向に働く</text>
+        <text x="270" y="364" text-anchor="middle" fill="white" font-size="11" font-weight="bold">攻撃方向 →　／　落とし＝相手が前にずれる。ずれた背後が空く</text>
         <defs>
+          <marker id="g3r" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#ff6b6b"/></marker>
           <marker id="g3y" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#f5c518"/></marker>
           <marker id="g3g" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#7fff7f"/></marker>
           <marker id="g3o" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#ffd166"/></marker>
@@ -598,18 +621,18 @@
       legs: [
         { to:[218,44], dur:900, hold:450, color:'#7ec8ff', marker:'g2b', no:'1',
           cap:'① 自陣でサイドチェンジ。ここまでは図1と同じ' },
-        { to:[218,44], dur:800, hold:1200, noTrail:true, show:['#g2-cond'],
-          cap:'② 蹴る前に2つ確認：FWが余裕で収まるか／2枚目が同時に走れるか' },
-        { to:[470,66], dur:1150, hold:300, color:'#ffffff', marker:'g2w', no:'2',
-          cap:'③ ギリギリではなく「収まる」強さで。蹴ると同時に2枚目も走り出す',
-          move:[{sel:'#f2-fw', to:[470,66]},{sel:'#f2-top', to:[400,150]},{sel:'#f2-rmf', to:[330,296]}] },
-        { to:[470,66], dur:700, hold:900, noTrail:true, show:['#g2-two'],
-          cap:'④ FWが収めた時点で、2枚目が到着＝1人にならない',
-          move:[{sel:'#f2-top', to:[436,148]},{sel:'#f2-rmf', to:[396,290]},{sel:'#f2-vol', to:[300,190]}] },
-        { to:[436,148], dur:600, hold:600, color:'#7fff7f', marker:'g2g', no:'3',
-          cap:'⑤ 落とす。FWは前を向いて動き直せる（脚も残っている）' },
+        { to:[218,44], dur:800, hold:1500, noTrail:true, show:['#g2-cond','#g2-block'],
+          cap:'② いま相手はボールとFWの間にいる（足元へは通らない）→ だから その背後 へ蹴る' },
+        { to:[470,66], dur:1150, hold:400, color:'#ffffff', marker:'g2w', no:'2', hide:['#g2-block'],
+          cap:'③ 背後へ蹴る＝FWは前を向いて走り、相手は追いかける側になる（マークがずれ始める）',
+          move:[{sel:'#f2-fw', to:[470,66]},{sel:'#f2-osb', to:[426,46]},{sel:'#f2-ocb', to:[486,96]},{sel:'#f2-top', to:[400,150]},{sel:'#f2-rmf', to:[330,296]}] },
+        { to:[470,66], dur:800, hold:1400, noTrail:true, show:['#g2-clear'],
+          cap:'④ マークがずれた：相手はFWの背後にいて、もうボールと味方（2枚目）の間にいない',
+          move:[{sel:'#f2-top', to:[420,142]},{sel:'#f2-rmf', to:[396,290]},{sel:'#f2-vol', to:[300,190]}] },
+        { to:[420,142], dur:600, hold:700, color:'#7fff7f', marker:'g2g', no:'3',
+          cap:'⑤ 空いたコースへ落とす。相手は戻りながらなので当たれない' },
         { to:[478,196], dur:700, hold:1700, color:'#ffd166', marker:'g2o', no:'4',
-          cap:'⑥ ゴール前へ。ここまでが「ロング1本」の完成',
+          cap:'⑥ そのままゴール前へ。マークがずれている間に勝負が終わる',
           move:[{sel:'#f2-fw', to:[478,196]}] }
       ]
     },
@@ -619,16 +642,20 @@
       legs: [
         { to:[330,175], dur:950, hold:450, color:'#f5c518', marker:'g3y', no:'1',
           cap:'① コーナーへ50m蹴らず、中央のFWへ30mの楔。雑でもいいから当てる' },
-        { to:[262,210], dur:600, hold:700, color:'#7fff7f', marker:'g3g', no:'2',
+        { to:[262,210], dur:600, hold:500, color:'#7fff7f', marker:'g3g', no:'2',
           cap:'② 落とす：当てて落とすまでが1つのプレー（斜め後ろ45度）' },
-        { to:[262,210], dur:1000, hold:1200, noTrail:true, show:['#g3-gap'],
-          cap:'③ 相手MF・CBは「前へ」食いつく → ライン間が空く',
-          move:[{sel:'#f3-omf1', to:[300,146]},{sel:'#f3-omf2', to:[300,212]},{sel:'#f3-odf1', to:[366,136]},{sel:'#f3-odf2', to:[366,220]}] },
+        { to:[262,210], dur:1100, hold:1500, noTrail:true, show:['#g3-shift'],
+          cap:'③ 落とした瞬間、相手MF・CBがボールへ「前にずれる」（点線＝元の位置）',
+          move:[{sel:'#f3-omf1', to:[252,148]},{sel:'#f3-omf2', to:[252,208]},{sel:'#f3-odf1', to:[340,142]},{sel:'#f3-odf2', to:[340,214]}] },
+        { to:[262,210], dur:900, hold:1200, noTrail:true, show:['#g3-gap'],
+          cap:'④ 前にずれた分、その背後が空く → 落としたFWがそのまま裏へ走り出す',
+          move:[{sel:'#f3-fw', to:[368,150]}] },
         { to:[262,210], dur:1200, hold:1000, noTrail:true, show:['#g3-up'],
-          cap:'④ 落ちた瞬間が上がる合図。この2秒で全体が20m前進する',
-          move:[{sel:'#f3-lmf', to:[324,44]},{sel:'#f3-rmf', to:[324,306]},{sel:'#f3-vol', to:[288,175]},{sel:'#f3-top', to:[306,232]}] },
-        { to:[324,44], dur:800, hold:1700, color:'#ffd166', marker:'g3o', no:'3',
-          cap:'⑤ 前向きの選手から、上がったサイドへ。FWの脚はまだ残っている＝次に裏を取れる' }
+          cap:'⑤ 同時に全体も上がる（この2秒だけ走る）。前向きのトップ下がボールを持っている',
+          move:[{sel:'#f3-lmf', to:[324,44]},{sel:'#f3-rmf', to:[324,306]},{sel:'#f3-vol', to:[288,175]}] },
+        { to:[446,108], dur:900, hold:1800, color:'#ffd166', marker:'g3o', no:'3',
+          cap:'⑥ 裏抜けへスルーパス。落として脚を残したFWの速さを、ここで使う',
+          move:[{sel:'#f3-fw', to:[446,108]}] }
       ]
     },
     fig4: {
